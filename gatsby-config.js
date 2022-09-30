@@ -41,7 +41,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                "icon": "src/assets/images/icon.png"
+                "icon": "src/assets/icons/favicon.png"
             }
         },
         {
@@ -79,6 +79,14 @@ module.exports = {
                     `poppins\:400,600,700,`
                 ],
                 display: 'swap'
+            }
+        },
+        {
+            resolve: "gatsby-plugin-react-svg",
+            options: {
+                rule: {
+                    include: /assets/
+                }
             }
         }
     ]
