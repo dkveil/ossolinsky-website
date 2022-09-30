@@ -6,13 +6,15 @@ import { theme } from 'styles/theme';
 
 export const MainTemplate = ({ children }) => {
     return (
-        <ThemeProvider theme={theme}>
-        <GlobalStyle />
-            {children}
-        </ThemeProvider>
+        <React.Fragment>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <main>{children}</main>
+            </ThemeProvider>
+        </React.Fragment>
     );
-}
+};
 
 MainTemplate.propTypes = {
-    children: PropTypes.node.isRequired
-}
+    children: PropTypes.node.isRequired,
+};

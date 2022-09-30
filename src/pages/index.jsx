@@ -1,16 +1,9 @@
-import React from "react"
+import React from 'react';
 
 const IndexPage = () => {
+    return <></>;
+};
 
-  return (
-    <main>
-      <h1>
-        Works
-      </h1>
-    </main>
-  )
-}
+export default IndexPage;
 
-export default IndexPage
-
-export const Head = () => <title>Home Page</title>
+export const Head = () => <title>Home Page</title>;

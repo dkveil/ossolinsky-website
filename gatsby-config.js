@@ -20,11 +20,11 @@ module.exports = {
     },
     plugins: [
         {
-        resolve: 'gatsby-source-contentful',
-        options: {
-            "accessToken": process.env.API_KEY,
-            "spaceId": "ad8qyjvqy4cc"
-        }
+            resolve: 'gatsby-source-contentful',
+            options: {
+                "accessToken": process.env.API_KEY,
+                "spaceId": "ad8qyjvqy4cc"
+            }
         },
         "gatsby-plugin-image",
         "gatsby-plugin-sharp",
