@@ -1,10 +1,10 @@
 import React from "react";
-import Logo from 'assets/icons/gimp.svg'
-import { StyledIcon } from "components/StyledIcon";
+import Logo from 'icons/logo.svg'
 import { Link } from "gatsby";
 import { Container } from "../../styles/Container";
-import { Wrapper, ContentWrapper, Box, StyledBurger } from "./Header.styles";
+import { Wrapper, ContentWrapper, Box, StyledBurger, StyledLogoIcon } from "./Header.styles";
 import { useTheme } from "styled-components";
+import { NavCart } from "../NavCart";
 
 export const Header = () => {
 
@@ -14,21 +14,26 @@ export const Header = () => {
     const [itemsColor, setItemsColor] = React.useState(theme.color.white)
     const [backgroundColor, setBackgroundColor] = React.useState('gray')
 
+    const toggleMenu = () => setIsActive(prev => !prev)
+
     return (
-        <Wrapper bgcolor={backgroundColor}>
-            <Container>
-                <ContentWrapper>
-                    <StyledBurger color={isActive ? theme.color.black : itemsColor} isActive={isActive} onClick={() => setIsActive(prev => !prev)}>
-                        <div />
-                    </StyledBurger>
-                    <StyledIcon width='9rem' color={itemsColor}>
-                        <Link to="/">
-                            <Logo />
-                        </Link>
-                    </StyledIcon>
-                    <Box />
-                </ContentWrapper>
-            </Container>
-        </Wrapper>
+        <>
+            <Wrapper bgcolor={isActive ? 'transparent' : backgroundColor} id="main-header">
+                <Container>
+                    <ContentWrapper>
+                        <StyledBurger color={isActive ? theme.color.black : itemsColor} isActive={isActive} onClick={toggleMenu}>
+                            <div />
+                        </StyledBurger>
+                        <StyledLogoIcon width='9rem' color={isActive ? theme.color.black : itemsColor} isActive={isActive}>
+                            <Link to="/">
+                                <Logo />
+                            </Link>
+                        </StyledLogoIcon>
+                        <Box />
+                    </ContentWrapper>
+                </Container>
+            </Wrapper>
+            <NavCart isActive={isActive} toggleMenu={toggleMenu} />
+        </>
     );
 }

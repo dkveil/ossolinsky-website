@@ -39,5 +39,15 @@ export const theme = {
         desktop: `@media (min-width: ${media.DESKTOP}px)`,
         bigdesktop: `@media (min-width: ${media.BIGDESKTOP}px)`,
         large: `@media (min-width: ${media.LARGE}px)`,
+    },
+    transition: {
+        navcart: '.2s ease'
+    },
+    zindex: {
+        header: 9999,
+        navcart: 999
+    },
+    height: {
+        mobileHeader: '80px'
     }
 }

@@ -1,11 +1,15 @@
-import React from 'react';
 import styled from "styled-components"
+import { StyledIcon } from "components/StyledIcon"
 
 export const Wrapper = styled.header`
     position: fixed;
-    height: 80px;
+    top: 0;
+    left: 0;
+    height: ${({ theme }) => theme.height.mobileHeader};
     width: 100%;
     background-color: ${(props) => props.bgcolor ? props.bgcolor : null};
+    z-index: ${({ theme }) => theme.zindex.header};
+    transition: background-color ${({ theme }) => theme.transition.navcart};
 `
 
 export const ContentWrapper = styled.div`
@@ -21,7 +25,7 @@ export const Box = styled.div`
     height: 100%;
 `
 
-export const StyledBurger = styled(({ color, ...props }) => <Box {...props} />)`
+export const StyledBurger = styled(Box)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,15 +36,15 @@ export const StyledBurger = styled(({ color, ...props }) => <Box {...props} />)`
         width: 2.55rem;
         height: 2px;
         background-color: ${({ isActive }) => isActive ? 'transparent' : (({ color }) => color ? color : ({ theme }) => theme.color.white)};
-        transition: background-color .1s ease-in;
+        transition: background-color ${({ theme }) => theme.transition.navcart};
 
         &::after, ::before{
-            transition: transform .2s ease-in;
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             background-color: ${({ color }) => color ? color : ({ theme }) => theme.color.white};
+            transition: transform ${({ theme }) => theme.transition.navcart}, background-color ${({ theme }) => theme.transition.navcart};
         }
         &::after{
             top: ${({ isActive }) => isActive ? '0' : '-7px'};
@@ -51,5 +55,11 @@ export const StyledBurger = styled(({ color, ...props }) => <Box {...props} />)`
             transform: rotate(${({ isActive }) => isActive ? '-45deg' : '-0'});
         }
 
+    }
+`
+
+export const StyledLogoIcon = styled(StyledIcon)`
+    svg path{
+        transition: fill ${({ theme }) => theme.transition.navcart};
     }
 `

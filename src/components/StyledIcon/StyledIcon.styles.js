@@ -1,7 +1,7 @@
-import React from 'react';
 import styled from "styled-components"
 
-export const StyledIconWrapper = styled(({ color, width, ...props }) => <span {...props} />)`
+export const StyledIconWrapper = styled.span`
+    display: inline-block;
     width: ${({ width }) => width ? width : '100px'};
 
     svg {
