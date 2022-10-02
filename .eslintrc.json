@@ -34,7 +34,7 @@
         "react/function-component-definition": "off",
         "react/button-has-type": "off",
         "react/self-closing-comp": "off",
-        // "react/prop-types": "warn",
+        "react/prop-types": "error",
         "react/destructuring-assignment": "warn",
         "no-debugger": "off"
     }

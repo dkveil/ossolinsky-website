@@ -1,4 +1,4 @@
-import media from "../utils/media"
+import media from "utils/media"
 
 export const theme = {
     color: {
@@ -19,7 +19,8 @@ export const theme = {
                 paragraph: '1.2rem',
                 featuresParagraph: '1rem',
                 ofertParagraph: '1.4rem',
-                testimetionalsParagraph: '1.8rem'
+                testimetionalsParagraph: '1.8rem',
+                navitem: '2.2rem'
             },
             desktop: {
                 heroHeading: '5.6rem',

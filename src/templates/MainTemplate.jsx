@@ -11,7 +11,7 @@ export const MainTemplate = ({ children }) => {
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
                 <Header />
-                <main>{children}</main>
+                <main id="main">{children}</main>
             </ThemeProvider>
         </>
     );

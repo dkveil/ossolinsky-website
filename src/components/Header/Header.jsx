@@ -12,7 +12,7 @@ export const Header = () => {
 
     const [isActive, setIsActive] = React.useState(false)
     const [itemsColor, setItemsColor] = React.useState(theme.color.white)
-    const [backgroundColor, setBackgroundColor] = React.useState('gray')
+    const [backgroundColor, setBackgroundColor] = React.useState('transparent')
 
     const toggleMenu = () => setIsActive(prev => !prev)
 

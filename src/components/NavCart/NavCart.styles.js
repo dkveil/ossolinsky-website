@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import { StyledIcon } from 'components/StyledIcon'
 
 export const Wrapper = styled.div`
@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     position: fixed;
-    margin-top: ${({ theme }) => theme.height.mobileHeader};
+    padding-top: ${({ theme }) => theme.height.mobileHeader};
     top: 0;
     left: 0;
     height: 100vh;
@@ -31,10 +31,9 @@ export const MenuWrapper = styled.div`
     }
     a{
         text-decoration: none;
-        font-size: 2rem;
+        font-size: ${({ theme }) => theme.font.size.mobile.navitem};
         color: inherit;
     }
-
 `
 
 export const IconsWrapper = styled.div`
