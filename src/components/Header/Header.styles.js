@@ -9,7 +9,17 @@ export const Wrapper = styled.header`
     width: 100%;
     background-color: ${(props) => props.bgcolor ? props.bgcolor : null};
     z-index: ${({ theme }) => theme.zindex.header};
-    transition: background-color ${({ theme }) => theme.transition.navcart};
+    transition: background-color ${({ theme }) => theme.transition.navcart}, box-shadow ${({ theme }) => theme.transition.navcart};
+    box-shadow: ${({ isActive, theme, bgcolor }) => {
+        if (isActive) {
+            return null
+        }
+        if (!isActive && bgcolor !== 'transparent') {
+            return `
+                0 1px 2px ${theme.color.black}
+            `
+        }
+    }};
 `
 
 export const ContentWrapper = styled.div`

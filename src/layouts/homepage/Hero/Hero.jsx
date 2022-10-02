@@ -3,10 +3,10 @@ import {
     Wrapper,
     ContentWrapper,
     VideoWrapper,
-    HeroHeading,
     HeroParagraph,
     StyledArrowIcon,
 } from './Hero.styles';
+import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
 import HeroVideo from 'videos/homepage/01_hero.mp4';
@@ -43,7 +43,9 @@ export const Hero = () => {
         <Wrapper id="hero">
             <Container>
                 <ContentWrapper>
-                    <HeroHeading>{h1Content()}</HeroHeading>
+                    <Heading variant="h1" margin="1rem 0" color="white">
+                        {h1Content()}
+                    </Heading>
                     <HeroParagraph>
                         Każdy drink jaki wykonam dla Ciebie i Twoich gości,
                         będzie niezapomnianym wrażeniem smakowym!

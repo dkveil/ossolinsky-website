@@ -47,9 +47,9 @@ export const HeroHeading = styled.h1`
     font-weight: 600;
     line-height: ${({ theme }) => `calc(${theme.font.size.mobile.heroHeading} + 4px)`};
     color: ${({ theme }) => theme.color.white};
-    text-align: center;
     text-transform: uppercase;
     text-shadow: 0 2px 2px ${({ theme }) => theme.color.black};
+    text-align: center;
     margin-bottom: 1rem;
 `
 

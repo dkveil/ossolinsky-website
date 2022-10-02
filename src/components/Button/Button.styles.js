@@ -1,23 +1,34 @@
 import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
-    font-family: ${({ theme }) => theme.font.family};
-    display: inline-flex;
-    font-size: 1.2rem;
-    text-transform: uppercase;
+    position: relative;
     outline: none;
     border: none;
 
-    ${({ isLink }) => {
+    span{
+        font-family: ${({ theme }) => theme.font.family};
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        min-width: 16rem;
+        font-weight: 600;
+        z-index: 2;
+
+        ${({ isLink }) => {
         if (isLink) {
             return css`
                 a {
                     padding: 12px 26px;
                     text-decoration: none;
                     color: inherit;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100%;
                 }
             `
-
         } else {
             return css`
                 padding: 12px 26px;
@@ -25,17 +36,85 @@ export const StyledButton = styled.button`
         }
     }}
 
-    ${({ variant, theme }) => {
+        ${({ variant, theme }) => {
+
         switch (variant) {
             case 'contained-outlined':
                 return css`
-                    font-weight: 600;
-                    background-color: ${theme.color.black};
-                    color: ${theme.color.white};
-                    border: 1px solid ${theme.color.white};
-                `
+                        background-color: ${theme.color.black};
+                        color: ${theme.color.white};
+                        border: 1px solid ${theme.color.white};
+                        transition: color .2s ease, background-color .2s ease;
+                        :hover{
+                            color: ${theme.color.black};
+                            background-color: ${theme.color.white};
+                        }
+                    `
+            case 'outlined':
+                return css`
+                        border: 1px solid ${theme.color.black};
+                        color: ${theme.color.black};
+                        background-color: ${theme.color.gray};
+                        transition: color .2s ease, background-color .2s ease;
+                        :hover{
+                            color: ${theme.color.white};
+                            background-color: ${theme.color.black};
+                            transition: color .2s .2s ease, background-color .2s .2s ease;
+                        }
+                    `
             default:
                 return null;
         }
+    }}}
+
+        ${({ boxOverlay, isLink, theme }) => {
+        if (boxOverlay) {
+            const boxOverlayStyles = () => (
+                css`
+                    &:hover::after{
+                        transform: translate(0, 0);
+                        transition: transform .2s  ease;
+
+                    }
+
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        pointer-events: none;
+                        top: 0;
+                        left: 0;
+                        background-color: ${theme.color.black};
+                        width: 100%;
+                        height: 100%;
+                        z-index: 0;
+                        border: 1px solid ${theme.color.black};
+                        transition: transform .2s .2s ease;
+
+                        ${() => {
+                        switch (boxOverlay) {
+                            case 'bottom-left':
+                                return css`
+                                        transform: translate(-1rem, 1rem);
+                                    `
+                            case 'bottom-right':
+                                return css`
+                                    transform: translate(1rem, -1rem);
+                                `
+                        }
+                    }}
+                    }
+                `
+            )
+
+            if (isLink) {
+                return css`
+                    position: relative;
+                    ${boxOverlayStyles}
+
+                `
+            }
+        }
     }}
+
+
 `

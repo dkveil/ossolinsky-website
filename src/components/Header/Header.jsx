@@ -37,6 +37,7 @@ export const Header = () => {
     return (
         <>
             <Wrapper
+                isActive={isActive}
                 bgcolor={
                     isActive && backgroundColor !== theme.color.white
                         ? 'transparent'
