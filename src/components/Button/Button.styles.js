@@ -4,6 +4,7 @@ export const StyledButton = styled.button`
     position: relative;
     outline: none;
     border: none;
+    background-color: transparent;
 
     span{
         font-family: ${({ theme }) => theme.font.family};
@@ -14,6 +15,7 @@ export const StyledButton = styled.button`
         font-size: 1.2rem;
         text-transform: uppercase;
         min-width: 16rem;
+        width: ${({ width }) => width ? width : 'fit-content'};
         font-weight: 600;
         z-index: 2;
 
@@ -41,27 +43,40 @@ export const StyledButton = styled.button`
         switch (variant) {
             case 'contained-outlined':
                 return css`
-                        background-color: ${theme.color.black};
-                        color: ${theme.color.white};
-                        border: 1px solid ${theme.color.white};
-                        transition: color .2s ease, background-color .2s ease;
-                        :hover{
-                            color: ${theme.color.black};
-                            background-color: ${theme.color.white};
-                        }
-                    `
+                    background-color: ${theme.color.black};
+                    color: ${theme.color.white};
+                    border: 1px solid ${theme.color.white};
+                    transition: color .2s ease, background-color .2s ease;
+                    :hover{
+                        color: ${theme.color.black};
+                        background-color: ${theme.color.white};
+                    }
+                `
             case 'outlined':
                 return css`
-                        border: 1px solid ${theme.color.black};
+                    border: 1px solid ${theme.color.black};
+                    color: ${theme.color.black};
+                    background-color: ${theme.color.gray};
+                    transition: color .2s ease, background-color .2s ease;
+                    :hover{
+                        color: ${theme.color.white};
+                        background-color: ${theme.color.black};
+                        transition: color .2s .2s ease, background-color .2s .2s ease;
+                    }
+                `
+            case 'full-outlined':
+                return css`
+                    background-color: transparent;
+                    border: 1px solid ${theme.color.white};
+                    text-shadow: 0 0 2px ${theme.color.black};
+                    color: ${theme.color.white};
+                    transition: color .2s ease, background-color .2s ease;
+                    :hover{
                         color: ${theme.color.black};
-                        background-color: ${theme.color.gray};
-                        transition: color .2s ease, background-color .2s ease;
-                        :hover{
-                            color: ${theme.color.white};
-                            background-color: ${theme.color.black};
-                            transition: color .2s .2s ease, background-color .2s .2s ease;
-                        }
-                    `
+                        background-color: ${theme.color.white};
+                        text-shadow: none;
+                    }
+                `
             default:
                 return null;
         }

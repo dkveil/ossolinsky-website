@@ -1,0 +1,1 @@
+export { OfertCard } from './OfertCard'

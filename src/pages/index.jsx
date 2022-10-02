@@ -1,10 +1,11 @@
 import React from 'react';
-import { Hero, Welcome } from 'layouts/homepage';
+import { Hero, Welcome, Oferts } from 'layouts/homepage';
 
 const IndexPage = () => (
     <>
         <Hero />
         <Welcome />
+        <Oferts />
     </>
 );
 

@@ -11,6 +11,7 @@ export const Button = ({
     path,
     blank,
     boxOverlay,
+    width,
 }) => {
     const internal = /^\/(?!\/)/.test(path);
 
@@ -21,6 +22,7 @@ export const Button = ({
                 onClick={onClickHandler}
                 isLink={isLink}
                 boxOverlay={boxOverlay}
+                width={width}
             >
                 <span>
                     <Link
@@ -71,8 +73,12 @@ export const Button = ({
 
 Button.propTypes = {
     children: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['contained', 'contained-outlined', 'outlined'])
-        .isRequired,
+    variant: PropTypes.oneOf([
+        'contained',
+        'contained-outlined',
+        'outlined',
+        'full-outlined',
+    ]).isRequired,
     onClickHandler: PropTypes.func,
     isLink: PropTypes.bool,
     path: ({ isLink, path }, componentName) => {
@@ -82,6 +88,7 @@ Button.propTypes = {
     },
     blank: PropTypes.bool,
     boxOverlay: PropTypes.oneOf(['bottom-left', 'bottom-right']),
+    width: PropTypes.string,
 };
 
 Button.defaultProps = {

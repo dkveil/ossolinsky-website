@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-    Wrapper,
-    ImageWrapper,
-    ContentWrapper,
-    WelcomeParagraph,
-} from './Welcome.styles';
+import { Wrapper, ImageWrapper, ContentWrapper } from './Welcome.styles';
 import { Container } from 'styles/Container';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Heading } from 'components/Heading';
+import { SectionParagraph } from 'components/SectionParagraph';
 import { Button } from 'components/Button';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
@@ -19,7 +15,7 @@ export const Welcome = () => {
     );
 
     return (
-        <Wrapper>
+        <Wrapper id="welcome-section">
             <Container>
                 <ContentWrapper>
                     <ImageWrapper>
@@ -28,13 +24,14 @@ export const Welcome = () => {
                             objectFit="cover"
                             style={{ width: '100%', height: '100%' }}
                             imgStyle={{ objectFit: 'cover' }}
+                            alt="Welcome image"
                         />
                     </ImageWrapper>
                     <Heading variant="h2" color="black" margin="5rem 0 2.2rem">
                         Ossolinsky... <br />i już wiesz jakiego barmana wybrać
                         na swoja imprezę!
                     </Heading>
-                    <WelcomeParagraph>
+                    <SectionParagraph margin="0 0 2.5rem">
                         Barmaństwem zajmuję się nie od dziś i pokażę Ci jakie
                         urozmaicenie wprowadza barman na różnego rodzaju
                         imprezach! Moją przygodę z barmaństwem zacząłem lata
@@ -43,7 +40,7 @@ export const Welcome = () => {
                         Dzięki temu, przez co udało mi się przebrnąć, zrobię
                         wszystko co w mojej mocy, żeby każdy wyszedł z Twojej
                         imprezy zadowolony!
-                    </WelcomeParagraph>
+                    </SectionParagraph>
                     <Button
                         variant="outlined"
                         isLink

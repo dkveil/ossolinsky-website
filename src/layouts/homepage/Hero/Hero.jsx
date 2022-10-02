@@ -12,9 +12,22 @@ import { Button } from 'components/Button';
 import HeroVideo from 'videos/homepage/01_hero.mp4';
 import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
 import media from 'utils/media';
+import { useTheme } from 'styled-components';
 
 export const Hero = () => {
     const { width: windowWidth } = useWindowDimensions();
+    const theme = useTheme();
+
+    const handleClick = () => {
+        const headerHeight = theme.height.mobileHeader.match(/\d+/)[0];
+
+        window.scrollTo({
+            top:
+                document.getElementById('welcome-section').offsetTop -
+                Number(headerHeight),
+            behavior: 'smooth',
+        });
+    };
 
     const h1Content = () => {
         if (windowWidth > media.TABLET) {
@@ -53,7 +66,7 @@ export const Hero = () => {
                     <Button variant="contained-outlined" isLink path="/">
                         Sprawdź ofertę
                     </Button>
-                    <StyledArrowIcon />
+                    <StyledArrowIcon onClick={handleClick} />
                 </ContentWrapper>
             </Container>
             <VideoWrapper>
