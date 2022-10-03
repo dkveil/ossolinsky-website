@@ -11,7 +11,7 @@ export const Contact = () => {
     const data = useStaticQuery(query);
 
     return (
-        <Wrapper>
+        <Wrapper id="contact-section">
             <ImageWrapper>
                 <GatsbyImage
                     image={data.contactimage.childImageSharp.gatsbyImageData}

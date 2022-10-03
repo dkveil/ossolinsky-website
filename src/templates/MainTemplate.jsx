@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/GlobalStyles';
 import { theme } from 'styles/theme';
 import { Header } from 'components/Header/';
+import { Footer } from 'components/Footer';
 
 export const MainTemplate = ({ children }) => {
     return (
@@ -12,6 +13,7 @@ export const MainTemplate = ({ children }) => {
                 <GlobalStyle />
                 <Header />
                 <main id="main">{children}</main>
+                <Footer />
             </ThemeProvider>
         </>
     );
