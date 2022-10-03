@@ -17,11 +17,26 @@ export const Oferts = () => {
     const data = useStaticQuery(query);
 
     return (
-        <Wrapper>
+        <Wrapper id="oferts-section">
             <Container>
                 <ContentWrapper>
-                    <Heading variant="h2" color="black" margin="0 0 3rem">
-                        Jaką Imprezę chcesz osłodzić?
+                    <Heading
+                        variant="h2"
+                        color="black"
+                        margin="0 0 3rem"
+                        overlay
+                        overlayColor="gray"
+                        overlayPosition={{
+                            top: '-1.1rem',
+                            left: '-1rem',
+                        }}
+                        overlaySize={{
+                            width: '18rem',
+                            height: '5rem',
+                        }}
+                    >
+                        Jaką Imprezę <br />
+                        chcesz <b>osłodzić?</b>
                     </Heading>
                     <SectionParagraph margin="0 0 3rem">
                         Sprawię, aby Twoja impreza była niezapomniana, a goście

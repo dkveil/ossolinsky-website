@@ -27,11 +27,26 @@ export const Welcome = () => {
                             alt="Welcome image"
                         />
                     </ImageWrapper>
-                    <Heading variant="h2" color="black" margin="5rem 0 2.2rem">
-                        Ossolinsky... <br />i już wiesz jakiego barmana wybrać
-                        na swoja imprezę!
+                    <Heading
+                        variant="h2"
+                        color="black"
+                        margin="5rem 0 3rem"
+                        overlay
+                        overlayColor="white"
+                        overlayPosition={{
+                            top: '-.8rem',
+                            left: '-1.1rem',
+                        }}
+                        overlaySize={{
+                            width: '13rem',
+                            height: '4.2rem',
+                        }}
+                    >
+                        <b>Ossolinsky... </b>
+                        <br />i już wiesz jakiego barmana wybrać na swoją
+                        imprezę!
                     </Heading>
-                    <SectionParagraph margin="0 0 2.5rem">
+                    <SectionParagraph margin="0 0 3rem">
                         Barmaństwem zajmuję się nie od dziś i pokażę Ci jakie
                         urozmaicenie wprowadza barman na różnego rodzaju
                         imprezach! Moją przygodę z barmaństwem zacząłem lata

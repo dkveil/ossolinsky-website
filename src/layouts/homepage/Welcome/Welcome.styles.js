@@ -11,10 +11,4 @@ export const ContentWrapper = styled.div`
 export const ImageWrapper = styled.div`
     width: 100%;
     height: 360px;
-    background: yellow;
-    div picture img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 `

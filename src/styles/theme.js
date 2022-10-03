@@ -20,7 +20,8 @@ export const theme = {
                 featuresParagraph: '1rem',
                 ofertParagraph: '1.4rem',
                 testimetionalsParagraph: '1.8rem',
-                navitem: '2.2rem'
+                navitem: '2.2rem',
+                blockquote: '1.8rem',
             },
             desktop: {
                 heroHeading: '5.6rem',
