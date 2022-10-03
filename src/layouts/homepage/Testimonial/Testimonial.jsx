@@ -21,6 +21,8 @@ export const Testimonial = () => {
         return () => clearTimeout(timeout);
     }, [activeTestimonial]);
 
+    const setPage = (id) => setActiveTestimonial(id);
+
     const handleTestimontialPage = (type) => {
         if (type === 'increment') {
             setActiveTestimonial((prev) =>
@@ -58,7 +60,7 @@ export const Testimonial = () => {
                 'Giga spoko wesele nam zrobił. Zabawa nie do zapomnienia! Jaze',
         },
         {
-            image: data.testimonial1.childImageSharp.gatsbyImageData,
+            image: data.testimonial3.childImageSharp.gatsbyImageData,
             authors: 'Szymon',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
@@ -125,6 +127,7 @@ export const Testimonial = () => {
             <Pagination
                 active={activeTestimonial}
                 pages={testimonialItems.length}
+                setPage={setPage}
                 increment={() => handleTestimontialPage('increment')}
                 decrement={() => handleTestimontialPage('decrement')}
                 styles={{

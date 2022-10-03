@@ -46,6 +46,8 @@ export const Button = ({
                 onClick={onClickHandler}
                 isLink={isLink}
                 boxOverlay={boxOverlay}
+                width={width}
+                color={color}
             >
                 <span>
                     <a
@@ -66,6 +68,8 @@ export const Button = ({
                 variant={variant}
                 onClick={onClickHandler}
                 boxOverlay={boxOverlay}
+                width={width}
+                color={color}
             >
                 <span>{children}</span>
             </StyledButton>
@@ -80,6 +84,7 @@ Button.propTypes = {
         'contained-outlined',
         'outlined',
         'full-outlined',
+        'full-contained',
     ]).isRequired,
     onClickHandler: PropTypes.func,
     isLink: PropTypes.bool,

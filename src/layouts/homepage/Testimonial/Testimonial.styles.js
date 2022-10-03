@@ -9,6 +9,6 @@ export const Wrapper = styled.section`
 
 export const TestimonialsWrapper = styled.div`
     position: relative;
-    height: calc(${testimonialCardHeight} + 19rem);
+    height: calc(${testimonialCardHeight} + 20rem);
     overflow: hidden;
 `

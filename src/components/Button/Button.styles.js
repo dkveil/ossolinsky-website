@@ -77,6 +77,11 @@ export const StyledButton = styled.button`
                         text-shadow: none;
                     }
                 `
+            case 'full-contained':
+                return css`
+                    background-color: ${theme.color.black};
+                    color: ${theme.color.white};
+                `
             default:
                 return null;
         }

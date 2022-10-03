@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 
 export const ContentWrapper = styled.div`
     position: relative;
-    padding-top: calc(6rem + 150px);
+    padding-top: calc(6rem + 175px);
     opacity: ${({ isActive }) => isActive ? 1 : 0};
     visibility: ${({ isActive }) => isActive ? 'visible' : 'hidden'};
 
@@ -36,10 +36,10 @@ export const ContentWrapper = styled.div`
 
 export const ImageWrapper = styled.div`
     position: absolute;
-    top: -150px;
+    top: -175px;
     left: 0;
     width: 100%;
-    height: 30rem;
+    height: 35rem;
     border: 2px solid ${({ theme }) => theme.color.white};
 
     &::after{

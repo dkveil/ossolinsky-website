@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-    padding: 3rem 0 8rem;
+    padding: 3rem 0 12rem;
     background-color: ${({ theme }) => theme.color.white};
 `
 
