@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Pagination } from "../Pagination"
 
 export const testimonialCardHeight = '56rem'
 
@@ -11,23 +10,26 @@ export const Wrapper = styled.div`
     width: 100%;
     background-color: ${({ theme }) => theme.color.gray};
     transform: ${({ position }) => `translateX(${position * 100 - 100}vw)`};
-    opacity: ${({ position }) => position === 1 ? 1 : 0};
-    visibility: ${({ position }) => position === 1 ? 'visible' : 'hidden'};
     transition: transform .4s ease, visibility .4s ease, opacity .4s ease;
+    z-index: ${({ position, theme }) => position === 1 ? theme.zindex.visiblecontent : theme.zindex.hiddencontent};
 `
 
 export const ContentWrapper = styled.div`
     position: relative;
     padding-top: calc(6rem + 150px);
+    opacity: ${({ isActive }) => isActive ? 1 : 0};
+    visibility: ${({ isActive }) => isActive ? 'visible' : 'hidden'};
 
-    blockquote, span {
+    blockquote {
         font-size: ${({ theme }) => theme.font.size.mobile.blockquote};
         line-height: 3.2rem;
-        color: ${({ theme }) => theme.color.black};
-        margin-bottom: 5rem;
+        color: ${({ theme }) => theme.color.text};
+        margin-bottom: 3rem;
     }
     span {
+        font-size: ${({ theme }) => theme.font.size.mobile.testimetionalsParagraph};
         font-weight: 600;
+        color: ${({ theme }) => theme.color.black};
         text-transform: uppercase;
     }
 `
@@ -51,10 +53,4 @@ export const ImageWrapper = styled.div`
         background-color: ${({ theme }) => theme.color.black};
         z-index: -1;
     }
-`
-
-export const StyledPagination = styled(Pagination)`
-    position: absolute;
-    bottom: 0;
-    left: 20px;
 `

@@ -30,7 +30,7 @@ export const Welcome = () => {
                     <Heading
                         variant="h2"
                         color="black"
-                        margin="5rem 0 3rem"
+                        margin="5rem 0 4rem"
                         overlay
                         overlayColor="white"
                         overlayPosition={{
@@ -46,7 +46,7 @@ export const Welcome = () => {
                         <br />i już wiesz jakiego barmana wybrać na swoją
                         imprezę!
                     </Heading>
-                    <SectionParagraph margin="0 0 3rem">
+                    <SectionParagraph margin="0 0 5rem">
                         Barmaństwem zajmuję się nie od dziś i pokażę Ci jakie
                         urozmaicenie wprowadza barman na różnego rodzaju
                         imprezach! Moją przygodę z barmaństwem zacząłem lata

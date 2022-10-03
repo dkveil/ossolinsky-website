@@ -12,6 +12,7 @@ export const Button = ({
     blank,
     boxOverlay,
     width,
+    color,
 }) => {
     const internal = /^\/(?!\/)/.test(path);
 
@@ -23,6 +24,7 @@ export const Button = ({
                 isLink={isLink}
                 boxOverlay={boxOverlay}
                 width={width}
+                color={color}
             >
                 <span>
                     <Link
@@ -89,6 +91,7 @@ Button.propTypes = {
     blank: PropTypes.bool,
     boxOverlay: PropTypes.oneOf(['bottom-left', 'bottom-right']),
     width: PropTypes.string,
+    color: PropTypes.string,
 };
 
 Button.defaultProps = {

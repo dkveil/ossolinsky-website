@@ -38,7 +38,7 @@ export const StyledButton = styled.button`
         }
     }}
 
-        ${({ variant, theme }) => {
+        ${({ variant, theme, color }) => {
 
         switch (variant) {
             case 'contained-outlined':
@@ -56,7 +56,7 @@ export const StyledButton = styled.button`
                 return css`
                     border: 1px solid ${theme.color.black};
                     color: ${theme.color.black};
-                    background-color: ${theme.color.gray};
+                    background-color: ${color === "white" ? theme.color.white : theme.color.gray};
                     transition: color .2s ease, background-color .2s ease;
                     :hover{
                         color: ${theme.color.white};

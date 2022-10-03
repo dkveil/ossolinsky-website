@@ -4,12 +4,13 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     gap: 3.2rem;
-    position: ${({ styles }) => styles.position ? styles.position : 'static'};
+    position: ${({ styles }) => styles.position ? styles.position : 'relative'};
     top: ${({ styles }) => styles.top ? styles.top : null};
     left: ${({ styles }) => styles.left ? styles.left : null};
     right: ${({ styles }) => styles.right ? styles.right : null};
     bottom: ${({ styles }) => styles.bottom ? styles.bottom : null};
     transform: ${({ styles }) => styles.transform ? styles.transform : null};
+    z-index: ${({ theme }) => theme.zindex.pagination};
 `
 
 export const DotsWrapper = styled.div`

@@ -12,7 +12,7 @@ export const TestimonialCard = ({ image, authors, content, position }) => {
     return (
         <Wrapper position={position}>
             <Container>
-                <ContentWrapper>
+                <ContentWrapper isActive={position === 1 ? true : false}>
                     <ImageWrapper>
                         <GatsbyImage
                             image={image}

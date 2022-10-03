@@ -11,6 +11,16 @@ export const Testimonial = () => {
     const [activeTestimonial, setActiveTestimonial] = React.useState(1);
     const [touchStart, setTouchStart] = React.useState(null);
 
+    React.useEffect(() => {
+        const timeout = setTimeout(() => {
+            setActiveTestimonial((prev) =>
+                prev === testimonialItems.length - 1 ? 0 : prev + 1
+            );
+        }, 8000);
+
+        return () => clearTimeout(timeout);
+    }, [activeTestimonial]);
+
     const handleTestimontialPage = (type) => {
         if (type === 'increment') {
             setActiveTestimonial((prev) =>
@@ -25,13 +35,11 @@ export const Testimonial = () => {
     };
 
     const handleSwipe = (e) => {
-        console.log(e.changedTouches[0].clientX);
-
         if (touchStart - e.changedTouches[0].clientX > 50) {
-            handleTestimontialPage('decrement');
+            handleTestimontialPage('increment');
         }
         if (touchStart - e.changedTouches[0].clientX < -50) {
-            handleTestimontialPage('increment');
+            handleTestimontialPage('decrement');
         }
         setTouchStart(null);
     };

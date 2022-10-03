@@ -19,9 +19,9 @@ export const theme = {
                 paragraph: '1.2rem',
                 featuresParagraph: '1rem',
                 ofertParagraph: '1.4rem',
-                testimetionalsParagraph: '1.8rem',
+                testimetionalsParagraph: '1.6rem',
                 navitem: '2.2rem',
-                blockquote: '1.8rem',
+                blockquote: '1.5rem',
             },
             desktop: {
                 heroHeading: '5.6rem',
@@ -47,7 +47,10 @@ export const theme = {
     },
     zindex: {
         header: 9999,
-        navcart: 999
+        navcart: 999,
+        pagination: 2,
+        visiblecontent: 1,
+        hiddencontent: 0,
     },
     height: {
         mobileHeader: '80px'

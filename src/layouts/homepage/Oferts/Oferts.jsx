@@ -23,7 +23,7 @@ export const Oferts = () => {
                     <Heading
                         variant="h2"
                         color="black"
-                        margin="0 0 3rem"
+                        margin="0 0 4rem"
                         overlay
                         overlayColor="gray"
                         overlayPosition={{
@@ -38,7 +38,7 @@ export const Oferts = () => {
                         Jaką Imprezę <br />
                         chcesz <b>osłodzić?</b>
                     </Heading>
-                    <SectionParagraph margin="0 0 3rem">
+                    <SectionParagraph margin="0 0 4rem">
                         Sprawię, aby Twoja impreza była niezapomniana, a goście
                         byli zachwyceni. Specjalizuję się głównie w barmaństwie
                         na weselach, 18stkach lub imprezach firmowych! Jeśli
@@ -67,11 +67,12 @@ export const Oferts = () => {
                     </OfertFeaturesList>
                     <Button
                         variant="outlined"
+                        color="white"
                         isLink
                         path="/"
                         boxOverlay="bottom-left"
                     >
-                        o mnie
+                        O mnie
                     </Button>
                 </ContentWrapper>
             </Container>
@@ -130,6 +131,11 @@ const query = graphql`
             }
         }
         ofertother: file(relativePath: { eq: "homepage/06_ofert-other.jpg" }) {
+            childImageSharp {
+                gatsbyImageData(placeholder: BLURRED)
+            }
+        }
+        blogpost1: file(relativePath: { eq: "homepage/10_blog.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }

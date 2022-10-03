@@ -12,7 +12,7 @@ export const OfertFeaturesList = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
     li {
         font-size: 1.2rem;
         text-transform: uppercase;
