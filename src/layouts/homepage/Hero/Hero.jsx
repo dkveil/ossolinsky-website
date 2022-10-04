@@ -91,7 +91,7 @@ export const Hero = () => {
                     <StyledArrowIcon onClick={handleClick} />
                 </ContentWrapper>
             </Container>
-            <VideoWrapper ref={videoRef}>
+            <VideoWrapper ref={videoRef} id="hero-video">
                 <video src={HeroVideo} autoPlay={true} loop={true} muted></video>
             </VideoWrapper>
         </Wrapper>

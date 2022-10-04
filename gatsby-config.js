@@ -80,7 +80,9 @@ module.exports = {
             resolve: `gatsby-plugin-google-fonts`,
             options: {
                 fonts: [
-                    `poppins\:400,600,700,`
+                    `poppins\:400,600,700,`,
+                    `dancing script\:400,500,600,700`,
+                    'Comforter Brush'
                 ],
                 display: 'swap'
             }

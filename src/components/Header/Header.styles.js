@@ -108,9 +108,12 @@ export const IconsWrapper = styled.div`
 
 export const StyledListItem = styled.li`
     color: ${({ color }) => color};
-    text-shadow: ${({ theme, color }) => color === theme.color.black ? 'null' : `0px 2px 4px ${theme.color.black}`};
+    text-shadow: ${({ theme, color }) => color === theme.color.black ? null : `0px 2px 4px ${theme.color.black}`};
     transition: color ${({ theme }) => theme.transition.navcart}, text-shadow ${({ theme }) => theme.transition.navcart};
-
+    :hover {
+        color: ${({ color, theme }) => color === theme.color.black ? theme.color.navhover : null};
+        text-shadow: ${({ theme, color }) => color === theme.color.black ? null : `0px 2px 8px black`};
+    }
     a{
         font-size: 1.4rem;
         font-weight: 600;

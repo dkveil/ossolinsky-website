@@ -6,10 +6,12 @@ export const theme = {
         white: '#FEFEFE',
         gray: '#F1F1F1',
         text: '#5F5F5F',
+        navhover: '#5F5F5F',
         transitionposition: '36%'
     },
     font: {
         family: 'Poppins, sans-serif',
+        authograph: 'Dancing Script, cursive',
         size: {
             mobile: {
                 heroHeading: '3.2rem',
@@ -36,7 +38,7 @@ export const theme = {
                 testimetionalsParagraph: '2.2rem',
             },
             large: {
-                heroHeading: '5.6rem'
+                heroHeading: '5.2rem',
             }
         }
     },
@@ -61,6 +63,6 @@ export const theme = {
         desktopHeader: '80px'
     },
     width: {
-        desktopherovideo: '61%'
+        desktopherovideo: '61vw'
     }
 }

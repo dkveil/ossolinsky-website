@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
+    display: inline-block;
+    width: fit-content;
     position: relative;
     outline: none;
     border: none;

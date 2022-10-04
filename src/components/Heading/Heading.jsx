@@ -56,6 +56,11 @@ export const Heading = styled(({ variant, children, overlay, overlayPosition, ov
                         font-size: ${theme.font.size.mobile.heading};
                         line-height: 3.6rem;
                         z-index: 0;
+
+                        ${theme.mq.desktop} {
+                            font-size: ${theme.font.size.desktop.heading};
+                            line-height: 5rem;
+                        }
                     `;
             }
         }};

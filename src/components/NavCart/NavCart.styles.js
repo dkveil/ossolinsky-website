@@ -47,9 +47,16 @@ export const StyledSocialIcon = styled(StyledIcon)`
     width: 30px;
 
     ${({ theme }) => theme.mq.desktop}{
-        filter: ${({ color, theme }) => color === theme.color.black ? null : 'drop-shadow( 0px 2px 1px rgba(0, 0, 0, .7))'};
+        filter: ${({ color, theme }) => color === theme.color.black ? null : 'drop-shadow( 0px 2px 1px rgba(0, 0, 0, 1))'};
         transition: filter ${({ theme }) => theme.transition.navcart};
         width: 26px;
+        :hover {
+            filter: ${({ color, theme }) => color === theme.color.black ? null : 'drop-shadow( 0px 3px 3px rgba(0, 0, 0, 1))'};
+
+            svg path{
+                fill: ${({ color, theme }) => color === theme.color.black ? theme.color.navhover : null};
+            }
+        }
     }
 
     svg path{
