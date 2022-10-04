@@ -13,9 +13,7 @@ export const Testimonial = () => {
 
     React.useEffect(() => {
         const timeout = setTimeout(() => {
-            setActiveTestimonial((prev) =>
-                prev === testimonialItems.length - 1 ? 0 : prev + 1
-            );
+            setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
         }, 8000);
 
         return () => clearTimeout(timeout);
@@ -25,14 +23,10 @@ export const Testimonial = () => {
 
     const handleTestimontialPage = (type) => {
         if (type === 'increment') {
-            setActiveTestimonial((prev) =>
-                prev === testimonialItems.length - 1 ? 0 : prev + 1
-            );
+            setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
         }
         if (type === 'decrement') {
-            setActiveTestimonial((prev) =>
-                prev === 0 ? testimonialItems.length - 1 : prev - 1
-            );
+            setActiveTestimonial((prev) => (prev === 0 ? testimonialItems.length - 1 : prev - 1));
         }
     };
 
@@ -50,47 +44,28 @@ export const Testimonial = () => {
         {
             image: data.testimonial1.childImageSharp.gatsbyImageData,
             authors: 'Dawid',
-            content:
-                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
         },
         {
             image: data.testimonial2.childImageSharp.gatsbyImageData,
             authors: 'Krzysiek i Magda',
-            content:
-                'Giga spoko wesele nam zrobił. Zabawa nie do zapomnienia! Jaze',
+            content: 'Giga spoko wesele nam zrobił. Zabawa nie do zapomnienia! Jaze',
         },
         {
             image: data.testimonial3.childImageSharp.gatsbyImageData,
             authors: 'Szymon',
-            content:
-                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
         },
     ];
 
     const handleIndex = (index) => {
         if (index === activeTestimonial) return { pos: 1 };
-        if (
-            index ===
-            (activeTestimonial - 1 < 0
-                ? testimonialItems.length - 1
-                : activeTestimonial - 1)
-        )
-            return { pos: 0 };
-        if (
-            index ===
-            (activeTestimonial + 1 === testimonialItems.length
-                ? 0
-                : activeTestimonial + 1)
-        )
-            return { pos: 2 };
+        if (index === (activeTestimonial - 1 < 0 ? testimonialItems.length - 1 : activeTestimonial - 1)) return { pos: 0 };
+        if (index === (activeTestimonial + 1 === testimonialItems.length ? 0 : activeTestimonial + 1)) return { pos: 2 };
     };
 
     return (
-        <Wrapper
-            id="testimonial-section"
-            onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-            onTouchEnd={handleSwipe}
-        >
+        <Wrapper id="testimonial-section" onTouchStart={(e) => setTouchStart(e.touches[0].clientX)} onTouchEnd={handleSwipe}>
             <Container>
                 <Heading
                     variant="h2"
@@ -143,23 +118,17 @@ export const Testimonial = () => {
 
 const query = graphql`
     query {
-        testimonial1: file(
-            relativePath: { eq: "homepage/07_testimotial.jpg" }
-        ) {
+        testimonial1: file(relativePath: { eq: "homepage/07_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        testimonial2: file(
-            relativePath: { eq: "homepage/08_testimotial.jpg" }
-        ) {
+        testimonial2: file(relativePath: { eq: "homepage/08_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        testimonial3: file(
-            relativePath: { eq: "homepage/09_testimotial.jpg" }
-        ) {
+        testimonial3: file(relativePath: { eq: "homepage/09_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }

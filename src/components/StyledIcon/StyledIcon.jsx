@@ -1,13 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { StyledIconWrapper } from './StyledIcon.styles'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StyledIconWrapper } from './StyledIcon.styles';
 
-export const StyledIcon = ({ children, ...props }) => (
-    <StyledIconWrapper {...props}>
-        {children}
-    </StyledIconWrapper>
-)
+export const StyledIcon = ({ children, ...props }) => <StyledIconWrapper {...props}>{children}</StyledIconWrapper>;
 
 StyledIcon.propTypes = {
-    children: PropTypes.node.isRequired
-}
+    children: PropTypes.node.isRequired,
+};

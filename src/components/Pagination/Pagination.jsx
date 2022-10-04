@@ -20,7 +20,7 @@ export const Pagination = ({
 
     return (
         <Wrapper styles={styles}>
-            <ArrowLeft onClick={decrement} />
+            <ArrowLeft onClick={decrement} style={{ cursor: 'pointer' }} />
             <DotsWrapper>
                 {items.map((i) => (
                     <Dot
@@ -30,7 +30,7 @@ export const Pagination = ({
                     />
                 ))}
             </DotsWrapper>
-            <ArrowRight onClick={increment} />
+            <ArrowRight onClick={increment} style={{ cursor: 'pointer' }} />
         </Wrapper>
     );
 };

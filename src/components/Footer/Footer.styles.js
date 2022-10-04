@@ -4,7 +4,7 @@ export const Wrapper = styled.footer`
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 4rem 0 5rem;
+    padding: 4rem 0 8rem;
     background-color: ${({ theme }) => theme.color.white};
 `
 

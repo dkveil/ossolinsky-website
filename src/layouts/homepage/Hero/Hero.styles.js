@@ -16,6 +16,11 @@ export const ContentWrapper = styled.div`
     margin-bottom: 2rem;
     width: 100%;
     height: 100%;
+
+    ${({ theme }) => theme.mq.desktop}{
+        justify-content: center;
+        align-items: flex-start;
+    }
 `
 
 export const VideoWrapper = styled.div`
@@ -29,11 +34,19 @@ export const VideoWrapper = styled.div`
     align-items: center;
     z-index: -1;
 
+    ${({ theme }) => theme.mq.desktop}{
+        left: unset;
+        right: 0;
+        overflow: hidden;
+        width: ${({ theme }) => theme.width.desktopherovideo};
+    }
+
     video {
         position: relative;
         height: 100%;
         width: auto;
     }
+
 `
 
 export const HeadingWrapper = styled.div`
@@ -42,22 +55,23 @@ export const HeadingWrapper = styled.div`
     flex-direction: column;
 `
 
-export const HeroHeading = styled.h1`
-    font-size: ${({ theme }) => theme.font.size.mobile.heroHeading};
-    font-weight: 600;
-    line-height: ${({ theme }) => `calc(${theme.font.size.mobile.heroHeading} + 4px)`};
-    color: ${({ theme }) => theme.color.white};
-    text-transform: uppercase;
-    text-shadow: 0 2px 2px ${({ theme }) => theme.color.black};
-    text-align: center;
-    margin-bottom: 1rem;
-`
-
 export const HeroParagraph = styled.p`
     font-size: ${({ theme }) => theme.font.size.mobile.heroParagraph};
     color: ${({ theme }) => theme.color.white};
     text-align: center;
     margin-bottom: 2.8rem;
+
+    ${({ theme }) => theme.mq.tablet}{
+        width: 420px;
+        margin-bottom: 3rem;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        text-align: start;
+        width: 320px;
+        margin-bottom: 3rem;
+        color: ${({ theme }) => theme.color.text}
+    }
 `
 
 export const StyledArrowIcon = styled(ArrowIcon)`
@@ -65,4 +79,9 @@ export const StyledArrowIcon = styled(ArrowIcon)`
     bottom: 8rem;
     width: 3.2rem;
     cursor: pointer;
+
+    ${({ theme }) => theme.mq.desktop}{
+        fill: black;
+        bottom: 20vh;
+    }
 `

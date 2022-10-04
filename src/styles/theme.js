@@ -5,7 +5,8 @@ export const theme = {
         black: '#303030',
         white: '#FEFEFE',
         gray: '#F1F1F1',
-        text: '#5F5F5F'
+        text: '#5F5F5F',
+        transitionposition: '36%'
     },
     font: {
         family: 'Poppins, sans-serif',
@@ -24,7 +25,7 @@ export const theme = {
                 blockquote: '1.5rem',
             },
             desktop: {
-                heroHeading: '5.6rem',
+                heroHeading: '5rem',
                 heading: '4.4rem',
                 smallHeading: '4rem',
                 articleHeading: '1.6rem',
@@ -34,6 +35,9 @@ export const theme = {
                 featuresParagraph: '1.2rem',
                 testimetionalsParagraph: '2.2rem',
             },
+            large: {
+                heroHeading: '5.6rem'
+            }
         }
     },
     mq: {
@@ -54,5 +58,8 @@ export const theme = {
     },
     height: {
         mobileHeader: '80px'
+    },
+    width: {
+        desktopherovideo: '61vw'
     }
 }

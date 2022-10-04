@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    Wrapper,
-    ContentWrapper,
-    Title,
-    Paragraph,
-    ImageWrapper,
-} from './OfertCard.styles';
+import { Wrapper, ContentWrapper, Title, Paragraph, ImageWrapper } from './OfertCard.styles';
 import { PropTypes } from 'prop-types';
 import { Button } from '../Button/Button';
 import { GatsbyImage } from 'gatsby-plugin-image';
@@ -17,12 +11,7 @@ export const OfertCard = ({ title, content, image, iscontact, link }) => {
                 <Title>{title}</Title>
                 <div>
                     <Paragraph>{content}</Paragraph>
-                    <Button
-                        variant="full-outlined"
-                        width="100%"
-                        isLink
-                        path={link}
-                    >
+                    <Button variant="full-outlined" width="100%" isLink path={link}>
                         {iscontact ? 'Kontakt' : 'Oferta'}
                     </Button>
                 </div>

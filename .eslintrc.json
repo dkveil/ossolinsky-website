@@ -35,5 +35,13 @@
         "react/prop-types": "error",
         "react/destructuring-assignment": "warn",
         "no-debugger": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["./src/components/Heading/*.jsx", "./src/components/StyledIcon/StyledIcon.styles.js"],
+            "rules": {
+                "no-unused-vars": "off"
+            }
+        }
+    ]
 }

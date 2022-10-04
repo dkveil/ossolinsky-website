@@ -19,13 +19,7 @@ export const BlogPostCard = ({
             <Wrapper>
                 <ImageWrapper main={main}>
                     <Link to={link}>
-                        <GatsbyImage
-                            image={image}
-                            objectFit="cover"
-                            style={{ width: '100%', height: '100%' }}
-                            imgStyle={{ objectFit: 'cover' }}
-                            alt={title}
-                        />
+                        <GatsbyImage image={image} objectFit="cover" style={{ width: '100%', height: '100%' }} imgStyle={{ objectFit: 'cover' }} alt={title} />
                     </Link>
                 </ImageWrapper>
                 <h3>

@@ -26,4 +26,5 @@ export const Dot = styled.div`
     background-color: ${({ theme, isActive }) => isActive ? theme.color.black : theme.color.text};
     transform: ${({ isActive }) => isActive ? 'scale(1.1)' : 'scale(1)'};
     transition: transform 0.4s ease;
+    cursor: pointer;
 `;

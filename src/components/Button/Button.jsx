@@ -3,17 +3,7 @@ import { PropTypes } from 'prop-types';
 import { StyledButton } from './Button.styles';
 import { Link } from 'gatsby';
 
-export const Button = ({
-    children,
-    variant,
-    onClickHandler,
-    isLink = false,
-    path,
-    blank,
-    boxOverlay,
-    width,
-    color,
-}) => {
+export const Button = ({ children, variant, onClickHandler, isLink = false, path, blank, boxOverlay, width, color, boxOverlayColor }) => {
     const internal = /^\/(?!\/)/.test(path);
 
     if (isLink && internal) {
@@ -25,13 +15,10 @@ export const Button = ({
                 boxOverlay={boxOverlay}
                 width={width}
                 color={color}
+                boxOverlayColor={boxOverlayColor}
             >
                 <span>
-                    <Link
-                        to={path}
-                        target={blank && '_blank'}
-                        rel={blank && 'noreferrer'}
-                    >
+                    <Link to={path} target={blank && '_blank'} rel={blank && 'noreferrer'}>
                         {children}
                     </Link>
                 </span>
@@ -48,13 +35,10 @@ export const Button = ({
                 boxOverlay={boxOverlay}
                 width={width}
                 color={color}
+                boxOverlayColor={boxOverlayColor}
             >
                 <span>
-                    <a
-                        href={path}
-                        target={blank && '_blank'}
-                        rel={blank && 'noreferrer'}
-                    >
+                    <a href={path} target={blank && '_blank'} rel={blank && 'noreferrer'}>
                         {children}
                     </a>
                 </span>
@@ -70,6 +54,7 @@ export const Button = ({
                 boxOverlay={boxOverlay}
                 width={width}
                 color={color}
+                boxOverlayColor={boxOverlayColor}
             >
                 <span>{children}</span>
             </StyledButton>
@@ -79,13 +64,7 @@ export const Button = ({
 
 Button.propTypes = {
     children: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf([
-        'contained',
-        'contained-outlined',
-        'outlined',
-        'full-outlined',
-        'full-contained',
-    ]).isRequired,
+    variant: PropTypes.oneOf(['contained', 'contained-outlined', 'outlined', 'full-outlined', 'full-contained']).isRequired,
     onClickHandler: PropTypes.func,
     isLink: PropTypes.bool,
     path: ({ isLink, path }, componentName) => {
@@ -95,6 +74,7 @@ Button.propTypes = {
     },
     blank: PropTypes.bool,
     boxOverlay: PropTypes.oneOf(['bottom-left', 'bottom-right']),
+    boxOverlayColor: PropTypes.string,
     width: PropTypes.string,
     color: PropTypes.string,
 };

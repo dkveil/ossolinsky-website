@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Wrapper,
-    ContentWrapper,
-    OfertsWrapper,
-    OfertFeaturesList,
-} from './Oferts.styles';
+import { Wrapper, ContentWrapper, OfertsWrapper, OfertFeaturesList } from './Oferts.styles';
 import { Container } from 'styles/Container';
 import { Heading } from 'components/Heading';
 import { SectionParagraph } from 'components/SectionParagraph';
@@ -39,10 +34,8 @@ export const Oferts = () => {
                         chcesz <b>osłodzić?</b>
                     </Heading>
                     <SectionParagraph margin="0 0 4rem">
-                        Sprawię, aby Twoja impreza była niezapomniana, a goście
-                        byli zachwyceni. Specjalizuję się głównie w barmaństwie
-                        na weselach, 18stkach lub imprezach firmowych! Jeśli
-                        Twoja okoliczność nie znajduje się na mojej liście, nic
+                        Sprawię, aby Twoja impreza była niezapomniana, a goście byli zachwyceni. Specjalizuję się głównie w barmaństwie na
+                        weselach, 18stkach lub imprezach firmowych! Jeśli Twoja okoliczność nie znajduje się na mojej liście, nic
                         straconego! <b>Napisz do mnie!</b>
                     </SectionParagraph>
                     <OfertFeaturesList>
@@ -65,13 +58,7 @@ export const Oferts = () => {
                             </p>
                         </li>
                     </OfertFeaturesList>
-                    <Button
-                        variant="outlined"
-                        color="white"
-                        isLink
-                        path="/"
-                        boxOverlay="bottom-left"
-                    >
+                    <Button variant="outlined" color="white" isLink path="/" boxOverlay="bottom-left">
                         O mnie
                     </Button>
                 </ContentWrapper>
@@ -92,9 +79,7 @@ export const Oferts = () => {
                 <OfertCard
                     title="Na imprezę firmową!"
                     content="Jeśli organizujesz ważne wydarzenie i nie masz pomysłu jak zadziwić swoich gości wypróbuj koniecznie barmana!"
-                    image={
-                        data.ofertcompanyparty.childImageSharp.gatsbyImageData
-                    }
+                    image={data.ofertcompanyparty.childImageSharp.gatsbyImageData}
                     link="/"
                 />
                 <OfertCard
@@ -116,16 +101,12 @@ const query = graphql`
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        ofertwedding: file(
-            relativePath: { eq: "homepage/04_ofert-wedding.jpg" }
-        ) {
+        ofertwedding: file(relativePath: { eq: "homepage/04_ofert-wedding.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        ofertcompanyparty: file(
-            relativePath: { eq: "homepage/05_ofert-company-party.jpg" }
-        ) {
+        ofertcompanyparty: file(relativePath: { eq: "homepage/05_ofert-company-party.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }

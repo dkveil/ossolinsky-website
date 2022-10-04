@@ -41,6 +41,19 @@ export const StyledButton = styled.button`
         ${({ variant, theme, color }) => {
 
         switch (variant) {
+            case 'contained':
+                return css`
+                    background-color: ${theme.color.black};
+                    color: ${theme.color.white};
+                    border: 1px solid ${theme.color.black};
+                    transition: color .2s ease, background-color .2s ease;
+                    :hover{
+                        color: ${theme.color.black};
+                        background-color: ${theme.color.white};
+                        transition: color .2s .2s ease, background-color .2s .2s ease;
+                    }
+
+                `
             case 'contained-outlined':
                 return css`
                     background-color: ${theme.color.black};
@@ -87,7 +100,7 @@ export const StyledButton = styled.button`
         }
     }}}
 
-        ${({ boxOverlay, isLink, theme }) => {
+        ${({ boxOverlay, boxOverlayColor, isLink, theme }) => {
         if (boxOverlay) {
             const boxOverlayStyles = () => (
                 css`
@@ -103,7 +116,7 @@ export const StyledButton = styled.button`
                         pointer-events: none;
                         top: 0;
                         left: 0;
-                        background-color: ${theme.color.black};
+                        background-color: ${boxOverlayColor === "white" ? theme.color.white : theme.color.black};
                         width: 100%;
                         height: 100%;
                         z-index: 0;
