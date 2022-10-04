@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from "styled-components"
 import { StyledIcon } from "components/StyledIcon"
 
@@ -16,10 +17,14 @@ export const Wrapper = styled.header`
         }
         if (!isActive && bgcolor !== 'transparent') {
             return `
-                0 1px 2px ${theme.color.black}
+            0 0 1px ${theme.color.black}
             `
         }
     }};
+
+    ${({ theme }) => theme.mq.desktop}{
+        height: ${({ theme }) => theme.height.desktopHeader};
+    }
 `
 
 export const ContentWrapper = styled.div`
@@ -68,8 +73,49 @@ export const StyledBurger = styled(Box)`
     }
 `
 
-export const StyledLogoIcon = styled(StyledIcon)`
+export const StyledLogoIcon = styled(({ ...props }) => <StyledIcon {...props} />)`
     svg path{
         transition: fill ${({ theme }) => theme.transition.navcart};
     }
+`
+
+export const MenuWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    width: 63.6%;
+    height: 100%;
+`
+
+export const NavWrapper = styled.nav`
+    display: flex;
+    padding: 0 3rem;
+    ul {
+        display: flex;
+        gap: 24px;
+        flex-direction: row;
+        align-items: center;
+        list-style: none;
+    }
+`
+
+export const IconsWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    height: fit-content;
+    gap: 2.4rem;
+`
+
+export const StyledListItem = styled.li`
+    color: ${({ color }) => color};
+    text-shadow: ${({ theme, color }) => color === theme.color.black ? 'null' : `0px 2px 4px ${theme.color.black}`};
+    transition: color ${({ theme }) => theme.transition.navcart}, text-shadow ${({ theme }) => theme.transition.navcart};
+
+    a{
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: inherit;
+    }
+
 `

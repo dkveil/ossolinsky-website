@@ -57,9 +57,10 @@ export const theme = {
         hiddencontent: 0,
     },
     height: {
-        mobileHeader: '80px'
+        mobileHeader: '70px',
+        desktopHeader: '80px'
     },
     width: {
-        desktopherovideo: '61vw'
+        desktopherovideo: '61%'
     }
 }

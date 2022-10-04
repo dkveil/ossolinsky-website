@@ -8,10 +8,17 @@ import {
     Box,
     StyledBurger,
     StyledLogoIcon,
+    MenuWrapper,
+    NavWrapper,
+    IconsWrapper,
+    StyledListItem,
 } from './Header.styles';
 import { useTheme } from 'styled-components';
 import { NavCart } from '../NavCart';
 import { useWindowScrollY } from 'hooks/useWindowScrollY.hook';
+import { isDesktop } from 'utils/isDesktop';
+import { navItems, socialsItems } from '../NavCart/data';
+import { StyledSocialIcon } from '../NavCart/NavCart.styles';
 
 export const Header = () => {
     const theme = useTheme();
@@ -38,36 +45,49 @@ export const Header = () => {
         <>
             <Wrapper
                 isActive={isActive}
-                bgcolor={
-                    isActive && backgroundColor !== theme.color.white
-                        ? 'transparent'
-                        : backgroundColor
-                }
+                bgcolor={isActive && backgroundColor !== theme.color.white ? 'transparent' : backgroundColor}
                 id="main-header"
             >
                 <Container>
                     <ContentWrapper>
-                        <StyledBurger
-                            color={isActive ? theme.color.black : itemsColor}
-                            isActive={isActive}
-                            onClick={toggleMenu}
-                        >
-                            <div />
-                        </StyledBurger>
-                        <StyledLogoIcon
-                            width="9rem"
-                            color={isActive ? theme.color.black : itemsColor}
-                            isActive={isActive}
-                        >
+                        {isDesktop() ? null : (
+                            <StyledBurger color={isActive ? theme.color.black : itemsColor} isActive={isActive} onClick={toggleMenu}>
+                                <div />
+                            </StyledBurger>
+                        )}
+                        <StyledLogoIcon width="9rem" color={isDesktop() ? theme.color.black : isActive ? theme.color.black : itemsColor}>
                             <Link to="/">
                                 <Logo />
                             </Link>
                         </StyledLogoIcon>
-                        <Box />
+                        {isDesktop() ? (
+                            <MenuWrapper>
+                                <NavWrapper>
+                                    <ul>
+                                        {navItems.map((item) => (
+                                            <StyledListItem key={item.name} color={itemsColor}>
+                                                <Link to={item.path}>{item.name}</Link>
+                                            </StyledListItem>
+                                        ))}
+                                    </ul>
+                                </NavWrapper>
+                                <IconsWrapper>
+                                    {socialsItems.map((item) => (
+                                        <StyledSocialIcon key={item.name} color={itemsColor}>
+                                            <a href={item.path} target="_blank" rel="noreferrer">
+                                                {item.icon}
+                                            </a>
+                                        </StyledSocialIcon>
+                                    ))}
+                                </IconsWrapper>
+                            </MenuWrapper>
+                        ) : (
+                            <Box />
+                        )}
                     </ContentWrapper>
                 </Container>
             </Wrapper>
-            <NavCart isActive={isActive} toggleMenu={toggleMenu} />
+            {isDesktop() ? null : <NavCart isActive={isActive} toggleMenu={toggleMenu} />}
         </>
     );
 };

@@ -38,7 +38,7 @@ export const Heading = styled(({ variant, children, overlay, overlayPosition, ov
                             background-position: 40% 40%;
                             background: linear-gradient(
                                 ${() => {
-                                    return `to right, ${theme.color.black} ${blackPartHeading},${theme.color.white} calc(${blackPartHeading}), ${theme.color.white} 70%`;
+                                    return `to right, ${theme.color.black} ${blackPartHeading},${theme.color.white} ${blackPartHeading}, ${theme.color.white} 70%`;
                                 }}
                             );
                             background-clip: text;
