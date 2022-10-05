@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
     display: inline-block;
-    width: fit-content;
+    width: ${({ width }) => width ? width : 'fit-content'};
     position: relative;
     outline: none;
     border: none;
@@ -17,7 +17,7 @@ export const StyledButton = styled.button`
         font-size: 1.2rem;
         text-transform: uppercase;
         min-width: 16rem;
-        width: ${({ width }) => width ? width : 'fit-content'};
+        width: ${({ width }) => width ? '100%' : 'fit-content'};
         font-weight: 600;
         z-index: 2;
 

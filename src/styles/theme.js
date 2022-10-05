@@ -33,6 +33,7 @@ export const theme = {
                 articleHeading: '1.6rem',
                 ofertHeading: '2rem',
                 heroParagraph: '1.6rem',
+                ofertParagraph: '1.2rem',
                 paragraph: '1.4rem',
                 featuresParagraph: '1.2rem',
                 testimetionalsParagraph: '2.2rem',

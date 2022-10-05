@@ -59,7 +59,6 @@ export const ImageWrapper = styled.div`
             bottom: -3rem;
             left: -3rem;
             z-index: 1;
-
         }
     }
 `

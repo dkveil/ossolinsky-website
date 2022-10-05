@@ -82,7 +82,7 @@ module.exports = {
                 fonts: [
                     `poppins\:400,600,700,`,
                     `dancing script\:400,500,600,700`,
-                    'Comforter Brush'
+                    'comforter brush'
                 ],
                 display: 'swap'
             }

@@ -3,14 +3,19 @@ import { Wrapper, ContentWrapper, Title, Paragraph, ImageWrapper } from './Ofert
 import { PropTypes } from 'prop-types';
 import { Button } from '../Button/Button';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
 
 export const OfertCard = ({ title, content, image, iscontact, link }) => {
     return (
         <Wrapper>
             <ContentWrapper>
-                <Title>{title}</Title>
+                <Title>
+                    <Link to={link}>{title}</Link>
+                </Title>
                 <div>
-                    <Paragraph>{content}</Paragraph>
+                    <Paragraph>
+                        <Link to={link}>{content}</Link>
+                    </Paragraph>
                     <Button variant="full-outlined" width="100%" isLink path={link}>
                         {iscontact ? 'Kontakt' : 'Oferta'}
                     </Button>

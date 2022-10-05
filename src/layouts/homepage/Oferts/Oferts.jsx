@@ -7,6 +7,7 @@ import { Button } from 'components/Button/Button';
 import CheckIcon from 'icons/check.svg';
 import { OfertCard } from 'components/OfertCard/OfertCard';
 import { useStaticQuery, graphql } from 'gatsby';
+import { isDesktop } from 'utils/isDesktop';
 
 export const Oferts = () => {
     const data = useStaticQuery(query);
