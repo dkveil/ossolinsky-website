@@ -4,21 +4,21 @@ import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
 import HeroVideo from 'videos/homepage/01_hero.mp4';
-import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
-import media from 'utils/media';
 import { useTheme } from 'styled-components';
+import { isDesktop } from 'utils/isDesktop';
 
 export const Hero = () => {
-    const { width: windowWidth } = useWindowDimensions();
     const theme = useTheme();
+    const isDesktopChecker = isDesktop();
 
     const containerRef = React.useRef(null);
     const videoRef = React.useRef(null);
     const [blackPartHeading, setBlackPartHeading] = React.useState('100%');
 
     React.useLayoutEffect(() => {
+        console.log(isDesktopChecker);
         const handleHeadingBlackPart = () => {
-            if (windowWidth > media.DESKTOP) {
+            if (isDesktopChecker) {
                 const margin = (window.innerWidth - containerRef.current.clientWidth) / 2;
                 setBlackPartHeading(`${window.innerWidth - margin - videoRef.current.clientWidth - 7}px`);
             }
@@ -28,7 +28,7 @@ export const Hero = () => {
 
         window.addEventListener('resize', handleHeadingBlackPart);
         return () => window.removeEventListener('resize', handleHeadingBlackPart);
-    }, []);
+    }, [isDesktopChecker]);
 
     const handleClick = () => {
         const headerHeight = theme.height.mobileHeader.match(/\d+/)[0];
@@ -39,7 +39,7 @@ export const Hero = () => {
     };
 
     const heroHeadingContent = () => {
-        if (windowWidth > media.DESKTOP) {
+        if (isDesktop()) {
             return (
                 <>
                     <b>Zachwyć</b> swoich gości <br />
@@ -48,7 +48,7 @@ export const Hero = () => {
                 </>
             );
         }
-        if (windowWidth > media.TABLET) {
+        if (isDesktop()) {
             return (
                 <>
                     <b>Zachwyć</b> <br />
@@ -80,10 +80,10 @@ export const Hero = () => {
                         Każdy drink jaki wykonam dla Ciebie i Twoich gości, będzie niezapomnianym wrażeniem smakowym!
                     </HeroParagraph>
                     <Button
-                        variant={windowWidth > media.DESKTOP ? 'contained' : 'contained-outlined'}
+                        variant={isDesktop() ? 'contained' : 'contained-outlined'}
                         isLink
                         path="/"
-                        boxOverlay={windowWidth > media.DESKTOP ? 'bottom-left' : null}
+                        boxOverlay={isDesktop() ? 'bottom-left' : null}
                         boxOverlayColor="white"
                     >
                         Sprawdź ofertę

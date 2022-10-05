@@ -42,7 +42,6 @@ export const VideoWrapper = styled.div`
     }
 
     video {
-        position: relative;
         height: 100%;
         width: auto;
     }

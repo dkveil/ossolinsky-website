@@ -51,7 +51,7 @@ export const Contact = () => {
 
 const query = graphql`
     query {
-        contactimage: file(relativePath: { eq: "homepage/14_contact.jpg" }) {
+        contactimage: file(relativePath: { eq: "homepage/15_contact.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }

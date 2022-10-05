@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
         z-index: 1;
         padding: 4rem 0;
         border: 1px solid ${({ theme }) => theme.color.white};
+
         :first-child{
             transform: scale(1.08);
             border: 2px solid ${({ theme }) => theme.color.white};

@@ -118,17 +118,17 @@ export const Testimonial = () => {
 
 const query = graphql`
     query {
-        testimonial1: file(relativePath: { eq: "homepage/07_testimotial.jpg" }) {
+        testimonial1: file(relativePath: { eq: "homepage/08_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        testimonial2: file(relativePath: { eq: "homepage/08_testimotial.jpg" }) {
+        testimonial2: file(relativePath: { eq: "homepage/09_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        testimonial3: file(relativePath: { eq: "homepage/09_testimotial.jpg" }) {
+        testimonial3: file(relativePath: { eq: "homepage/10_testimotial.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }

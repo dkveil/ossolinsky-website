@@ -80,22 +80,22 @@ export const Blog = () => {
 
 const query = graphql`
     query {
-        blogpost1: file(relativePath: { eq: "homepage/10_blog.jpg" }) {
+        blogpost1: file(relativePath: { eq: "homepage/11_blog.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        blogpost2: file(relativePath: { eq: "homepage/11_blog.jpg" }) {
+        blogpost2: file(relativePath: { eq: "homepage/12_blog.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        blogpost3: file(relativePath: { eq: "homepage/12_blog.jpg" }) {
+        blogpost3: file(relativePath: { eq: "homepage/13_blog.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-        blogpost4: file(relativePath: { eq: "homepage/13_blog.jpg" }) {
+        blogpost4: file(relativePath: { eq: "homepage/14_blog.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
