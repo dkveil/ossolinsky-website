@@ -1,23 +1,28 @@
 import React from 'react';
-import { Wrapper, TestimonialsWrapper } from './Testimonial.styles';
+import { Wrapper, ContentWrapper, TestimonialsWrapper, Autograph } from './Testimonial.styles';
 import { Container } from 'styles/Container';
 import { Heading } from 'components/Heading';
 import { TestimonialCard } from 'components/TestimonialCard';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Pagination } from 'components/Pagination';
+import { isDesktop } from 'utils/isDesktop';
 
 export const Testimonial = () => {
     const data = useStaticQuery(query);
     const [activeTestimonial, setActiveTestimonial] = React.useState(1);
     const [touchStart, setTouchStart] = React.useState(null);
 
+    const isDesktopChecker = isDesktop();
+
     React.useEffect(() => {
         const timeout = setTimeout(() => {
-            setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
+            if (!isDesktopChecker) {
+                setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
+            }
         }, 8000);
 
         return () => clearTimeout(timeout);
-    }, [activeTestimonial]);
+    }, [activeTestimonial, isDesktopChecker]);
 
     const setPage = (id) => setActiveTestimonial(id);
 
@@ -67,51 +72,91 @@ export const Testimonial = () => {
     return (
         <Wrapper id="testimonial-section" onTouchStart={(e) => setTouchStart(e.touches[0].clientX)} onTouchEnd={handleSwipe}>
             <Container>
-                <Heading
-                    variant="h2"
-                    color="black"
-                    overlay
-                    overlayColor="gray"
-                    overlayPosition={{
-                        top: '-1.1rem',
-                        left: '-1rem',
-                    }}
-                    overlaySize={{
-                        width: '18rem',
-                        height: '5rem',
-                    }}
-                >
-                    Dziesiątki <b>zawodolonych</b> klientów
-                </Heading>
+                <ContentWrapper>
+                    <Heading
+                        variant="h2"
+                        color="black"
+                        textAlign={isDesktop() ? 'center' : null}
+                        overlay
+                        overlayColor={isDesktop() ? 'white' : 'gray'}
+                        overlayPosition={
+                            isDesktop()
+                                ? {
+                                      top: '-3rem',
+                                      left: '13.2rem',
+                                  }
+                                : {
+                                      top: '-1.1rem',
+                                      left: '-1rem',
+                                  }
+                        }
+                        overlaySize={
+                            isDesktop()
+                                ? {
+                                      width: '22rem',
+                                      height: '10rem',
+                                  }
+                                : {
+                                      width: '18rem',
+                                      height: '5rem',
+                                  }
+                        }
+                        margin={isDesktop() ? '0 0 8rem' : null}
+                    >
+                        Dziesiątki <b>zawodolonych</b> klientów
+                    </Heading>
+                    {isDesktop() && (
+                        <TestimonialsWrapper>
+                            {testimonialItems.map((testimonial, index) => {
+                                if (handleIndex(index)) {
+                                    return (
+                                        <TestimonialCard
+                                            key={index}
+                                            position={handleIndex(index).pos}
+                                            image={testimonial.image}
+                                            authors={testimonial.authors}
+                                            content={testimonial.content}
+                                        />
+                                    );
+                                }
+                            })}
+                        </TestimonialsWrapper>
+                    )}
+                </ContentWrapper>
+                {isDesktop() && <Autograph>Ossolinsky</Autograph>}
             </Container>
-            <TestimonialsWrapper>
-                {testimonialItems.map((testimonial, index) => {
-                    if (handleIndex(index)) {
-                        return (
-                            <TestimonialCard
-                                key={index}
-                                position={handleIndex(index).pos}
-                                image={testimonial.image}
-                                authors={testimonial.authors}
-                                content={testimonial.content}
-                            />
-                        );
-                    }
-                })}
-            </TestimonialsWrapper>
-            <Pagination
-                active={activeTestimonial}
-                pages={testimonialItems.length}
-                setPage={setPage}
-                increment={() => handleTestimontialPage('increment')}
-                decrement={() => handleTestimontialPage('decrement')}
-                styles={{
-                    position: 'absolute',
-                    bottom: '8rem',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                }}
-            />
+            {!isDesktop() && (
+                <>
+                    <TestimonialsWrapper>
+                        {testimonialItems.map((testimonial, index) => {
+                            if (handleIndex(index)) {
+                                return (
+                                    <TestimonialCard
+                                        key={index}
+                                        position={handleIndex(index).pos}
+                                        image={testimonial.image}
+                                        authors={testimonial.authors}
+                                        content={testimonial.content}
+                                    />
+                                );
+                            }
+                        })}
+                    </TestimonialsWrapper>
+                    <Pagination
+                        active={activeTestimonial}
+                        pages={testimonialItems.length}
+                        setPage={setPage}
+                        increment={() => handleTestimontialPage('increment')}
+                        decrement={() => handleTestimontialPage('decrement')}
+                        styles={{
+                            position: 'absolute',
+                            bottom: '8rem',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                        }}
+                    />
+                </>
+            )}
         </Wrapper>
     );
 };

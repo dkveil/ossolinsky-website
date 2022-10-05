@@ -4,16 +4,20 @@ import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
 import HeroVideo from 'videos/homepage/01_hero.mp4';
+import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
+import media from 'utils/media';
 import { useTheme } from 'styled-components';
 import { isDesktop } from 'utils/isDesktop';
 
 export const Hero = () => {
+    const { width: windowWidth } = useWindowDimensions();
     const theme = useTheme();
-    const isDesktopChecker = isDesktop();
 
     const containerRef = React.useRef(null);
     const videoRef = React.useRef(null);
     const [blackPartHeading, setBlackPartHeading] = React.useState('100%');
+
+    const isDesktopChecker = isDesktop();
 
     React.useLayoutEffect(() => {
         console.log(isDesktopChecker);
@@ -39,7 +43,7 @@ export const Hero = () => {
     };
 
     const heroHeadingContent = () => {
-        if (isDesktop()) {
+        if (windowWidth > media.DESKTOP) {
             return (
                 <>
                     <b>Zachwyć</b> swoich gości <br />
@@ -48,7 +52,7 @@ export const Hero = () => {
                 </>
             );
         }
-        if (isDesktop()) {
+        if (windowWidth > media.TABLET) {
             return (
                 <>
                     <b>Zachwyć</b> <br />
@@ -80,10 +84,10 @@ export const Hero = () => {
                         Każdy drink jaki wykonam dla Ciebie i Twoich gości, będzie niezapomnianym wrażeniem smakowym!
                     </HeroParagraph>
                     <Button
-                        variant={isDesktop() ? 'contained' : 'contained-outlined'}
+                        variant={windowWidth > media.DESKTOP ? 'contained' : 'contained-outlined'}
                         isLink
                         path="/"
-                        boxOverlay={isDesktop() ? 'bottom-left' : null}
+                        boxOverlay={windowWidth > media.DESKTOP ? 'bottom-left' : null}
                         boxOverlayColor="white"
                     >
                         Sprawdź ofertę

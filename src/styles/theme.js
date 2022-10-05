@@ -37,6 +37,7 @@ export const theme = {
                 paragraph: '1.4rem',
                 featuresParagraph: '1.2rem',
                 testimetionalsParagraph: '2.2rem',
+                blockquote: '2rem'
             },
             large: {
                 heroHeading: '5.2rem',

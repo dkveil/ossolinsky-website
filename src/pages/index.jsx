@@ -7,7 +7,7 @@ const IndexPage = () => (
         <Hero />
         <Welcome />
         <Oferts />
-        {isDesktop() && <Video />}
+        {isDesktop() ? <Video /> : null}
         <Testimonial />
         <Blog />
         <Contact />
