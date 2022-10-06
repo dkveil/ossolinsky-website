@@ -20,7 +20,6 @@ export const Hero = () => {
     const isDesktopChecker = isDesktop();
 
     React.useLayoutEffect(() => {
-        console.log(isDesktopChecker);
         const handleHeadingBlackPart = () => {
             if (isDesktopChecker) {
                 const margin = (window.innerWidth - containerRef.current.clientWidth) / 2;

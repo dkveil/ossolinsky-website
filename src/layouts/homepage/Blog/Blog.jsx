@@ -3,6 +3,7 @@ import { Wrapper, ContentWrapper } from './Blog.styles';
 import { Container } from 'styles/Container';
 import { BlogPostCard } from 'components/BlogPostCard';
 import { useStaticQuery, graphql } from 'gatsby';
+import { isDesktop } from 'utils/isDesktop';
 
 export const Blog = () => {
     const data = useStaticQuery(query);
@@ -55,11 +56,20 @@ export const Blog = () => {
         },
     ];
 
+    const sliceArrayIfIsDesktop = (array) => {
+        if (isDesktop()) {
+            return array.slice(0, 4);
+        }
+        return array;
+    };
+
+    console.log(isDesktop());
+
     return (
         <Wrapper id="section-blog">
             <Container>
                 <ContentWrapper>
-                    {blogPostItems.map((post, index) => (
+                    {sliceArrayIfIsDesktop(blogPostItems).map((post, index) => (
                         <BlogPostCard
                             homepage
                             main={index === 0 ? true : false}

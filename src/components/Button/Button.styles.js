@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import ArrowRight from 'icons/arrow-right.svg';
 
 export const StyledButton = styled.button`
     display: inline-block;
@@ -16,12 +17,25 @@ export const StyledButton = styled.button`
         align-items: center;
         font-size: 1.2rem;
         text-transform: uppercase;
-        min-width: 16rem;
+        min-width: ${({ variant }) => variant !== 'text' ? '16rem' : null};
         width: ${({ width }) => width ? '100%' : 'fit-content'};
         font-weight: 600;
         z-index: 2;
 
-        ${({ isLink }) => {
+        ${({ isLink, variant }) => {
+        if (isLink && variant === 'text') {
+            return css`
+                a {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    color: inherit;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100%;
+                }
+            `
+        }
         if (isLink) {
             return css`
                 a {
@@ -96,6 +110,11 @@ export const StyledButton = styled.button`
                 return css`
                     background-color: ${theme.color.black};
                     color: ${theme.color.white};
+                    `
+            case 'text':
+                return css`
+                    color: ${theme.color.black};
+                    font-weight: bold;
                 `
             default:
                 return null;
@@ -152,4 +171,8 @@ export const StyledButton = styled.button`
     }}
 
 
+`
+
+export const StyledArrowIcon = styled(ArrowRight)`
+    transform: scale(.5);
 `

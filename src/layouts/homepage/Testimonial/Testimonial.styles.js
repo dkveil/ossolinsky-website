@@ -37,7 +37,7 @@ export const Autograph = styled.span`
     font-weight: bold;
     pointer-events: none;
     position: absolute;
-    bottom: -10rem;
+    bottom: -11rem;
     right: 0;
     color: ${({ theme }) => theme.color.white};
 `

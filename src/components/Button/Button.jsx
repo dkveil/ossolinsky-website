@@ -1,10 +1,23 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { StyledButton } from './Button.styles';
+import { StyledButton, StyledArrowIcon } from './Button.styles';
 import { Link } from 'gatsby';
 
 export const Button = ({ children, variant, onClickHandler, isLink = false, path, blank, boxOverlay, width, color, boxOverlayColor }) => {
     const internal = /^\/(?!\/)/.test(path);
+
+    if (variant === 'text') {
+        return (
+            <StyledButton variant={variant} onClick={onClickHandler} isLink={isLink} width={width} color={color}>
+                <span>
+                    <Link to={path} target={blank && '_blank'} rel={blank && 'noreferrer'}>
+                        {children}
+                        <StyledArrowIcon />
+                    </Link>
+                </span>
+            </StyledButton>
+        );
+    }
 
     if (isLink && internal) {
         return (
@@ -64,7 +77,7 @@ export const Button = ({ children, variant, onClickHandler, isLink = false, path
 
 Button.propTypes = {
     children: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['contained', 'contained-outlined', 'outlined', 'full-outlined', 'full-contained']).isRequired,
+    variant: PropTypes.oneOf(['contained', 'contained-outlined', 'outlined', 'full-outlined', 'full-contained', 'text']).isRequired,
     onClickHandler: PropTypes.func,
     isLink: PropTypes.bool,
     path: ({ isLink, path }, componentName) => {
