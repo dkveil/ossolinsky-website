@@ -26,6 +26,7 @@ export const StyledInput = styled.input`
     outline: none;
     border: none;
     border-bottom: 1px solid ${({ error }) => error ? 'red' : '#7C8794'};
+    background-color: inherit;
     color: ${({ theme, error }) => error ? 'red' : theme.color.text};
     ::placeholder {
         color: ${({ theme, error }) => error ? 'red' : theme.color.text}
@@ -43,6 +44,7 @@ export const StyledTextArea = styled.textarea`
     resize: none;
     outline: none;
     border: none;
+    background-color: inherit;
     border-bottom: 1px solid ${({ error }) => error ? 'red' : '#7C8794'};
     color: ${({ theme, error }) => error ? 'red' : theme.color.text};
     margin-bottom: 5rem;
@@ -53,6 +55,10 @@ export const StyledTextArea = styled.textarea`
 
     :focus{
         background-color: rgba(0,0,0,0.05)
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        height: 14rem;
     }
 `
 

@@ -6,6 +6,11 @@ export const Wrapper = styled.footer`
     flex-direction: column;
     padding: 4rem 0 8rem;
     background-color: ${({ theme }) => theme.color.white};
+
+    ${({ theme }) => theme.mq.desktop}{
+        background-color: ${({ theme }) => theme.color.gray};
+
+    }
 `
 
 export const ContactDetails = styled.address`

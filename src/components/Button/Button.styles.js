@@ -21,6 +21,7 @@ export const StyledButton = styled.button`
         width: ${({ width }) => width ? '100%' : 'fit-content'};
         font-weight: 600;
         z-index: 2;
+        cursor: pointer;
 
         ${({ isLink, variant }) => {
         if (isLink && variant === 'text') {
@@ -121,7 +122,7 @@ export const StyledButton = styled.button`
         }
     }}}
 
-        ${({ boxOverlay, boxOverlayColor, isLink, theme }) => {
+        ${({ boxOverlay, boxOverlayColor, theme }) => {
         if (boxOverlay) {
             const boxOverlayStyles = () => (
                 css`
@@ -160,13 +161,11 @@ export const StyledButton = styled.button`
                 `
             )
 
-            if (isLink) {
-                return css`
-                    position: relative;
-                    ${boxOverlayStyles}
+            return css`
+                position: relative;
+                ${boxOverlayStyles}
 
-                `
-            }
+            `
         }
     }}
 

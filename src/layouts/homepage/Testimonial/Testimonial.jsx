@@ -78,6 +78,7 @@ export const Testimonial = () => {
                         color="black"
                         textAlign={isDesktop() ? 'center' : null}
                         overlay
+                        smallHeading
                         overlayColor={isDesktop() ? 'white' : 'gray'}
                         overlayPosition={
                             isDesktop()

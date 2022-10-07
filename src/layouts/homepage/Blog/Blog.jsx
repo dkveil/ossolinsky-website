@@ -63,8 +63,6 @@ export const Blog = () => {
         return array;
     };
 
-    console.log(isDesktop());
-
     return (
         <Wrapper id="section-blog">
             <Container>

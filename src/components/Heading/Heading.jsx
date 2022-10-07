@@ -2,11 +2,13 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import styled, { css } from 'styled-components';
 
-export const Heading = styled(({ variant, children, overlay, overlayPosition, overlaySize, overlayColor, blackPartHeading, ...props }) => {
-    const HtmlTag = variant;
-    return <HtmlTag {...props}>{children}</HtmlTag>;
-})(
-    ({ theme, variant, textAlign, margin, color, blackPartHeading }) => css`
+export const Heading = styled(
+    ({ variant, children, overlay, overlayPosition, overlaySize, overlayColor, blackPartHeading, textAlign, smallHeading, ...props }) => {
+        const HtmlTag = variant;
+        return <HtmlTag {...props}>{children}</HtmlTag>;
+    }
+)(
+    ({ theme, variant, textAlign, margin, color, blackPartHeading, smallHeading }) => css`
         text-transform: uppercase;
         text-align: ${textAlign ? textAlign : 'start'};
         text-shadow: 0 2px 2px ${theme.color.black};
@@ -58,7 +60,7 @@ export const Heading = styled(({ variant, children, overlay, overlayPosition, ov
                         z-index: 0;
 
                         ${theme.mq.desktop} {
-                            font-size: ${theme.font.size.desktop.heading};
+                            font-size: ${smallHeading ? theme.font.size.desktop.smallHeading : theme.font.size.desktop.heading};
                             line-height: 5rem;
                         }
                     `;
