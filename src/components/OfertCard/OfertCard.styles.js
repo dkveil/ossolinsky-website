@@ -17,19 +17,16 @@ export const Wrapper = styled.div`
     ${overlay(0.2)}
 
     ${({ theme }) => theme.mq.desktop}{
-        width: 29rem;
-        height: 45rem;
-        z-index: 1;
+        position: absolute;
+        top: 50%;
+        transform: translate( ${({ position }) => `calc(${position} * 29rem)`},-50%);
+        transition: transform .4s ease;
+        width: ${({ main }) => main ? '31.32rem' : '29rem'};
+        height: ${({ main }) => main ? '48.6rem' : '45rem'};
+        z-index: ${({ main, position, lastChild }) => main ? 3 : position === lastChild ? 1 : 2};
         padding: 4rem 0;
-        border: 1px solid ${({ theme }) => theme.color.white};
-
-        :first-child{
-            transform: scale(1.08);
-            border: 2px solid ${({ theme }) => theme.color.white};
-            z-index: 2;
-            box-shadow: 6px 6px 10px 2px rgba(0,0,0,0.4);
-
-        }
+        border: ${({ main, theme }) => main ? `2px solid ${theme.color.white}` : `1px solid ${theme.color.white}`};
+        box-shadow: ${({ main }) => main && ' 6px 6px 10px 2px rgba(0,0,0,0.4)'};
     }
     `
 

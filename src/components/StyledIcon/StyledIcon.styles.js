@@ -16,6 +16,6 @@ export const StyledIconWrapper = styled(({ color, width, height, ...props }) => 
 
     svg path {
         stroke: none;
-        fill: ${({ color }) => color ? color : ({ theme }) => theme.color.white};
+        fill: ${({ color }) => color ? color : null};
     }
 `

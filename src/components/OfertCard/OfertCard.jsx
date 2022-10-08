@@ -5,9 +5,9 @@ import { Button } from '../Button/Button';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 
-export const OfertCard = ({ title, content, image, iscontact, link }) => {
+export const OfertCard = ({ title, content, image, iscontact, link, position, main, lastChild }) => {
     return (
-        <Wrapper>
+        <Wrapper position={position} main={main} lastChild={lastChild}>
             <ContentWrapper>
                 <Title>
                     <Link to={link}>{title}</Link>
@@ -40,6 +40,9 @@ OfertCard.propTypes = {
     image: PropTypes.object.isRequired,
     iscontact: PropTypes.bool.isRequired,
     link: PropTypes.string.isRequired,
+    position: PropTypes.number,
+    main: PropTypes.bool,
+    lastChild: PropTypes.number,
 };
 
 OfertCard.defaultProps = {

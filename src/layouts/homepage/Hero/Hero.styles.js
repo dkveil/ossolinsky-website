@@ -83,6 +83,7 @@ export const StyledArrowIcon = styled(ArrowIcon)`
 
 export const StyledDesktopIcon = styled(ArrowDesktopIcon)`
     display: none;
+
     ${({ theme }) => theme.mq.desktop}{
         position: absolute;
         display: block;

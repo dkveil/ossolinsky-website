@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledIcon } from 'components/StyledIcon'
 
 export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.white};
@@ -67,9 +68,33 @@ export const OfertsWrapper = styled.div`
 
     ${({ theme }) => theme.mq.desktop}{
         display: flex;
+        align-items: center;
+        height: 54rem;
+        overflow: hidden;
         position: absolute;
         top: 50%;
-        left: calc(42vw + 8rem);
+        left: calc(44vw + 6.8rem);
         transform: translate(0, -50%)
+    }
+`
+
+export const ButtonsWrapper = styled.div`
+    position: absolute;
+    top: 52%;
+    left: calc(44vw + 2rem);
+    transform: translate(0, -50%);
+    z-index: 3;
+`
+
+export const StyledArrowIcon = styled(StyledIcon)`
+    cursor: pointer;
+    transform: ${({ right }) => right && 'rotate(180deg)'};
+    &:hover {
+        svg path {
+            fill: ${({ theme }) => theme.color.text} ;
+        }
+    }
+    svg path {
+        stroke: ${({ theme }) => theme.color.white};
     }
 `
