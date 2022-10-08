@@ -145,7 +145,7 @@ export const ContentWrapper = styled.div`
     padding: 2rem 0 0;
 
     ${({ theme }) => theme.mq.desktop}{
-        padding: ${({ main }) => main ? '3rem 2px' : '2rem 0 2rem 2rem'};
+        padding: ${({ main }) => main ? '2rem 2px' : '2rem 0 2rem 2rem'};
     }
 
 `

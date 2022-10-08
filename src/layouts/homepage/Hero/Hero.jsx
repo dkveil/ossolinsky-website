@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon } from './Hero.styles';
+import { Wrapper, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon, StyledDesktopIcon } from './Hero.styles';
 import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
@@ -91,7 +91,7 @@ export const Hero = () => {
                     >
                         Sprawdź ofertę
                     </Button>
-                    <StyledArrowIcon onClick={handleClick} />
+                    {isDesktop() ? <StyledDesktopIcon onClick={handleClick} /> : <StyledArrowIcon onClick={handleClick} />}
                 </ContentWrapper>
             </Container>
             <VideoWrapper ref={videoRef} id="hero-video">

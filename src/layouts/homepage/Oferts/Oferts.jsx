@@ -7,10 +7,9 @@ import { Button } from 'components/Button/Button';
 import CheckIcon from 'icons/check.svg';
 import { OfertCard } from 'components/OfertCard/OfertCard';
 import { useStaticQuery, graphql } from 'gatsby';
-import { isDesktop } from 'utils/isDesktop';
 
 export const Oferts = () => {
-    const data = useStaticQuery(query);
+    const { oferts, contactcard } = useStaticQuery(query);
 
     return (
         <Wrapper id="oferts-section">
@@ -65,30 +64,25 @@ export const Oferts = () => {
                 </ContentWrapper>
             </Container>
             <OfertsWrapper>
+                {oferts.edges.map((item) => {
+                    const { title, shortdescription, image, slug } = item.node;
+
+                    return (
+                        <OfertCard
+                            key={title}
+                            title={title}
+                            content={shortdescription.shortdescription}
+                            image={image.gatsbyImageData}
+                            link={`/${slug}`}
+                        />
+                    );
+                })}
                 <OfertCard
-                    title="Na Twoją 18stkę!"
-                    content="Chcesz, żeby twoje urodziny różniły się od typowych 18-naste? Pojawię się za barem, a Twoi goście osłupieją!"
-                    image={data.ofert18.childImageSharp.gatsbyImageData}
-                    link="/"
-                />
-                <OfertCard
-                    title="Na Wasze wesele!"
-                    content="Zbliża się najważniejszy moment w waszym życiu i chcecie, żeby wszystko wypadło perfekcyjnie? Pozwólcie gościom cieszyć się pysznym drinkiem!"
-                    image={data.ofertwedding.childImageSharp.gatsbyImageData}
-                    link="/"
-                />
-                <OfertCard
-                    title="Na imprezę firmową!"
-                    content="Jeśli organizujesz ważne wydarzenie i nie masz pomysłu jak zadziwić swoich gości wypróbuj koniecznie barmana!"
-                    image={data.ofertcompanyparty.childImageSharp.gatsbyImageData}
-                    link="/"
-                />
-                <OfertCard
-                    title="Inna okoliczność?"
-                    content="Nic straconego! <br />Napisz do mnie, zobaczymy co da się zrobić!"
-                    image={data.ofertother.childImageSharp.gatsbyImageData}
-                    link="/"
-                    iscontact={true}
+                    iscontact
+                    title={contactcard.title}
+                    content={contactcard.content}
+                    image={contactcard.image.gatsbyImageData}
+                    link="/kontakt"
                 />
             </OfertsWrapper>
         </Wrapper>
@@ -97,29 +91,27 @@ export const Oferts = () => {
 
 const query = graphql`
     query {
-        ofert18: file(relativePath: { eq: "homepage/03_ofert-18.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+        oferts: allContentfulOferty(filter: { iscontact: { eq: false } }, sort: { fields: priority, order: ASC }) {
+            edges {
+                node {
+                    title
+                    shortdescription {
+                        shortdescription
+                    }
+                    image {
+                        gatsbyImageData
+                    }
+                    slug
+                }
             }
         }
-        ofertwedding: file(relativePath: { eq: "homepage/04_ofert-wedding.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+        contactcard: contentfulOferty(iscontact: { eq: true }) {
+            title
+            shortdescription {
+                shortdescription
             }
-        }
-        ofertcompanyparty: file(relativePath: { eq: "homepage/05_ofert-company-party.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
-            }
-        }
-        ofertother: file(relativePath: { eq: "homepage/06_ofert-other.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
-            }
-        }
-        blogpost1: file(relativePath: { eq: "homepage/10_blog.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+            image {
+                gatsbyImageData
             }
         }
     }

@@ -101,6 +101,7 @@ export const NavWrapper = styled.nav`
 export const IconsWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     flex-grow: 1;
     height: fit-content;
     gap: 2.4rem;
@@ -119,6 +120,7 @@ export const StyledListItem = styled.li`
         font-weight: 600;
         text-decoration: none;
         color: inherit;
+        white-space: nowrap;
     }
 
 `

@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from 'icons/logo.svg';
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import { Container } from '../../styles/Container';
 import {
     Wrapper,
@@ -17,13 +17,15 @@ import { useTheme } from 'styled-components';
 import { NavCart } from '../NavCart';
 import { useWindowScrollY } from 'hooks/useWindowScrollY.hook';
 import { isDesktop } from 'utils/isDesktop';
-import { navItems, socialsItems } from '../NavCart/data';
 import { StyledSocialIcon } from '../NavCart/NavCart.styles';
+import { socialmedia } from 'helpers/socialmedia';
+import { navItems } from 'helpers/navigationItems';
 
 export const Header = () => {
     const theme = useTheme();
 
     const scrollY = useWindowScrollY();
+    const { allContentfulSocialMedia } = useStaticQuery(query);
 
     const [isActive, setIsActive] = React.useState(false);
     const [itemsColor, setItemsColor] = React.useState(theme.color.white);
@@ -72,13 +74,18 @@ export const Header = () => {
                                     </ul>
                                 </NavWrapper>
                                 <IconsWrapper>
-                                    {socialsItems.map((item) => (
-                                        <StyledSocialIcon key={item.name} color={itemsColor}>
-                                            <a href={item.path} target="_blank" rel="noreferrer">
-                                                {item.icon}
-                                            </a>
-                                        </StyledSocialIcon>
-                                    ))}
+                                    {allContentfulSocialMedia?.edges.map((item) => {
+                                        const socialItem = item.node;
+                                        const Social = socialmedia.find((social) => social.id === socialItem.name);
+
+                                        return (
+                                            <StyledSocialIcon key={socialItem.name} color={itemsColor} width="24px">
+                                                <a href={socialItem.link} target="_blank" rel="noreferrer">
+                                                    {Social.icon}
+                                                </a>
+                                            </StyledSocialIcon>
+                                        );
+                                    })}
                                 </IconsWrapper>
                             </MenuWrapper>
                         ) : (
@@ -87,7 +94,21 @@ export const Header = () => {
                     </ContentWrapper>
                 </Container>
             </Wrapper>
-            {isDesktop() ? null : <NavCart isActive={isActive} toggleMenu={toggleMenu} />}
+            {!isDesktop() && <NavCart isActive={isActive} toggleMenu={toggleMenu} />}
         </>
     );
 };
+
+const query = graphql`
+    query getSocialMedia {
+        allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
+            edges {
+                node {
+                    name
+                    link
+                    priority
+                }
+            }
+        }
+    }
+`;

@@ -64,7 +64,8 @@ module.exports = {
                 icons: path.join(__dirname, "src/assets/icons"),
                 images: path.join(__dirname, "src/assets/images"),
                 videos: path.join(__dirname, "src/assets/videos"),
-                layouts: path.join(__dirname, "src/layouts")
+                layouts: path.join(__dirname, "src/layouts"),
+                helpers: path.join(__dirname, "src/helpers"),
             },
         },
         {

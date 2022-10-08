@@ -21,7 +21,7 @@ export const ContactDetails = styled.address`
     margin: 2rem 0 3rem;
 
     ${({ theme }) => theme.mq.desktop}{
-        margin: 2rem 0 ;
+        margin: 2rem 0 2rem;
     }
 `
 
@@ -33,6 +33,8 @@ export const CopyrightDetails = styled.small`
 
 export const IconsWrapper = styled.div`
     display: flex;
+    align-items: center;
+    height: 5rem;
     gap: 2rem;
     margin-bottom: 2rem;
 `

@@ -19,13 +19,13 @@ export const Wrapper = styled.div`
         transform: translate(0 ,0);
         z-index: 1;
         overflow: hidden;
-        height: 46rem;
+        height: 44rem;
         background: yellow;
 
 
         &:nth-child(2){
 
-            height: 52rem;
+            height: 50rem;
         }
     }
 `

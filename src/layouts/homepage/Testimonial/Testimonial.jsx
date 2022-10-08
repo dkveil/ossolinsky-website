@@ -8,16 +8,17 @@ import { Pagination } from 'components/Pagination';
 import { isDesktop } from 'utils/isDesktop';
 
 export const Testimonial = () => {
-    const data = useStaticQuery(query);
+    const { testimonialitems, leftsidetestimontial, midsidetestimontial, rightsidetestimontial } = useStaticQuery(query);
     const [activeTestimonial, setActiveTestimonial] = React.useState(1);
     const [touchStart, setTouchStart] = React.useState(null);
+    const desktopTestimonialItems = [leftsidetestimontial, midsidetestimontial, rightsidetestimontial];
 
     const isDesktopChecker = isDesktop();
 
     React.useEffect(() => {
         const timeout = setTimeout(() => {
             if (!isDesktopChecker) {
-                setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
+                setActiveTestimonial((prev) => (prev === testimonialitems.totalCount - 1 ? 0 : prev + 1));
             }
         }, 8000);
 
@@ -28,10 +29,10 @@ export const Testimonial = () => {
 
     const handleTestimontialPage = (type) => {
         if (type === 'increment') {
-            setActiveTestimonial((prev) => (prev === testimonialItems.length - 1 ? 0 : prev + 1));
+            setActiveTestimonial((prev) => (prev === testimonialitems.totalCount - 1 ? 0 : prev + 1));
         }
         if (type === 'decrement') {
-            setActiveTestimonial((prev) => (prev === 0 ? testimonialItems.length - 1 : prev - 1));
+            setActiveTestimonial((prev) => (prev === 0 ? testimonialitems.totalCount - 1 : prev - 1));
         }
     };
 
@@ -45,28 +46,10 @@ export const Testimonial = () => {
         setTouchStart(null);
     };
 
-    const testimonialItems = [
-        {
-            image: data.testimonial1.childImageSharp.gatsbyImageData,
-            authors: 'Dawid',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
-        },
-        {
-            image: data.testimonial2.childImageSharp.gatsbyImageData,
-            authors: 'Krzysiek i Magda',
-            content: 'Giga spoko wesele nam zrobił. Zabawa nie do zapomnienia! Jaze',
-        },
-        {
-            image: data.testimonial3.childImageSharp.gatsbyImageData,
-            authors: 'Szymon',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque necessitatibus magni facere?',
-        },
-    ];
-
     const handleIndex = (index) => {
         if (index === activeTestimonial) return { pos: 1 };
-        if (index === (activeTestimonial - 1 < 0 ? testimonialItems.length - 1 : activeTestimonial - 1)) return { pos: 0 };
-        if (index === (activeTestimonial + 1 === testimonialItems.length ? 0 : activeTestimonial + 1)) return { pos: 2 };
+        if (index === (activeTestimonial - 1 < 0 ? testimonialitems.totalCount - 1 : activeTestimonial - 1)) return { pos: 0 };
+        if (index === (activeTestimonial + 1 === testimonialitems.totalCount ? 0 : activeTestimonial + 1)) return { pos: 2 };
     };
 
     return (
@@ -108,15 +91,15 @@ export const Testimonial = () => {
                     </Heading>
                     {isDesktop() && (
                         <TestimonialsWrapper>
-                            {testimonialItems.map((testimonial, index) => {
+                            {desktopTestimonialItems.map((testimonial, index) => {
                                 if (handleIndex(index)) {
                                     return (
                                         <TestimonialCard
                                             key={index}
                                             position={handleIndex(index).pos}
-                                            image={testimonial.image}
-                                            authors={testimonial.authors}
-                                            content={testimonial.content}
+                                            image={testimonial.image.gatsbyImageData}
+                                            authors={testimonial.author}
+                                            content={testimonial.blockquote.blockquote}
                                         />
                                     );
                                 }
@@ -129,15 +112,15 @@ export const Testimonial = () => {
             {!isDesktop() && (
                 <>
                     <TestimonialsWrapper>
-                        {testimonialItems.map((testimonial, index) => {
+                        {testimonialitems.edges.map((testimonial, index) => {
                             if (handleIndex(index)) {
                                 return (
                                     <TestimonialCard
                                         key={index}
                                         position={handleIndex(index).pos}
-                                        image={testimonial.image}
-                                        authors={testimonial.authors}
-                                        content={testimonial.content}
+                                        image={testimonial.node.image.gatsbyImageData}
+                                        authors={testimonial.node.author}
+                                        content={testimonial.node.blockquote.blockquote}
                                     />
                                 );
                             }
@@ -145,7 +128,7 @@ export const Testimonial = () => {
                     </TestimonialsWrapper>
                     <Pagination
                         active={activeTestimonial}
-                        pages={testimonialItems.length}
+                        pages={testimonialitems.totalCount}
                         setPage={setPage}
                         increment={() => handleTestimontialPage('increment')}
                         decrement={() => handleTestimontialPage('decrement')}
@@ -164,20 +147,46 @@ export const Testimonial = () => {
 
 const query = graphql`
     query {
-        testimonial1: file(relativePath: { eq: "homepage/08_testimotial.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+        testimonialitems: allContentfulOpinie {
+            totalCount
+            edges {
+                node {
+                    blockquote {
+                        blockquote
+                    }
+                    author
+                    image {
+                        gatsbyImageData
+                    }
+                }
             }
         }
-        testimonial2: file(relativePath: { eq: "homepage/09_testimotial.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+        leftsidetestimontial: contentfulOpinie(position: { eq: "Lewa strona" }) {
+            blockquote {
+                blockquote
             }
+            image {
+                gatsbyImageData
+            }
+            author
         }
-        testimonial3: file(relativePath: { eq: "homepage/10_testimotial.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(placeholder: BLURRED)
+        midsidetestimontial: contentfulOpinie(position: { eq: "Środek" }) {
+            blockquote {
+                blockquote
             }
+            image {
+                gatsbyImageData
+            }
+            author
+        }
+        rightsidetestimontial: contentfulOpinie(position: { eq: "Prawa strona" }) {
+            blockquote {
+                blockquote
+            }
+            image {
+                gatsbyImageData
+            }
+            author
         }
     }
 `;

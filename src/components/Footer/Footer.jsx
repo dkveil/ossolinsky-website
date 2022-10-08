@@ -1,13 +1,14 @@
 import React from 'react';
 import { Wrapper, ContactDetails, CopyrightDetails, IconsWrapper } from './Footer.styles';
 import { StyledIcon } from 'components/StyledIcon';
-import { Link } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 import Logo from 'assets/icons/logo.svg';
 import { isDesktop } from 'utils/isDesktop';
-import FacebookIcon from 'icons/facebook.svg';
-import TiktokIcon from 'icons/tiktok.svg';
+import { socialmedia } from 'helpers/socialmedia';
 
 export const Footer = () => {
+    const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
+
     return (
         <Wrapper>
             <StyledIcon color={({ theme }) => theme.color.black} width={isDesktop() ? '120px' : '90px'}>
@@ -18,22 +19,24 @@ export const Footer = () => {
             <ContactDetails>
                 <b>Kraków/Małopolska</b>
                 <br />
-                (123)456-7890
+                {phonenumber ? phonenumber.content : null}
                 <br />
-                kontakt@ossolinsky.pl
+                {email ? email.content : null}
             </ContactDetails>
             {isDesktop() && (
                 <IconsWrapper>
-                    <StyledIcon width="24px" color={({ theme }) => theme.color.black}>
-                        <Link to="">
-                            <FacebookIcon />
-                        </Link>
-                    </StyledIcon>
-                    <StyledIcon width="24px" color={({ theme }) => theme.color.black}>
-                        <Link to="">
-                            <TiktokIcon />
-                        </Link>
-                    </StyledIcon>
+                    {socialmediaitems?.edges.map((item) => {
+                        const socialItem = item.node;
+                        const Social = socialmedia.find((social) => social.id === socialItem.name);
+
+                        return (
+                            <StyledIcon key={socialItem.name} width="24px" color={({ theme }) => theme.color.black}>
+                                <a href={socialItem.link} target="_blank" rel="noreferrer">
+                                    {Social.icon}
+                                </a>
+                            </StyledIcon>
+                        );
+                    })}
                 </IconsWrapper>
             )}
             <CopyrightDetails>
@@ -44,3 +47,23 @@ export const Footer = () => {
         </Wrapper>
     );
 };
+
+const query = graphql`
+    query {
+        socialmediaitems: allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
+            edges {
+                node {
+                    name
+                    link
+                    priority
+                }
+            }
+        }
+        phonenumber: contentfulDaneKontaktowe(contactid: { eq: "Numer telefonu" }) {
+            content
+        }
+        email: contentfulDaneKontaktowe(contactid: { eq: "Adres e-mail" }) {
+            content
+        }
+    }
+`;

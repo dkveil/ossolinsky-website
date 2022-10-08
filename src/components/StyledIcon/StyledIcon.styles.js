@@ -7,6 +7,9 @@ export const StyledIconWrapper = styled(({ color, width, height, ...props }) => 
     height: ${({ height }) => height ? height : null};
 
     svg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: auto;
     }
