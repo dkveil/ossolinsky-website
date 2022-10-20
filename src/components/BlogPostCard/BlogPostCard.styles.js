@@ -92,7 +92,7 @@ export const Wrapper = styled.article`
 
 `;
 
-export const Date = styled.span`
+export const Date = styled.time`
     display: ${({ main }) => main ? 'none' : 'block'};
     color: ${({ theme }) => theme.color.text};
     font-size: 1.2rem;
