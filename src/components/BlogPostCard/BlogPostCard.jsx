@@ -34,7 +34,7 @@ export const BlogPostCard = ({ homepage, title, description, category, image, li
                             {description}
                         </Link>
                     </p>
-                    <Date main={main}>
+                    <Date main={main} datetime={date}>
                         <Link to={link}>{date}</Link>
                     </Date>
                     {main && isDesktop() && (
