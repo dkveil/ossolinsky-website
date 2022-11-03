@@ -3,16 +3,16 @@ import { Hero, Welcome, Oferts, Testimonial, Blog, Contact, Video } from 'layout
 import { isDesktop } from 'utils/isDesktop';
 
 const IndexPage = () => (
-    <>
-        <Hero />
-        <Welcome />
-        <Oferts />
-        {isDesktop() ? <Video /> : null}
-        <Testimonial />
-        <Blog />
-        <Contact />
-    </>
-);
+        <>
+            <Hero />
+            <Welcome />
+            <Oferts />
+            {typeof window !== "undefined" && isDesktop() ? <Video /> : null}
+            <Testimonial />
+            <Blog />
+            <Contact />
+        </>
+)
 
 export default IndexPage;
 

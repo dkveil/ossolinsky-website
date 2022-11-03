@@ -39,6 +39,10 @@ export const Wrapper = styled.section`
 export const ContentWrapper = styled.div`
     padding: 8rem 0;
 
+    ${({ theme }) => theme.mq.tablet}{
+        width: 65%;
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         width: 43%;
     }
@@ -65,6 +69,12 @@ export const OfertFeaturesList = styled.ul`
 
 export const OfertsWrapper = styled.div`
     width: 100%;
+
+    ${({ theme }) => theme.mq.tablet}{
+        display: flex;
+        flex-wrap: wrap;
+
+    }
 
     ${({ theme }) => theme.mq.desktop}{
         display: flex;

@@ -48,7 +48,14 @@ export const Wrapper = styled.article`
         line-clamp: 4;
         -webkit-box-orient: vertical;
 
+        ${({ theme }) => theme.mq.tablet}{
+            font-size: 2rem;
+            line-height: 2.8rem;
+        }
+
         ${({ theme }) => theme.mq.desktop}{
+            font-size: 1.6rem;
+            line-height: 2.4rem;
             font-weight: 600;
             -webkit-line-clamp: 2;
             margin: .6rem 0 1rem;
@@ -74,6 +81,12 @@ export const Wrapper = styled.article`
             line-height: 3.2rem;
             height: fit-content;
 
+            ${({ theme }) => theme.mq.tablet}{
+                font-size: 3.2rem;
+                line-height: 4.2rem;
+                margin: 0 0 2rem;
+            }
+
             ${({ theme }) => theme.mq.desktop}{
                 font-size: 4rem;
                 line-height: 4.8rem;
@@ -86,6 +99,23 @@ export const Wrapper = styled.article`
             font-size: 1.2rem;
             line-height: 2;
             color: ${({ theme }) => theme.color.text};
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis " [..]";
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+
+
+            ${({ theme }) => theme.mq.tablet}{
+                width: 75%;
+            }
+
+            ${({ theme }) => theme.mq.desktop}{
+                font-size: 1.2rem;
+                line-height: 2;
+                width: 95%;
+            }
         }
 
     }
@@ -115,6 +145,10 @@ export const Category = styled.span`
 export const ImageWrapper = styled.div`
     width: 100%;
     height: ${({ main }) => main ? '19rem' : '10rem'};
+
+    ${({ theme }) => theme.mq.tablet}{
+        height: ${({ main }) => main ? '34rem' : '22rem'};
+    }
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;

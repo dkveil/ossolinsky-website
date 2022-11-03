@@ -5,8 +5,13 @@ import { graphql, useStaticQuery, Link } from 'gatsby';
 import Logo from 'assets/icons/logo.svg';
 import { isDesktop } from 'utils/isDesktop';
 import { socialmedia } from 'helpers/socialmedia';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Footer = () => {
+    if (!isBrowser) {
+        return null
+    }
+
     const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
 
     return (

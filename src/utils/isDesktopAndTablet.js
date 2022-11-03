@@ -1,8 +1,8 @@
 import media from 'utils/media'
 import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
 
-export const isDesktop = () => {
+export const isDesktopAndTablet = () => {
     const { width: windowWidth } = useWindowDimensions()
 
-    return windowWidth >= media.DESKTOP
+    return windowWidth >= media.TABLET
 }

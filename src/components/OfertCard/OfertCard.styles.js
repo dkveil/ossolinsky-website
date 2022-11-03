@@ -9,6 +9,11 @@ export const Wrapper = styled.div`
     width: 100%;
     padding: 5rem 0;
 
+    ${({ theme }) => theme.mq.tablet}{
+        width: 50%;
+        border: 1px solid ${({ theme }) => theme.color.white};
+    }
+
     a{
         color: inherit;
         text-decoration: none;
@@ -28,17 +33,18 @@ export const Wrapper = styled.div`
         border: ${({ main, theme }) => main ? `2px solid ${theme.color.white}` : `1px solid ${theme.color.white}`};
         box-shadow: ${({ main }) => main && ' 6px 6px 10px 2px rgba(0,0,0,0.4)'};
     }
-    `
+`
 
 export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 28rem;
+    width: 72.5%;
     height: 100%;
     margin: 0 auto;
     z-index: 2;
+
     div{
         display: flex;
         flex-direction: column;
@@ -57,6 +63,10 @@ export const Title = styled.h3`
     text-shadow: 0 2px 2px ${({ theme }) => theme.color.black};
     color: ${({ theme }) => theme.color.white};
 
+    ${({ theme }) => theme.mq.tablet}{
+        font-size: ${({ theme }) => theme.font.size.tablet.ofertHeading};
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         font-size: ${({ theme }) => theme.font.size.desktop.ofertHeading};
     }
@@ -64,9 +74,15 @@ export const Title = styled.h3`
 
 export const Paragraph = styled.p`
     font-size: ${({ theme }) => theme.font.size.mobile.ofertParagraph};
-    line-height: 1.8rem;
+    line-height: 2rem;
     color: ${({ theme }) => theme.color.white};
     margin-bottom: 4rem;
+
+    ${({ theme }) => theme.mq.tablet}{
+        font-size: ${({ theme }) => theme.font.size.tablet.ofertParagraph};;
+        line-height: 2rem;
+    }
+
 
     ${({ theme }) => theme.mq.desktop}{
         font-size: ${({ theme }) => theme.font.size.desktop.ofertParagraph};

@@ -12,8 +12,11 @@ export const Wrapper = styled.section`
 `
 
 export const ImageWrapper = styled.div`
-    height: 43rem;
     margin-bottom: 4rem;
+
+    ${({ theme }) => theme.mq.tablet}{
+        height: 72rem;
+    }
 
     ${({ theme }) => theme.mq.desktop}{
         position: absolute;

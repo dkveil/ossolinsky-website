@@ -6,7 +6,7 @@ export const Wrapper = styled.section`
     padding: 7rem 0 0;
     background-color: ${({ theme }) => theme.color.white};
 
-    ${({ theme }) => theme.mq.desktop}{
+    ${({ theme }) => theme.mq.tablet}{
         background-color: ${({ theme }) => theme.color.gray};
         padding: 8rem 0 11rem;
     }
@@ -23,11 +23,15 @@ export const TestimonialsWrapper = styled.div`
     height: calc(${testimonialCardHeight} + 20rem);
     overflow: hidden;
 
-    ${({ theme }) => theme.mq.desktop}{
+    ${({ theme }) => theme.mq.tablet}{
         display: flex;
         align-items: center;
-        gap: 3rem;
         height: fit-content;
+        gap: 0;
+    }
+
+    ${({ theme }) => theme.mq.bigdesktop}{
+        gap: 3rem;
     }
 `
 

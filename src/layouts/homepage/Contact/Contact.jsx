@@ -7,8 +7,13 @@ import { Heading } from 'components/Heading';
 import { SectionParagraph } from 'components/SectionParagraph';
 import { ContactForm } from 'components/ContactForm';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Contact = () => {
+    if (!isBrowser) {
+        return null
+    }
+
     const data = useStaticQuery(query);
 
     return (

@@ -4,6 +4,10 @@ export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.gray};
     padding: 3rem 0 12rem;
 
+    ${({ theme }) => theme.mq.tablet}{
+        padding: 10rem 0;
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
         display: flex;
@@ -25,7 +29,27 @@ export const Wrapper = styled.section`
     }
 `
 
+export const ContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    ${({ theme }) => theme.mq.tablet}{
+        flex-direction: row;
+        align-items: center;
+        gap: 5rem;
+    }
+    ${({ theme }) => theme.mq.desktop}{
+        gap: unset;
+    }
+`
+
 export const ContentWrapper = styled.div`
+    ${({ theme }) => theme.mq.tablet}{
+        height: 100%;
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
         display: flex;
@@ -38,13 +62,19 @@ export const ContentWrapper = styled.div`
 
 export const ImageWrapper = styled.div`
     width: 100%;
-    height: 360px;
+
+    ${({ theme }) => theme.mq.tablet}{
+        width: 325px;
+        height: 100%;
+        margin: auto 0;
+    }
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
         height: 620px;
         width: 500px;
         margin-right: 10rem;
+
         div{
             z-index: 2;
         }

@@ -20,8 +20,13 @@ import { isDesktop } from 'utils/isDesktop';
 import { StyledSocialIcon } from '../NavCart/NavCart.styles';
 import { socialmedia } from 'helpers/socialmedia';
 import { navItems } from 'helpers/navigationItems';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Header = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const theme = useTheme();
 
     const scrollY = useWindowScrollY();

@@ -4,8 +4,13 @@ import { Container } from 'styles/Container';
 import { BlogPostCard } from 'components/BlogPostCard';
 import { useStaticQuery, graphql } from 'gatsby';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Blog = () => {
+    if (!isBrowser) {
+        return null
+    }
+
     const { blogposts } = useStaticQuery(query);
 
     const sliceArrayIfIsDesktop = (array) => {

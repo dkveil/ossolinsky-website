@@ -7,6 +7,14 @@ export const Wrapper = styled.div`
     overflow: hidden;
     height: 100vh;
     min-height: 640px;
+
+    ${({ theme }) => theme.mq.tablet}{
+        height: 700px;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        height: 100vh;
+    }
 `
 
 export const ContentWrapper = styled.div`
@@ -19,7 +27,6 @@ export const ContentWrapper = styled.div`
     height: 100%;
 
     ${({ theme }) => theme.mq.desktop}{
-        justify-content: center;
         align-items: flex-start;
     }
 `
@@ -79,6 +86,9 @@ export const StyledArrowIcon = styled(ArrowIcon)`
     bottom: 8rem;
     width: 3.2rem;
     cursor: pointer;
+
+    ${({ theme }) => theme.mq.tablet}{
+    }
 `
 
 export const StyledDesktopIcon = styled(ArrowDesktopIcon)`

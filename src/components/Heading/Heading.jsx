@@ -59,6 +59,11 @@ export const Heading = styled(
                         line-height: 3.6rem;
                         z-index: 0;
 
+                        ${theme.mq.tablet} {
+                            font-size: ${theme.font.size.tablet.heading};
+                            line-height: 4.4rem;
+                        }
+
                         ${theme.mq.desktop} {
                             font-size: ${smallHeading ? theme.font.size.desktop.smallHeading : theme.font.size.desktop.heading};
                             line-height: 5rem;

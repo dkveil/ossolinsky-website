@@ -26,6 +26,12 @@ export const theme = {
                 navitem: '2.2rem',
                 blockquote: '1.5rem',
             },
+            tablet: {
+                heading: '3.6rem',
+                ofertHeading: '2.4rem',
+                ofertParagraph: '1.4rem',
+                blockquote: '1.5rem',
+            },
             desktop: {
                 heroHeading: '5rem',
                 heading: '4.4rem',

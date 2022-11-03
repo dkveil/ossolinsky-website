@@ -14,17 +14,19 @@ export const Wrapper = styled.div`
     transition: transform .4s ease, visibility .4s ease, opacity .4s ease;
     z-index: ${({ position, theme }) => position === 1 ? theme.zindex.visiblecontent : theme.zindex.hiddencontent};
 
-    ${({ theme }) => theme.mq.desktop}{
+    ${({ theme }) => theme.mq.tablet}{
         position: static;
         transform: translate(0 ,0);
         z-index: 1;
         overflow: hidden;
         height: 44rem;
-        background: yellow;
-
 
         &:nth-child(2){
-
+            height: 46rem;
+        }
+    }
+    ${({ theme }) => theme.mq.desktop}{
+        &:nth-child(2){
             height: 50rem;
         }
     }
@@ -37,32 +39,42 @@ export const ContentWrapper = styled.div`
     visibility: ${({ isActive }) => isActive ? 'visible' : 'hidden'};
     color: ${({ theme }) => theme.color.text};
 
-    ${({ theme }) => theme.mq.desktop}{
+    ${({ theme }) => theme.mq.tablet}{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         width: 100%;
         height: 100%;
-        padding: 8rem 6rem;
+        padding: 12rem 1.5rem;
         visibility: visible;
         opacity: 1;
         color: ${({ theme }) => theme.color.white};
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        padding: 8rem 6rem;
     }
 
     blockquote {
         font-size: ${({ theme }) => theme.font.size.mobile.blockquote};
         line-height: 3.2rem;
         margin-bottom: 3rem;
-        ${({ theme }) => theme.mq.desktop}{
-            font-size: ${({ theme }) => theme.font.size.desktop.blockquote};
+        ${({ theme }) => theme.mq.tablet}{
+            line-height: 2.6rem;
+            font-size: ${({ theme }) => theme.font.size.tablet.blockquote};
             text-shadow: 0 1px 2px ${({ theme }) => theme.color.black};
+        }
+
+        ${({ theme }) => theme.mq.desktop}{
+            line-height: 3.2rem;
+            font-size: ${({ theme }) => theme.font.size.desktop.blockquote};
         }
     }
     span {
         font-size: ${({ theme }) => theme.font.size.mobile.testimetionalsParagraph};
         font-weight: 600;
         text-transform: uppercase;
-        ${({ theme }) => theme.mq.desktop}{
+        ${({ theme }) => theme.mq.tablet}{
             text-shadow: 0 1px 2px ${({ theme }) => theme.color.black};
         }
     }
@@ -90,11 +102,13 @@ export const ImageWrapper = styled.div`
         z-index: -1;
     }
 
-    ${({ theme }) => theme.mq.desktop}{
+
+    ${({ theme }) => theme.mq.tablet}{
         top: 0;
         width: 100%;
         height: 100%;
         z-index: -1;
+        border: 1px solid ${({ theme }) => theme.color.white};
 
         &::after{
             all: unset;

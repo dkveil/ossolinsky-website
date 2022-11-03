@@ -5,25 +5,31 @@ import { Heading } from 'components/Heading';
 import { TestimonialCard } from 'components/TestimonialCard';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Pagination } from 'components/Pagination';
+import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
+import { isBrowser } from 'utils/isBrowser';
 import { isDesktop } from 'utils/isDesktop';
 
 export const Testimonial = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const { testimonialitems, leftsidetestimontial, midsidetestimontial, rightsidetestimontial } = useStaticQuery(query);
     const [activeTestimonial, setActiveTestimonial] = React.useState(1);
     const [touchStart, setTouchStart] = React.useState(null);
     const desktopTestimonialItems = [leftsidetestimontial, midsidetestimontial, rightsidetestimontial];
 
-    const isDesktopChecker = isDesktop();
+    const isDesktopAndTabletChecker = isDesktopAndTablet();
 
     React.useEffect(() => {
         const timeout = setTimeout(() => {
-            if (!isDesktopChecker) {
+            if (!isDesktopAndTabletChecker) {
                 setActiveTestimonial((prev) => (prev === testimonialitems.totalCount - 1 ? 0 : prev + 1));
             }
         }, 8000);
 
         return () => clearTimeout(timeout);
-    }, [activeTestimonial, isDesktopChecker]);
+    }, [activeTestimonial, isDesktopAndTabletChecker]);
 
     const setPage = (id) => setActiveTestimonial(id);
 
@@ -59,7 +65,7 @@ export const Testimonial = () => {
                     <Heading
                         variant="h2"
                         color="black"
-                        textAlign={isDesktop() ? 'center' : null}
+                        textAlign={isDesktopAndTablet() ? 'center' : null}
                         overlay
                         smallHeading
                         overlayColor={isDesktop() ? 'white' : 'gray'}
@@ -85,11 +91,11 @@ export const Testimonial = () => {
                                       height: '5rem',
                                   }
                         }
-                        margin={isDesktop() ? '0 0 8rem' : null}
+                        margin={isDesktopAndTablet() ? '0 0 8rem' : null}
                     >
                         Dziesiątki <b>zawodolonych</b> klientów
                     </Heading>
-                    {isDesktop() && (
+                    {isDesktopAndTablet() && (
                         <TestimonialsWrapper>
                             {desktopTestimonialItems.map((testimonial, index) => {
                                 if (handleIndex(index)) {
@@ -109,7 +115,7 @@ export const Testimonial = () => {
                 </ContentWrapper>
                 {isDesktop() && <Autograph>Ossolinsky</Autograph>}
             </Container>
-            {!isDesktop() && (
+            {!isDesktopAndTablet() && (
                 <>
                     <TestimonialsWrapper>
                         {testimonialitems.edges.map((testimonial, index) => {

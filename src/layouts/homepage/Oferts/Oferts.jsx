@@ -8,9 +8,14 @@ import CheckIcon from 'icons/check.svg';
 import { OfertCard } from 'components/OfertCard/OfertCard';
 import { useStaticQuery, graphql } from 'gatsby';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 import ArrowSquare from 'icons/arrow-square.svg';
 
 export const Oferts = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const { oferts, contactcard } = useStaticQuery(query);
     const [ofertCardPosition, setOfertCardPosition] = React.useState(0);
 
@@ -61,19 +66,19 @@ export const Oferts = () => {
                         <li>
                             <CheckIcon />
                             <p>
-                                <strong>Gwaranuję dobrą zabawę!</strong>
+                                <strong>Najwyższa jakość!</strong>
                             </p>
                         </li>
                         <li>
                             <CheckIcon />
                             <p>
-                                <strong>Gwaranuję dobrą zabawę!</strong>
+                                <strong>Bezkonkurencyjna cena!</strong>
                             </p>
                         </li>
                         <li>
                             <CheckIcon />
                             <p>
-                                <strong>Gwaranuję dobrą zabawę!</strong>
+                                <strong>Gwarancja dobrej zabawy!</strong>
                             </p>
                         </li>
                     </OfertFeaturesList>

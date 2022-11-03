@@ -3,12 +3,14 @@ import { PropTypes } from 'prop-types';
 import { ImageWrapper, Wrapper, ContentWrapper } from './TestimonialCard.styles';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Container } from 'styles/Container';
-import { isDesktop } from 'utils/isDesktop';
+import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 
 export const TestimonialCard = ({ image, authors, content, position }) => {
+    console.log(isDesktopAndTablet());
+
     return (
         <Wrapper position={position}>
-            {!isDesktop() && (
+            {!isDesktopAndTablet() && (
                 <Container>
                     <ContentWrapper isActive={position === 1 ? true : false}>
                         <blockquote>“{content}“</blockquote>
@@ -25,7 +27,7 @@ export const TestimonialCard = ({ image, authors, content, position }) => {
                     </ContentWrapper>
                 </Container>
             )}
-            {isDesktop() && (
+            {isDesktopAndTablet() && (
                 <ContentWrapper>
                     <blockquote>“{content}“</blockquote>
                     <span>{authors}</span>

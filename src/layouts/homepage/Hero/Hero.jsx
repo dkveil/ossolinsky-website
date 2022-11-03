@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon, StyledDesktopIcon } from './Hero.styles';
+import { Wrapper, ContentContainer, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon, StyledDesktopIcon } from './Hero.styles';
 import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
@@ -8,11 +8,15 @@ import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
 import media from 'utils/media';
 import { useTheme } from 'styled-components';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Hero = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const { width: windowWidth } = useWindowDimensions();
     const theme = useTheme();
-
     const containerRef = React.useRef(null);
     const videoRef = React.useRef(null);
     const [blackPartHeading, setBlackPartHeading] = React.useState('100%');
@@ -42,16 +46,15 @@ export const Hero = () => {
     };
 
     const heroHeadingContent = () => {
-        if (windowWidth > media.DESKTOP) {
+        if (windowWidth >= media.DESKTOP) {
             return (
                 <>
                     <b>Zachwyć</b> swoich gości <br />
                     <b>profesjonalną </b> usługą barmańską!
-                    <span></span>
                 </>
             );
         }
-        if (windowWidth > media.TABLET) {
+        if (windowWidth >= media.TABLET) {
             return (
                 <>
                     <b>Zachwyć</b> <br />
