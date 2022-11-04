@@ -41,7 +41,7 @@ export const Header = () => {
     const toggleMenu = () => setIsActive((prev) => !prev);
 
     React.useEffect(() => {
-        if (scrollY > 0.2 * window.innerHeight) {
+        if (scrollY > 0.1 * window.innerHeight) {
             setBackgroundColor(theme.color.white);
             setItemsColor(theme.color.black);
         } else {

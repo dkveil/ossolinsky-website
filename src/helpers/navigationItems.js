@@ -5,7 +5,7 @@ export const navItems = [
     },
     {
         name: 'O mnie',
-        path: ''
+        path: '/Omnie'
     },
     {
         name: 'Oferta',
