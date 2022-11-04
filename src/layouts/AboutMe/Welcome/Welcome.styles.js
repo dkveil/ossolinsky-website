@@ -6,9 +6,8 @@ export const Wrapper = styled.section`
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
-        margin-top: 0;
-        padding-top: ${({ theme }) => theme.height.header};
-        height: 100vh;
+        margin-top: ${({ theme }) => theme.height.desktopHeader};
+
         ::after{
             position: absolute;
             content: "";
@@ -52,18 +51,18 @@ export const ImageWrapper = styled.div`
     align-items:center;
 
     ${({ theme }) => theme.mq.tablet}{
+        max-width: 45%;
         min-width: 45%;
     }
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
-        max-width: 50rem;
-        max-height: 62rem;
-        z-index: 2;
+        min-width: unset;
+        max-height: unset;
+        height: 60rem;
 
         div{
             z-index: 2;
-            overflow: hidden;
         }
 
         &::after{
@@ -85,6 +84,9 @@ export const ContentWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     height: 50rem;
+    position: relative;
+    z-index: 2;
+
     ${({ theme }) => theme.mq.tablet}{
         height: unset;
     }

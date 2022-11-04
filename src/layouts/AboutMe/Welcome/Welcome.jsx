@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wrapper, ImageWrapper, ContentWrapper, ContentContainer } from './Welcome.styles';
 import { Container } from 'styles/Container';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Heading } from 'components/Heading';
 import { SectionParagraph } from 'components/SectionParagraph';
@@ -12,16 +12,18 @@ import { isDesktop } from 'utils/isDesktop';
 export const Welcome = () => {
     const data = useStaticQuery(query);
 
+    const welcomeimage = getImage(data.contactimage.childImageSharp.gatsbyImageData);
+
     return (
         <Wrapper>
             {!isDesktopAndTablet() && (
                 <ImageWrapper>
                     <GatsbyImage
-                        image={data.contactimage.childImageSharp.gatsbyImageData}
+                        image={welcomeimage}
                         objectFit="cover"
-                        style={{ width: '100%', height: '100%' }}
-                        imgStyle={{ objectFit: 'cover' }}
-                        alt="contact-image"
+                        style={{ width: 'inherit', height: 'inherit' }}
+                        imgStyle={{ objectFit: 'cover', width: 'inherit', height: 'inherit' }}
+                        alt="Welcome image"
                     />
                 </ImageWrapper>
             )}
@@ -34,7 +36,7 @@ export const Welcome = () => {
                                 objectFit="cover"
                                 style={{ width: '100%', height: '100%' }}
                                 imgStyle={{ objectFit: 'cover' }}
-                                alt="contact-image"
+                                alt="Welcome image"
                             />
                         </ImageWrapper>
                     )}

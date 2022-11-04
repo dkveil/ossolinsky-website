@@ -3,13 +3,15 @@ import styled from "styled-components"
 export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.gray};
     padding: 3rem 0 12rem;
-    height: 100vh;
     overflow: hidden;
 
     ${({ theme }) => theme.mq.tablet}{
         padding: 12rem 0;
     }
 
+    ${({ theme }) => theme.mq.desktop}{
+        height: 1080px;
+    }
 `
 
 export const ContentContainer = styled.div`
@@ -37,11 +39,9 @@ export const ImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     width: 100%;
     height: 50rem;
     margin-bottom: 8rem;
-    overflow: hidden;
     z-index: 2;
 
     ${({ theme }) => theme.mq.tablet}{
@@ -52,8 +52,25 @@ export const ImageWrapper = styled.div`
     }
 
     ${({ theme }) => theme.mq.desktop}{
-        max-width: 50rem;
-        max-height: 62rem;
+        position: relative;
+        height: 62rem;
+        max-height: unset;
+
+        div{
+            z-index: 2;
+        }
+
+        &::after{
+            content: '';
+            display: block;
+            position: absolute;
+            background-color: ${({ theme }) => theme.color.black};
+            height: 100%;
+            width: 100%;
+            bottom: -3rem;
+            right: -3rem;
+            z-index: 1;
+        }
     }
 `
 

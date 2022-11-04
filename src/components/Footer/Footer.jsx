@@ -6,16 +6,32 @@ import Logo from 'assets/icons/logo.svg';
 import { isDesktop } from 'utils/isDesktop';
 import { socialmedia } from 'helpers/socialmedia';
 import { isBrowser } from 'utils/isBrowser';
+import { useLocation } from '@reach/router';
+import { useTheme } from 'styled-components';
 
 export const Footer = () => {
     if (!isBrowser) {
-        return null
+        return null;
     }
+    const theme = useTheme();
+    const location = useLocation();
+    const [mobileBackgroundColor, setMobileBackgroundColor] = React.useState(theme.color.white);
+    const [desktopBackgroundColor, setDesktopBackgroundColor] = React.useState(theme.color.white);
 
     const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
 
+    React.useEffect(() => {
+        if (location.pathname === '/') {
+            setMobileBackgroundColor(theme.color.white);
+            setDesktopBackgroundColor(theme.color.gray);
+        } else {
+            setDesktopBackgroundColor(theme.color.white);
+            setMobileBackgroundColor(theme.color.white);
+        }
+    }, [location.pathname]);
+
     return (
-        <Wrapper>
+        <Wrapper mobileBackgroundColor={mobileBackgroundColor} desktopBackgroundColor={desktopBackgroundColor}>
             <StyledIcon color={({ theme }) => theme.color.black} width={isDesktop() ? '120px' : '90px'}>
                 <Link to="/">
                     <Logo />

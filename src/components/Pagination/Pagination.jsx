@@ -4,14 +4,7 @@ import { Wrapper, DotsWrapper, Dot } from './Pagination.styles';
 import ArrowLeft from 'assets/icons/arrow-left.svg';
 import ArrowRight from 'assets/icons/arrow-right.svg';
 
-export const Pagination = ({
-    pages,
-    styles,
-    active,
-    setPage,
-    increment,
-    decrement,
-}) => {
+export const Pagination = ({ pages, styles, active, setPage, increment, decrement, arrowButtons = true }) => {
     let items = [];
 
     for (let i = 0; pages > i; i++) {
@@ -20,17 +13,13 @@ export const Pagination = ({
 
     return (
         <Wrapper styles={styles}>
-            <ArrowLeft onClick={decrement} style={{ cursor: 'pointer' }} />
+            {arrowButtons && <ArrowLeft onClick={decrement} style={{ cursor: 'pointer' }} />}
             <DotsWrapper>
                 {items.map((i) => (
-                    <Dot
-                        key={i}
-                        isActive={i === active}
-                        onClick={() => setPage(i)}
-                    />
+                    <Dot key={i} isActive={i === active} onClick={() => setPage(i)} />
                 ))}
             </DotsWrapper>
-            <ArrowRight onClick={increment} style={{ cursor: 'pointer' }} />
+            {arrowButtons && <ArrowRight onClick={increment} style={{ cursor: 'pointer' }} />}
         </Wrapper>
     );
 };
@@ -38,8 +27,17 @@ export const Pagination = ({
 Pagination.propTypes = {
     active: PropTypes.number.isRequired,
     pages: PropTypes.number.isRequired,
-    increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired,
+    increment: ({ arrowButtons, increment }, componentName) => {
+        if (arrowButtons === true && typeof increment !== 'function') {
+            return new Error(`Provide a increment function for the ${componentName}`);
+        }
+    },
+    decrement: ({ arrowButtons, decrement }, componentName) => {
+        if (arrowButtons === true && typeof decrement !== 'function') {
+            return new Error(`Provide a increment function for the ${componentName}`);
+        }
+    },
     setPage: PropTypes.func.isRequired,
     styles: PropTypes.object,
+    arrowButtons: PropTypes.boolean,
 };

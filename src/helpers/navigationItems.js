@@ -1,7 +1,7 @@
 export const navItems = [
     {
         name: 'Strona główna',
-        path: ''
+        path: '/'
     },
     {
         name: 'O mnie',

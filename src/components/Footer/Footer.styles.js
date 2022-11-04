@@ -5,10 +5,10 @@ export const Wrapper = styled.footer`
     align-items: center;
     flex-direction: column;
     padding: 6rem 0 8rem;
-    background-color: ${({ theme }) => theme.color.white};
+    background-color: ${({ mobileBackgroundColor }) => mobileBackgroundColor};
 
     ${({ theme }) => theme.mq.desktop}{
-        background-color: ${({ theme }) => theme.color.gray};
+        background-color: ${({ desktopBackgroundColor }) => desktopBackgroundColor};
         padding: 6rem 0;
     }
 `

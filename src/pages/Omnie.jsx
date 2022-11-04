@@ -1,10 +1,12 @@
 import React from 'react';
-import { Welcome, AboutBartending } from 'layouts/AboutMe';
+import { Welcome, AboutBartending, Testimonial } from 'layouts/AboutMe';
+import { isDesktop } from 'utils/isDesktop';
 
 const AboutMePage = () => (
     <>
         <Welcome />
         <AboutBartending />
+        {isDesktop() && <Testimonial />}
     </>
 );
 
