@@ -21,6 +21,7 @@ import { StyledSocialIcon } from '../NavCart/NavCart.styles';
 import { socialmedia } from 'helpers/socialmedia';
 import { navItems } from 'helpers/navigationItems';
 import { isBrowser } from 'utils/isBrowser';
+import { useLocation } from '@reach/router';
 
 export const Header = () => {
     if (!isBrowser) {
@@ -30,10 +31,11 @@ export const Header = () => {
     const theme = useTheme();
 
     const scrollY = useWindowScrollY();
-    const { allContentfulSocialMedia } = useStaticQuery(query);
+    const { socials } = useStaticQuery(query);
+    const location = useLocation();
 
     const [isActive, setIsActive] = React.useState(false);
-    const [itemsColor, setItemsColor] = React.useState(theme.color.white);
+    const [itemsColor, setItemsColor] = React.useState(location.pathname === '/' ? theme.color.white : theme.color.black);
     const [backgroundColor, setBackgroundColor] = React.useState('transparent');
 
     const toggleMenu = () => setIsActive((prev) => !prev);
@@ -44,9 +46,13 @@ export const Header = () => {
             setItemsColor(theme.color.black);
         } else {
             setBackgroundColor('transparent');
-            setItemsColor(theme.color.white);
+            if (location.pathname === '/') {
+                setItemsColor(theme.color.white);
+            } else {
+                setItemsColor(theme.color.black);
+            }
         }
-    }, [scrollY]);
+    }, [scrollY, location.pathname]);
 
     return (
         <>
@@ -79,7 +85,7 @@ export const Header = () => {
                                     </ul>
                                 </NavWrapper>
                                 <IconsWrapper>
-                                    {allContentfulSocialMedia?.edges.map((item) => {
+                                    {socials?.edges.map((item) => {
                                         const socialItem = item.node;
                                         const Social = socialmedia.find((social) => social.id === socialItem.name);
 
@@ -105,8 +111,8 @@ export const Header = () => {
 };
 
 const query = graphql`
-    query getSocialMedia {
-        allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
+    query {
+        socials: allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
             edges {
                 node {
                     name

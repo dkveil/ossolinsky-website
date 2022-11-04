@@ -25,12 +25,16 @@ export const theme = {
                 testimetionalsParagraph: '1.6rem',
                 navitem: '2.2rem',
                 blockquote: '1.5rem',
+                heading404: '9.2rem',
+                paragraph404: '1.6rem',
             },
             tablet: {
                 heading: '3.6rem',
                 ofertHeading: '2.4rem',
                 ofertParagraph: '1.4rem',
                 blockquote: '1.5rem',
+                heading404: '',
+                paragraph404: '',
             },
             desktop: {
                 heroHeading: '5rem',
@@ -43,7 +47,9 @@ export const theme = {
                 paragraph: '1.4rem',
                 featuresParagraph: '1.2rem',
                 testimetionalsParagraph: '2.2rem',
-                blockquote: '2rem'
+                blockquote: '2rem',
+                heading404: '22rem',
+                paragraph404: '3.2rem',
             },
             large: {
                 heroHeading: '5.2rem',

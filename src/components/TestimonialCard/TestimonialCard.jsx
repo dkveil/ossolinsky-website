@@ -6,8 +6,6 @@ import { Container } from 'styles/Container';
 import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 
 export const TestimonialCard = ({ image, authors, content, position }) => {
-    console.log(isDesktopAndTablet());
-
     return (
         <Wrapper position={position}>
             {!isDesktopAndTablet() && (
