@@ -61,7 +61,7 @@ export const Heading = styled(
 
                         ${theme.mq.tablet} {
                             font-size: ${theme.font.size.tablet.heading};
-                            line-height: 4.4rem;
+                            line-height: 4rem;
                         }
 
                         ${theme.mq.desktop} {

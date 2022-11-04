@@ -5,18 +5,87 @@ export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.white};
 
     ${({ theme }) => theme.mq.desktop}{
-        margin-top: ${({ theme }) => theme.height.header};
+        position: relative;
+        margin-top: 0;
+        padding-top: ${({ theme }) => theme.height.header};
+        height: 100vh;
+        ::after{
+            position: absolute;
+            content: "";
+            pointer-events: none;
+            display: block;
+            height: 33%;
+            width: 100%;
+            background: linear-gradient(to bottom left, transparent 50%, ${({ theme }) => theme.color.gray} 0);
+            left: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+    }
+`
+
+export const ContentContainer = styled.div`
+    width: 100%;
+    height: 100%;
+
+    ${({ theme }) => theme.mq.tablet}{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12rem 0;
+        gap: 5rem;
     }
 
+    ${({ theme }) => theme.mq.desktop}{
+        gap: 8rem;
+    }
+
+    ${({ theme }) => theme.mq.bigdesktop}{
+        gap: 12rem;
+    }
 `
 
 export const ImageWrapper = styled.div`
-    height: 52rem;
+    max-height: 70rem;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    ${({ theme }) => theme.mq.tablet}{
+        min-width: 45%;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        position: relative;
+        max-width: 50rem;
+        max-height: 62rem;
+        z-index: 2;
+
+        div{
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        &::after{
+            content: '';
+            display: block;
+            position: absolute;
+            background-color: ${({ theme }) => theme.color.black};
+            height: 100%;
+            width: 100%;
+            bottom: -3rem;
+            left: -3rem;
+            z-index: 1;
+        }
+    }
 `
 
 export const ContentWrapper = styled.div`
-    height: 50rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 50rem;
+    ${({ theme }) => theme.mq.tablet}{
+        height: unset;
+    }
 `

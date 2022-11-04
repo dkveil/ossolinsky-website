@@ -37,7 +37,18 @@ export const StyledButton = styled.button`
                 }
             `
         }
-        if (isLink) {
+        if (!isLink && variant === 'text') {
+            return css`
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: inherit;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+            `
+        }
+        if (isLink && variant !== 'text') {
             return css`
                 a {
                     padding: 12px 26px;

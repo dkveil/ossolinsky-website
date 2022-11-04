@@ -5,7 +5,7 @@ export const Wrapper = styled.section`
     padding: 3rem 0 12rem;
 
     ${({ theme }) => theme.mq.tablet}{
-        padding: 10rem 0;
+        padding: 12rem 0;
     }
 
     ${({ theme }) => theme.mq.desktop}{
@@ -40,15 +40,13 @@ export const ContentContainer = styled.div`
         align-items: center;
         gap: 5rem;
     }
+
     ${({ theme }) => theme.mq.desktop}{
         gap: unset;
     }
 `
 
 export const ContentWrapper = styled.div`
-    ${({ theme }) => theme.mq.tablet}{
-        height: 100%;
-    }
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
@@ -64,15 +62,15 @@ export const ImageWrapper = styled.div`
     width: 100%;
 
     ${({ theme }) => theme.mq.tablet}{
-        width: 325px;
-        height: 100%;
+        min-width: 45%;
         margin: auto 0;
     }
 
     ${({ theme }) => theme.mq.desktop}{
+        min-width: unset;
         position: relative;
-        height: 620px;
-        width: 500px;
+        height: 62rem;
+        width: 50rem;
         margin-right: 10rem;
 
         div{

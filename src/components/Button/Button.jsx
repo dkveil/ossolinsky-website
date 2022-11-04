@@ -6,7 +6,7 @@ import { Link } from 'gatsby';
 export const Button = ({ children, variant, onClickHandler, isLink = false, path, blank, boxOverlay, width, color, boxOverlayColor }) => {
     const internal = /^\/(?!\/)/.test(path);
 
-    if (variant === 'text') {
+    if (isLink && variant === 'text') {
         return (
             <StyledButton variant={variant} onClick={onClickHandler} isLink={isLink} width={width} color={color}>
                 <span>
@@ -14,6 +14,17 @@ export const Button = ({ children, variant, onClickHandler, isLink = false, path
                         {children}
                         <StyledArrowIcon />
                     </Link>
+                </span>
+            </StyledButton>
+        );
+    }
+
+    if (!isLink && variant === 'text') {
+        return (
+            <StyledButton variant={variant} onClick={onClickHandler} isLink={isLink} width={width} color={color}>
+                <span>
+                    {children}
+                    <StyledArrowIcon />
                 </span>
             </StyledButton>
         );

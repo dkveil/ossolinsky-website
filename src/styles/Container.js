@@ -9,6 +9,10 @@ export const Container = styled.div`
     margin: 0 auto;
     position: relative;
 
+    ${({ theme }) => theme.mq.tablet}{
+        padding: 0 4rem;
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         flex-direction: row;
         padding: 0;

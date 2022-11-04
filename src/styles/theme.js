@@ -29,7 +29,7 @@ export const theme = {
                 paragraph404: '1.6rem',
             },
             tablet: {
-                heading: '3.6rem',
+                heading: '3rem',
                 ofertHeading: '2.4rem',
                 ofertParagraph: '1.4rem',
                 blockquote: '1.5rem',
