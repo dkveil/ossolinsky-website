@@ -51,7 +51,7 @@ export const TestimonialWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    min-width: 100%;
     text-align: center;
     min-height: 100%;
     opacity: ${({ position }) => position === 1 ? 1 : 0};

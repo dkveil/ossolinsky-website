@@ -69,8 +69,8 @@ export const theme = {
         header: 9999,
         navcart: 999,
         pagination: 2,
-        visiblecontent: 1,
-        hiddencontent: 0,
+        visiblecontent: 2,
+        hiddencontent: 1,
     },
     height: {
         mobileHeader: '70px',

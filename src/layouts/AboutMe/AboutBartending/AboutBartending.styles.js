@@ -53,6 +53,7 @@ export const ImageWrapper = styled.div`
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
+        min-width: 50rem;
         height: 62rem;
         max-height: unset;
 

@@ -8,11 +8,20 @@ import { SectionParagraph } from 'components/SectionParagraph';
 import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
+import parse from 'html-react-parser';
 
 export const Welcome = () => {
-    const data = useStaticQuery(query);
+    const { embeddedwelcomeimage, welcomecontent, dynamicwelcomeimage } = useStaticQuery(query);
 
-    const welcomeimage = getImage(data.contactimage.childImageSharp.gatsbyImageData);
+    const welcomeimage = getImage(
+        dynamicwelcomeimage?.image.gatsbyImageData && dynamicwelcomeimage?.useThis
+            ? dynamicwelcomeimage?.image.gatsbyImageData
+            : embeddedwelcomeimage.childImageSharp.gatsbyImageData
+    );
+
+    const embeddedText = `Nazywam się Mikołaj Ossoliński. Mam 21 lat i studiuje na krakowskiej uczelni. Zawsze chciałem otworzyć własną
+                            działalność, żeby być niezależnym. Każdy mówił: „znajdź sobie pracę do której będziesz lubił chodzić, wtedy nie
+                            spędzisz ani minuty w pracy”. Skoro znajdujesz się na tej stronie udało mi się tego dokonać.`;
 
     return (
         <Wrapper>
@@ -32,7 +41,7 @@ export const Welcome = () => {
                     {isDesktopAndTablet() && (
                         <ImageWrapper>
                             <GatsbyImage
-                                image={data.contactimage.childImageSharp.gatsbyImageData}
+                                image={welcomeimage}
                                 objectFit="cover"
                                 style={{ width: '100%', height: '100%' }}
                                 imgStyle={{ objectFit: 'cover' }}
@@ -73,9 +82,9 @@ export const Welcome = () => {
                             Poznajmy się
                         </Heading>
                         <SectionParagraph margin="0 0 6rem">
-                            Nazywam się Mikołaj Ossoliński. Mam 21 lat i studiuje na krakowskiej uczelni. Zawsze chciałem otworzyć własną
-                            działalność, żeby być niezależnym. Każdy mówił: „znajdź sobie pracę do której będziesz lubił chodzić, wtedy nie
-                            spędzisz ani minuty w pracy”. Skoro znajdujesz się na tej stronie udało mi się tego dokonać.
+                            {welcomecontent?.content?.content && welcomecontent?.toUseThis
+                                ? parse(welcomecontent.content.content)
+                                : embeddedText}
                         </SectionParagraph>
                         <Button variant="text" onClickHandler={() => console.log('test')}>
                             Czytaj dalej
@@ -89,10 +98,17 @@ export const Welcome = () => {
 
 const query = graphql`
     query {
-        contactimage: file(relativePath: { eq: "homepage/02_welcome.jpg" }) {
+        embeddedwelcomeimage: file(relativePath: { eq: "homepage/02_welcome.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
     }
+    welcomecontent: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "Poznaj mnie - treść" }) {
+        content {
+            content
+        }
+        toUseThis
+    }
 `;
+

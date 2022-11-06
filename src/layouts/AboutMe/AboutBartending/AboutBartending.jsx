@@ -1,15 +1,30 @@
 import React from 'react';
 import { Wrapper, ContentWrapper, ImageWrapper, ContentContainer } from './AboutBartending.styles';
 import { Container } from 'styles/Container';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Heading } from 'components/Heading';
 import { SectionParagraph } from 'components/SectionParagraph';
 import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
+import parse from 'html-react-parser';
+
+const embeddedHeading = 'Swoją przygodę <br />z barmaństwem...';
+const embeddedText = `zacząłem lata temu, kiedy robiłem cocktaile alkoholowe hobbistycznie zachwycając rodzinę i znajomych. Nabierałem
+                        doświadczenia sprawiając, że każdy drink był coraz to lepszy. Wraz z ukończeniem pełnoletności, natychmiast
+                        udałem, się do Krakowsk iej Szkoły Barmańskiej, gdzie po ukończeniu kursu uzyskałem kwalifikacje Barmana.
+                        Zauważyłem, że to początkowe hobby, może stać się moim sposobem na zarobek i tak się stało. Niemal od 3 lat
+                        pracuję jako barman, zaczynając na krótki czas w krakowskim pubie, natomiast niedługo później moje ścieżki
+                        powędrowały na wesela i różnego rodzaju imprezy okolicznościowe.`;
 
 export const AboutBartending = () => {
-    const data = useStaticQuery(query);
+    const { embeddedimage, aboutbartendingheading, aboutbartendingtext, aboutbartendingimage } = useStaticQuery(query);
+
+    const image = getImage(
+        aboutbartendingimage?.image?.gatsbyImageData && aboutbartendingimage?.useThis
+            ? aboutbartendingimage.image.gatsbyImageData
+            : embeddedimage.childImageSharp.gatsbyImageData
+    );
 
     return (
         <Wrapper>
@@ -17,7 +32,7 @@ export const AboutBartending = () => {
                 <ContentContainer>
                     <ImageWrapper>
                         <GatsbyImage
-                            image={data.contactimage.childImageSharp.gatsbyImageData}
+                            image={image}
                             objectFit="cover"
                             style={{ width: '100%', height: '100%' }}
                             imgStyle={{ objectFit: 'cover' }}
@@ -54,15 +69,14 @@ export const AboutBartending = () => {
                                       }
                             }
                         >
-                            Swoją przygodę <br />z barmaństwem...
+                            {aboutbartendingheading?.content?.content && aboutbartendingheading?.toUseThis
+                                ? parse(aboutbartendingheading.content.content)
+                                : parse(embeddedHeading)}
                         </Heading>
                         <SectionParagraph margin="0 0 6rem">
-                            zacząłem lata temu, kiedy robiłem cocktaile alkoholowe hobbistycznie zachwycając rodzinę i znajomych. Nabierałem
-                            doświadczenia sprawiając, że każdy drink był coraz to lepszy. Wraz z ukończeniem pełnoletności, natychmiast
-                            udałem, się do Krakowsk iej Szkoły Barmańskiej, gdzie po ukończeniu kursu uzyskałem kwalifikacje Barmana.
-                            Zauważyłem, że to początkowe hobby, może stać się moim sposobem na zarobek i tak się stało. Niemal od 3 lat
-                            pracuję jako barman, zaczynając na krótki czas w krakowskim pubie, natomiast niedługo później moje ścieżki
-                            powędrowały na wesela i różnego rodzaju imprezy okolicznościowe.
+                            {aboutbartendingtext?.content?.content && aboutbartendingtext?.toUseThis
+                                ? parse(aboutbartendingtext.content.content)
+                                : parse(embeddedText)}
                         </SectionParagraph>
                         <Button variant="outlined" isLink path="/kontakt" boxOverlay="bottom-left">
                             Kontakt
@@ -76,10 +90,29 @@ export const AboutBartending = () => {
 
 const query = graphql`
     query {
-        contactimage: file(relativePath: { eq: "homepage/15_contact.jpg" }) {
+        embeddedimage: file(relativePath: { eq: "homepage/15_contact.jpg" }) {
             childImageSharp {
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
     }
+    aboutbartendingheading: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - nagłówek" }) {
+        content {
+            content
+        }
+        toUseThis
+    }
+    aboutbartendingtext: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - treść" }) {
+        content {
+            content
+        }
+        toUseThis
+    }
+    aboutbartendingimage: contentfulOMnieZdjeciaNaPodstronie(contentfulid: { eq: "O barmaństwie" }) {
+        image {
+            gatsbyImageData
+        }
+        useThis
+    }
 `;
+
