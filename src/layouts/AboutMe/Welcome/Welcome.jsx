@@ -10,6 +10,8 @@ import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
 import parse from 'html-react-parser';
 
+//TODO: Add resolvers
+
 export const Welcome = () => {
     const { embeddedwelcomeimage, welcomecontent, dynamicwelcomeimage } = useStaticQuery(query);
 
@@ -111,4 +113,3 @@ const query = graphql`
         toUseThis
     }
 `;
-

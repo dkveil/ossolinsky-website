@@ -115,4 +115,3 @@ const query = graphql`
         useThis
     }
 `;
-
