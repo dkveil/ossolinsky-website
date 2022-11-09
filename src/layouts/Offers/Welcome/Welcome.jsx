@@ -5,6 +5,7 @@ import { Heading } from 'components/Heading';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { SectionParagraph } from 'components/SectionParagraph';
+import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 
 export const Welcome = () => {
     const { embeddedwelcomeimage } = useStaticQuery(query);
@@ -21,18 +22,32 @@ export const Welcome = () => {
                         margin="0 0 3rem"
                         overlay
                         overlayColor="gray"
-                        overlayPosition={{
-                            top: '-.2rem',
-                            left: '-1rem',
-                        }}
-                        overlaySize={{
-                            width: '10rem',
-                            height: '4rem',
-                        }}
+                        overlayPosition={
+                            isDesktopAndTablet()
+                                ? {
+                                      top: '-2rem',
+                                      left: '-2rem',
+                                  }
+                                : {
+                                      top: '-.2rem',
+                                      left: '-1rem',
+                                  }
+                        }
+                        overlaySize={
+                            isDesktopAndTablet()
+                                ? {
+                                      width: '15rem',
+                                      height: '8rem',
+                                  }
+                                : {
+                                      width: '10rem',
+                                      height: '4rem',
+                                  }
+                        }
                     >
                         Moja oferta
                     </Heading>
-                    <SectionParagraph textAlign="center">
+                    <SectionParagraph textAlign={isDesktopAndTablet() ? 'start' : 'center'}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ante urna, eleifend ut nulla sagittis, sagittis dictum
                         est. Proin facilisis sem suscipit sapien eleifend, laoreet pulvinar nunc finibus. Sed luctus metus ex, quis
                         porttitor lectus eleifend id. Sed malesuada imperdiet metus ultricies auctor. Curabitur faucibus odio in risus

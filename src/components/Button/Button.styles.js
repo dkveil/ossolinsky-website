@@ -77,7 +77,7 @@ export const StyledButton = styled.button`
                     transition: color .2s ease, background-color .2s ease;
                     :hover{
                         color: ${theme.color.black};
-                        background-color: ${theme.color.white};
+                        background-color: ${color === "white" ? theme.color.white : theme.color.gray};
                         transition: color .2s .2s ease, background-color .2s .2s ease;
                     }
 
@@ -149,7 +149,7 @@ export const StyledButton = styled.button`
                         pointer-events: none;
                         top: 0;
                         left: 0;
-                        background-color: ${boxOverlayColor === "white" ? theme.color.white : theme.color.black};
+                        background-color: ${boxOverlayColor === "white" ? theme.color.white : boxOverlayColor === "gray" ? theme.color.gray : theme.color.black};
                         width: 100%;
                         height: 100%;
                         z-index: 0;

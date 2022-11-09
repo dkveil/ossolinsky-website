@@ -13,14 +13,16 @@ export const Heading = styled(
         blackPartHeading,
         textAlign,
         smallHeading,
-        fontSize,
+        mobileFontSize,
+        tabletFontSize,
+        desktopFontSize,
         ...props
     }) => {
-        const HtmlTag = variant === 'subpage h1' ? 'h1' : variant;
+        const HtmlTag = variant === 'subpage h1' ? 'h1' : variant === 'offerspage' ? 'h3' : variant;
         return <HtmlTag {...props}>{children}</HtmlTag>;
     }
 )(
-    ({ theme, variant, textAlign, margin, color, blackPartHeading, smallHeading, fontSize }) => css`
+    ({ theme, variant, textAlign, margin, color, blackPartHeading, smallHeading, mobileFontSize, tabletFontSize, desktopFontSize }) => css`
         text-transform: uppercase;
         text-align: ${textAlign ? textAlign : 'start'};
         text-shadow: 0 2px 2px ${theme.color.black};
@@ -41,9 +43,20 @@ export const Heading = styled(
                 case 'subpage h1':
                     return css`
                         position: relative;
-                        font-size: ${fontSize ? fontSize : theme.font.size.mobile.subpageHeading};
+                        font-size: ${mobileFontSize ? mobileFontSize : theme.font.size.mobile.subpageHeading};
                         line-height: 3.6rem;
                         text-align: ${textAlign ? textAlign : 'start'};
+
+                        ${theme.mq.tablet} {
+                            font-size: ${tabletFontSize ? tabletFontSize : theme.font.size.tablet.subpageHeading};
+                            line-height: 4.2rem;
+                            text-align: ${textAlign ? textAlign : 'start'};
+                        }
+                        ${theme.mq.desktop} {
+                            font-size: ${desktopFontSize ? desktopFontSize : theme.font.size.desktop.subpageHeading};
+                            line-height: 5rem;
+                            text-align: ${textAlign ? textAlign : 'start'};
+                        }
                     `;
                 case 'h1':
                     return css`
@@ -87,6 +100,22 @@ export const Heading = styled(
                         ${theme.mq.desktop} {
                             font-size: ${smallHeading ? theme.font.size.desktop.smallHeading : theme.font.size.desktop.heading};
                             line-height: 5rem;
+                        }
+                    `;
+                case 'offerspage':
+                    return css`
+                        ${theme.mq.tablet} {
+                            position: relative;
+                            z-index: 0;
+                            text-transform: uppercase;
+                            font-size: 1000rem;
+                            color: ${theme.color.black};
+                        }
+
+                        ${theme.mq.desktop} {
+                            font-size: 4.4rem;
+                            line-height: 5rem;
+                            font-weight: 600;
                         }
                     `;
             }

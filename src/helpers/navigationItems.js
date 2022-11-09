@@ -5,11 +5,11 @@ export const navItems = [
     },
     {
         name: 'O mnie',
-        path: '/Omnie'
+        path: '/omnie'
     },
     {
         name: 'Oferta',
-        path: '/MojaOferta'
+        path: '/oferta'
     },
     {
         name: 'Doświadczenie',

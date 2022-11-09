@@ -32,7 +32,8 @@ export const theme = {
             tablet: {
                 heading: '3rem',
                 ofertHeading: '2.4rem',
-                ofertParagraph: '1.4rem',
+                ofertParagraph: '1rem',
+                subpageHeading: '4.2rem',
                 blockquote: '1.5rem',
                 heading404: '',
                 paragraph404: '',
@@ -43,6 +44,7 @@ export const theme = {
                 smallHeading: '4rem',
                 articleHeading: '1.6rem',
                 ofertHeading: '2rem',
+                subpageHeading: '5.6rem',
                 heroParagraph: '1.6rem',
                 ofertParagraph: '1.2rem',
                 paragraph: '1.4rem',
