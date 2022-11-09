@@ -10,13 +10,11 @@ import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
 import parse from 'html-react-parser';
 
-//TODO: Add resolvers
-
 export const Welcome = () => {
     const { embeddedwelcomeimage, welcomecontent, dynamicwelcomeimage } = useStaticQuery(query);
 
     const welcomeimage = getImage(
-        dynamicwelcomeimage?.image.gatsbyImageData && dynamicwelcomeimage?.useThis
+        dynamicwelcomeimage?.image?.gatsbyImageData && dynamicwelcomeimage?.useThis
             ? dynamicwelcomeimage?.image.gatsbyImageData
             : embeddedwelcomeimage.childImageSharp.gatsbyImageData
     );
@@ -52,6 +50,7 @@ export const Welcome = () => {
                         </ImageWrapper>
                     )}
                     <ContentWrapper>
+                        <h1>O mnie</h1>
                         <Heading
                             variant="h2"
                             color="black"
@@ -105,11 +104,17 @@ const query = graphql`
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-    }
-    welcomecontent: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "Poznaj mnie - treść" }) {
-        content {
-            content
+        welcomecontent: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "Poznaj mnie - treść" }) {
+            content {
+                content
+            }
+            toUseThis
         }
-        toUseThis
+        dynamicwelcomeimage: contentfulOMnieZdjeciaNaPodstronie(contentfulid: { eq: "Poznaj mnie" }) {
+            image {
+                gatsbyImageData
+            }
+            useThis
+        }
     }
 `;

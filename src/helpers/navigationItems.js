@@ -9,7 +9,7 @@ export const navItems = [
     },
     {
         name: 'Oferta',
-        path: ''
+        path: '/MojaOferta'
     },
     {
         name: 'Doświadczenie',

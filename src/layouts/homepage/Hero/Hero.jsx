@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, ContentContainer, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon, StyledDesktopIcon } from './Hero.styles';
+import { Wrapper, ContentWrapper, VideoWrapper, HeroParagraph, StyledArrowIcon, StyledDesktopIcon } from './Hero.styles';
 import { Heading } from 'components/Heading';
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';

@@ -95,23 +95,23 @@ const query = graphql`
                 gatsbyImageData(placeholder: BLURRED)
             }
         }
-    }
-    aboutbartendingheading: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - nagłówek" }) {
-        content {
-            content
+        aboutbartendingheading: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - nagłówek" }) {
+            content {
+                content
+            }
+            toUseThis
         }
-        toUseThis
-    }
-    aboutbartendingtext: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - treść" }) {
-        content {
-            content
+        aboutbartendingtext: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "O barmaństwie - treść" }) {
+            content {
+                content
+            }
+            toUseThis
         }
-        toUseThis
-    }
-    aboutbartendingimage: contentfulOMnieZdjeciaNaPodstronie(contentfulid: { eq: "O barmaństwie" }) {
-        image {
-            gatsbyImageData
+        aboutbartendingimage: contentfulOMnieZdjeciaNaPodstronie(contentfulid: { eq: "O barmaństwie" }) {
+            image {
+                gatsbyImageData
+            }
+            useThis
         }
-        useThis
     }
 `;

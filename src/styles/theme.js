@@ -18,6 +18,7 @@ export const theme = {
                 heading: '2.8rem',
                 ofertHeading: '2.4rem',
                 articleHeading: '1.6rem',
+                subpageHeading: '3.2rem',
                 heroParagraph: '1.6rem',
                 paragraph: '1.2rem',
                 featuresParagraph: '1rem',

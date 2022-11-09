@@ -5,6 +5,7 @@ export const SectionParagraph = styled.p`
     line-height: 2.8rem;
     margin: ${(props) => (props.margin ? props.margin : 0)};
     color: ${({ theme }) => theme.color.text};
+    text-align: ${({ textAlign }) => (textAlign ? textAlign : 'start')};
 
     ${({ theme }) => theme.mq.desktop} {
         font-size: ${({ theme }) => theme.font.size.desktop.paragraph};

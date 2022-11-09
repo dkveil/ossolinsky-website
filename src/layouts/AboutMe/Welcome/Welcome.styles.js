@@ -27,6 +27,10 @@ export const ContentContainer = styled.div`
     width: 100%;
     height: 100%;
 
+    h1{
+        display: none;
+    }
+
     ${({ theme }) => theme.mq.tablet}{
         display: flex;
         flex-direction: row;

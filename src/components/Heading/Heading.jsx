@@ -3,12 +3,24 @@ import { PropTypes } from 'prop-types';
 import styled, { css } from 'styled-components';
 
 export const Heading = styled(
-    ({ variant, children, overlay, overlayPosition, overlaySize, overlayColor, blackPartHeading, textAlign, smallHeading, ...props }) => {
-        const HtmlTag = variant;
+    ({
+        variant,
+        children,
+        overlay,
+        overlayPosition,
+        overlaySize,
+        overlayColor,
+        blackPartHeading,
+        textAlign,
+        smallHeading,
+        fontSize,
+        ...props
+    }) => {
+        const HtmlTag = variant === 'subpage h1' ? 'h1' : variant;
         return <HtmlTag {...props}>{children}</HtmlTag>;
     }
 )(
-    ({ theme, variant, textAlign, margin, color, blackPartHeading, smallHeading }) => css`
+    ({ theme, variant, textAlign, margin, color, blackPartHeading, smallHeading, fontSize }) => css`
         text-transform: uppercase;
         text-align: ${textAlign ? textAlign : 'start'};
         text-shadow: 0 2px 2px ${theme.color.black};
@@ -26,8 +38,16 @@ export const Heading = styled(
 
         ${() => {
             switch (variant) {
+                case 'subpage h1':
+                    return css`
+                        position: relative;
+                        font-size: ${fontSize ? fontSize : theme.font.size.mobile.subpageHeading};
+                        line-height: 3.6rem;
+                        text-align: ${textAlign ? textAlign : 'start'};
+                    `;
                 case 'h1':
                     return css`
+                        position: relative;
                         font-size: ${theme.font.size.mobile.heroHeading};
                         line-height: calc(${theme.font.size.mobile.heroHeading} + 4px);
                         text-align: center;
