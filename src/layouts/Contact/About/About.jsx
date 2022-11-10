@@ -19,12 +19,12 @@ export const About = () => {
                 <GatsbyImage
                     image={image}
                     objectFit="cover"
-                    style={{ width: '100%', height: '100%', maxHeight: 'inherit', maxWidth: 'inherit' }}
+                    style={{ width: '100%', height: '100%' }}
                     imgStyle={{ objectFit: 'cover' }}
                     alt="about-bartending-image"
                 />
             </ImageWrapper>
-            <Container>
+            {isDesktopAndTablet() ? (
                 <ContentWrapper>
                     <Heading
                         variant="subpage h1"
@@ -32,12 +32,12 @@ export const About = () => {
                         overlay
                         overlayColor="gray"
                         overlayPosition={{
-                            top: '-1rem',
-                            left: '-.8rem',
+                            top: '-1.4rem',
+                            left: '-2rem',
                         }}
                         overlaySize={{
-                            width: '11rem',
-                            height: '5rem',
+                            width: '17rem',
+                            height: '7rem',
                         }}
                     >
                         Kontakt
@@ -51,7 +51,7 @@ export const About = () => {
                         <span>tel. {phonenumber ? phonenumber.content : null}</span>
                     </ContactDetails>
                     <SocialMediaDetails>
-                        <span>ŚLEDŹ MOJE SOCIAL MEDIA</span>
+                        <span>ŚLEDŹ RÓWNIEŻ MOJE SOCIAL MEDIA</span>
                         <div>
                             {socialmediaitems?.edges.map((item) => {
                                 const socialItem = item.node;
@@ -68,7 +68,53 @@ export const About = () => {
                         </div>
                     </SocialMediaDetails>
                 </ContentWrapper>
-            </Container>
+            ) : (
+                <Container>
+                    <ContentWrapper>
+                        <Heading
+                            variant="subpage h1"
+                            color="black"
+                            overlay
+                            overlayColor="gray"
+                            overlayPosition={{
+                                top: '-1rem',
+                                left: '-.8rem',
+                            }}
+                            overlaySize={{
+                                width: '11rem',
+                                height: '5rem',
+                            }}
+                        >
+                            Kontakt
+                        </Heading>
+                        <SectionParagraph>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet faucibus justo. Nullam a faucibus
+                            nisi, et suscipit augue. Vivamus orci sem, luctus in consectetur auctor, elementum ac mauris.
+                        </SectionParagraph>
+                        <ContactDetails>
+                            <span>mail: {email ? email.content : null}</span>
+                            <span>tel. {phonenumber ? phonenumber.content : null}</span>
+                        </ContactDetails>
+                        <SocialMediaDetails>
+                            <span>ŚLEDŹ RÓWNIEŻ MOJE SOCIAL MEDIA</span>
+                            <div>
+                                {socialmediaitems?.edges.map((item) => {
+                                    const socialItem = item.node;
+                                    const Social = socialmedia.find((social) => social.id === socialItem.name);
+
+                                    return (
+                                        <StyledIcon key={socialItem.name} width="24px" color={({ theme }) => theme.color.black}>
+                                            <a href={socialItem.link} target="_blank" rel="noreferrer">
+                                                {Social.icon}
+                                            </a>
+                                        </StyledIcon>
+                                    );
+                                })}
+                            </div>
+                        </SocialMediaDetails>
+                    </ContentWrapper>
+                </Container>
+            )}
         </Wrapper>
     );
 };

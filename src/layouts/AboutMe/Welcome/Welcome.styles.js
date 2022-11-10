@@ -44,7 +44,7 @@ export const ContentContainer = styled.div`
 `
 
 export const ImageWrapper = styled.div`
-    max-height: 45rem;
+    height: 45rem;
     display: flex;
     justify-content: center;
     align-items:center;
