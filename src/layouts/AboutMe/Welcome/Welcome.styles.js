@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
     margin-top: ${({ theme }) => theme.height.mobileHeader};
     background-color: ${({ theme }) => theme.color.white};
+    overflow: hidden;
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
@@ -24,12 +25,6 @@ export const Wrapper = styled.section`
 `
 
 export const ContentContainer = styled.div`
-    width: 100%;
-    height: 100%;
-
-    h1{
-        display: none;
-    }
 
     ${({ theme }) => theme.mq.tablet}{
         display: flex;
@@ -49,7 +44,7 @@ export const ContentContainer = styled.div`
 `
 
 export const ImageWrapper = styled.div`
-    max-height: 70rem;
+    max-height: 45rem;
     display: flex;
     justify-content: center;
     align-items:center;
@@ -87,11 +82,12 @@ export const ContentWrapper = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 50rem;
     position: relative;
     z-index: 2;
+    padding: 10rem 0;
 
     ${({ theme }) => theme.mq.tablet}{
         height: unset;
+        padding: 0;
     }
 `

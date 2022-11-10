@@ -18,7 +18,7 @@ const embeddedText = `zacząłem lata temu, kiedy robiłem cocktaile alkoholowe 
                         powędrowały na wesela i różnego rodzaju imprezy okolicznościowe.`;
 
 export const AboutBartending = () => {
-    const { embeddedimage, aboutbartendingheading, aboutbartendingtext, aboutbartendingimage } = useStaticQuery(query);
+    const { embeddedimage, aboutbartendingheading, aboutbartendingtext, aboutbartendingimage, buttoncontent } = useStaticQuery(query);
 
     const image = getImage(
         aboutbartendingimage?.image?.gatsbyImageData && aboutbartendingimage?.useThis
@@ -36,7 +36,7 @@ export const AboutBartending = () => {
                             objectFit="cover"
                             style={{ width: '100%', height: '100%' }}
                             imgStyle={{ objectFit: 'cover' }}
-                            alt="contact-image"
+                            alt="about-bartending-image"
                         />
                     </ImageWrapper>
                     <ContentWrapper>
@@ -79,7 +79,7 @@ export const AboutBartending = () => {
                                 : parse(embeddedText)}
                         </SectionParagraph>
                         <Button variant="outlined" isLink path="/kontakt" boxOverlay="bottom-left">
-                            Kontakt
+                            {buttoncontent?.content?.content && buttoncontent?.toUseThis ? buttoncontent.content.content : 'Kontakt'}
                         </Button>
                     </ContentWrapper>
                 </ContentContainer>
@@ -112,6 +112,12 @@ const query = graphql`
                 gatsbyImageData
             }
             useThis
+        }
+        buttoncontent: contentfulOMnieTresciNaPodstronie(contentfulid: { eq: "Przycisk - treść" }) {
+            content {
+                content
+            }
+            toUseThis
         }
     }
 `;

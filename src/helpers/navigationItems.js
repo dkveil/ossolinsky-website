@@ -21,6 +21,6 @@ export const navItems = [
     },
     {
         name: 'Kontakt',
-        path: ''
+        path: '/kontakt'
     },
 ]

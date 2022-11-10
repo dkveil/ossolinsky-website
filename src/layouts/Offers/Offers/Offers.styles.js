@@ -85,7 +85,7 @@ export const OfferContentWrapper = styled.div`
         margin-bottom: 2rem;
 
         ${({ theme }) => theme.mq.tablet}{
-            font-size: 3rem;
+            font-size: 3.2rem;
             text-shadow: 0 2px 2px ${({ theme }) => theme.color.black};
         }
 

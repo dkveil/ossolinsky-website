@@ -30,8 +30,8 @@ export const Welcome = () => {
                     <GatsbyImage
                         image={welcomeimage}
                         objectFit="cover"
-                        style={{ width: 'inherit', height: 'inherit' }}
-                        imgStyle={{ objectFit: 'cover', width: 'inherit', height: 'inherit' }}
+                        style={{ width: '100%', height: '100%', maxHeight: 'inherit' }}
+                        imgStyle={{ objectFit: 'cover' }}
                         alt="Welcome image"
                     />
                 </ImageWrapper>
@@ -50,9 +50,8 @@ export const Welcome = () => {
                         </ImageWrapper>
                     )}
                     <ContentWrapper>
-                        <h1>O mnie</h1>
                         <Heading
-                            variant="h2"
+                            variant="subpage h1"
                             color="black"
                             margin="0 0 3rem"
                             overlay
@@ -64,7 +63,7 @@ export const Welcome = () => {
                                           left: '-2rem',
                                       }
                                     : {
-                                          top: '-.6rem',
+                                          top: '-1rem',
                                           left: '-1rem',
                                       }
                             }
@@ -76,7 +75,7 @@ export const Welcome = () => {
                                       }
                                     : {
                                           width: '11rem',
-                                          height: '4rem',
+                                          height: '5rem',
                                       }
                             }
                         >

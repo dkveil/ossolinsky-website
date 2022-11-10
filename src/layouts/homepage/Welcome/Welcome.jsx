@@ -10,11 +10,14 @@ import { isBrowser } from 'utils/isBrowser';
 import { isDesktop } from 'utils/isDesktop';
 import { useWindowDimensions } from 'hooks/useWindowDimensions.hook';
 import media from 'utils/media';
+import { navItems } from 'helpers/navigationItems';
 
 export const Welcome = () => {
     if (!isBrowser) {
         return null;
     }
+
+    const welcomeLink = navItems.find((item) => item.name === 'O mnie');
 
     const data = useStaticQuery(query);
     const { width: windowWidth } = useWindowDimensions();
@@ -61,7 +64,7 @@ export const Welcome = () => {
                             rodziny i znajomych szybko przerodziło się w pasję. Dzięki temu, przez co udało mi się przebrnąć, zrobię
                             wszystko co w mojej mocy, żeby każdy wyszedł z Twojej imprezy zadowolony!
                         </SectionParagraph>
-                        <Button variant="outlined" isLink path="/" boxOverlay="bottom-left">
+                        <Button variant="outlined" isLink path={welcomeLink.path} boxOverlay="bottom-left">
                             o mnie
                         </Button>
                         {isDesktop() && <Autograph>Mikołaj Ossoliński</Autograph>}

@@ -10,6 +10,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
 import ArrowSquare from 'icons/arrow-square.svg';
+import { navItems } from 'helpers/navigationItems';
 
 export const Oferts = () => {
     if (!isBrowser) {
@@ -18,6 +19,8 @@ export const Oferts = () => {
 
     const { oferts, contactcard } = useStaticQuery(query);
     const [ofertCardPosition, setOfertCardPosition] = React.useState(0);
+
+    const offertsLink = navItems.find((item) => item.name === 'Oferta');
 
     const handlePosition = (index) => {
         if (index - ofertCardPosition < 0) {
@@ -82,7 +85,7 @@ export const Oferts = () => {
                             </p>
                         </li>
                     </OfertFeaturesList>
-                    <Button variant="outlined" color="white" isLink path="/" boxOverlay="bottom-left">
+                    <Button variant="outlined" color="white" isLink path={offertsLink.path} boxOverlay="bottom-left">
                         O mnie
                     </Button>
                 </ContentWrapper>

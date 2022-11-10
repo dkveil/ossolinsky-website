@@ -25,7 +25,7 @@ export const Welcome = () => {
                         overlayPosition={
                             isDesktopAndTablet()
                                 ? {
-                                      top: '-2rem',
+                                      top: '-1.6rem',
                                       left: '-2rem',
                                   }
                                 : {

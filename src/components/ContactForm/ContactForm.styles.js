@@ -39,7 +39,7 @@ export const StyledInput = styled.input`
 export const StyledTextArea = styled.textarea`
     font-size: 1.2rem;
     padding: 1rem 3px;
-    height: 10rem;
+    height: 14rem;
     width: 100%;
     resize: none;
     outline: none;
