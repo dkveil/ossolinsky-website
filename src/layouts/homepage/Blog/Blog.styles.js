@@ -28,7 +28,7 @@ export const ContentWrapper = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    gap: 3rem;
+    gap: 2rem;
     z-index: 1;
 
     ${({ theme }) => theme.mq.desktop}{

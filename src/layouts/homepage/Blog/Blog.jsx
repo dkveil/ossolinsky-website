@@ -36,7 +36,7 @@ export const Blog = () => {
                                 description={post.shortdescription.shortdescription}
                                 category={post.category.name}
                                 image={post.image.gatsbyImageData}
-                                link={`/${post.slug}`}
+                                link={post.slug}
                                 date={post.createdAt}
                             />
                         );

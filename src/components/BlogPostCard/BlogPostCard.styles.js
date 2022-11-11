@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.article`
-    width: calc(50% - 1.5rem);
-    padding-bottom: 1rem;
+    width: ${({ blogpage }) => blogpage ? '100%' : 'calc(50% - 1rem)'};
+    padding-bottom: ${({ blogpage }) => blogpage ? '0' : '1rem'};
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
@@ -36,10 +36,10 @@ export const Wrapper = styled.article`
 
     h3{
         display: -webkit-box;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
+        font-size: ${({ blogpage }) => blogpage ? '2.4rem' : '1.6rem'};
+        line-height: 2.4rem${({ blogpage }) => blogpage ? '2.8rem' : '2.4rem'};
         text-transform: uppercase;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         color: ${({ theme }) => theme.color.black};
         font-weight: bold;
         overflow: hidden;
@@ -62,7 +62,16 @@ export const Wrapper = styled.article`
         }
     }
     p{
-        display: none;
+        display: ${({ blogpage }) => blogpage ? 'block' : 'none'};
+            font-size: 1.2rem;
+            line-height: 2;
+            color: ${({ theme }) => theme.color.text};
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis " [..]";
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
     }
 
     :first-child{
@@ -96,16 +105,6 @@ export const Wrapper = styled.article`
         }
         p{
             display: block;
-            font-size: 1.2rem;
-            line-height: 2;
-            color: ${({ theme }) => theme.color.text};
-            overflow: hidden;
-            display: -webkit-box;
-            text-overflow: ellipsis " [..]";
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-
 
             ${({ theme }) => theme.mq.tablet}{
                 width: 75%;
@@ -144,7 +143,7 @@ export const Category = styled.span`
 
 export const ImageWrapper = styled.div`
     width: 100%;
-    height: ${({ main }) => main ? '19rem' : '10rem'};
+    height: ${({ main, blogpage }) => main || blogpage ? '20rem' : '10rem'};
 
     ${({ theme }) => theme.mq.tablet}{
         height: ${({ main }) => main ? '34rem' : '22rem'};
