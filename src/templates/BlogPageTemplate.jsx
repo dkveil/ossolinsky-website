@@ -1,9 +1,9 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import PageTitle from 'components/PageTitle';
 import { Container } from 'styles/Container';
 import { BlogPostCard } from 'components/BlogPostCard/BlogPostCard';
-import { BlogPostsWrapper, ContentWrapper } from 'layouts/Blogpage/Blogpage.styles';
+import { Wrapper, BlogPostsWrapper, ContentWrapper } from 'layouts/Blogpage/Blogpage.styles';
 import { Pagination } from 'components/Pagination';
 
 const BlogPage = (data) => {
@@ -11,7 +11,32 @@ const BlogPage = (data) => {
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
     const { currentPage, numPages } = data.pageContext;
     const currentCategory = data.pageContext.category || null;
-    console.log(currentPage);
+
+    const setPage = (i) => {
+        if (i + 1 === 1) {
+            navigate('/blog');
+            return;
+        }
+
+        navigate(`/blog/${i + 1}`);
+    };
+
+    const incrementPage = () => {
+        if (currentPage < numPages) {
+            navigate(`/blog/${currentPage + 1}`);
+        }
+    };
+
+    const decrementPage = () => {
+        if (currentPage === 2) {
+            navigate('/blog');
+            return;
+        }
+
+        if (currentPage > 1) {
+            navigate(`/blog/${currentPage - 1}`);
+        }
+    };
 
     return (
         <>
@@ -19,9 +44,9 @@ const BlogPage = (data) => {
                 title="Blog"
                 description="Zaciekawiony tym co oferuję? W tej sekcji znajdziesz relacje z imprez oraz przepisy na różnego rodzaju koktajle alkoholowe. Nie zabraknie tutaj również przepisów na syropy, nalewki etc. oraz poleceń firm wykonujących inne usługi na imprezach, które mile zapadną mi w pamięć. Zostaniesz na dłużej na blogu?"
                 categories={categories}
-                currentCategory={currentCategory}
+                currentCategory={currentCategory === null ? 'Wszystko' : currentCategory}
             />
-            <section id="blogposts">
+            <Wrapper>
                 <Container>
                     <ContentWrapper>
                         <BlogPostsWrapper>
@@ -42,10 +67,19 @@ const BlogPage = (data) => {
                                 );
                             })}
                         </BlogPostsWrapper>
-                        {numPages > 1 && <Pagination active={currentPage} pages={numPages} />}
+                        {true && (
+                            <Pagination
+                                active={currentPage}
+                                pages={numPages}
+                                numericPagination
+                                setPage={setPage}
+                                increment={incrementPage}
+                                decrement={decrementPage}
+                            />
+                        )}
                     </ContentWrapper>
                 </Container>
-            </section>
+            </Wrapper>
         </>
     );
 };

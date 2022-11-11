@@ -20,11 +20,13 @@ export const DotsWrapper = styled.div`
 `
 
 export const Dot = styled.div`
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    background-color: ${({ theme, isActive }) => isActive ? theme.color.black : theme.color.text};
-    transform: ${({ isActive }) => isActive ? 'scale(1.1)' : 'scale(1)'};
+    width: ${({ numeric }) => numeric ? null : '1rem'};
+    height: ${({ numeric }) => numeric ? null : '1rem'};
+    border-radius: ${({ numeric }) => numeric ? null : '100%'};
+    background-color: ${({ theme, isActive, numeric }) => !numeric && isActive ? theme.color.black : numeric ? null : theme.color.text};
+    transform: ${({ isActive, numeric }) => isActive && !numeric ? 'scale(1.1)' : numeric ? null : 'scale(1)'};
     transition: transform 0.4s ease;
+    font-size: ${({ numeric }) => numeric ? '1.6rem' : null};
+    color: ${({ numeric, isActive, theme }) => numeric && isActive ? theme.color.black : numeric ? 'rgba(0,0,0,.5)' : null};
     cursor: pointer;
 `;

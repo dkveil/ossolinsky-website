@@ -4,7 +4,7 @@ import { Wrapper, DotsWrapper, Dot } from './Pagination.styles';
 import ArrowLeft from 'assets/icons/arrow-left.svg';
 import ArrowRight from 'assets/icons/arrow-right.svg';
 
-export const Pagination = ({ pages, styles, active, setPage, increment, decrement, arrowButtons = true }) => {
+export const Pagination = ({ pages, styles, active, setPage, increment, decrement, arrowButtons = true, numericPagination = false }) => {
     let items = [];
 
     for (let i = 0; pages > i; i++) {
@@ -16,7 +16,14 @@ export const Pagination = ({ pages, styles, active, setPage, increment, decremen
             {arrowButtons && <ArrowLeft onClick={decrement} style={{ cursor: 'pointer' }} />}
             <DotsWrapper>
                 {items.map((i) => (
-                    <Dot key={i} isActive={i === active} onClick={() => setPage(i)} />
+                    <Dot
+                        key={i}
+                        isActive={i && !numericPagination === active ? true : numericPagination && i + 1 === active}
+                        onClick={() => setPage(i)}
+                        numeric={numericPagination}
+                    >
+                        {numericPagination && `${i + 1}.`}
+                    </Dot>
                 ))}
             </DotsWrapper>
             {arrowButtons && <ArrowRight onClick={increment} style={{ cursor: 'pointer' }} />}
@@ -39,5 +46,6 @@ Pagination.propTypes = {
     },
     setPage: PropTypes.func.isRequired,
     styles: PropTypes.object,
-    arrowButtons: PropTypes.boolean,
+    arrowButtons: PropTypes.bool,
+    numericPagination: PropTypes.bool,
 };

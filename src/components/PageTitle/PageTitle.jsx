@@ -6,7 +6,7 @@ import { SectionParagraph } from 'components/SectionParagraph';
 import { Container } from 'styles/Container';
 import { Link } from 'gatsby';
 import slugify from 'slugify';
-// import { isDesktop } from 'utils/isDesktop';
+import { isDesktop } from 'utils/isDesktop';
 
 const PageTitle = ({ title, description, categories, currentCategory }) => {
     return (
@@ -16,10 +16,10 @@ const PageTitle = ({ title, description, categories, currentCategory }) => {
                     <Heading
                         variant="subpage h1"
                         color="black"
-                        margin="0 0 2rem"
+                        margin={isDesktop() ? '0 0 4rem' : '0 0 2rem'}
                         overlay
-                        overlaySize={{ width: '70%', height: '4.5rem' }}
-                        overlayPosition={{ top: '-.5rem', left: '-1rem' }}
+                        overlaySize={isDesktop() ? { width: '80%', height: '140%' } : { width: '70%', height: '4.5rem' }}
+                        overlayPosition={isDesktop() ? { top: '-1.5rem', left: '-2rem' } : { top: '-.5rem', left: '-1rem' }}
                         overlayColor="gray"
                     >
                         {title}
@@ -28,7 +28,7 @@ const PageTitle = ({ title, description, categories, currentCategory }) => {
                         {description}
                     </SectionParagraph>
                     <CategoriesList>
-                        <CategoryItem active={currentCategory === null}>
+                        <CategoryItem active={currentCategory === 'Wszystko'}>
                             <Link to="/blog">Wszystko</Link>
                         </CategoryItem>
                         {categories?.map((category) => {

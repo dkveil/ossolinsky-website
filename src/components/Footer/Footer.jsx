@@ -8,25 +8,33 @@ import { socialmedia } from 'helpers/socialmedia';
 import { isBrowser } from 'utils/isBrowser';
 import { useLocation } from '@reach/router';
 import { useTheme } from 'styled-components';
+import { pathsWhereFooterIsWhiteMobile, pathsWhereFooterIsWhiteDesktop } from 'helpers/pathsWhereFooterIsWhite';
+import { pathsWhereFooterIsGrayMobile, pathsWhereFooterIsGrayDesktop } from 'helpers/pathsWhereFooterIsGray';
 
 export const Footer = () => {
     if (!isBrowser) {
         return null;
     }
+
     const theme = useTheme();
     const location = useLocation();
     const [mobileBackgroundColor, setMobileBackgroundColor] = React.useState(theme.color.white);
     const [desktopBackgroundColor, setDesktopBackgroundColor] = React.useState(theme.color.white);
 
-    const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
+    const { socialmediaitems, phonenumber, email, site } = useStaticQuery(query);
 
     React.useEffect(() => {
-        if (location.pathname === '/') {
-            setMobileBackgroundColor(theme.color.white);
-            setDesktopBackgroundColor(theme.color.gray);
-        } else {
+        if (pathsWhereFooterIsWhiteDesktop.find((path) => path === location.pathname)) {
             setDesktopBackgroundColor(theme.color.white);
+        }
+        if (pathsWhereFooterIsWhiteMobile.find((path) => path === location.pathname)) {
             setMobileBackgroundColor(theme.color.white);
+        }
+        if (pathsWhereFooterIsGrayDesktop.find((path) => path === location.pathname)) {
+            setDesktopBackgroundColor(theme.color.gray);
+        }
+        if (pathsWhereFooterIsGrayMobile.find((path) => path === location.pathname)) {
+            setMobileBackgroundColor(theme.color.gray);
         }
     }, [location.pathname]);
 
@@ -71,6 +79,15 @@ export const Footer = () => {
 
 const query = graphql`
     query {
+        site {
+            pathPrefix
+            polyfill
+            jsxRuntime
+            siteMetadata {
+                title
+                siteUrl
+            }
+        }
         socialmediaitems: allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
             edges {
                 node {

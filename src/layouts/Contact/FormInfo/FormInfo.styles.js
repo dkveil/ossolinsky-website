@@ -40,7 +40,7 @@ export const Wrapper = styled.section`
 `
 
 export const ContentContainer = styled.div`
-    ${({ theme }) => theme.mq.theme}{
+    ${({ theme }) => theme.mq.tablet}{
         display: flex;
         align-items: center;
     }

@@ -4,17 +4,21 @@ export const Wrapper = styled.article`
     width: ${({ blogpage }) => blogpage ? '100%' : 'calc(50% - 1rem)'};
     padding-bottom: ${({ blogpage }) => blogpage ? '0' : '1rem'};
 
+    ${({ theme }) => theme.mq.tablet}{
+        width: ${({ blogpage }) => blogpage ? 'calc(50% - 1rem)' : null};
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
-        width: calc(40% - 1.5rem);
-        height: 16rem;
+        width: ${({ blogpage }) => blogpage ? 'calc(33% - .5rem - 1px)' : 'calc(40% - 1.5rem)'};
+        height: ${({ blogpage }) => blogpage ? 'auto' : '16rem'};
         padding: 0;
         display: flex;
-        flex-direction: ${({ main }) => main ? 'column' : 'row'};
-        border: ${({ main, theme }) => !main && `2px solid ${theme.color.gray}`};
+        flex-direction: ${({ main, blogpage }) => main || blogpage ? 'column' : 'row'};
+        border: ${({ main, theme, blogpage }) => !main && !blogpage && `2px solid ${theme.color.gray}`};
         z-index: 0;
 
-        ${({ main }) => !main && css`
+        ${({ main, blogpage }) => !main && !blogpage && css`
             ::after{
                 content: '';
                 top: -1.5rem;
@@ -37,7 +41,7 @@ export const Wrapper = styled.article`
     h3{
         display: -webkit-box;
         font-size: ${({ blogpage }) => blogpage ? '2.4rem' : '1.6rem'};
-        line-height: 2.4rem${({ blogpage }) => blogpage ? '2.8rem' : '2.4rem'};
+        line-height: ${({ blogpage }) => blogpage ? '2.8rem' : '2.4rem'};
         text-transform: uppercase;
         margin-bottom: 1.5rem;
         color: ${({ theme }) => theme.color.black};
@@ -54,32 +58,40 @@ export const Wrapper = styled.article`
         }
 
         ${({ theme }) => theme.mq.desktop}{
-            font-size: 1.6rem;
-            line-height: 2.4rem;
+            font-size: ${({ blogpage }) => blogpage ? '2.4rem' : '1.6rem'};
+            line-height: ${({ blogpage }) => blogpage ? '3.2rem' : '2.4rem'};
             font-weight: 600;
             -webkit-line-clamp: 2;
             margin: .6rem 0 1rem;
         }
     }
     p{
-        display: ${({ blogpage }) => blogpage ? 'block' : 'none'};
-            font-size: 1.2rem;
-            line-height: 2;
-            color: ${({ theme }) => theme.color.text};
-            overflow: hidden;
-            display: -webkit-box;
-            text-overflow: ellipsis " [..]";
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
+        display: ${({ blogpage }) => blogpage ? '-webkit-box' : 'none'};
+        font-size: 1.2rem;
+        line-height: 2;
+        color: ${({ theme }) => theme.color.text};
+        overflow: hidden;
+
+        text-overflow: ellipsis " [..]";
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+
+        ${({ theme }) => theme.mq.desktop}{
+            display: ${({ blogpage }) => blogpage ? '-webkit-box' : 'none'};
+        }
+
     }
 
-    :first-child{
-        width: 100%;
+    ${({ blogpage }) => !blogpage && css`
+
+        :first-child{
+            width: 100%;
 
         ${({ theme }) => theme.mq.desktop}{
             width: 60%;
             height: 100%;
+
             p {
                 margin-bottom: ${({ main }) => main && '1rem'};
             }
@@ -104,7 +116,7 @@ export const Wrapper = styled.article`
             }
         }
         p{
-            display: block;
+            display: -webkit-box;
 
             ${({ theme }) => theme.mq.tablet}{
                 width: 75%;
@@ -115,11 +127,12 @@ export const Wrapper = styled.article`
                 line-height: 2;
                 width: 95%;
             }
-        }
+        }}
+        `
 
     }
 
-`;
+`
 
 export const Date = styled.time`
     display: ${({ main }) => main ? 'none' : 'block'};
@@ -151,11 +164,11 @@ export const ImageWrapper = styled.div`
 
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
-        width: ${({ main }) => main ? '100%' : '35%'};
-        height: ${({ main }) => main ? '40rem' : '100%'};
-        border-right: ${({ main, theme }) => !main && `2px solid ${theme.color.gray}`};
+        width: ${({ main, blogpage }) => main || blogpage ? '100%' : '35%'};
+        height: ${({ main, blogpage }) => main ? '40rem' : blogpage ? '24rem' : '100%'};
+        border-right: ${({ main, theme, blogpage }) => !main && !blogpage && `2px solid ${theme.color.gray}`};
         margin: 0;
-        border: ${({ theme }) => `2px solid ${theme.color.gray}`};
+        border: ${({ theme, blogpage }) => !blogpage && `2px solid ${theme.color.gray}`};
 
         ${({ main }) => main && css`
             ::after{
@@ -178,7 +191,7 @@ export const ContentWrapper = styled.div`
     padding: 2rem 0 0;
 
     ${({ theme }) => theme.mq.desktop}{
-        padding: ${({ main }) => main ? '2rem 2px' : '2rem 0 2rem 2rem'};
+        padding: ${({ main, blogpage }) => main ? '2rem 2px' : blogpage ? '2rem 0 0' : '2rem 0 2rem 2rem'};
     }
 
 `

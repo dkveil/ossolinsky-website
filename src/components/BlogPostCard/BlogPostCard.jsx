@@ -20,7 +20,7 @@ export const BlogPostCard = ({ homepage, blogpage, title, description, category,
                     />
                 </Link>
             </ImageWrapper>
-            <ContentWrapper main={main && homepage}>
+            <ContentWrapper main={main && homepage} blogpage={blogpage}>
                 <Category main={main && homepage}>
                     <Link to={`/blog/${link}`}>{category}</Link>
                 </Category>
@@ -54,6 +54,6 @@ BlogPostCard.propTypes = {
     category: PropTypes.string.isRequired,
     image: PropTypes.object.isRequired,
     link: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    main: PropTypes.bool.isRequired,
+    date: PropTypes.string,
+    main: PropTypes.bool,
 };

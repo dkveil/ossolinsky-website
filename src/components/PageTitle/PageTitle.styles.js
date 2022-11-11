@@ -14,6 +14,15 @@ export const ContentWrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    ${({ theme }) => theme.mq.tablet}{
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        width: 45%;
+    }
 `
 
 export const CategoriesList = styled.ul`
@@ -23,6 +32,15 @@ export const CategoriesList = styled.ul`
     align-items: center;
     flex-direction: column;
     gap: 1rem;
+
+    ${({ theme }) => theme.mq.tablet}{
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        gap: 3rem;
+    }
 
 `
 
