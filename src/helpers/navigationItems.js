@@ -13,7 +13,7 @@ export const navItems = [
     },
     {
         name: 'Doświadczenie',
-        path: ''
+        path: '/blog'
     },
     {
         name: 'Galeria',

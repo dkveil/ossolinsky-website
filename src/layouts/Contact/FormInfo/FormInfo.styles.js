@@ -53,7 +53,7 @@ export const ContentWrapper = styled.div`
     }
 
     ${({ theme }) => theme.mq.desktop}{
-        width: 85%;
-        padding-right: 10rem;
+        width: 88%;
+        padding-right: 8rem;
     }
 `

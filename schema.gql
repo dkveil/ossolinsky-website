@@ -603,7 +603,7 @@ type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node @der
     contentful_id: String!
     node_locale: String!
     title: String
-    category: String
+    category: ContentfulKategorieDlaBlogaIGalerii @link(by: "id", from: "category___NODE")
     slug: String
     image: ContentfulAsset @link(by: "id", from: "image___NODE")
     shortdescription: contentfulBlogShortdescriptionTextNode @link(by: "id", from: "shortdescription___NODE")
@@ -611,6 +611,34 @@ type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node @der
     createdAt: Date @dateformat
     updatedAt: Date @dateformat
     sys: ContentfulBlogSys
+}
+
+type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+    contentful_id: String!
+    node_locale: String!
+    name: String
+    priority: Int
+    spaceId: String
+    createdAt: Date @dateformat
+    updatedAt: Date @dateformat
+    sys: ContentfulKategorieDlaBlogaIGaleriiSys
+    blog: [ContentfulBlog] @link(by: "id", from: "blog___NODE")
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSys @derivedTypes {
+    type: String
+    revision: Int
+    contentType: ContentfulKategorieDlaBlogaIGaleriiSysContentType
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSysContentType @derivedTypes {
+    sys: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys {
+    type: String
+    linkType: String
+    id: String
 }
 
 type contentfulBlogShortdescriptionTextNode implements Node @derivedTypes @childOf(types: ["ContentfulBlog"]) @dontInfer {

@@ -6,6 +6,7 @@ export const Wrapper = styled.section`
     position: relative;
 
     ${({ theme }) => theme.mq.desktop}{
+
         background-color: ${({ theme }) => theme.color.gray};
         height: 90rem;
     }
@@ -31,7 +32,7 @@ export const ContentWrapper = styled.div`
     ${({ theme }) => theme.mq.desktop}{
         display: flex;
         flex-direction: column;
-        height: 100%;
+        margin: auto;
         justify-content: center;
         margin-left: calc(44% + 10rem);
     }

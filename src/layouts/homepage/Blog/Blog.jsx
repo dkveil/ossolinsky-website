@@ -8,7 +8,7 @@ import { isBrowser } from 'utils/isBrowser';
 
 export const Blog = () => {
     if (!isBrowser) {
-        return null
+        return null;
     }
 
     const { blogposts } = useStaticQuery(query);
@@ -34,7 +34,7 @@ export const Blog = () => {
                                 key={post.title + index}
                                 title={post.title}
                                 description={post.shortdescription.shortdescription}
-                                category={post.category}
+                                category={post.category.name}
                                 image={post.image.gatsbyImageData}
                                 link={`/${post.slug}`}
                                 date={post.createdAt}
@@ -53,7 +53,9 @@ const query = graphql`
             edges {
                 node {
                     title
-                    category
+                    category {
+                        name
+                    }
                     shortdescription {
                         shortdescription
                     }

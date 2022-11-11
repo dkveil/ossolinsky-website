@@ -5,9 +5,14 @@ export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.white};
     overflow: hidden;
 
+    ${({ theme }) => theme.mq.tablet}{
+        height: 700px;
+    }
+
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
         margin-top: ${({ theme }) => theme.height.desktopHeader};
+        height: calc(100vh - ${({ theme }) => theme.height.desktopHeader});
 
         ::after{
             position: absolute;
