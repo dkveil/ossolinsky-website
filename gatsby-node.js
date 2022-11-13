@@ -81,7 +81,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 context: {
                     limit: postsPerPage,
                     skip: i * postsPerPage,
-                    numPages,
+                    numPages: numPagesWithThatCategory,
                     currentPage: i + 1,
                     category: category.node.name
                 }

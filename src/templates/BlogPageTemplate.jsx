@@ -67,7 +67,7 @@ const BlogPage = (data) => {
                                 );
                             })}
                         </BlogPostsWrapper>
-                        {true && (
+                        {numPages > 1 && (
                             <Pagination
                                 active={currentPage}
                                 pages={numPages}

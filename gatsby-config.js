@@ -102,6 +102,13 @@ module.exports = {
                 }
             }
         },
+        {
+            resolve: 'gatsby-plugin-htaccess',
+            options: {
+                RewriteBase: '/custom/',
+                https: true,
+            },
+        },
 
     ]
 };
