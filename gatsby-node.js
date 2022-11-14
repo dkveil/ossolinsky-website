@@ -35,17 +35,58 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     const posts = blogpage.allContentfulBlog.edges
     const postsPerPage = 6
-    const numPages = Math.ceil(posts.length / postsPerPage)
+    const numBlogPages = Math.ceil(posts.length / postsPerPage)
 
 
-    Array.from({ length: numPages }).forEach((_, i) => {
+    Array.from({ length: numBlogPages > 1 ? numBlogPages : 1 }).forEach((_, i) => {
         createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
             component: path.resolve("./src/templates/BlogPageTemplate.jsx"),
             context: {
                 limit: postsPerPage,
                 skip: i * postsPerPage,
-                numPages,
+                numPages: numBlogPages,
+                currentPage: i + 1,
+            },
+        })
+    })
+
+    const gallerypage = await graphql(`
+        {
+            allContentfulGaleria(sort: {fields: createdAt, order: DESC}){
+                edges{
+                    node{
+                        title
+                        category {
+                            name
+                        }
+                        image {
+                            gatsbyImageData
+                        }
+                    }
+                }
+            }
+        }
+    `).then(res => res.data)
+
+    if (gallerypage.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`)
+        return
+    }
+
+    const images = gallerypage.allContentfulGaleria.edges
+    const imagesPerPage = 12
+    const numGalleryPages = Math.ceil(images.length / imagesPerPage)
+
+
+    Array.from({ length: numGalleryPages > 1 ? numGalleryPages : 1 }).forEach((_, i) => {
+        createPage({
+            path: i === 0 ? `/galeria` : `/galeria/${i + 1}`,
+            component: path.resolve("./src/templates/GalleryPageTemplate.jsx"),
+            context: {
+                limit: imagesPerPage,
+                skip: i * imagesPerPage,
+                numPages: numGalleryPages,
                 currentPage: i + 1,
             },
         })
@@ -72,16 +113,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     categories.map(category => {
         const postsWithThatCategory = blogpage.allContentfulBlog.edges.filter(post => post.node.category.name === category.node.name)
-        const numPagesWithThatCategory = Math.ceil(postsWithThatCategory.length / postsPerPage)
+        const imagesWithThatCategory = gallerypage.allContentfulGaleria.edges.filter(image => image.node.category.name === category.node.name)
+        const numBlogPagesWithThatCategory = Math.ceil(postsWithThatCategory.length / postsPerPage)
+        const numGalleryPagesWithThatCategory = Math.ceil(imagesWithThatCategory.length / imagesPerPage)
 
-        Array.from({ length: numPagesWithThatCategory }).forEach((_, i) => {
+        Array.from({ length: numBlogPagesWithThatCategory > 1 ? numBlogPagesWithThatCategory : 1 }).forEach((_, i) => {
             createPage({
                 path: i === 0 ? `/blog/${slugify(category.node.name).toLowerCase()}` : `/blog/${slugify(category.node.name)}/${i + 1}`,
                 component: path.resolve("./src/templates/BlogPageTemplate.jsx"),
                 context: {
                     limit: postsPerPage,
                     skip: i * postsPerPage,
-                    numPages: numPagesWithThatCategory,
+                    numPages: numBlogPagesWithThatCategory,
+                    currentPage: i + 1,
+                    category: category.node.name
+                }
+            })
+        })
+
+        Array.from({ length: numGalleryPagesWithThatCategory > 1 ? numGalleryPagesWithThatCategoryy : 1 }).forEach((_, i) => {
+            createPage({
+                path: i === 0 ? `/galeria/${slugify(category.node.name).toLowerCase()}` : `/galeria/${slugify(category.node.name)}/${i + 1}`,
+                component: path.resolve("./src/templates/GalleryPageTemplate.jsx"),
+                context: {
+                    limit: imagesPerPage,
+                    skip: i * imagesPerPage,
+                    numPages: numGalleryPagesWithThatCategory,
                     currentPage: i + 1,
                     category: category.node.name
                 }

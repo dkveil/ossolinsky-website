@@ -17,7 +17,7 @@ export const navItems = [
     },
     {
         name: 'Galeria',
-        path: ''
+        path: '/galeria'
     },
     {
         name: 'Kontakt',

@@ -2,72 +2,69 @@ import React from 'react';
 import { graphql, navigate } from 'gatsby';
 import PageTitle from 'components/PageTitle';
 import { Container } from 'styles/Container';
-import { BlogPostCard } from 'components/BlogPostCard/BlogPostCard';
-import { Wrapper, BlogPostsWrapper, ContentWrapper } from 'layouts/Blogpage/Blogpage.styles';
 import { Pagination } from 'components/Pagination';
+import { Wrapper, ImagesWrapper, ContentWrapper } from 'layouts/Gallerypage/Gallerypage.styles';
+import { GalleryCard } from 'components/GalleryCard';
 
-const BlogPage = (data) => {
-    const { edges: blogposts } = data.data.allContentfulBlog;
+const GalleryPage = (data) => {
+    const { edges: images } = data.data.allContentfulGaleria;
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
     const { currentPage, numPages } = data.pageContext;
     const currentCategory = data.pageContext.category || null;
 
     const setPage = (i) => {
         if (i + 1 === 1) {
-            navigate('/blog');
+            navigate('/galeria');
             return;
         }
 
-        navigate(`/blog/${i + 1}`);
+        navigate(`/galeria/${i + 1}`);
     };
 
     const incrementPage = () => {
         if (currentPage < numPages) {
-            navigate(`/blog/${currentPage + 1}`);
+            navigate(`/galeria/${currentPage + 1}`);
         }
     };
 
     const decrementPage = () => {
         if (currentPage === 2) {
-            navigate('/blog');
+            navigate('/galeria');
             return;
         }
 
         if (currentPage > 1) {
-            navigate(`/blog/${currentPage - 1}`);
+            navigate(`/galeria/${currentPage - 1}`);
         }
     };
 
     return (
         <>
             <PageTitle
-                title="Blog"
-                description="Zaciekawiony tym co oferuję? W tej sekcji znajdziesz relacje z imprez oraz przepisy na różnego rodzaju koktajle alkoholowe. Nie zabraknie tutaj również przepisów na syropy, nalewki etc. oraz poleceń firm wykonujących inne usługi na imprezach, które mile zapadną mi w pamięć. Zostaniesz na dłużej na blogu?"
+                title="Galeria"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin tellus non eros gravida lacinia. Integer luctus nisi sodales libero vulputate cursus. Fusce vitae lacus ut lorem varius ultricies ac id dui. Nunc ex ante."
                 categories={categories}
                 currentCategory={currentCategory === null ? 'Wszystko' : currentCategory}
-                prefix="/blog"
+                prefix="/galeria"
             />
             <Wrapper>
                 <Container>
                     <ContentWrapper>
-                        <BlogPostsWrapper>
-                            {blogposts.map((item, index) => {
-                                const post = item.node;
+                        <ImagesWrapper>
+                            {images.map((item, index) => {
+                                const image = item.node;
 
                                 return (
-                                    <BlogPostCard
-                                        blogpage
-                                        key={post.title + index}
-                                        title={post.title}
-                                        description={post.shortdescription.shortdescription}
-                                        category={post.category.name}
-                                        image={post.image.gatsbyImageData}
-                                        link={post.slug}
-                                        date={post.createdAt}
+                                    <GalleryCard
+                                        key={`${image.title} + ${index}`}
+                                        title={image.title}
+                                        date={image.createdAt}
+                                        image={image.image.gatsbyImageData}
+                                        index={index}
                                     />
                                 );
                             })}
-                        </BlogPostsWrapper>
+                        </ImagesWrapper>
                         {numPages > 1 && (
                             <Pagination
                                 active={currentPage}
@@ -86,7 +83,7 @@ const BlogPage = (data) => {
 };
 
 export const query = graphql`
-    query blogListQuery($skip: Int!, $limit: Int!, $category: String) {
+    query galleryListQuery($skip: Int!, $limit: Int!, $category: String) {
         allContentfulKategorieDlaBlogaIGalerii(sort: { fields: priority, order: ASC }) {
             edges {
                 node {
@@ -94,7 +91,7 @@ export const query = graphql`
                 }
             }
         }
-        allContentfulBlog(
+        allContentfulGaleria(
             sort: { fields: createdAt, order: DESC }
             limit: $limit
             skip: $skip
@@ -106,17 +103,14 @@ export const query = graphql`
                     category {
                         name
                     }
-                    shortdescription {
-                        shortdescription
-                    }
-                    slug
                     image {
                         gatsbyImageData
                     }
+                    createdAt(formatString: "DD.MM.YYYY")
                 }
             }
         }
     }
 `;
 
-export default BlogPage;
+export default GalleryPage;

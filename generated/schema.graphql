@@ -1402,6 +1402,70 @@ type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & Conten
   internal: Internal!
 }
 
+type ContentfulGaleria implements ContentfulReference & ContentfulEntry & Node {
+  contentful_id: String!
+  id: ID!
+  node_locale: String!
+  title: String
+  category: ContentfulKategorieDlaBlogaIGalerii
+  image: ContentfulAsset
+  spaceId: String
+  createdAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to "milliseconds" but you can also pass in as the measurement "years", "months", "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  updatedAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to "milliseconds" but you can also pass in as the measurement "years", "months", "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  sys: ContentfulGaleriaSys
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+}
+
+type ContentfulGaleriaSys {
+  type: String
+  revision: Int
+  contentType: ContentfulGaleriaSysContentType
+}
+
+type ContentfulGaleriaSysContentType {
+  sys: ContentfulGaleriaSysContentTypeSys
+}
+
+type ContentfulGaleriaSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 enum GatsbyImageFormat {
   NO_CHANGE
   AUTO
@@ -1995,6 +2059,8 @@ type Query {
   allContentfulOMnieZdjeciaNaPodstronie(filter: ContentfulOMnieZdjeciaNaPodstronieFilterInput, sort: ContentfulOMnieZdjeciaNaPodstronieSortInput, skip: Int, limit: Int): ContentfulOMnieZdjeciaNaPodstronieConnection!
   contentfulKategorieDlaBlogaIGalerii(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, priority: IntQueryOperatorInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput, blog: ContentfulBlogFilterListInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulKategorieDlaBlogaIGalerii
   allContentfulKategorieDlaBlogaIGalerii(filter: ContentfulKategorieDlaBlogaIGaleriiFilterInput, sort: ContentfulKategorieDlaBlogaIGaleriiSortInput, skip: Int, limit: Int): ContentfulKategorieDlaBlogaIGaleriiConnection!
+  contentfulGaleria(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, image: ContentfulAssetFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulGaleriaSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulGaleria
+  allContentfulGaleria(filter: ContentfulGaleriaFilterInput, sort: ContentfulGaleriaSortInput, skip: Int, limit: Int): ContentfulGaleriaConnection!
   imageSharp(fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: GatsbyImageDataQueryOperatorInput, original: ImageSharpOriginalFilterInput, resize: ImageSharpResizeFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ImageSharp
   allImageSharp(filter: ImageSharpFilterInput, sort: ImageSharpSortInput, skip: Int, limit: Int): ImageSharpConnection!
   contentfulOpinieBlockquoteTextNode(blockquote: StringQueryOperatorInput, sys: contentfulOpinieBlockquoteTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOpinieBlockquoteTextNode
@@ -6654,6 +6720,365 @@ type ContentfulKategorieDlaBlogaIGaleriiGroupConnection {
 
 input ContentfulKategorieDlaBlogaIGaleriiSortInput {
   fields: [ContentfulKategorieDlaBlogaIGaleriiFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+input ContentfulGaleriaSysFilterInput {
+  type: StringQueryOperatorInput
+  revision: IntQueryOperatorInput
+  contentType: ContentfulGaleriaSysContentTypeFilterInput
+}
+
+input ContentfulGaleriaSysContentTypeFilterInput {
+  sys: ContentfulGaleriaSysContentTypeSysFilterInput
+}
+
+input ContentfulGaleriaSysContentTypeSysFilterInput {
+  type: StringQueryOperatorInput
+  linkType: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+}
+
+type ContentfulGaleriaConnection {
+  totalCount: Int!
+  edges: [ContentfulGaleriaEdge!]!
+  nodes: [ContentfulGaleria!]!
+  pageInfo: PageInfo!
+  distinct(field: ContentfulGaleriaFieldsEnum!): [String!]!
+  max(field: ContentfulGaleriaFieldsEnum!): Float
+  min(field: ContentfulGaleriaFieldsEnum!): Float
+  sum(field: ContentfulGaleriaFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: ContentfulGaleriaFieldsEnum!): [ContentfulGaleriaGroupConnection!]!
+}
+
+type ContentfulGaleriaEdge {
+  next: ContentfulGaleria
+  node: ContentfulGaleria!
+  previous: ContentfulGaleria
+}
+
+enum ContentfulGaleriaFieldsEnum {
+  contentful_id
+  id
+  node_locale
+  title
+  category___contentful_id
+  category___id
+  category___node_locale
+  category___name
+  category___priority
+  category___spaceId
+  category___createdAt
+  category___updatedAt
+  category___sys___type
+  category___sys___revision
+  category___blog
+  category___blog___contentful_id
+  category___blog___id
+  category___blog___node_locale
+  category___blog___title
+  category___blog___category___contentful_id
+  category___blog___category___id
+  category___blog___category___node_locale
+  category___blog___category___name
+  category___blog___category___priority
+  category___blog___category___spaceId
+  category___blog___category___createdAt
+  category___blog___category___updatedAt
+  category___blog___category___blog
+  category___blog___category___children
+  category___blog___slug
+  category___blog___image___contentful_id
+  category___blog___image___id
+  category___blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___image___spaceId
+  category___blog___image___createdAt
+  category___blog___image___updatedAt
+  category___blog___image___title
+  category___blog___image___description
+  category___blog___image___node_locale
+  category___blog___image___url
+  category___blog___image___placeholderUrl
+  category___blog___image___mimeType
+  category___blog___image___filename
+  category___blog___image___width
+  category___blog___image___height
+  category___blog___image___size
+  category___blog___image___children
+  category___blog___image___filesize
+  category___blog___image___publicUrl
+  category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___shortdescription___shortdescription
+  category___blog___shortdescription___id
+  category___blog___shortdescription___children
+  category___blog___spaceId
+  category___blog___createdAt
+  category___blog___updatedAt
+  category___blog___sys___type
+  category___blog___sys___revision
+  category___blog___childrenContentfulBlogShortdescriptionTextNode
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___id
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___children
+  category___blog___childContentfulBlogShortdescriptionTextNode___shortdescription
+  category___blog___childContentfulBlogShortdescriptionTextNode___id
+  category___blog___childContentfulBlogShortdescriptionTextNode___children
+  category___blog___parent___id
+  category___blog___parent___children
+  category___blog___children
+  category___blog___children___id
+  category___blog___children___children
+  category___blog___internal___content
+  category___blog___internal___contentDigest
+  category___blog___internal___description
+  category___blog___internal___fieldOwners
+  category___blog___internal___ignoreType
+  category___blog___internal___mediaType
+  category___blog___internal___owner
+  category___blog___internal___type
+  category___blog___internal___contentFilePath
+  category___parent___id
+  category___parent___parent___id
+  category___parent___parent___children
+  category___parent___children
+  category___parent___children___id
+  category___parent___children___children
+  category___parent___internal___content
+  category___parent___internal___contentDigest
+  category___parent___internal___description
+  category___parent___internal___fieldOwners
+  category___parent___internal___ignoreType
+  category___parent___internal___mediaType
+  category___parent___internal___owner
+  category___parent___internal___type
+  category___parent___internal___contentFilePath
+  category___children
+  category___children___id
+  category___children___parent___id
+  category___children___parent___children
+  category___children___children
+  category___children___children___id
+  category___children___children___children
+  category___children___internal___content
+  category___children___internal___contentDigest
+  category___children___internal___description
+  category___children___internal___fieldOwners
+  category___children___internal___ignoreType
+  category___children___internal___mediaType
+  category___children___internal___owner
+  category___children___internal___type
+  category___children___internal___contentFilePath
+  category___internal___content
+  category___internal___contentDigest
+  category___internal___description
+  category___internal___fieldOwners
+  category___internal___ignoreType
+  category___internal___mediaType
+  category___internal___owner
+  category___internal___type
+  category___internal___contentFilePath
+  image___contentful_id
+  image___id
+  image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___spaceId
+  image___createdAt
+  image___updatedAt
+  image___file___url
+  image___file___details___size
+  image___file___fileName
+  image___file___contentType
+  image___title
+  image___description
+  image___node_locale
+  image___sys___type
+  image___sys___revision
+  image___url
+  image___placeholderUrl
+  image___mimeType
+  image___filename
+  image___width
+  image___height
+  image___size
+  image___parent___id
+  image___parent___parent___id
+  image___parent___parent___children
+  image___parent___children
+  image___parent___children___id
+  image___parent___children___children
+  image___parent___internal___content
+  image___parent___internal___contentDigest
+  image___parent___internal___description
+  image___parent___internal___fieldOwners
+  image___parent___internal___ignoreType
+  image___parent___internal___mediaType
+  image___parent___internal___owner
+  image___parent___internal___type
+  image___parent___internal___contentFilePath
+  image___children
+  image___children___id
+  image___children___parent___id
+  image___children___parent___children
+  image___children___children
+  image___children___children___id
+  image___children___children___children
+  image___children___internal___content
+  image___children___internal___contentDigest
+  image___children___internal___description
+  image___children___internal___fieldOwners
+  image___children___internal___ignoreType
+  image___children___internal___mediaType
+  image___children___internal___owner
+  image___children___internal___type
+  image___children___internal___contentFilePath
+  image___internal___content
+  image___internal___contentDigest
+  image___internal___description
+  image___internal___fieldOwners
+  image___internal___ignoreType
+  image___internal___mediaType
+  image___internal___owner
+  image___internal___type
+  image___internal___contentFilePath
+  image___filesize
+  image___publicUrl
+  image___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  spaceId
+  createdAt
+  updatedAt
+  sys___type
+  sys___revision
+  sys___contentType___sys___type
+  sys___contentType___sys___linkType
+  sys___contentType___sys___id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type ContentfulGaleriaGroupConnection {
+  totalCount: Int!
+  edges: [ContentfulGaleriaEdge!]!
+  nodes: [ContentfulGaleria!]!
+  pageInfo: PageInfo!
+  distinct(field: ContentfulGaleriaFieldsEnum!): [String!]!
+  max(field: ContentfulGaleriaFieldsEnum!): Float
+  min(field: ContentfulGaleriaFieldsEnum!): Float
+  sum(field: ContentfulGaleriaFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: ContentfulGaleriaFieldsEnum!): [ContentfulGaleriaGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input ContentfulGaleriaFilterInput {
+  contentful_id: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+  node_locale: StringQueryOperatorInput
+  title: StringQueryOperatorInput
+  category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
+  image: ContentfulAssetFilterInput
+  spaceId: StringQueryOperatorInput
+  createdAt: DateQueryOperatorInput
+  updatedAt: DateQueryOperatorInput
+  sys: ContentfulGaleriaSysFilterInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input ContentfulGaleriaSortInput {
+  fields: [ContentfulGaleriaFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 

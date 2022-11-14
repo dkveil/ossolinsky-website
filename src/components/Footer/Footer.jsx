@@ -21,7 +21,7 @@ export const Footer = () => {
     const [mobileBackgroundColor, setMobileBackgroundColor] = React.useState(theme.color.white);
     const [desktopBackgroundColor, setDesktopBackgroundColor] = React.useState(theme.color.white);
 
-    const { socialmediaitems, phonenumber, email, site } = useStaticQuery(query);
+    const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
 
     React.useEffect(() => {
         if (pathsWhereFooterIsWhiteDesktop.find((path) => path === location.pathname)) {
@@ -79,15 +79,6 @@ export const Footer = () => {
 
 const query = graphql`
     query {
-        site {
-            pathPrefix
-            polyfill
-            jsxRuntime
-            siteMetadata {
-                title
-                siteUrl
-            }
-        }
         socialmediaitems: allContentfulSocialMedia(sort: { fields: priority, order: ASC }) {
             edges {
                 node {

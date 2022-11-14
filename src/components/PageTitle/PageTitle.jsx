@@ -8,7 +8,7 @@ import { Link } from 'gatsby';
 import slugify from 'slugify';
 import { isDesktop } from 'utils/isDesktop';
 
-const PageTitle = ({ title, description, categories, currentCategory }) => {
+const PageTitle = ({ title, description, categories, currentCategory, prefix }) => {
     return (
         <Wrapper>
             <Container>
@@ -29,14 +29,14 @@ const PageTitle = ({ title, description, categories, currentCategory }) => {
                     </SectionParagraph>
                     <CategoriesList>
                         <CategoryItem active={currentCategory === 'Wszystko'}>
-                            <Link to="/blog">Wszystko</Link>
+                            <Link to={prefix}>Wszystko</Link>
                         </CategoryItem>
                         {categories?.map((category) => {
                             const { name } = category.node;
 
                             return (
                                 <CategoryItem key={name} active={currentCategory === name}>
-                                    <Link to={`/blog/${slugify(name).toLowerCase()}`}>{name}</Link>
+                                    <Link to={`${prefix}/${slugify(name).toLowerCase()}`}>{name}</Link>
                                 </CategoryItem>
                             );
                         })}
@@ -54,4 +54,5 @@ PageTitle.propTypes = {
     description: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
     currentCategory: PropTypes.string.isRequired,
+    prefix: PropTypes.string.isRequired,
 };

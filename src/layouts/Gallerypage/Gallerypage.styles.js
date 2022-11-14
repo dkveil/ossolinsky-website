@@ -12,9 +12,9 @@ export const Wrapper = styled.section`
             content: "";
             pointer-events: none;
             display: block;
-            height: 18%;
+            height: 15rem;
             width: 100%;
-            background: linear-gradient(to bottom right, transparent 50%, ${({ theme }) => theme.color.gray} 0);
+            background: linear-gradient(to bottom left, transparent 50%, ${({ theme }) => theme.color.gray} 0);
             left: 0;
             bottom:0;
             z-index: 0;
@@ -22,10 +22,10 @@ export const Wrapper = styled.section`
     }
 `
 
-export const BlogPostsWrapper = styled.div`
+export const ImagesWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
     margin-bottom: 8rem;
     z-index: 1;
 
@@ -34,13 +34,13 @@ export const BlogPostsWrapper = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         gap: 2rem;
-        row-gap: 3rem;
+        row-gap: 2rem;
 
     }
 
     ${({ theme }) => theme.mq.desktop}{
         gap: 1.5rem;
-        row-gap: 4rem;
+        row-gap: 2rem;
         margin-bottom: 12rem;
     }
 `
