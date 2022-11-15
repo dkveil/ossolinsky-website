@@ -69,6 +69,7 @@ export const theme = {
         navcart: '.2s ease'
     },
     zindex: {
+        gallerydisplayer: 99999,
         header: 9999,
         navcart: 999,
         pagination: 2,

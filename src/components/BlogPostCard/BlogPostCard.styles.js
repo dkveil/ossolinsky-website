@@ -8,9 +8,10 @@ export const Wrapper = styled.article`
         width: ${({ blogpage }) => blogpage ? 'calc(50% - 1rem)' : null};
     }
 
+
     ${({ theme }) => theme.mq.desktop}{
         position: relative;
-        width: ${({ blogpage }) => blogpage ? 'calc(33% - .5rem - 1px)' : 'calc(40% - 1.5rem)'};
+        width: ${({ blogpage }) => blogpage ? 'calc(33% - .5rem - 3px)' : 'calc(40% - 1.5rem)'};
         height: ${({ blogpage }) => blogpage ? 'auto' : '16rem'};
         padding: 0;
         display: flex;
@@ -30,7 +31,14 @@ export const Wrapper = styled.article`
                 z-index: -1;
             }
         `}
+    }
 
+    ${({ theme }) => theme.mq.bigdesktop}{
+        width: ${({ blogpage }) => blogpage ? 'calc(33% - .5rem - 2px)' : 'calc(40% - 1.5rem)'};
+    }
+
+    ${({ theme }) => theme.mq.large}{
+        width: ${({ blogpage }) => blogpage ? 'calc(33% - .5rem - 1px)' : 'calc(40% - 1.5rem)'};
     }
 
     a{

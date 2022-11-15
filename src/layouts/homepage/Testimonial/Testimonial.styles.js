@@ -10,6 +10,9 @@ export const Wrapper = styled.section`
         background-color: ${({ theme }) => theme.color.gray};
         padding: 8rem 0 11rem;
     }
+    ${({ theme }) => theme.mq.desktop}{
+        padding: 12rem 0;
+    }
 `
 
 export const ContentWrapper = styled.div`

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-
     padding-bottom: 12rem;
 
     ${({ theme }) => theme.mq.desktop}{
@@ -34,13 +33,13 @@ export const ImagesWrapper = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         gap: 2rem;
-        row-gap: 2rem;
+        row-gap: 1rem;
 
     }
 
     ${({ theme }) => theme.mq.desktop}{
         gap: 1.5rem;
-        row-gap: 2rem;
+        row-gap: 1rem;
         margin-bottom: 12rem;
     }
 `
@@ -50,4 +49,33 @@ export const ContentWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+`
+
+export const EmptyState = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    padding: 3rem;
+    background-color: ${({ theme }) => theme.color.gray};
+    text-align: center;
+
+    ${({ theme }) => theme.mq.tablet}{
+        width: 70%;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        width: 45%;
+    }
+
+    h2{
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: .5rem;
+    }
+    h3{
+        font-weight: 400;
+
+    }
 `

@@ -3,14 +3,27 @@ import { graphql, navigate } from 'gatsby';
 import PageTitle from 'components/PageTitle';
 import { Container } from 'styles/Container';
 import { Pagination } from 'components/Pagination';
-import { Wrapper, ImagesWrapper, ContentWrapper } from 'layouts/Gallerypage/Gallerypage.styles';
+import { Wrapper, ImagesWrapper, ContentWrapper, EmptyState } from 'layouts/Gallerypage/Gallerypage.styles';
 import { GalleryCard } from 'components/GalleryCard';
+import { Gallery } from 'components/Gallery';
 
 const GalleryPage = (data) => {
     const { edges: images } = data.data.allContentfulGaleria;
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
+    const { allGalleryItems } = data.data;
     const { currentPage, numPages } = data.pageContext;
     const currentCategory = data.pageContext.category || null;
+
+    const [isGalleryOpen, setIsGalleryOpen] = React.useState(false);
+    const [firstGalleryItem, setFirstGalleryItem] = React.useState(null);
+
+    React.useEffect(() => {
+        if (isGalleryOpen) {
+            document.body.style.overflow = 'hidden';
+        } else document.body.style.overflow = 'unset';
+
+        return () => (document.body.style.overflow = 'unset');
+    }, [isGalleryOpen]);
 
     const setPage = (i) => {
         if (i + 1 === 1) {
@@ -38,6 +51,11 @@ const GalleryPage = (data) => {
         }
     };
 
+    const openGallery = (index) => {
+        setFirstGalleryItem(index);
+        setIsGalleryOpen(true);
+    };
+
     return (
         <>
             <PageTitle
@@ -51,19 +69,27 @@ const GalleryPage = (data) => {
                 <Container>
                     <ContentWrapper>
                         <ImagesWrapper>
-                            {images.map((item, index) => {
-                                const image = item.node;
+                            {images.length > 0 ? (
+                                images.map((item, index) => {
+                                    const image = item.node;
 
-                                return (
-                                    <GalleryCard
-                                        key={`${image.title} + ${index}`}
-                                        title={image.title}
-                                        date={image.createdAt}
-                                        image={image.image.gatsbyImageData}
-                                        index={index}
-                                    />
-                                );
-                            })}
+                                    return (
+                                        <GalleryCard
+                                            key={`${image.title} + ${index}`}
+                                            title={image.title}
+                                            date={image.createdAt}
+                                            image={image.image.gatsbyImageData}
+                                            index={index}
+                                            onClickHandler={() => openGallery(index)}
+                                        />
+                                    );
+                                })
+                            ) : (
+                                <EmptyState>
+                                    <h2>{currentCategory === null ? 'Brak zdjęć' : 'Brak zdjęć z wybranej kategorii'}</h2>
+                                    <h3>Już niebawem nowe zdjęcia</h3>
+                                </EmptyState>
+                            )}
                         </ImagesWrapper>
                         {numPages > 1 && (
                             <Pagination
@@ -78,6 +104,9 @@ const GalleryPage = (data) => {
                     </ContentWrapper>
                 </Container>
             </Wrapper>
+            {isGalleryOpen && (
+                <Gallery closeGallery={() => setIsGalleryOpen(false)} items={allGalleryItems.edges} firstActive={firstGalleryItem} />
+            )}
         </>
     );
 };
@@ -88,6 +117,20 @@ export const query = graphql`
             edges {
                 node {
                     name
+                }
+            }
+        }
+        allGalleryItems: allContentfulGaleria(sort: { fields: createdAt, order: DESC }, filter: { category: { name: { eq: $category } } }) {
+            edges {
+                node {
+                    title
+                    category {
+                        name
+                    }
+                    image {
+                        gatsbyImageData
+                    }
+                    createdAt(formatString: "DD.MM.YYYY")
                 }
             }
         }

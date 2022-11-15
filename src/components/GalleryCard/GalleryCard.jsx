@@ -3,9 +3,9 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { PropTypes } from 'prop-types';
 import { Wrapper, ImageWrapper, ImageHover, StyledSearchIcon } from './GalleryCard.styles';
 
-export const GalleryCard = ({ title, image, date, index }) => {
+export const GalleryCard = ({ title, image, date, index, onClickHandler }) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={onClickHandler}>
             <ImageHover>
                 <StyledSearchIcon />
                 <h4>{title}</h4>
@@ -28,5 +28,6 @@ GalleryCard.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.object.isRequired,
     date: PropTypes.string.isRequired,
+    onClickHandler: PropTypes.func.isRequired,
     index: PropTypes.number,
 };

@@ -50,6 +50,12 @@ export const Wrapper = styled.figure`
         width: calc(50% - 1rem);
     }
     ${({ theme }) => theme.mq.desktop}{
+        width: calc(33% - .5rem - 3px);
+    }
+    ${({ theme }) => theme.mq.bigdesktop}{
+        width: calc(33% - .5rem - 2px);
+    }
+    ${({ theme }) => theme.mq.large}{
         width: calc(33% - .5rem - 1px);
     }
 

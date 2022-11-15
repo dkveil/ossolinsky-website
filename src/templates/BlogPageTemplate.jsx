@@ -3,7 +3,7 @@ import { graphql, navigate } from 'gatsby';
 import PageTitle from 'components/PageTitle';
 import { Container } from 'styles/Container';
 import { BlogPostCard } from 'components/BlogPostCard/BlogPostCard';
-import { Wrapper, BlogPostsWrapper, ContentWrapper } from 'layouts/Blogpage/Blogpage.styles';
+import { Wrapper, BlogPostsWrapper, ContentWrapper, EmptyState } from 'layouts/Blogpage/Blogpage.styles';
 import { Pagination } from 'components/Pagination';
 
 const BlogPage = (data) => {
@@ -51,22 +51,29 @@ const BlogPage = (data) => {
                 <Container>
                     <ContentWrapper>
                         <BlogPostsWrapper>
-                            {blogposts.map((item, index) => {
-                                const post = item.node;
+                            {blogposts.length > 0 ? (
+                                blogposts.map((item, index) => {
+                                    const post = item.node;
 
-                                return (
-                                    <BlogPostCard
-                                        blogpage
-                                        key={post.title + index}
-                                        title={post.title}
-                                        description={post.shortdescription.shortdescription}
-                                        category={post.category.name}
-                                        image={post.image.gatsbyImageData}
-                                        link={post.slug}
-                                        date={post.createdAt}
-                                    />
-                                );
-                            })}
+                                    return (
+                                        <BlogPostCard
+                                            blogpage
+                                            key={post.title + index}
+                                            title={post.title}
+                                            description={post.shortdescription.shortdescription}
+                                            category={post.category.name}
+                                            image={post.image.gatsbyImageData}
+                                            link={post.slug}
+                                            date={post.createdAt}
+                                        />
+                                    );
+                                })
+                            ) : (
+                                <EmptyState>
+                                    <h2>{currentCategory === null ? 'Brak wpisów' : 'Brak wpisów z wybranej kategorii'}</h2>
+                                    <h3>Już niebawem nowe artykuły</h3>
+                                </EmptyState>
+                            )}
                         </BlogPostsWrapper>
                         {numPages > 1 && (
                             <Pagination
