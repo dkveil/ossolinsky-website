@@ -1,18 +1,48 @@
 import styled from "styled-components";
+import { overlay } from "utils/overlay";
 
 export const Wrapper = styled.section`
     background-color: ${({ theme }) => theme.color.white};
 
 `
 
-export const ContentWrapper = styled.div`
+export const ContentContainer = styled.div`
     padding: 12rem 0;
+`
+
+export const ContentWrapper = styled.div`
+
+    ${({ theme }) => theme.mq.tablet}{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 50%;
+        margin: 0 auto 9rem;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        width: 40%;
+    }
+
 `
 
 export const DrinksWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    ${({ theme }) => theme.mq.tablet}{
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        gap: 2rem;
+        flex-wrap: nowrap;
+    }
 `
 
 export const DrinkWrapper = styled.div`
@@ -26,6 +56,16 @@ export const DrinkWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    ${({ theme }) => theme.mq.tablet}{
+        width: calc(50% - .5rem);
+        height: 36rem;
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        height: 39rem;
+        max-width: 29rem;
+    }
 
     h4{
         font-size: 2.4rem;
@@ -50,13 +90,5 @@ export const ImageWrapper = styled.div`
     width: 100%;
     z-index: -1;
 
-    ::after{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.2);
-    }
+    ${overlay(.2)}
 `

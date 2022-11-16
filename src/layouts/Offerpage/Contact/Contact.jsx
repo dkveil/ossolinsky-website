@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, ContentWrapper, ContactDetails } from './Contact.styles';
+import { Wrapper, ContentWrapper } from './Contact.styles';
 import { Container } from 'styles/Container';
 import { Heading } from 'components/Heading/Heading';
 import { Button } from 'components/Button/Button';
@@ -21,7 +21,7 @@ export const Contact = ({ phonenumber, email }) => {
                         {phonenumber && <span>{phonenumber}</span>}
                         {email && <span>{email}</span>}
                     </address>
-                    <Button variant="contained" isLink path="/kontakt">
+                    <Button variant="full-contained" isLink path="/kontakt">
                         Formularz kontaktowy
                     </Button>
                 </ContentWrapper>

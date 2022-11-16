@@ -5,7 +5,6 @@ export const Wrapper = styled.section`
     position: relative;
 
     ${({ theme }) => theme.mq.tablet}{
-        margin-top: ${({ theme }) => theme.height.mobileHeader};
         height: 600px;
     }
     ${({ theme }) => theme.mq.desktop}{
