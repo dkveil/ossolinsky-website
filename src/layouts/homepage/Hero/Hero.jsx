@@ -88,7 +88,7 @@ export const Hero = () => {
                     <Button
                         variant={windowWidth > media.DESKTOP ? 'contained' : 'contained-outlined'}
                         isLink
-                        path="/"
+                        path="/oferta"
                         boxOverlay={windowWidth > media.DESKTOP ? 'bottom-left' : null}
                         boxOverlayColor="white"
                     >

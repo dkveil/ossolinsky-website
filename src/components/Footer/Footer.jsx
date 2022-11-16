@@ -24,16 +24,32 @@ export const Footer = () => {
     const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
 
     React.useEffect(() => {
-        if (pathsWhereFooterIsWhiteDesktop.find((path) => path === location.pathname)) {
+        if (
+            pathsWhereFooterIsWhiteDesktop.find((path) =>
+                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
+            )
+        ) {
             setDesktopBackgroundColor(theme.color.white);
         }
-        if (pathsWhereFooterIsWhiteMobile.find((path) => path === location.pathname)) {
+        if (
+            pathsWhereFooterIsWhiteMobile.find((path) =>
+                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
+            )
+        ) {
             setMobileBackgroundColor(theme.color.white);
         }
-        if (pathsWhereFooterIsGrayDesktop.find((path) => path === location.pathname)) {
+        if (
+            pathsWhereFooterIsGrayDesktop.find((path) =>
+                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
+            )
+        ) {
             setDesktopBackgroundColor(theme.color.gray);
         }
-        if (pathsWhereFooterIsGrayMobile.find((path) => path === location.pathname)) {
+        if (
+            pathsWhereFooterIsGrayMobile.find((path) =>
+                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
+            )
+        ) {
             setMobileBackgroundColor(theme.color.gray);
         }
     }, [location.pathname]);

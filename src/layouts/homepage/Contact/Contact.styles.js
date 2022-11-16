@@ -14,6 +14,7 @@ export const Wrapper = styled.section`
 
 export const ImageWrapper = styled.div`
     margin-bottom: 4rem;
+    height: 46rem;
 
     ${({ theme }) => theme.mq.tablet}{
         height: 72rem;

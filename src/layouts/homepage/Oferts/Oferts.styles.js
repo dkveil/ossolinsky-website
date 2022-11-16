@@ -69,6 +69,7 @@ export const OfertFeaturesList = styled.ul`
 
 export const OfertsWrapper = styled.div`
     width: 100%;
+    user-select: none;
 
     ${({ theme }) => theme.mq.tablet}{
         display: flex;

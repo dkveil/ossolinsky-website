@@ -12,7 +12,7 @@ export const Wrapper = styled.section`
             content: "";
             pointer-events: none;
             display: block;
-            height: 18%;
+            height: 22rem;
             width: 100%;
             background: linear-gradient(to bottom right, transparent 50%, ${({ theme }) => theme.color.gray} 0);
             left: 0;

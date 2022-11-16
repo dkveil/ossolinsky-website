@@ -47,6 +47,8 @@ export const Heading = styled(
                         line-height: 3.6rem;
                         text-align: ${textAlign ? textAlign : 'start'};
                         z-index: 0;
+                        display: inline;
+                        width: fit-content;
 
                         ${theme.mq.tablet} {
                             font-size: ${tabletFontSize ? tabletFontSize : theme.font.size.tablet.subpageHeading};

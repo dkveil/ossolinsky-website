@@ -145,4 +145,37 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             })
         })
     })
+
+    const offerpages = await graphql(`
+        {
+            allContentfulOferty{
+                edges{
+                    node{
+                        title
+                        iscontact
+                        slug
+                    }
+                }
+            }
+        }
+    `).then(res => res.data)
+
+    if (offerpages.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`)
+        return
+    }
+
+    const offers = offerpages.allContentfulOferty.edges;
+
+    offers.map(offer => {
+        if (!offer.node.iscontact) {
+            createPage({
+                path: `/oferta/${offer.node.slug}`,
+                component: path.resolve("./src/templates/OfferPageTemplate.jsx"),
+                context: {
+                    title: offer.node.title,
+                }
+            })
+        }
+    })
 }

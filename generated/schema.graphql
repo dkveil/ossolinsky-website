@@ -1223,6 +1223,11 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node {
   ): Date
   sys: ContentfulOfertySys
   priority: Int
+  secondimage: ContentfulAsset
+  drinks: [ContentfulDrinki]
+  description: contentfulOfertyDescriptionTextNode
+  moreInformation: contentfulOfertyMoreInformationTextNode
+  aboutdrinks: contentfulOfertyAboutdrinksTextNode
 
   """
   Returns all children nodes filtered by type contentfulOfertyShortdescriptionTextNode
@@ -1243,6 +1248,36 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node {
   Returns the first child node of type contentfulOfertyOffersPageTextTextNode or null if there are no children of given type on this node
   """
   childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNode
+
+  """
+  Returns all children nodes filtered by type contentfulOfertyDescriptionTextNode
+  """
+  childrenContentfulOfertyDescriptionTextNode: [contentfulOfertyDescriptionTextNode]
+
+  """
+  Returns the first child node of type contentfulOfertyDescriptionTextNode or null if there are no children of given type on this node
+  """
+  childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNode
+
+  """
+  Returns all children nodes filtered by type contentfulOfertyMoreInformationTextNode
+  """
+  childrenContentfulOfertyMoreInformationTextNode: [contentfulOfertyMoreInformationTextNode]
+
+  """
+  Returns the first child node of type contentfulOfertyMoreInformationTextNode or null if there are no children of given type on this node
+  """
+  childContentfulOfertyMoreInformationTextNode: contentfulOfertyMoreInformationTextNode
+
+  """
+  Returns all children nodes filtered by type contentfulOfertyAboutdrinksTextNode
+  """
+  childrenContentfulOfertyAboutdrinksTextNode: [contentfulOfertyAboutdrinksTextNode]
+
+  """
+  Returns the first child node of type contentfulOfertyAboutdrinksTextNode or null if there are no children of given type on this node
+  """
+  childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNode
   parent: Node
   children: [Node!]!
   internal: Internal!
@@ -1397,6 +1432,7 @@ type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & Conten
   ): Date
   sys: ContentfulKategorieDlaBlogaIGaleriiSys
   blog: [ContentfulBlog]
+  galeria: [ContentfulGaleria]
   parent: Node
   children: [Node!]!
   internal: Internal!
@@ -1450,20 +1486,63 @@ type ContentfulGaleria implements ContentfulReference & ContentfulEntry & Node {
   internal: Internal!
 }
 
-type ContentfulGaleriaSys {
-  type: String
-  revision: Int
-  contentType: ContentfulGaleriaSysContentType
-}
+type ContentfulDrinki implements ContentfulReference & ContentfulEntry & Node {
+  contentful_id: String!
+  id: ID!
+  node_locale: String!
+  name: String
+  image: ContentfulAsset
+  oferty: [ContentfulOferty]
+  description: contentfulDrinkiDescriptionTextNode
+  spaceId: String
+  createdAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens.
+    """
+    formatString: String
 
-type ContentfulGaleriaSysContentType {
-  sys: ContentfulGaleriaSysContentTypeSys
-}
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
 
-type ContentfulGaleriaSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
+    """
+    Returns the difference between this date and the current time. Defaults to "milliseconds" but you can also pass in as the measurement "years", "months", "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  updatedAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to "milliseconds" but you can also pass in as the measurement "years", "months", "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  sys: ContentfulDrinkiSys
+
+  """
+  Returns all children nodes filtered by type contentfulDrinkiDescriptionTextNode
+  """
+  childrenContentfulDrinkiDescriptionTextNode: [contentfulDrinkiDescriptionTextNode]
+
+  """
+  Returns the first child node of type contentfulDrinkiDescriptionTextNode or null if there are no children of given type on this node
+  """
+  childContentfulDrinkiDescriptionTextNode: contentfulDrinkiDescriptionTextNode
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
 }
 
 enum GatsbyImageFormat {
@@ -1893,6 +1972,22 @@ type ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys {
   id: String
 }
 
+type ContentfulGaleriaSys {
+  type: String
+  revision: Int
+  contentType: ContentfulGaleriaSysContentType
+}
+
+type ContentfulGaleriaSysContentType {
+  sys: ContentfulGaleriaSysContentTypeSys
+}
+
+type ContentfulGaleriaSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type contentfulBlogShortdescriptionTextNode implements Node {
   shortdescription: String
   sys: contentfulBlogShortdescriptionTextNodeSys
@@ -1962,6 +2057,74 @@ type ContentfulOfertySysContentTypeSys {
   type: String
   linkType: String
   id: String
+}
+
+type contentfulDrinkiDescriptionTextNode implements Node {
+  description: String
+  sys: contentfulDrinkiDescriptionTextNodeSys
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+}
+
+type contentfulDrinkiDescriptionTextNodeSys {
+  type: String
+}
+
+type ContentfulDrinkiSys {
+  type: String
+  revision: Int
+  contentType: ContentfulDrinkiSysContentType
+}
+
+type ContentfulDrinkiSysContentType {
+  sys: ContentfulDrinkiSysContentTypeSys
+}
+
+type ContentfulDrinkiSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type contentfulOfertyDescriptionTextNode implements Node {
+  description: String
+  sys: contentfulOfertyDescriptionTextNodeSys
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+}
+
+type contentfulOfertyDescriptionTextNodeSys {
+  type: String
+}
+
+type contentfulOfertyMoreInformationTextNode implements Node {
+  moreInformation: String
+  sys: contentfulOfertyMoreInformationTextNodeSys
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+}
+
+type contentfulOfertyMoreInformationTextNodeSys {
+  type: String
+}
+
+type contentfulOfertyAboutdrinksTextNode implements Node {
+  aboutdrinks: String
+  sys: contentfulOfertyAboutdrinksTextNodeSys
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+}
+
+type contentfulOfertyAboutdrinksTextNodeSys {
+  type: String
 }
 
 type contentfulOMnieTresciNaPodstronieContentTextNode implements Node {
@@ -2051,16 +2214,18 @@ type Query {
   allContentfulOpinie(filter: ContentfulOpinieFilterInput, sort: ContentfulOpinieSortInput, skip: Int, limit: Int): ContentfulOpinieConnection!
   contentfulBlog(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulBlogSysFilterInput, childrenContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterListInput, childContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulBlog
   allContentfulBlog(filter: ContentfulBlogFilterInput, sort: ContentfulBlogSortInput, skip: Int, limit: Int): ContentfulBlogConnection!
-  contentfulOferty(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, iscontact: BooleanQueryOperatorInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput, offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOfertySysFilterInput, priority: IntQueryOperatorInput, childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput, childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput, childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput, childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOferty
+  contentfulOferty(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, iscontact: BooleanQueryOperatorInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput, offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOfertySysFilterInput, priority: IntQueryOperatorInput, secondimage: ContentfulAssetFilterInput, drinks: ContentfulDrinkiFilterListInput, description: contentfulOfertyDescriptionTextNodeFilterInput, moreInformation: contentfulOfertyMoreInformationTextNodeFilterInput, aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput, childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput, childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput, childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput, childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput, childrenContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterListInput, childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterInput, childrenContentfulOfertyMoreInformationTextNode: contentfulOfertyMoreInformationTextNodeFilterListInput, childContentfulOfertyMoreInformationTextNode: contentfulOfertyMoreInformationTextNodeFilterInput, childrenContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterListInput, childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOferty
   allContentfulOferty(filter: ContentfulOfertyFilterInput, sort: ContentfulOfertySortInput, skip: Int, limit: Int): ContentfulOfertyConnection!
   contentfulOMnieTresciNaPodstronie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, contentfulid: StringQueryOperatorInput, toUseThis: BooleanQueryOperatorInput, content: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOMnieTresciNaPodstronieSysFilterInput, childrenContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterListInput, childContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOMnieTresciNaPodstronie
   allContentfulOMnieTresciNaPodstronie(filter: ContentfulOMnieTresciNaPodstronieFilterInput, sort: ContentfulOMnieTresciNaPodstronieSortInput, skip: Int, limit: Int): ContentfulOMnieTresciNaPodstronieConnection!
   contentfulOMnieZdjeciaNaPodstronie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, useThis: BooleanQueryOperatorInput, contentfulid: StringQueryOperatorInput, image: ContentfulAssetFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOMnieZdjeciaNaPodstronieSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOMnieZdjeciaNaPodstronie
   allContentfulOMnieZdjeciaNaPodstronie(filter: ContentfulOMnieZdjeciaNaPodstronieFilterInput, sort: ContentfulOMnieZdjeciaNaPodstronieSortInput, skip: Int, limit: Int): ContentfulOMnieZdjeciaNaPodstronieConnection!
-  contentfulKategorieDlaBlogaIGalerii(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, priority: IntQueryOperatorInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput, blog: ContentfulBlogFilterListInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulKategorieDlaBlogaIGalerii
+  contentfulKategorieDlaBlogaIGalerii(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, priority: IntQueryOperatorInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput, blog: ContentfulBlogFilterListInput, galeria: ContentfulGaleriaFilterListInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulKategorieDlaBlogaIGalerii
   allContentfulKategorieDlaBlogaIGalerii(filter: ContentfulKategorieDlaBlogaIGaleriiFilterInput, sort: ContentfulKategorieDlaBlogaIGaleriiSortInput, skip: Int, limit: Int): ContentfulKategorieDlaBlogaIGaleriiConnection!
   contentfulGaleria(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, image: ContentfulAssetFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulGaleriaSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulGaleria
   allContentfulGaleria(filter: ContentfulGaleriaFilterInput, sort: ContentfulGaleriaSortInput, skip: Int, limit: Int): ContentfulGaleriaConnection!
+  contentfulDrinki(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, image: ContentfulAssetFilterInput, oferty: ContentfulOfertyFilterListInput, description: contentfulDrinkiDescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulDrinkiSysFilterInput, childrenContentfulDrinkiDescriptionTextNode: contentfulDrinkiDescriptionTextNodeFilterListInput, childContentfulDrinkiDescriptionTextNode: contentfulDrinkiDescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulDrinki
+  allContentfulDrinki(filter: ContentfulDrinkiFilterInput, sort: ContentfulDrinkiSortInput, skip: Int, limit: Int): ContentfulDrinkiConnection!
   imageSharp(fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: GatsbyImageDataQueryOperatorInput, original: ImageSharpOriginalFilterInput, resize: ImageSharpResizeFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ImageSharp
   allImageSharp(filter: ImageSharpFilterInput, sort: ImageSharpSortInput, skip: Int, limit: Int): ImageSharpConnection!
   contentfulOpinieBlockquoteTextNode(blockquote: StringQueryOperatorInput, sys: contentfulOpinieBlockquoteTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOpinieBlockquoteTextNode
@@ -2071,6 +2236,14 @@ type Query {
   allContentfulOfertyShortdescriptionTextNode(filter: contentfulOfertyShortdescriptionTextNodeFilterInput, sort: contentfulOfertyShortdescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyShortdescriptionTextNodeConnection!
   contentfulOfertyOffersPageTextTextNode(offersPageText: StringQueryOperatorInput, sys: contentfulOfertyOffersPageTextTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyOffersPageTextTextNode
   allContentfulOfertyOffersPageTextTextNode(filter: contentfulOfertyOffersPageTextTextNodeFilterInput, sort: contentfulOfertyOffersPageTextTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyOffersPageTextTextNodeConnection!
+  contentfulDrinkiDescriptionTextNode(description: StringQueryOperatorInput, sys: contentfulDrinkiDescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulDrinkiDescriptionTextNode
+  allContentfulDrinkiDescriptionTextNode(filter: contentfulDrinkiDescriptionTextNodeFilterInput, sort: contentfulDrinkiDescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulDrinkiDescriptionTextNodeConnection!
+  contentfulOfertyDescriptionTextNode(description: StringQueryOperatorInput, sys: contentfulOfertyDescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyDescriptionTextNode
+  allContentfulOfertyDescriptionTextNode(filter: contentfulOfertyDescriptionTextNodeFilterInput, sort: contentfulOfertyDescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyDescriptionTextNodeConnection!
+  contentfulOfertyMoreInformationTextNode(moreInformation: StringQueryOperatorInput, sys: contentfulOfertyMoreInformationTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyMoreInformationTextNode
+  allContentfulOfertyMoreInformationTextNode(filter: contentfulOfertyMoreInformationTextNodeFilterInput, sort: contentfulOfertyMoreInformationTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyMoreInformationTextNodeConnection!
+  contentfulOfertyAboutdrinksTextNode(aboutdrinks: StringQueryOperatorInput, sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyAboutdrinksTextNode
+  allContentfulOfertyAboutdrinksTextNode(filter: contentfulOfertyAboutdrinksTextNodeFilterInput, sort: contentfulOfertyAboutdrinksTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyAboutdrinksTextNodeConnection!
   contentfulOMnieTresciNaPodstronieContentTextNode(content: StringQueryOperatorInput, sys: contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOMnieTresciNaPodstronieContentTextNode
   allContentfulOMnieTresciNaPodstronieContentTextNode(filter: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, sort: contentfulOMnieTresciNaPodstronieContentTextNodeSortInput, skip: Int, limit: Int): contentfulOMnieTresciNaPodstronieContentTextNodeConnection!
   contentfulContentType(name: StringQueryOperatorInput, displayField: StringQueryOperatorInput, description: StringQueryOperatorInput, sys: ContentfulContentTypeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulContentType
@@ -4743,6 +4916,7 @@ input ContentfulKategorieDlaBlogaIGaleriiFilterInput {
   updatedAt: DateQueryOperatorInput
   sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput
   blog: ContentfulBlogFilterListInput
+  galeria: ContentfulGaleriaFilterListInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
@@ -4821,6 +4995,42 @@ input contentfulBlogShortdescriptionTextNodeFilterListInput {
   elemMatch: contentfulBlogShortdescriptionTextNodeFilterInput
 }
 
+input ContentfulGaleriaFilterListInput {
+  elemMatch: ContentfulGaleriaFilterInput
+}
+
+input ContentfulGaleriaFilterInput {
+  contentful_id: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+  node_locale: StringQueryOperatorInput
+  title: StringQueryOperatorInput
+  category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
+  image: ContentfulAssetFilterInput
+  spaceId: StringQueryOperatorInput
+  createdAt: DateQueryOperatorInput
+  updatedAt: DateQueryOperatorInput
+  sys: ContentfulGaleriaSysFilterInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input ContentfulGaleriaSysFilterInput {
+  type: StringQueryOperatorInput
+  revision: IntQueryOperatorInput
+  contentType: ContentfulGaleriaSysContentTypeFilterInput
+}
+
+input ContentfulGaleriaSysContentTypeFilterInput {
+  sys: ContentfulGaleriaSysContentTypeSysFilterInput
+}
+
+input ContentfulGaleriaSysContentTypeSysFilterInput {
+  type: StringQueryOperatorInput
+  linkType: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+}
+
 type ContentfulBlogConnection {
   totalCount: Int!
   edges: [ContentfulBlogEdge!]!
@@ -4868,6 +5078,7 @@ enum ContentfulBlogFieldsEnum {
   category___blog___category___createdAt
   category___blog___category___updatedAt
   category___blog___category___blog
+  category___blog___category___galeria
   category___blog___category___children
   category___blog___slug
   category___blog___image___contentful_id
@@ -4919,6 +5130,61 @@ enum ContentfulBlogFieldsEnum {
   category___blog___internal___owner
   category___blog___internal___type
   category___blog___internal___contentFilePath
+  category___galeria
+  category___galeria___contentful_id
+  category___galeria___id
+  category___galeria___node_locale
+  category___galeria___title
+  category___galeria___category___contentful_id
+  category___galeria___category___id
+  category___galeria___category___node_locale
+  category___galeria___category___name
+  category___galeria___category___priority
+  category___galeria___category___spaceId
+  category___galeria___category___createdAt
+  category___galeria___category___updatedAt
+  category___galeria___category___blog
+  category___galeria___category___galeria
+  category___galeria___category___children
+  category___galeria___image___contentful_id
+  category___galeria___image___id
+  category___galeria___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___image___spaceId
+  category___galeria___image___createdAt
+  category___galeria___image___updatedAt
+  category___galeria___image___title
+  category___galeria___image___description
+  category___galeria___image___node_locale
+  category___galeria___image___url
+  category___galeria___image___placeholderUrl
+  category___galeria___image___mimeType
+  category___galeria___image___filename
+  category___galeria___image___width
+  category___galeria___image___height
+  category___galeria___image___size
+  category___galeria___image___children
+  category___galeria___image___filesize
+  category___galeria___image___publicUrl
+  category___galeria___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___spaceId
+  category___galeria___createdAt
+  category___galeria___updatedAt
+  category___galeria___sys___type
+  category___galeria___sys___revision
+  category___galeria___parent___id
+  category___galeria___parent___children
+  category___galeria___children
+  category___galeria___children___id
+  category___galeria___children___children
+  category___galeria___internal___content
+  category___galeria___internal___contentDigest
+  category___galeria___internal___description
+  category___galeria___internal___fieldOwners
+  category___galeria___internal___ignoreType
+  category___galeria___internal___mediaType
+  category___galeria___internal___owner
+  category___galeria___internal___type
+  category___galeria___internal___contentFilePath
   category___parent___id
   category___parent___parent___id
   category___parent___parent___children
@@ -5321,12 +5587,158 @@ input ContentfulOfertySysContentTypeSysFilterInput {
   id: StringQueryOperatorInput
 }
 
+input ContentfulDrinkiFilterListInput {
+  elemMatch: ContentfulDrinkiFilterInput
+}
+
+input ContentfulDrinkiFilterInput {
+  contentful_id: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+  node_locale: StringQueryOperatorInput
+  name: StringQueryOperatorInput
+  image: ContentfulAssetFilterInput
+  oferty: ContentfulOfertyFilterListInput
+  description: contentfulDrinkiDescriptionTextNodeFilterInput
+  spaceId: StringQueryOperatorInput
+  createdAt: DateQueryOperatorInput
+  updatedAt: DateQueryOperatorInput
+  sys: ContentfulDrinkiSysFilterInput
+  childrenContentfulDrinkiDescriptionTextNode: contentfulDrinkiDescriptionTextNodeFilterListInput
+  childContentfulDrinkiDescriptionTextNode: contentfulDrinkiDescriptionTextNodeFilterInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input ContentfulOfertyFilterListInput {
+  elemMatch: ContentfulOfertyFilterInput
+}
+
+input ContentfulOfertyFilterInput {
+  contentful_id: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+  node_locale: StringQueryOperatorInput
+  title: StringQueryOperatorInput
+  iscontact: BooleanQueryOperatorInput
+  slug: StringQueryOperatorInput
+  image: ContentfulAssetFilterInput
+  shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput
+  offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput
+  spaceId: StringQueryOperatorInput
+  createdAt: DateQueryOperatorInput
+  updatedAt: DateQueryOperatorInput
+  sys: ContentfulOfertySysFilterInput
+  priority: IntQueryOperatorInput
+  secondimage: ContentfulAssetFilterInput
+  drinks: ContentfulDrinkiFilterListInput
+  description: contentfulOfertyDescriptionTextNodeFilterInput
+  moreInformation: contentfulOfertyMoreInformationTextNodeFilterInput
+  aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput
+  childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput
+  childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput
+  childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput
+  childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput
+  childrenContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterListInput
+  childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterInput
+  childrenContentfulOfertyMoreInformationTextNode: contentfulOfertyMoreInformationTextNodeFilterListInput
+  childContentfulOfertyMoreInformationTextNode: contentfulOfertyMoreInformationTextNodeFilterInput
+  childrenContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterListInput
+  childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input contentfulOfertyDescriptionTextNodeFilterInput {
+  description: StringQueryOperatorInput
+  sys: contentfulOfertyDescriptionTextNodeSysFilterInput
+  id: StringQueryOperatorInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input contentfulOfertyDescriptionTextNodeSysFilterInput {
+  type: StringQueryOperatorInput
+}
+
+input contentfulOfertyMoreInformationTextNodeFilterInput {
+  moreInformation: StringQueryOperatorInput
+  sys: contentfulOfertyMoreInformationTextNodeSysFilterInput
+  id: StringQueryOperatorInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input contentfulOfertyMoreInformationTextNodeSysFilterInput {
+  type: StringQueryOperatorInput
+}
+
+input contentfulOfertyAboutdrinksTextNodeFilterInput {
+  aboutdrinks: StringQueryOperatorInput
+  sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput
+  id: StringQueryOperatorInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input contentfulOfertyAboutdrinksTextNodeSysFilterInput {
+  type: StringQueryOperatorInput
+}
+
 input contentfulOfertyShortdescriptionTextNodeFilterListInput {
   elemMatch: contentfulOfertyShortdescriptionTextNodeFilterInput
 }
 
 input contentfulOfertyOffersPageTextTextNodeFilterListInput {
   elemMatch: contentfulOfertyOffersPageTextTextNodeFilterInput
+}
+
+input contentfulOfertyDescriptionTextNodeFilterListInput {
+  elemMatch: contentfulOfertyDescriptionTextNodeFilterInput
+}
+
+input contentfulOfertyMoreInformationTextNodeFilterListInput {
+  elemMatch: contentfulOfertyMoreInformationTextNodeFilterInput
+}
+
+input contentfulOfertyAboutdrinksTextNodeFilterListInput {
+  elemMatch: contentfulOfertyAboutdrinksTextNodeFilterInput
+}
+
+input contentfulDrinkiDescriptionTextNodeFilterInput {
+  description: StringQueryOperatorInput
+  sys: contentfulDrinkiDescriptionTextNodeSysFilterInput
+  id: StringQueryOperatorInput
+  parent: NodeFilterInput
+  children: NodeFilterListInput
+  internal: InternalFilterInput
+}
+
+input contentfulDrinkiDescriptionTextNodeSysFilterInput {
+  type: StringQueryOperatorInput
+}
+
+input ContentfulDrinkiSysFilterInput {
+  type: StringQueryOperatorInput
+  revision: IntQueryOperatorInput
+  contentType: ContentfulDrinkiSysContentTypeFilterInput
+}
+
+input ContentfulDrinkiSysContentTypeFilterInput {
+  sys: ContentfulDrinkiSysContentTypeSysFilterInput
+}
+
+input ContentfulDrinkiSysContentTypeSysFilterInput {
+  type: StringQueryOperatorInput
+  linkType: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+}
+
+input contentfulDrinkiDescriptionTextNodeFilterListInput {
+  elemMatch: contentfulDrinkiDescriptionTextNodeFilterInput
 }
 
 type ContentfulOfertyConnection {
@@ -5517,6 +5929,474 @@ enum ContentfulOfertyFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   priority
+  secondimage___contentful_id
+  secondimage___id
+  secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  secondimage___spaceId
+  secondimage___createdAt
+  secondimage___updatedAt
+  secondimage___file___url
+  secondimage___file___details___size
+  secondimage___file___fileName
+  secondimage___file___contentType
+  secondimage___title
+  secondimage___description
+  secondimage___node_locale
+  secondimage___sys___type
+  secondimage___sys___revision
+  secondimage___url
+  secondimage___placeholderUrl
+  secondimage___mimeType
+  secondimage___filename
+  secondimage___width
+  secondimage___height
+  secondimage___size
+  secondimage___parent___id
+  secondimage___parent___parent___id
+  secondimage___parent___parent___children
+  secondimage___parent___children
+  secondimage___parent___children___id
+  secondimage___parent___children___children
+  secondimage___parent___internal___content
+  secondimage___parent___internal___contentDigest
+  secondimage___parent___internal___description
+  secondimage___parent___internal___fieldOwners
+  secondimage___parent___internal___ignoreType
+  secondimage___parent___internal___mediaType
+  secondimage___parent___internal___owner
+  secondimage___parent___internal___type
+  secondimage___parent___internal___contentFilePath
+  secondimage___children
+  secondimage___children___id
+  secondimage___children___parent___id
+  secondimage___children___parent___children
+  secondimage___children___children
+  secondimage___children___children___id
+  secondimage___children___children___children
+  secondimage___children___internal___content
+  secondimage___children___internal___contentDigest
+  secondimage___children___internal___description
+  secondimage___children___internal___fieldOwners
+  secondimage___children___internal___ignoreType
+  secondimage___children___internal___mediaType
+  secondimage___children___internal___owner
+  secondimage___children___internal___type
+  secondimage___children___internal___contentFilePath
+  secondimage___internal___content
+  secondimage___internal___contentDigest
+  secondimage___internal___description
+  secondimage___internal___fieldOwners
+  secondimage___internal___ignoreType
+  secondimage___internal___mediaType
+  secondimage___internal___owner
+  secondimage___internal___type
+  secondimage___internal___contentFilePath
+  secondimage___filesize
+  secondimage___publicUrl
+  secondimage___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  secondimage___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  secondimage___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  secondimage___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks
+  drinks___contentful_id
+  drinks___id
+  drinks___node_locale
+  drinks___name
+  drinks___image___contentful_id
+  drinks___image___id
+  drinks___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___image___spaceId
+  drinks___image___createdAt
+  drinks___image___updatedAt
+  drinks___image___file___url
+  drinks___image___file___fileName
+  drinks___image___file___contentType
+  drinks___image___title
+  drinks___image___description
+  drinks___image___node_locale
+  drinks___image___sys___type
+  drinks___image___sys___revision
+  drinks___image___url
+  drinks___image___placeholderUrl
+  drinks___image___mimeType
+  drinks___image___filename
+  drinks___image___width
+  drinks___image___height
+  drinks___image___size
+  drinks___image___parent___id
+  drinks___image___parent___children
+  drinks___image___children
+  drinks___image___children___id
+  drinks___image___children___children
+  drinks___image___internal___content
+  drinks___image___internal___contentDigest
+  drinks___image___internal___description
+  drinks___image___internal___fieldOwners
+  drinks___image___internal___ignoreType
+  drinks___image___internal___mediaType
+  drinks___image___internal___owner
+  drinks___image___internal___type
+  drinks___image___internal___contentFilePath
+  drinks___image___filesize
+  drinks___image___publicUrl
+  drinks___image___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___oferty
+  drinks___oferty___contentful_id
+  drinks___oferty___id
+  drinks___oferty___node_locale
+  drinks___oferty___title
+  drinks___oferty___iscontact
+  drinks___oferty___slug
+  drinks___oferty___image___contentful_id
+  drinks___oferty___image___id
+  drinks___oferty___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___oferty___image___spaceId
+  drinks___oferty___image___createdAt
+  drinks___oferty___image___updatedAt
+  drinks___oferty___image___title
+  drinks___oferty___image___description
+  drinks___oferty___image___node_locale
+  drinks___oferty___image___url
+  drinks___oferty___image___placeholderUrl
+  drinks___oferty___image___mimeType
+  drinks___oferty___image___filename
+  drinks___oferty___image___width
+  drinks___oferty___image___height
+  drinks___oferty___image___size
+  drinks___oferty___image___children
+  drinks___oferty___image___filesize
+  drinks___oferty___image___publicUrl
+  drinks___oferty___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___oferty___shortdescription___shortdescription
+  drinks___oferty___shortdescription___id
+  drinks___oferty___shortdescription___children
+  drinks___oferty___offersPageText___offersPageText
+  drinks___oferty___offersPageText___id
+  drinks___oferty___offersPageText___children
+  drinks___oferty___spaceId
+  drinks___oferty___createdAt
+  drinks___oferty___updatedAt
+  drinks___oferty___sys___type
+  drinks___oferty___sys___revision
+  drinks___oferty___priority
+  drinks___oferty___secondimage___contentful_id
+  drinks___oferty___secondimage___id
+  drinks___oferty___secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___oferty___secondimage___spaceId
+  drinks___oferty___secondimage___createdAt
+  drinks___oferty___secondimage___updatedAt
+  drinks___oferty___secondimage___title
+  drinks___oferty___secondimage___description
+  drinks___oferty___secondimage___node_locale
+  drinks___oferty___secondimage___url
+  drinks___oferty___secondimage___placeholderUrl
+  drinks___oferty___secondimage___mimeType
+  drinks___oferty___secondimage___filename
+  drinks___oferty___secondimage___width
+  drinks___oferty___secondimage___height
+  drinks___oferty___secondimage___size
+  drinks___oferty___secondimage___children
+  drinks___oferty___secondimage___filesize
+  drinks___oferty___secondimage___publicUrl
+  drinks___oferty___secondimage___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  drinks___oferty___drinks
+  drinks___oferty___drinks___contentful_id
+  drinks___oferty___drinks___id
+  drinks___oferty___drinks___node_locale
+  drinks___oferty___drinks___name
+  drinks___oferty___drinks___oferty
+  drinks___oferty___drinks___spaceId
+  drinks___oferty___drinks___createdAt
+  drinks___oferty___drinks___updatedAt
+  drinks___oferty___drinks___childrenContentfulDrinkiDescriptionTextNode
+  drinks___oferty___drinks___children
+  drinks___oferty___description___description
+  drinks___oferty___description___id
+  drinks___oferty___description___children
+  drinks___oferty___moreInformation___moreInformation
+  drinks___oferty___moreInformation___id
+  drinks___oferty___moreInformation___children
+  drinks___oferty___aboutdrinks___aboutdrinks
+  drinks___oferty___aboutdrinks___id
+  drinks___oferty___aboutdrinks___children
+  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode
+  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
+  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___id
+  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___children
+  drinks___oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
+  drinks___oferty___childContentfulOfertyShortdescriptionTextNode___id
+  drinks___oferty___childContentfulOfertyShortdescriptionTextNode___children
+  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode
+  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
+  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___id
+  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___children
+  drinks___oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
+  drinks___oferty___childContentfulOfertyOffersPageTextTextNode___id
+  drinks___oferty___childContentfulOfertyOffersPageTextTextNode___children
+  drinks___oferty___childrenContentfulOfertyDescriptionTextNode
+  drinks___oferty___childrenContentfulOfertyDescriptionTextNode___description
+  drinks___oferty___childrenContentfulOfertyDescriptionTextNode___id
+  drinks___oferty___childrenContentfulOfertyDescriptionTextNode___children
+  drinks___oferty___childContentfulOfertyDescriptionTextNode___description
+  drinks___oferty___childContentfulOfertyDescriptionTextNode___id
+  drinks___oferty___childContentfulOfertyDescriptionTextNode___children
+  drinks___oferty___childrenContentfulOfertyMoreInformationTextNode
+  drinks___oferty___childrenContentfulOfertyMoreInformationTextNode___moreInformation
+  drinks___oferty___childrenContentfulOfertyMoreInformationTextNode___id
+  drinks___oferty___childrenContentfulOfertyMoreInformationTextNode___children
+  drinks___oferty___childContentfulOfertyMoreInformationTextNode___moreInformation
+  drinks___oferty___childContentfulOfertyMoreInformationTextNode___id
+  drinks___oferty___childContentfulOfertyMoreInformationTextNode___children
+  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode
+  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___id
+  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___children
+  drinks___oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  drinks___oferty___childContentfulOfertyAboutdrinksTextNode___id
+  drinks___oferty___childContentfulOfertyAboutdrinksTextNode___children
+  drinks___oferty___parent___id
+  drinks___oferty___parent___children
+  drinks___oferty___children
+  drinks___oferty___children___id
+  drinks___oferty___children___children
+  drinks___oferty___internal___content
+  drinks___oferty___internal___contentDigest
+  drinks___oferty___internal___description
+  drinks___oferty___internal___fieldOwners
+  drinks___oferty___internal___ignoreType
+  drinks___oferty___internal___mediaType
+  drinks___oferty___internal___owner
+  drinks___oferty___internal___type
+  drinks___oferty___internal___contentFilePath
+  drinks___description___description
+  drinks___description___sys___type
+  drinks___description___id
+  drinks___description___parent___id
+  drinks___description___parent___children
+  drinks___description___children
+  drinks___description___children___id
+  drinks___description___children___children
+  drinks___description___internal___content
+  drinks___description___internal___contentDigest
+  drinks___description___internal___description
+  drinks___description___internal___fieldOwners
+  drinks___description___internal___ignoreType
+  drinks___description___internal___mediaType
+  drinks___description___internal___owner
+  drinks___description___internal___type
+  drinks___description___internal___contentFilePath
+  drinks___spaceId
+  drinks___createdAt
+  drinks___updatedAt
+  drinks___sys___type
+  drinks___sys___revision
+  drinks___childrenContentfulDrinkiDescriptionTextNode
+  drinks___childrenContentfulDrinkiDescriptionTextNode___description
+  drinks___childrenContentfulDrinkiDescriptionTextNode___sys___type
+  drinks___childrenContentfulDrinkiDescriptionTextNode___id
+  drinks___childrenContentfulDrinkiDescriptionTextNode___parent___id
+  drinks___childrenContentfulDrinkiDescriptionTextNode___parent___children
+  drinks___childrenContentfulDrinkiDescriptionTextNode___children
+  drinks___childrenContentfulDrinkiDescriptionTextNode___children___id
+  drinks___childrenContentfulDrinkiDescriptionTextNode___children___children
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___content
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___contentDigest
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___description
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___fieldOwners
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___ignoreType
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___mediaType
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___owner
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___type
+  drinks___childrenContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  drinks___childContentfulDrinkiDescriptionTextNode___description
+  drinks___childContentfulDrinkiDescriptionTextNode___sys___type
+  drinks___childContentfulDrinkiDescriptionTextNode___id
+  drinks___childContentfulDrinkiDescriptionTextNode___parent___id
+  drinks___childContentfulDrinkiDescriptionTextNode___parent___children
+  drinks___childContentfulDrinkiDescriptionTextNode___children
+  drinks___childContentfulDrinkiDescriptionTextNode___children___id
+  drinks___childContentfulDrinkiDescriptionTextNode___children___children
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___content
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___contentDigest
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___description
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___fieldOwners
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___ignoreType
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___mediaType
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___owner
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___type
+  drinks___childContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  drinks___parent___id
+  drinks___parent___parent___id
+  drinks___parent___parent___children
+  drinks___parent___children
+  drinks___parent___children___id
+  drinks___parent___children___children
+  drinks___parent___internal___content
+  drinks___parent___internal___contentDigest
+  drinks___parent___internal___description
+  drinks___parent___internal___fieldOwners
+  drinks___parent___internal___ignoreType
+  drinks___parent___internal___mediaType
+  drinks___parent___internal___owner
+  drinks___parent___internal___type
+  drinks___parent___internal___contentFilePath
+  drinks___children
+  drinks___children___id
+  drinks___children___parent___id
+  drinks___children___parent___children
+  drinks___children___children
+  drinks___children___children___id
+  drinks___children___children___children
+  drinks___children___internal___content
+  drinks___children___internal___contentDigest
+  drinks___children___internal___description
+  drinks___children___internal___fieldOwners
+  drinks___children___internal___ignoreType
+  drinks___children___internal___mediaType
+  drinks___children___internal___owner
+  drinks___children___internal___type
+  drinks___children___internal___contentFilePath
+  drinks___internal___content
+  drinks___internal___contentDigest
+  drinks___internal___description
+  drinks___internal___fieldOwners
+  drinks___internal___ignoreType
+  drinks___internal___mediaType
+  drinks___internal___owner
+  drinks___internal___type
+  drinks___internal___contentFilePath
+  description___description
+  description___sys___type
+  description___id
+  description___parent___id
+  description___parent___parent___id
+  description___parent___parent___children
+  description___parent___children
+  description___parent___children___id
+  description___parent___children___children
+  description___parent___internal___content
+  description___parent___internal___contentDigest
+  description___parent___internal___description
+  description___parent___internal___fieldOwners
+  description___parent___internal___ignoreType
+  description___parent___internal___mediaType
+  description___parent___internal___owner
+  description___parent___internal___type
+  description___parent___internal___contentFilePath
+  description___children
+  description___children___id
+  description___children___parent___id
+  description___children___parent___children
+  description___children___children
+  description___children___children___id
+  description___children___children___children
+  description___children___internal___content
+  description___children___internal___contentDigest
+  description___children___internal___description
+  description___children___internal___fieldOwners
+  description___children___internal___ignoreType
+  description___children___internal___mediaType
+  description___children___internal___owner
+  description___children___internal___type
+  description___children___internal___contentFilePath
+  description___internal___content
+  description___internal___contentDigest
+  description___internal___description
+  description___internal___fieldOwners
+  description___internal___ignoreType
+  description___internal___mediaType
+  description___internal___owner
+  description___internal___type
+  description___internal___contentFilePath
+  moreInformation___moreInformation
+  moreInformation___sys___type
+  moreInformation___id
+  moreInformation___parent___id
+  moreInformation___parent___parent___id
+  moreInformation___parent___parent___children
+  moreInformation___parent___children
+  moreInformation___parent___children___id
+  moreInformation___parent___children___children
+  moreInformation___parent___internal___content
+  moreInformation___parent___internal___contentDigest
+  moreInformation___parent___internal___description
+  moreInformation___parent___internal___fieldOwners
+  moreInformation___parent___internal___ignoreType
+  moreInformation___parent___internal___mediaType
+  moreInformation___parent___internal___owner
+  moreInformation___parent___internal___type
+  moreInformation___parent___internal___contentFilePath
+  moreInformation___children
+  moreInformation___children___id
+  moreInformation___children___parent___id
+  moreInformation___children___parent___children
+  moreInformation___children___children
+  moreInformation___children___children___id
+  moreInformation___children___children___children
+  moreInformation___children___internal___content
+  moreInformation___children___internal___contentDigest
+  moreInformation___children___internal___description
+  moreInformation___children___internal___fieldOwners
+  moreInformation___children___internal___ignoreType
+  moreInformation___children___internal___mediaType
+  moreInformation___children___internal___owner
+  moreInformation___children___internal___type
+  moreInformation___children___internal___contentFilePath
+  moreInformation___internal___content
+  moreInformation___internal___contentDigest
+  moreInformation___internal___description
+  moreInformation___internal___fieldOwners
+  moreInformation___internal___ignoreType
+  moreInformation___internal___mediaType
+  moreInformation___internal___owner
+  moreInformation___internal___type
+  moreInformation___internal___contentFilePath
+  aboutdrinks___aboutdrinks
+  aboutdrinks___sys___type
+  aboutdrinks___id
+  aboutdrinks___parent___id
+  aboutdrinks___parent___parent___id
+  aboutdrinks___parent___parent___children
+  aboutdrinks___parent___children
+  aboutdrinks___parent___children___id
+  aboutdrinks___parent___children___children
+  aboutdrinks___parent___internal___content
+  aboutdrinks___parent___internal___contentDigest
+  aboutdrinks___parent___internal___description
+  aboutdrinks___parent___internal___fieldOwners
+  aboutdrinks___parent___internal___ignoreType
+  aboutdrinks___parent___internal___mediaType
+  aboutdrinks___parent___internal___owner
+  aboutdrinks___parent___internal___type
+  aboutdrinks___parent___internal___contentFilePath
+  aboutdrinks___children
+  aboutdrinks___children___id
+  aboutdrinks___children___parent___id
+  aboutdrinks___children___parent___children
+  aboutdrinks___children___children
+  aboutdrinks___children___children___id
+  aboutdrinks___children___children___children
+  aboutdrinks___children___internal___content
+  aboutdrinks___children___internal___contentDigest
+  aboutdrinks___children___internal___description
+  aboutdrinks___children___internal___fieldOwners
+  aboutdrinks___children___internal___ignoreType
+  aboutdrinks___children___internal___mediaType
+  aboutdrinks___children___internal___owner
+  aboutdrinks___children___internal___type
+  aboutdrinks___children___internal___contentFilePath
+  aboutdrinks___internal___content
+  aboutdrinks___internal___contentDigest
+  aboutdrinks___internal___description
+  aboutdrinks___internal___fieldOwners
+  aboutdrinks___internal___ignoreType
+  aboutdrinks___internal___mediaType
+  aboutdrinks___internal___owner
+  aboutdrinks___internal___type
+  aboutdrinks___internal___contentFilePath
   childrenContentfulOfertyShortdescriptionTextNode
   childrenContentfulOfertyShortdescriptionTextNode___shortdescription
   childrenContentfulOfertyShortdescriptionTextNode___sys___type
@@ -5691,6 +6571,267 @@ enum ContentfulOfertyFieldsEnum {
   childContentfulOfertyOffersPageTextTextNode___internal___owner
   childContentfulOfertyOffersPageTextTextNode___internal___type
   childContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
+  childrenContentfulOfertyDescriptionTextNode
+  childrenContentfulOfertyDescriptionTextNode___description
+  childrenContentfulOfertyDescriptionTextNode___sys___type
+  childrenContentfulOfertyDescriptionTextNode___id
+  childrenContentfulOfertyDescriptionTextNode___parent___id
+  childrenContentfulOfertyDescriptionTextNode___parent___parent___id
+  childrenContentfulOfertyDescriptionTextNode___parent___parent___children
+  childrenContentfulOfertyDescriptionTextNode___parent___children
+  childrenContentfulOfertyDescriptionTextNode___parent___children___id
+  childrenContentfulOfertyDescriptionTextNode___parent___children___children
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___content
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___contentDigest
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___description
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___fieldOwners
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___ignoreType
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___mediaType
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___owner
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___type
+  childrenContentfulOfertyDescriptionTextNode___parent___internal___contentFilePath
+  childrenContentfulOfertyDescriptionTextNode___children
+  childrenContentfulOfertyDescriptionTextNode___children___id
+  childrenContentfulOfertyDescriptionTextNode___children___parent___id
+  childrenContentfulOfertyDescriptionTextNode___children___parent___children
+  childrenContentfulOfertyDescriptionTextNode___children___children
+  childrenContentfulOfertyDescriptionTextNode___children___children___id
+  childrenContentfulOfertyDescriptionTextNode___children___children___children
+  childrenContentfulOfertyDescriptionTextNode___children___internal___content
+  childrenContentfulOfertyDescriptionTextNode___children___internal___contentDigest
+  childrenContentfulOfertyDescriptionTextNode___children___internal___description
+  childrenContentfulOfertyDescriptionTextNode___children___internal___fieldOwners
+  childrenContentfulOfertyDescriptionTextNode___children___internal___ignoreType
+  childrenContentfulOfertyDescriptionTextNode___children___internal___mediaType
+  childrenContentfulOfertyDescriptionTextNode___children___internal___owner
+  childrenContentfulOfertyDescriptionTextNode___children___internal___type
+  childrenContentfulOfertyDescriptionTextNode___children___internal___contentFilePath
+  childrenContentfulOfertyDescriptionTextNode___internal___content
+  childrenContentfulOfertyDescriptionTextNode___internal___contentDigest
+  childrenContentfulOfertyDescriptionTextNode___internal___description
+  childrenContentfulOfertyDescriptionTextNode___internal___fieldOwners
+  childrenContentfulOfertyDescriptionTextNode___internal___ignoreType
+  childrenContentfulOfertyDescriptionTextNode___internal___mediaType
+  childrenContentfulOfertyDescriptionTextNode___internal___owner
+  childrenContentfulOfertyDescriptionTextNode___internal___type
+  childrenContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  childContentfulOfertyDescriptionTextNode___description
+  childContentfulOfertyDescriptionTextNode___sys___type
+  childContentfulOfertyDescriptionTextNode___id
+  childContentfulOfertyDescriptionTextNode___parent___id
+  childContentfulOfertyDescriptionTextNode___parent___parent___id
+  childContentfulOfertyDescriptionTextNode___parent___parent___children
+  childContentfulOfertyDescriptionTextNode___parent___children
+  childContentfulOfertyDescriptionTextNode___parent___children___id
+  childContentfulOfertyDescriptionTextNode___parent___children___children
+  childContentfulOfertyDescriptionTextNode___parent___internal___content
+  childContentfulOfertyDescriptionTextNode___parent___internal___contentDigest
+  childContentfulOfertyDescriptionTextNode___parent___internal___description
+  childContentfulOfertyDescriptionTextNode___parent___internal___fieldOwners
+  childContentfulOfertyDescriptionTextNode___parent___internal___ignoreType
+  childContentfulOfertyDescriptionTextNode___parent___internal___mediaType
+  childContentfulOfertyDescriptionTextNode___parent___internal___owner
+  childContentfulOfertyDescriptionTextNode___parent___internal___type
+  childContentfulOfertyDescriptionTextNode___parent___internal___contentFilePath
+  childContentfulOfertyDescriptionTextNode___children
+  childContentfulOfertyDescriptionTextNode___children___id
+  childContentfulOfertyDescriptionTextNode___children___parent___id
+  childContentfulOfertyDescriptionTextNode___children___parent___children
+  childContentfulOfertyDescriptionTextNode___children___children
+  childContentfulOfertyDescriptionTextNode___children___children___id
+  childContentfulOfertyDescriptionTextNode___children___children___children
+  childContentfulOfertyDescriptionTextNode___children___internal___content
+  childContentfulOfertyDescriptionTextNode___children___internal___contentDigest
+  childContentfulOfertyDescriptionTextNode___children___internal___description
+  childContentfulOfertyDescriptionTextNode___children___internal___fieldOwners
+  childContentfulOfertyDescriptionTextNode___children___internal___ignoreType
+  childContentfulOfertyDescriptionTextNode___children___internal___mediaType
+  childContentfulOfertyDescriptionTextNode___children___internal___owner
+  childContentfulOfertyDescriptionTextNode___children___internal___type
+  childContentfulOfertyDescriptionTextNode___children___internal___contentFilePath
+  childContentfulOfertyDescriptionTextNode___internal___content
+  childContentfulOfertyDescriptionTextNode___internal___contentDigest
+  childContentfulOfertyDescriptionTextNode___internal___description
+  childContentfulOfertyDescriptionTextNode___internal___fieldOwners
+  childContentfulOfertyDescriptionTextNode___internal___ignoreType
+  childContentfulOfertyDescriptionTextNode___internal___mediaType
+  childContentfulOfertyDescriptionTextNode___internal___owner
+  childContentfulOfertyDescriptionTextNode___internal___type
+  childContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  childrenContentfulOfertyMoreInformationTextNode
+  childrenContentfulOfertyMoreInformationTextNode___moreInformation
+  childrenContentfulOfertyMoreInformationTextNode___sys___type
+  childrenContentfulOfertyMoreInformationTextNode___id
+  childrenContentfulOfertyMoreInformationTextNode___parent___id
+  childrenContentfulOfertyMoreInformationTextNode___parent___parent___id
+  childrenContentfulOfertyMoreInformationTextNode___parent___parent___children
+  childrenContentfulOfertyMoreInformationTextNode___parent___children
+  childrenContentfulOfertyMoreInformationTextNode___parent___children___id
+  childrenContentfulOfertyMoreInformationTextNode___parent___children___children
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___content
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___contentDigest
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___description
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___fieldOwners
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___ignoreType
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___mediaType
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___owner
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___type
+  childrenContentfulOfertyMoreInformationTextNode___parent___internal___contentFilePath
+  childrenContentfulOfertyMoreInformationTextNode___children
+  childrenContentfulOfertyMoreInformationTextNode___children___id
+  childrenContentfulOfertyMoreInformationTextNode___children___parent___id
+  childrenContentfulOfertyMoreInformationTextNode___children___parent___children
+  childrenContentfulOfertyMoreInformationTextNode___children___children
+  childrenContentfulOfertyMoreInformationTextNode___children___children___id
+  childrenContentfulOfertyMoreInformationTextNode___children___children___children
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___content
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___contentDigest
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___description
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___fieldOwners
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___ignoreType
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___mediaType
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___owner
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___type
+  childrenContentfulOfertyMoreInformationTextNode___children___internal___contentFilePath
+  childrenContentfulOfertyMoreInformationTextNode___internal___content
+  childrenContentfulOfertyMoreInformationTextNode___internal___contentDigest
+  childrenContentfulOfertyMoreInformationTextNode___internal___description
+  childrenContentfulOfertyMoreInformationTextNode___internal___fieldOwners
+  childrenContentfulOfertyMoreInformationTextNode___internal___ignoreType
+  childrenContentfulOfertyMoreInformationTextNode___internal___mediaType
+  childrenContentfulOfertyMoreInformationTextNode___internal___owner
+  childrenContentfulOfertyMoreInformationTextNode___internal___type
+  childrenContentfulOfertyMoreInformationTextNode___internal___contentFilePath
+  childContentfulOfertyMoreInformationTextNode___moreInformation
+  childContentfulOfertyMoreInformationTextNode___sys___type
+  childContentfulOfertyMoreInformationTextNode___id
+  childContentfulOfertyMoreInformationTextNode___parent___id
+  childContentfulOfertyMoreInformationTextNode___parent___parent___id
+  childContentfulOfertyMoreInformationTextNode___parent___parent___children
+  childContentfulOfertyMoreInformationTextNode___parent___children
+  childContentfulOfertyMoreInformationTextNode___parent___children___id
+  childContentfulOfertyMoreInformationTextNode___parent___children___children
+  childContentfulOfertyMoreInformationTextNode___parent___internal___content
+  childContentfulOfertyMoreInformationTextNode___parent___internal___contentDigest
+  childContentfulOfertyMoreInformationTextNode___parent___internal___description
+  childContentfulOfertyMoreInformationTextNode___parent___internal___fieldOwners
+  childContentfulOfertyMoreInformationTextNode___parent___internal___ignoreType
+  childContentfulOfertyMoreInformationTextNode___parent___internal___mediaType
+  childContentfulOfertyMoreInformationTextNode___parent___internal___owner
+  childContentfulOfertyMoreInformationTextNode___parent___internal___type
+  childContentfulOfertyMoreInformationTextNode___parent___internal___contentFilePath
+  childContentfulOfertyMoreInformationTextNode___children
+  childContentfulOfertyMoreInformationTextNode___children___id
+  childContentfulOfertyMoreInformationTextNode___children___parent___id
+  childContentfulOfertyMoreInformationTextNode___children___parent___children
+  childContentfulOfertyMoreInformationTextNode___children___children
+  childContentfulOfertyMoreInformationTextNode___children___children___id
+  childContentfulOfertyMoreInformationTextNode___children___children___children
+  childContentfulOfertyMoreInformationTextNode___children___internal___content
+  childContentfulOfertyMoreInformationTextNode___children___internal___contentDigest
+  childContentfulOfertyMoreInformationTextNode___children___internal___description
+  childContentfulOfertyMoreInformationTextNode___children___internal___fieldOwners
+  childContentfulOfertyMoreInformationTextNode___children___internal___ignoreType
+  childContentfulOfertyMoreInformationTextNode___children___internal___mediaType
+  childContentfulOfertyMoreInformationTextNode___children___internal___owner
+  childContentfulOfertyMoreInformationTextNode___children___internal___type
+  childContentfulOfertyMoreInformationTextNode___children___internal___contentFilePath
+  childContentfulOfertyMoreInformationTextNode___internal___content
+  childContentfulOfertyMoreInformationTextNode___internal___contentDigest
+  childContentfulOfertyMoreInformationTextNode___internal___description
+  childContentfulOfertyMoreInformationTextNode___internal___fieldOwners
+  childContentfulOfertyMoreInformationTextNode___internal___ignoreType
+  childContentfulOfertyMoreInformationTextNode___internal___mediaType
+  childContentfulOfertyMoreInformationTextNode___internal___owner
+  childContentfulOfertyMoreInformationTextNode___internal___type
+  childContentfulOfertyMoreInformationTextNode___internal___contentFilePath
+  childrenContentfulOfertyAboutdrinksTextNode
+  childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  childrenContentfulOfertyAboutdrinksTextNode___sys___type
+  childrenContentfulOfertyAboutdrinksTextNode___id
+  childrenContentfulOfertyAboutdrinksTextNode___parent___id
+  childrenContentfulOfertyAboutdrinksTextNode___parent___parent___id
+  childrenContentfulOfertyAboutdrinksTextNode___parent___parent___children
+  childrenContentfulOfertyAboutdrinksTextNode___parent___children
+  childrenContentfulOfertyAboutdrinksTextNode___parent___children___id
+  childrenContentfulOfertyAboutdrinksTextNode___parent___children___children
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___content
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___contentDigest
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___description
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___fieldOwners
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___ignoreType
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___mediaType
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___owner
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___type
+  childrenContentfulOfertyAboutdrinksTextNode___parent___internal___contentFilePath
+  childrenContentfulOfertyAboutdrinksTextNode___children
+  childrenContentfulOfertyAboutdrinksTextNode___children___id
+  childrenContentfulOfertyAboutdrinksTextNode___children___parent___id
+  childrenContentfulOfertyAboutdrinksTextNode___children___parent___children
+  childrenContentfulOfertyAboutdrinksTextNode___children___children
+  childrenContentfulOfertyAboutdrinksTextNode___children___children___id
+  childrenContentfulOfertyAboutdrinksTextNode___children___children___children
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___content
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___contentDigest
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___description
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___fieldOwners
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___ignoreType
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___mediaType
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___owner
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___type
+  childrenContentfulOfertyAboutdrinksTextNode___children___internal___contentFilePath
+  childrenContentfulOfertyAboutdrinksTextNode___internal___content
+  childrenContentfulOfertyAboutdrinksTextNode___internal___contentDigest
+  childrenContentfulOfertyAboutdrinksTextNode___internal___description
+  childrenContentfulOfertyAboutdrinksTextNode___internal___fieldOwners
+  childrenContentfulOfertyAboutdrinksTextNode___internal___ignoreType
+  childrenContentfulOfertyAboutdrinksTextNode___internal___mediaType
+  childrenContentfulOfertyAboutdrinksTextNode___internal___owner
+  childrenContentfulOfertyAboutdrinksTextNode___internal___type
+  childrenContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
+  childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  childContentfulOfertyAboutdrinksTextNode___sys___type
+  childContentfulOfertyAboutdrinksTextNode___id
+  childContentfulOfertyAboutdrinksTextNode___parent___id
+  childContentfulOfertyAboutdrinksTextNode___parent___parent___id
+  childContentfulOfertyAboutdrinksTextNode___parent___parent___children
+  childContentfulOfertyAboutdrinksTextNode___parent___children
+  childContentfulOfertyAboutdrinksTextNode___parent___children___id
+  childContentfulOfertyAboutdrinksTextNode___parent___children___children
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___content
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___contentDigest
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___description
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___fieldOwners
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___ignoreType
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___mediaType
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___owner
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___type
+  childContentfulOfertyAboutdrinksTextNode___parent___internal___contentFilePath
+  childContentfulOfertyAboutdrinksTextNode___children
+  childContentfulOfertyAboutdrinksTextNode___children___id
+  childContentfulOfertyAboutdrinksTextNode___children___parent___id
+  childContentfulOfertyAboutdrinksTextNode___children___parent___children
+  childContentfulOfertyAboutdrinksTextNode___children___children
+  childContentfulOfertyAboutdrinksTextNode___children___children___id
+  childContentfulOfertyAboutdrinksTextNode___children___children___children
+  childContentfulOfertyAboutdrinksTextNode___children___internal___content
+  childContentfulOfertyAboutdrinksTextNode___children___internal___contentDigest
+  childContentfulOfertyAboutdrinksTextNode___children___internal___description
+  childContentfulOfertyAboutdrinksTextNode___children___internal___fieldOwners
+  childContentfulOfertyAboutdrinksTextNode___children___internal___ignoreType
+  childContentfulOfertyAboutdrinksTextNode___children___internal___mediaType
+  childContentfulOfertyAboutdrinksTextNode___children___internal___owner
+  childContentfulOfertyAboutdrinksTextNode___children___internal___type
+  childContentfulOfertyAboutdrinksTextNode___children___internal___contentFilePath
+  childContentfulOfertyAboutdrinksTextNode___internal___content
+  childContentfulOfertyAboutdrinksTextNode___internal___contentDigest
+  childContentfulOfertyAboutdrinksTextNode___internal___description
+  childContentfulOfertyAboutdrinksTextNode___internal___fieldOwners
+  childContentfulOfertyAboutdrinksTextNode___internal___ignoreType
+  childContentfulOfertyAboutdrinksTextNode___internal___mediaType
+  childContentfulOfertyAboutdrinksTextNode___internal___owner
+  childContentfulOfertyAboutdrinksTextNode___internal___type
+  childContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -5797,30 +6938,6 @@ type ContentfulOfertyGroupConnection {
   group(skip: Int, limit: Int, field: ContentfulOfertyFieldsEnum!): [ContentfulOfertyGroupConnection!]!
   field: String!
   fieldValue: String
-}
-
-input ContentfulOfertyFilterInput {
-  contentful_id: StringQueryOperatorInput
-  id: StringQueryOperatorInput
-  node_locale: StringQueryOperatorInput
-  title: StringQueryOperatorInput
-  iscontact: BooleanQueryOperatorInput
-  slug: StringQueryOperatorInput
-  image: ContentfulAssetFilterInput
-  shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput
-  offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput
-  spaceId: StringQueryOperatorInput
-  createdAt: DateQueryOperatorInput
-  updatedAt: DateQueryOperatorInput
-  sys: ContentfulOfertySysFilterInput
-  priority: IntQueryOperatorInput
-  childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput
-  childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput
-  childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput
-  childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput
-  parent: NodeFilterInput
-  children: NodeFilterListInput
-  internal: InternalFilterInput
 }
 
 input ContentfulOfertySortInput {
@@ -6457,6 +7574,15 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___category___blog___updatedAt
   blog___category___blog___childrenContentfulBlogShortdescriptionTextNode
   blog___category___blog___children
+  blog___category___galeria
+  blog___category___galeria___contentful_id
+  blog___category___galeria___id
+  blog___category___galeria___node_locale
+  blog___category___galeria___title
+  blog___category___galeria___spaceId
+  blog___category___galeria___createdAt
+  blog___category___galeria___updatedAt
+  blog___category___galeria___children
   blog___category___parent___id
   blog___category___parent___children
   blog___category___children
@@ -6610,6 +7736,141 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___internal___owner
   blog___internal___type
   blog___internal___contentFilePath
+  galeria
+  galeria___contentful_id
+  galeria___id
+  galeria___node_locale
+  galeria___title
+  galeria___category___contentful_id
+  galeria___category___id
+  galeria___category___node_locale
+  galeria___category___name
+  galeria___category___priority
+  galeria___category___spaceId
+  galeria___category___createdAt
+  galeria___category___updatedAt
+  galeria___category___sys___type
+  galeria___category___sys___revision
+  galeria___category___blog
+  galeria___category___blog___contentful_id
+  galeria___category___blog___id
+  galeria___category___blog___node_locale
+  galeria___category___blog___title
+  galeria___category___blog___slug
+  galeria___category___blog___spaceId
+  galeria___category___blog___createdAt
+  galeria___category___blog___updatedAt
+  galeria___category___blog___childrenContentfulBlogShortdescriptionTextNode
+  galeria___category___blog___children
+  galeria___category___galeria
+  galeria___category___galeria___contentful_id
+  galeria___category___galeria___id
+  galeria___category___galeria___node_locale
+  galeria___category___galeria___title
+  galeria___category___galeria___spaceId
+  galeria___category___galeria___createdAt
+  galeria___category___galeria___updatedAt
+  galeria___category___galeria___children
+  galeria___category___parent___id
+  galeria___category___parent___children
+  galeria___category___children
+  galeria___category___children___id
+  galeria___category___children___children
+  galeria___category___internal___content
+  galeria___category___internal___contentDigest
+  galeria___category___internal___description
+  galeria___category___internal___fieldOwners
+  galeria___category___internal___ignoreType
+  galeria___category___internal___mediaType
+  galeria___category___internal___owner
+  galeria___category___internal___type
+  galeria___category___internal___contentFilePath
+  galeria___image___contentful_id
+  galeria___image___id
+  galeria___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  galeria___image___spaceId
+  galeria___image___createdAt
+  galeria___image___updatedAt
+  galeria___image___file___url
+  galeria___image___file___fileName
+  galeria___image___file___contentType
+  galeria___image___title
+  galeria___image___description
+  galeria___image___node_locale
+  galeria___image___sys___type
+  galeria___image___sys___revision
+  galeria___image___url
+  galeria___image___placeholderUrl
+  galeria___image___mimeType
+  galeria___image___filename
+  galeria___image___width
+  galeria___image___height
+  galeria___image___size
+  galeria___image___parent___id
+  galeria___image___parent___children
+  galeria___image___children
+  galeria___image___children___id
+  galeria___image___children___children
+  galeria___image___internal___content
+  galeria___image___internal___contentDigest
+  galeria___image___internal___description
+  galeria___image___internal___fieldOwners
+  galeria___image___internal___ignoreType
+  galeria___image___internal___mediaType
+  galeria___image___internal___owner
+  galeria___image___internal___type
+  galeria___image___internal___contentFilePath
+  galeria___image___filesize
+  galeria___image___publicUrl
+  galeria___image___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  galeria___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  galeria___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  galeria___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  galeria___spaceId
+  galeria___createdAt
+  galeria___updatedAt
+  galeria___sys___type
+  galeria___sys___revision
+  galeria___parent___id
+  galeria___parent___parent___id
+  galeria___parent___parent___children
+  galeria___parent___children
+  galeria___parent___children___id
+  galeria___parent___children___children
+  galeria___parent___internal___content
+  galeria___parent___internal___contentDigest
+  galeria___parent___internal___description
+  galeria___parent___internal___fieldOwners
+  galeria___parent___internal___ignoreType
+  galeria___parent___internal___mediaType
+  galeria___parent___internal___owner
+  galeria___parent___internal___type
+  galeria___parent___internal___contentFilePath
+  galeria___children
+  galeria___children___id
+  galeria___children___parent___id
+  galeria___children___parent___children
+  galeria___children___children
+  galeria___children___children___id
+  galeria___children___children___children
+  galeria___children___internal___content
+  galeria___children___internal___contentDigest
+  galeria___children___internal___description
+  galeria___children___internal___fieldOwners
+  galeria___children___internal___ignoreType
+  galeria___children___internal___mediaType
+  galeria___children___internal___owner
+  galeria___children___internal___type
+  galeria___children___internal___contentFilePath
+  galeria___internal___content
+  galeria___internal___contentDigest
+  galeria___internal___description
+  galeria___internal___fieldOwners
+  galeria___internal___ignoreType
+  galeria___internal___mediaType
+  galeria___internal___owner
+  galeria___internal___type
+  galeria___internal___contentFilePath
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -6723,22 +7984,6 @@ input ContentfulKategorieDlaBlogaIGaleriiSortInput {
   order: [SortOrderEnum] = [ASC]
 }
 
-input ContentfulGaleriaSysFilterInput {
-  type: StringQueryOperatorInput
-  revision: IntQueryOperatorInput
-  contentType: ContentfulGaleriaSysContentTypeFilterInput
-}
-
-input ContentfulGaleriaSysContentTypeFilterInput {
-  sys: ContentfulGaleriaSysContentTypeSysFilterInput
-}
-
-input ContentfulGaleriaSysContentTypeSysFilterInput {
-  type: StringQueryOperatorInput
-  linkType: StringQueryOperatorInput
-  id: StringQueryOperatorInput
-}
-
 type ContentfulGaleriaConnection {
   totalCount: Int!
   edges: [ContentfulGaleriaEdge!]!
@@ -6786,6 +8031,7 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___category___createdAt
   category___blog___category___updatedAt
   category___blog___category___blog
+  category___blog___category___galeria
   category___blog___category___children
   category___blog___slug
   category___blog___image___contentful_id
@@ -6837,6 +8083,61 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___internal___owner
   category___blog___internal___type
   category___blog___internal___contentFilePath
+  category___galeria
+  category___galeria___contentful_id
+  category___galeria___id
+  category___galeria___node_locale
+  category___galeria___title
+  category___galeria___category___contentful_id
+  category___galeria___category___id
+  category___galeria___category___node_locale
+  category___galeria___category___name
+  category___galeria___category___priority
+  category___galeria___category___spaceId
+  category___galeria___category___createdAt
+  category___galeria___category___updatedAt
+  category___galeria___category___blog
+  category___galeria___category___galeria
+  category___galeria___category___children
+  category___galeria___image___contentful_id
+  category___galeria___image___id
+  category___galeria___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___image___spaceId
+  category___galeria___image___createdAt
+  category___galeria___image___updatedAt
+  category___galeria___image___title
+  category___galeria___image___description
+  category___galeria___image___node_locale
+  category___galeria___image___url
+  category___galeria___image___placeholderUrl
+  category___galeria___image___mimeType
+  category___galeria___image___filename
+  category___galeria___image___width
+  category___galeria___image___height
+  category___galeria___image___size
+  category___galeria___image___children
+  category___galeria___image___filesize
+  category___galeria___image___publicUrl
+  category___galeria___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___spaceId
+  category___galeria___createdAt
+  category___galeria___updatedAt
+  category___galeria___sys___type
+  category___galeria___sys___revision
+  category___galeria___parent___id
+  category___galeria___parent___children
+  category___galeria___children
+  category___galeria___children___id
+  category___galeria___children___children
+  category___galeria___internal___content
+  category___galeria___internal___contentDigest
+  category___galeria___internal___description
+  category___galeria___internal___fieldOwners
+  category___galeria___internal___ignoreType
+  category___galeria___internal___mediaType
+  category___galeria___internal___owner
+  category___galeria___internal___type
+  category___galeria___internal___contentFilePath
   category___parent___id
   category___parent___parent___id
   category___parent___parent___children
@@ -7061,24 +8362,817 @@ type ContentfulGaleriaGroupConnection {
   fieldValue: String
 }
 
-input ContentfulGaleriaFilterInput {
-  contentful_id: StringQueryOperatorInput
-  id: StringQueryOperatorInput
-  node_locale: StringQueryOperatorInput
-  title: StringQueryOperatorInput
-  category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
-  image: ContentfulAssetFilterInput
-  spaceId: StringQueryOperatorInput
-  createdAt: DateQueryOperatorInput
-  updatedAt: DateQueryOperatorInput
-  sys: ContentfulGaleriaSysFilterInput
-  parent: NodeFilterInput
-  children: NodeFilterListInput
-  internal: InternalFilterInput
-}
-
 input ContentfulGaleriaSortInput {
   fields: [ContentfulGaleriaFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type ContentfulDrinkiConnection {
+  totalCount: Int!
+  edges: [ContentfulDrinkiEdge!]!
+  nodes: [ContentfulDrinki!]!
+  pageInfo: PageInfo!
+  distinct(field: ContentfulDrinkiFieldsEnum!): [String!]!
+  max(field: ContentfulDrinkiFieldsEnum!): Float
+  min(field: ContentfulDrinkiFieldsEnum!): Float
+  sum(field: ContentfulDrinkiFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: ContentfulDrinkiFieldsEnum!): [ContentfulDrinkiGroupConnection!]!
+}
+
+type ContentfulDrinkiEdge {
+  next: ContentfulDrinki
+  node: ContentfulDrinki!
+  previous: ContentfulDrinki
+}
+
+enum ContentfulDrinkiFieldsEnum {
+  contentful_id
+  id
+  node_locale
+  name
+  image___contentful_id
+  image___id
+  image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___spaceId
+  image___createdAt
+  image___updatedAt
+  image___file___url
+  image___file___details___size
+  image___file___fileName
+  image___file___contentType
+  image___title
+  image___description
+  image___node_locale
+  image___sys___type
+  image___sys___revision
+  image___url
+  image___placeholderUrl
+  image___mimeType
+  image___filename
+  image___width
+  image___height
+  image___size
+  image___parent___id
+  image___parent___parent___id
+  image___parent___parent___children
+  image___parent___children
+  image___parent___children___id
+  image___parent___children___children
+  image___parent___internal___content
+  image___parent___internal___contentDigest
+  image___parent___internal___description
+  image___parent___internal___fieldOwners
+  image___parent___internal___ignoreType
+  image___parent___internal___mediaType
+  image___parent___internal___owner
+  image___parent___internal___type
+  image___parent___internal___contentFilePath
+  image___children
+  image___children___id
+  image___children___parent___id
+  image___children___parent___children
+  image___children___children
+  image___children___children___id
+  image___children___children___children
+  image___children___internal___content
+  image___children___internal___contentDigest
+  image___children___internal___description
+  image___children___internal___fieldOwners
+  image___children___internal___ignoreType
+  image___children___internal___mediaType
+  image___children___internal___owner
+  image___children___internal___type
+  image___children___internal___contentFilePath
+  image___internal___content
+  image___internal___contentDigest
+  image___internal___description
+  image___internal___fieldOwners
+  image___internal___ignoreType
+  image___internal___mediaType
+  image___internal___owner
+  image___internal___type
+  image___internal___contentFilePath
+  image___filesize
+  image___publicUrl
+  image___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty
+  oferty___contentful_id
+  oferty___id
+  oferty___node_locale
+  oferty___title
+  oferty___iscontact
+  oferty___slug
+  oferty___image___contentful_id
+  oferty___image___id
+  oferty___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___image___spaceId
+  oferty___image___createdAt
+  oferty___image___updatedAt
+  oferty___image___file___url
+  oferty___image___file___fileName
+  oferty___image___file___contentType
+  oferty___image___title
+  oferty___image___description
+  oferty___image___node_locale
+  oferty___image___sys___type
+  oferty___image___sys___revision
+  oferty___image___url
+  oferty___image___placeholderUrl
+  oferty___image___mimeType
+  oferty___image___filename
+  oferty___image___width
+  oferty___image___height
+  oferty___image___size
+  oferty___image___parent___id
+  oferty___image___parent___children
+  oferty___image___children
+  oferty___image___children___id
+  oferty___image___children___children
+  oferty___image___internal___content
+  oferty___image___internal___contentDigest
+  oferty___image___internal___description
+  oferty___image___internal___fieldOwners
+  oferty___image___internal___ignoreType
+  oferty___image___internal___mediaType
+  oferty___image___internal___owner
+  oferty___image___internal___type
+  oferty___image___internal___contentFilePath
+  oferty___image___filesize
+  oferty___image___publicUrl
+  oferty___image___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___shortdescription___shortdescription
+  oferty___shortdescription___sys___type
+  oferty___shortdescription___id
+  oferty___shortdescription___parent___id
+  oferty___shortdescription___parent___children
+  oferty___shortdescription___children
+  oferty___shortdescription___children___id
+  oferty___shortdescription___children___children
+  oferty___shortdescription___internal___content
+  oferty___shortdescription___internal___contentDigest
+  oferty___shortdescription___internal___description
+  oferty___shortdescription___internal___fieldOwners
+  oferty___shortdescription___internal___ignoreType
+  oferty___shortdescription___internal___mediaType
+  oferty___shortdescription___internal___owner
+  oferty___shortdescription___internal___type
+  oferty___shortdescription___internal___contentFilePath
+  oferty___offersPageText___offersPageText
+  oferty___offersPageText___sys___type
+  oferty___offersPageText___id
+  oferty___offersPageText___parent___id
+  oferty___offersPageText___parent___children
+  oferty___offersPageText___children
+  oferty___offersPageText___children___id
+  oferty___offersPageText___children___children
+  oferty___offersPageText___internal___content
+  oferty___offersPageText___internal___contentDigest
+  oferty___offersPageText___internal___description
+  oferty___offersPageText___internal___fieldOwners
+  oferty___offersPageText___internal___ignoreType
+  oferty___offersPageText___internal___mediaType
+  oferty___offersPageText___internal___owner
+  oferty___offersPageText___internal___type
+  oferty___offersPageText___internal___contentFilePath
+  oferty___spaceId
+  oferty___createdAt
+  oferty___updatedAt
+  oferty___sys___type
+  oferty___sys___revision
+  oferty___priority
+  oferty___secondimage___contentful_id
+  oferty___secondimage___id
+  oferty___secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___secondimage___spaceId
+  oferty___secondimage___createdAt
+  oferty___secondimage___updatedAt
+  oferty___secondimage___file___url
+  oferty___secondimage___file___fileName
+  oferty___secondimage___file___contentType
+  oferty___secondimage___title
+  oferty___secondimage___description
+  oferty___secondimage___node_locale
+  oferty___secondimage___sys___type
+  oferty___secondimage___sys___revision
+  oferty___secondimage___url
+  oferty___secondimage___placeholderUrl
+  oferty___secondimage___mimeType
+  oferty___secondimage___filename
+  oferty___secondimage___width
+  oferty___secondimage___height
+  oferty___secondimage___size
+  oferty___secondimage___parent___id
+  oferty___secondimage___parent___children
+  oferty___secondimage___children
+  oferty___secondimage___children___id
+  oferty___secondimage___children___children
+  oferty___secondimage___internal___content
+  oferty___secondimage___internal___contentDigest
+  oferty___secondimage___internal___description
+  oferty___secondimage___internal___fieldOwners
+  oferty___secondimage___internal___ignoreType
+  oferty___secondimage___internal___mediaType
+  oferty___secondimage___internal___owner
+  oferty___secondimage___internal___type
+  oferty___secondimage___internal___contentFilePath
+  oferty___secondimage___filesize
+  oferty___secondimage___publicUrl
+  oferty___secondimage___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___secondimage___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___secondimage___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___secondimage___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___drinks
+  oferty___drinks___contentful_id
+  oferty___drinks___id
+  oferty___drinks___node_locale
+  oferty___drinks___name
+  oferty___drinks___image___contentful_id
+  oferty___drinks___image___id
+  oferty___drinks___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___drinks___image___spaceId
+  oferty___drinks___image___createdAt
+  oferty___drinks___image___updatedAt
+  oferty___drinks___image___title
+  oferty___drinks___image___description
+  oferty___drinks___image___node_locale
+  oferty___drinks___image___url
+  oferty___drinks___image___placeholderUrl
+  oferty___drinks___image___mimeType
+  oferty___drinks___image___filename
+  oferty___drinks___image___width
+  oferty___drinks___image___height
+  oferty___drinks___image___size
+  oferty___drinks___image___children
+  oferty___drinks___image___filesize
+  oferty___drinks___image___publicUrl
+  oferty___drinks___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  oferty___drinks___oferty
+  oferty___drinks___oferty___contentful_id
+  oferty___drinks___oferty___id
+  oferty___drinks___oferty___node_locale
+  oferty___drinks___oferty___title
+  oferty___drinks___oferty___iscontact
+  oferty___drinks___oferty___slug
+  oferty___drinks___oferty___spaceId
+  oferty___drinks___oferty___createdAt
+  oferty___drinks___oferty___updatedAt
+  oferty___drinks___oferty___priority
+  oferty___drinks___oferty___drinks
+  oferty___drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode
+  oferty___drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode
+  oferty___drinks___oferty___childrenContentfulOfertyDescriptionTextNode
+  oferty___drinks___oferty___childrenContentfulOfertyMoreInformationTextNode
+  oferty___drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode
+  oferty___drinks___oferty___children
+  oferty___drinks___description___description
+  oferty___drinks___description___id
+  oferty___drinks___description___children
+  oferty___drinks___spaceId
+  oferty___drinks___createdAt
+  oferty___drinks___updatedAt
+  oferty___drinks___sys___type
+  oferty___drinks___sys___revision
+  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode
+  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___description
+  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___id
+  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___children
+  oferty___drinks___childContentfulDrinkiDescriptionTextNode___description
+  oferty___drinks___childContentfulDrinkiDescriptionTextNode___id
+  oferty___drinks___childContentfulDrinkiDescriptionTextNode___children
+  oferty___drinks___parent___id
+  oferty___drinks___parent___children
+  oferty___drinks___children
+  oferty___drinks___children___id
+  oferty___drinks___children___children
+  oferty___drinks___internal___content
+  oferty___drinks___internal___contentDigest
+  oferty___drinks___internal___description
+  oferty___drinks___internal___fieldOwners
+  oferty___drinks___internal___ignoreType
+  oferty___drinks___internal___mediaType
+  oferty___drinks___internal___owner
+  oferty___drinks___internal___type
+  oferty___drinks___internal___contentFilePath
+  oferty___description___description
+  oferty___description___sys___type
+  oferty___description___id
+  oferty___description___parent___id
+  oferty___description___parent___children
+  oferty___description___children
+  oferty___description___children___id
+  oferty___description___children___children
+  oferty___description___internal___content
+  oferty___description___internal___contentDigest
+  oferty___description___internal___description
+  oferty___description___internal___fieldOwners
+  oferty___description___internal___ignoreType
+  oferty___description___internal___mediaType
+  oferty___description___internal___owner
+  oferty___description___internal___type
+  oferty___description___internal___contentFilePath
+  oferty___moreInformation___moreInformation
+  oferty___moreInformation___sys___type
+  oferty___moreInformation___id
+  oferty___moreInformation___parent___id
+  oferty___moreInformation___parent___children
+  oferty___moreInformation___children
+  oferty___moreInformation___children___id
+  oferty___moreInformation___children___children
+  oferty___moreInformation___internal___content
+  oferty___moreInformation___internal___contentDigest
+  oferty___moreInformation___internal___description
+  oferty___moreInformation___internal___fieldOwners
+  oferty___moreInformation___internal___ignoreType
+  oferty___moreInformation___internal___mediaType
+  oferty___moreInformation___internal___owner
+  oferty___moreInformation___internal___type
+  oferty___moreInformation___internal___contentFilePath
+  oferty___aboutdrinks___aboutdrinks
+  oferty___aboutdrinks___sys___type
+  oferty___aboutdrinks___id
+  oferty___aboutdrinks___parent___id
+  oferty___aboutdrinks___parent___children
+  oferty___aboutdrinks___children
+  oferty___aboutdrinks___children___id
+  oferty___aboutdrinks___children___children
+  oferty___aboutdrinks___internal___content
+  oferty___aboutdrinks___internal___contentDigest
+  oferty___aboutdrinks___internal___description
+  oferty___aboutdrinks___internal___fieldOwners
+  oferty___aboutdrinks___internal___ignoreType
+  oferty___aboutdrinks___internal___mediaType
+  oferty___aboutdrinks___internal___owner
+  oferty___aboutdrinks___internal___type
+  oferty___aboutdrinks___internal___contentFilePath
+  oferty___childrenContentfulOfertyShortdescriptionTextNode
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___sys___type
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___id
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___parent___id
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___parent___children
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___children
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___children___id
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___children___children
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___content
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___contentDigest
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___description
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___fieldOwners
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___ignoreType
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___mediaType
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___owner
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___type
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
+  oferty___childContentfulOfertyShortdescriptionTextNode___sys___type
+  oferty___childContentfulOfertyShortdescriptionTextNode___id
+  oferty___childContentfulOfertyShortdescriptionTextNode___parent___id
+  oferty___childContentfulOfertyShortdescriptionTextNode___parent___children
+  oferty___childContentfulOfertyShortdescriptionTextNode___children
+  oferty___childContentfulOfertyShortdescriptionTextNode___children___id
+  oferty___childContentfulOfertyShortdescriptionTextNode___children___children
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___content
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___contentDigest
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___description
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___fieldOwners
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___ignoreType
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___mediaType
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___owner
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___type
+  oferty___childContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
+  oferty___childrenContentfulOfertyOffersPageTextTextNode
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___sys___type
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___id
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___parent___id
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___parent___children
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___children
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___children___id
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___children___children
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___content
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___contentDigest
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___description
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___fieldOwners
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___ignoreType
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___mediaType
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___owner
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___type
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
+  oferty___childContentfulOfertyOffersPageTextTextNode___sys___type
+  oferty___childContentfulOfertyOffersPageTextTextNode___id
+  oferty___childContentfulOfertyOffersPageTextTextNode___parent___id
+  oferty___childContentfulOfertyOffersPageTextTextNode___parent___children
+  oferty___childContentfulOfertyOffersPageTextTextNode___children
+  oferty___childContentfulOfertyOffersPageTextTextNode___children___id
+  oferty___childContentfulOfertyOffersPageTextTextNode___children___children
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___content
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___contentDigest
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___description
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___fieldOwners
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___ignoreType
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___mediaType
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___owner
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___type
+  oferty___childContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
+  oferty___childrenContentfulOfertyDescriptionTextNode
+  oferty___childrenContentfulOfertyDescriptionTextNode___description
+  oferty___childrenContentfulOfertyDescriptionTextNode___sys___type
+  oferty___childrenContentfulOfertyDescriptionTextNode___id
+  oferty___childrenContentfulOfertyDescriptionTextNode___parent___id
+  oferty___childrenContentfulOfertyDescriptionTextNode___parent___children
+  oferty___childrenContentfulOfertyDescriptionTextNode___children
+  oferty___childrenContentfulOfertyDescriptionTextNode___children___id
+  oferty___childrenContentfulOfertyDescriptionTextNode___children___children
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___content
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___contentDigest
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___description
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___fieldOwners
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___ignoreType
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___mediaType
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___owner
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___type
+  oferty___childrenContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyDescriptionTextNode___description
+  oferty___childContentfulOfertyDescriptionTextNode___sys___type
+  oferty___childContentfulOfertyDescriptionTextNode___id
+  oferty___childContentfulOfertyDescriptionTextNode___parent___id
+  oferty___childContentfulOfertyDescriptionTextNode___parent___children
+  oferty___childContentfulOfertyDescriptionTextNode___children
+  oferty___childContentfulOfertyDescriptionTextNode___children___id
+  oferty___childContentfulOfertyDescriptionTextNode___children___children
+  oferty___childContentfulOfertyDescriptionTextNode___internal___content
+  oferty___childContentfulOfertyDescriptionTextNode___internal___contentDigest
+  oferty___childContentfulOfertyDescriptionTextNode___internal___description
+  oferty___childContentfulOfertyDescriptionTextNode___internal___fieldOwners
+  oferty___childContentfulOfertyDescriptionTextNode___internal___ignoreType
+  oferty___childContentfulOfertyDescriptionTextNode___internal___mediaType
+  oferty___childContentfulOfertyDescriptionTextNode___internal___owner
+  oferty___childContentfulOfertyDescriptionTextNode___internal___type
+  oferty___childContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  oferty___childrenContentfulOfertyMoreInformationTextNode
+  oferty___childrenContentfulOfertyMoreInformationTextNode___moreInformation
+  oferty___childrenContentfulOfertyMoreInformationTextNode___sys___type
+  oferty___childrenContentfulOfertyMoreInformationTextNode___id
+  oferty___childrenContentfulOfertyMoreInformationTextNode___parent___id
+  oferty___childrenContentfulOfertyMoreInformationTextNode___parent___children
+  oferty___childrenContentfulOfertyMoreInformationTextNode___children
+  oferty___childrenContentfulOfertyMoreInformationTextNode___children___id
+  oferty___childrenContentfulOfertyMoreInformationTextNode___children___children
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___content
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___contentDigest
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___description
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___fieldOwners
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___ignoreType
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___mediaType
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___owner
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___type
+  oferty___childrenContentfulOfertyMoreInformationTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyMoreInformationTextNode___moreInformation
+  oferty___childContentfulOfertyMoreInformationTextNode___sys___type
+  oferty___childContentfulOfertyMoreInformationTextNode___id
+  oferty___childContentfulOfertyMoreInformationTextNode___parent___id
+  oferty___childContentfulOfertyMoreInformationTextNode___parent___children
+  oferty___childContentfulOfertyMoreInformationTextNode___children
+  oferty___childContentfulOfertyMoreInformationTextNode___children___id
+  oferty___childContentfulOfertyMoreInformationTextNode___children___children
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___content
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___contentDigest
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___description
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___fieldOwners
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___ignoreType
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___mediaType
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___owner
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___type
+  oferty___childContentfulOfertyMoreInformationTextNode___internal___contentFilePath
+  oferty___childrenContentfulOfertyAboutdrinksTextNode
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___sys___type
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___id
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___parent___id
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___parent___children
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___children
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___children___id
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___children___children
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___content
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___contentDigest
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___description
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___fieldOwners
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___ignoreType
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___mediaType
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___owner
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___type
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  oferty___childContentfulOfertyAboutdrinksTextNode___sys___type
+  oferty___childContentfulOfertyAboutdrinksTextNode___id
+  oferty___childContentfulOfertyAboutdrinksTextNode___parent___id
+  oferty___childContentfulOfertyAboutdrinksTextNode___parent___children
+  oferty___childContentfulOfertyAboutdrinksTextNode___children
+  oferty___childContentfulOfertyAboutdrinksTextNode___children___id
+  oferty___childContentfulOfertyAboutdrinksTextNode___children___children
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___content
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___contentDigest
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___description
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___fieldOwners
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___ignoreType
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___mediaType
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___owner
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___type
+  oferty___childContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
+  oferty___parent___id
+  oferty___parent___parent___id
+  oferty___parent___parent___children
+  oferty___parent___children
+  oferty___parent___children___id
+  oferty___parent___children___children
+  oferty___parent___internal___content
+  oferty___parent___internal___contentDigest
+  oferty___parent___internal___description
+  oferty___parent___internal___fieldOwners
+  oferty___parent___internal___ignoreType
+  oferty___parent___internal___mediaType
+  oferty___parent___internal___owner
+  oferty___parent___internal___type
+  oferty___parent___internal___contentFilePath
+  oferty___children
+  oferty___children___id
+  oferty___children___parent___id
+  oferty___children___parent___children
+  oferty___children___children
+  oferty___children___children___id
+  oferty___children___children___children
+  oferty___children___internal___content
+  oferty___children___internal___contentDigest
+  oferty___children___internal___description
+  oferty___children___internal___fieldOwners
+  oferty___children___internal___ignoreType
+  oferty___children___internal___mediaType
+  oferty___children___internal___owner
+  oferty___children___internal___type
+  oferty___children___internal___contentFilePath
+  oferty___internal___content
+  oferty___internal___contentDigest
+  oferty___internal___description
+  oferty___internal___fieldOwners
+  oferty___internal___ignoreType
+  oferty___internal___mediaType
+  oferty___internal___owner
+  oferty___internal___type
+  oferty___internal___contentFilePath
+  description___description
+  description___sys___type
+  description___id
+  description___parent___id
+  description___parent___parent___id
+  description___parent___parent___children
+  description___parent___children
+  description___parent___children___id
+  description___parent___children___children
+  description___parent___internal___content
+  description___parent___internal___contentDigest
+  description___parent___internal___description
+  description___parent___internal___fieldOwners
+  description___parent___internal___ignoreType
+  description___parent___internal___mediaType
+  description___parent___internal___owner
+  description___parent___internal___type
+  description___parent___internal___contentFilePath
+  description___children
+  description___children___id
+  description___children___parent___id
+  description___children___parent___children
+  description___children___children
+  description___children___children___id
+  description___children___children___children
+  description___children___internal___content
+  description___children___internal___contentDigest
+  description___children___internal___description
+  description___children___internal___fieldOwners
+  description___children___internal___ignoreType
+  description___children___internal___mediaType
+  description___children___internal___owner
+  description___children___internal___type
+  description___children___internal___contentFilePath
+  description___internal___content
+  description___internal___contentDigest
+  description___internal___description
+  description___internal___fieldOwners
+  description___internal___ignoreType
+  description___internal___mediaType
+  description___internal___owner
+  description___internal___type
+  description___internal___contentFilePath
+  spaceId
+  createdAt
+  updatedAt
+  sys___type
+  sys___revision
+  sys___contentType___sys___type
+  sys___contentType___sys___linkType
+  sys___contentType___sys___id
+  childrenContentfulDrinkiDescriptionTextNode
+  childrenContentfulDrinkiDescriptionTextNode___description
+  childrenContentfulDrinkiDescriptionTextNode___sys___type
+  childrenContentfulDrinkiDescriptionTextNode___id
+  childrenContentfulDrinkiDescriptionTextNode___parent___id
+  childrenContentfulDrinkiDescriptionTextNode___parent___parent___id
+  childrenContentfulDrinkiDescriptionTextNode___parent___parent___children
+  childrenContentfulDrinkiDescriptionTextNode___parent___children
+  childrenContentfulDrinkiDescriptionTextNode___parent___children___id
+  childrenContentfulDrinkiDescriptionTextNode___parent___children___children
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___content
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___contentDigest
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___description
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___fieldOwners
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___ignoreType
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___mediaType
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___owner
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___type
+  childrenContentfulDrinkiDescriptionTextNode___parent___internal___contentFilePath
+  childrenContentfulDrinkiDescriptionTextNode___children
+  childrenContentfulDrinkiDescriptionTextNode___children___id
+  childrenContentfulDrinkiDescriptionTextNode___children___parent___id
+  childrenContentfulDrinkiDescriptionTextNode___children___parent___children
+  childrenContentfulDrinkiDescriptionTextNode___children___children
+  childrenContentfulDrinkiDescriptionTextNode___children___children___id
+  childrenContentfulDrinkiDescriptionTextNode___children___children___children
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___content
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___contentDigest
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___description
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___fieldOwners
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___ignoreType
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___mediaType
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___owner
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___type
+  childrenContentfulDrinkiDescriptionTextNode___children___internal___contentFilePath
+  childrenContentfulDrinkiDescriptionTextNode___internal___content
+  childrenContentfulDrinkiDescriptionTextNode___internal___contentDigest
+  childrenContentfulDrinkiDescriptionTextNode___internal___description
+  childrenContentfulDrinkiDescriptionTextNode___internal___fieldOwners
+  childrenContentfulDrinkiDescriptionTextNode___internal___ignoreType
+  childrenContentfulDrinkiDescriptionTextNode___internal___mediaType
+  childrenContentfulDrinkiDescriptionTextNode___internal___owner
+  childrenContentfulDrinkiDescriptionTextNode___internal___type
+  childrenContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  childContentfulDrinkiDescriptionTextNode___description
+  childContentfulDrinkiDescriptionTextNode___sys___type
+  childContentfulDrinkiDescriptionTextNode___id
+  childContentfulDrinkiDescriptionTextNode___parent___id
+  childContentfulDrinkiDescriptionTextNode___parent___parent___id
+  childContentfulDrinkiDescriptionTextNode___parent___parent___children
+  childContentfulDrinkiDescriptionTextNode___parent___children
+  childContentfulDrinkiDescriptionTextNode___parent___children___id
+  childContentfulDrinkiDescriptionTextNode___parent___children___children
+  childContentfulDrinkiDescriptionTextNode___parent___internal___content
+  childContentfulDrinkiDescriptionTextNode___parent___internal___contentDigest
+  childContentfulDrinkiDescriptionTextNode___parent___internal___description
+  childContentfulDrinkiDescriptionTextNode___parent___internal___fieldOwners
+  childContentfulDrinkiDescriptionTextNode___parent___internal___ignoreType
+  childContentfulDrinkiDescriptionTextNode___parent___internal___mediaType
+  childContentfulDrinkiDescriptionTextNode___parent___internal___owner
+  childContentfulDrinkiDescriptionTextNode___parent___internal___type
+  childContentfulDrinkiDescriptionTextNode___parent___internal___contentFilePath
+  childContentfulDrinkiDescriptionTextNode___children
+  childContentfulDrinkiDescriptionTextNode___children___id
+  childContentfulDrinkiDescriptionTextNode___children___parent___id
+  childContentfulDrinkiDescriptionTextNode___children___parent___children
+  childContentfulDrinkiDescriptionTextNode___children___children
+  childContentfulDrinkiDescriptionTextNode___children___children___id
+  childContentfulDrinkiDescriptionTextNode___children___children___children
+  childContentfulDrinkiDescriptionTextNode___children___internal___content
+  childContentfulDrinkiDescriptionTextNode___children___internal___contentDigest
+  childContentfulDrinkiDescriptionTextNode___children___internal___description
+  childContentfulDrinkiDescriptionTextNode___children___internal___fieldOwners
+  childContentfulDrinkiDescriptionTextNode___children___internal___ignoreType
+  childContentfulDrinkiDescriptionTextNode___children___internal___mediaType
+  childContentfulDrinkiDescriptionTextNode___children___internal___owner
+  childContentfulDrinkiDescriptionTextNode___children___internal___type
+  childContentfulDrinkiDescriptionTextNode___children___internal___contentFilePath
+  childContentfulDrinkiDescriptionTextNode___internal___content
+  childContentfulDrinkiDescriptionTextNode___internal___contentDigest
+  childContentfulDrinkiDescriptionTextNode___internal___description
+  childContentfulDrinkiDescriptionTextNode___internal___fieldOwners
+  childContentfulDrinkiDescriptionTextNode___internal___ignoreType
+  childContentfulDrinkiDescriptionTextNode___internal___mediaType
+  childContentfulDrinkiDescriptionTextNode___internal___owner
+  childContentfulDrinkiDescriptionTextNode___internal___type
+  childContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type ContentfulDrinkiGroupConnection {
+  totalCount: Int!
+  edges: [ContentfulDrinkiEdge!]!
+  nodes: [ContentfulDrinki!]!
+  pageInfo: PageInfo!
+  distinct(field: ContentfulDrinkiFieldsEnum!): [String!]!
+  max(field: ContentfulDrinkiFieldsEnum!): Float
+  min(field: ContentfulDrinkiFieldsEnum!): Float
+  sum(field: ContentfulDrinkiFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: ContentfulDrinkiFieldsEnum!): [ContentfulDrinkiGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input ContentfulDrinkiSortInput {
+  fields: [ContentfulDrinkiFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 
@@ -7784,6 +9878,546 @@ type contentfulOfertyOffersPageTextTextNodeGroupConnection {
 
 input contentfulOfertyOffersPageTextTextNodeSortInput {
   fields: [contentfulOfertyOffersPageTextTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulDrinkiDescriptionTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
+  nodes: [contentfulDrinkiDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
+}
+
+type contentfulDrinkiDescriptionTextNodeEdge {
+  next: contentfulDrinkiDescriptionTextNode
+  node: contentfulDrinkiDescriptionTextNode!
+  previous: contentfulDrinkiDescriptionTextNode
+}
+
+enum contentfulDrinkiDescriptionTextNodeFieldsEnum {
+  description
+  sys___type
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type contentfulDrinkiDescriptionTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
+  nodes: [contentfulDrinkiDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulDrinkiDescriptionTextNodeSortInput {
+  fields: [contentfulDrinkiDescriptionTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulOfertyDescriptionTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyDescriptionTextNodeEdge!]!
+  nodes: [contentfulOfertyDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyDescriptionTextNodeFieldsEnum!): [contentfulOfertyDescriptionTextNodeGroupConnection!]!
+}
+
+type contentfulOfertyDescriptionTextNodeEdge {
+  next: contentfulOfertyDescriptionTextNode
+  node: contentfulOfertyDescriptionTextNode!
+  previous: contentfulOfertyDescriptionTextNode
+}
+
+enum contentfulOfertyDescriptionTextNodeFieldsEnum {
+  description
+  sys___type
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type contentfulOfertyDescriptionTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyDescriptionTextNodeEdge!]!
+  nodes: [contentfulOfertyDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyDescriptionTextNodeFieldsEnum!): [contentfulOfertyDescriptionTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulOfertyDescriptionTextNodeSortInput {
+  fields: [contentfulOfertyDescriptionTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulOfertyMoreInformationTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyMoreInformationTextNodeEdge!]!
+  nodes: [contentfulOfertyMoreInformationTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): [contentfulOfertyMoreInformationTextNodeGroupConnection!]!
+}
+
+type contentfulOfertyMoreInformationTextNodeEdge {
+  next: contentfulOfertyMoreInformationTextNode
+  node: contentfulOfertyMoreInformationTextNode!
+  previous: contentfulOfertyMoreInformationTextNode
+}
+
+enum contentfulOfertyMoreInformationTextNodeFieldsEnum {
+  moreInformation
+  sys___type
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type contentfulOfertyMoreInformationTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyMoreInformationTextNodeEdge!]!
+  nodes: [contentfulOfertyMoreInformationTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyMoreInformationTextNodeFieldsEnum!): [contentfulOfertyMoreInformationTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulOfertyMoreInformationTextNodeSortInput {
+  fields: [contentfulOfertyMoreInformationTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulOfertyAboutdrinksTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyAboutdrinksTextNodeEdge!]!
+  nodes: [contentfulOfertyAboutdrinksTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): [contentfulOfertyAboutdrinksTextNodeGroupConnection!]!
+}
+
+type contentfulOfertyAboutdrinksTextNodeEdge {
+  next: contentfulOfertyAboutdrinksTextNode
+  node: contentfulOfertyAboutdrinksTextNode!
+  previous: contentfulOfertyAboutdrinksTextNode
+}
+
+enum contentfulOfertyAboutdrinksTextNodeFieldsEnum {
+  aboutdrinks
+  sys___type
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+}
+
+type contentfulOfertyAboutdrinksTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulOfertyAboutdrinksTextNodeEdge!]!
+  nodes: [contentfulOfertyAboutdrinksTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  min(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  sum(field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulOfertyAboutdrinksTextNodeFieldsEnum!): [contentfulOfertyAboutdrinksTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulOfertyAboutdrinksTextNodeSortInput {
+  fields: [contentfulOfertyAboutdrinksTextNodeFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 

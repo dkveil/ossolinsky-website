@@ -623,6 +623,7 @@ type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & Conten
     updatedAt: Date @dateformat
     sys: ContentfulKategorieDlaBlogaIGaleriiSys
     blog: [ContentfulBlog] @link(by: "id", from: "blog___NODE")
+    galeria: [ContentfulGaleria] @link(by: "id", from: "galeria___NODE")
 }
 
 type ContentfulKategorieDlaBlogaIGaleriiSys @derivedTypes {
@@ -636,6 +637,34 @@ type ContentfulKategorieDlaBlogaIGaleriiSysContentType @derivedTypes {
 }
 
 type ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys {
+    type: String
+    linkType: String
+    id: String
+}
+
+type ContentfulGaleria implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+    contentful_id: String!
+    node_locale: String!
+    title: String
+    category: ContentfulKategorieDlaBlogaIGalerii @link(by: "id", from: "category___NODE")
+    image: ContentfulAsset @link(by: "id", from: "image___NODE")
+    spaceId: String
+    createdAt: Date @dateformat
+    updatedAt: Date @dateformat
+    sys: ContentfulGaleriaSys
+}
+
+type ContentfulGaleriaSys @derivedTypes {
+    type: String
+    revision: Int
+    contentType: ContentfulGaleriaSysContentType
+}
+
+type ContentfulGaleriaSysContentType @derivedTypes {
+    sys: ContentfulGaleriaSysContentTypeSys
+}
+
+type ContentfulGaleriaSysContentTypeSys {
     type: String
     linkType: String
     id: String
@@ -680,6 +709,11 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node @d
     updatedAt: Date @dateformat
     sys: ContentfulOfertySys
     priority: Int
+    secondimage: ContentfulAsset @link(by: "id", from: "secondimage___NODE")
+    drinks: [ContentfulDrinki] @link(by: "id", from: "drinks___NODE")
+    description: contentfulOfertyDescriptionTextNode @link(by: "id", from: "description___NODE")
+    moreInformation: contentfulOfertyMoreInformationTextNode @link(by: "id", from: "moreInformation___NODE")
+    aboutdrinks: contentfulOfertyAboutdrinksTextNode @link(by: "id", from: "aboutdrinks___NODE")
 }
 
 type contentfulOfertyShortdescriptionTextNode implements Node @derivedTypes @childOf(types: ["ContentfulOferty"]) @dontInfer {
@@ -714,6 +748,71 @@ type ContentfulOfertySysContentTypeSys {
     type: String
     linkType: String
     id: String
+}
+
+type ContentfulDrinki implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
+    contentful_id: String!
+    node_locale: String!
+    name: String
+    image: ContentfulAsset @link(by: "id", from: "image___NODE")
+    oferty: [ContentfulOferty] @link(by: "id", from: "oferty___NODE")
+    description: contentfulDrinkiDescriptionTextNode @link(by: "id", from: "description___NODE")
+    spaceId: String
+    createdAt: Date @dateformat
+    updatedAt: Date @dateformat
+    sys: ContentfulDrinkiSys
+}
+
+type contentfulDrinkiDescriptionTextNode implements Node @derivedTypes @childOf(types: ["ContentfulDrinki"]) @dontInfer {
+    description: String
+    sys: contentfulDrinkiDescriptionTextNodeSys
+}
+
+type contentfulDrinkiDescriptionTextNodeSys {
+    type: String
+}
+
+type ContentfulDrinkiSys @derivedTypes {
+    type: String
+    revision: Int
+    contentType: ContentfulDrinkiSysContentType
+}
+
+type ContentfulDrinkiSysContentType @derivedTypes {
+    sys: ContentfulDrinkiSysContentTypeSys
+}
+
+type ContentfulDrinkiSysContentTypeSys {
+    type: String
+    linkType: String
+    id: String
+}
+
+type contentfulOfertyDescriptionTextNode implements Node @derivedTypes @childOf(types: ["ContentfulOferty"]) @dontInfer {
+    description: String
+    sys: contentfulOfertyDescriptionTextNodeSys
+}
+
+type contentfulOfertyDescriptionTextNodeSys {
+    type: String
+}
+
+type contentfulOfertyMoreInformationTextNode implements Node @derivedTypes @childOf(types: ["ContentfulOferty"]) @dontInfer {
+    moreInformation: String
+    sys: contentfulOfertyMoreInformationTextNodeSys
+}
+
+type contentfulOfertyMoreInformationTextNodeSys {
+    type: String
+}
+
+type contentfulOfertyAboutdrinksTextNode implements Node @derivedTypes @childOf(types: ["ContentfulOferty"]) @dontInfer {
+    aboutdrinks: String
+    sys: contentfulOfertyAboutdrinksTextNodeSys
+}
+
+type contentfulOfertyAboutdrinksTextNodeSys {
+    type: String
 }
 
 type ContentfulOMnieTresciNaPodstronie implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {
