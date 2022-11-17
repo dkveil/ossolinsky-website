@@ -6,8 +6,13 @@ import { Pagination } from 'components/Pagination';
 import { Wrapper, ImagesWrapper, ContentWrapper, EmptyState } from 'layouts/Gallerypage/Gallerypage.styles';
 import { GalleryCard } from 'components/GalleryCard';
 import { Gallery } from 'components/Gallery';
+import { isBrowser } from 'utils/isBrowser';
 
 const GalleryPage = (data) => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const { edges: images } = data.data.allContentfulGaleria;
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
     const { allGalleryItems } = data.data;

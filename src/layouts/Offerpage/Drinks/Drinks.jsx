@@ -23,10 +23,17 @@ export const Drinks = ({ about, drinks }) => {
                                 top: '-.2rem',
                                 left: '-1rem',
                             }}
-                            overlaySize={{
-                                width: '10rem',
-                                height: '4rem',
-                            }}
+                            overlaySize={
+                                isDesktopAndTablet()
+                                    ? {
+                                          width: '15.5rem',
+                                          height: '5.6rem',
+                                      }
+                                    : {
+                                          width: '10rem',
+                                          height: '4rem',
+                                      }
+                            }
                         >
                             Co serwuję?
                         </Heading>

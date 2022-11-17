@@ -42,6 +42,7 @@ export const Wrapper = styled.section`
 
 export const ContentWrapper = styled.div`
     padding: 12rem 0;
+    width: 100%;
 
     ${({ theme }) => theme.mq.tablet}{
         padding: 0;
@@ -49,16 +50,40 @@ export const ContentWrapper = styled.div`
         align-items: center;
         gap: 8rem;
         z-index: 1;
-
-        p{
-            width: calc(100% - 45%)
-        }
     }
 
     ${({ theme }) => theme.mq.desktop}{
-
         gap: 12rem;
     }
+`
+
+export const Content = styled.div`
+    font-size: ${({ theme }) => theme.font.size.mobile.paragraph};
+    line-height: 2.8rem;
+    color: ${({ theme }) => theme.color.text};
+
+    ul{
+        margin: 1rem 0;
+        list-style: none;
+        li{
+            position: relative;
+            padding-left: 1.5rem;
+            ::after{
+                position: absolute;
+                content: '\\2714';
+                top: 50%;
+                left: 0;
+                transform: translate(-50%,-50%);
+            }
+        }
+    }
+
+    ${({ theme }) => theme.mq.desktop} {
+        font-size: ${({ theme }) => theme.font.size.desktop.paragraph};
+        line-height: 3.2rem;
+        width: calc(55% - 12rem);
+    }
+
 `
 
 export const ImageWrapper = styled.div`
@@ -75,7 +100,6 @@ export const ImageWrapper = styled.div`
     ${({ theme }) => theme.mq.desktop}{
         height: 60rem;
         width: 45%;
-
 
         &::before{
             content: '';

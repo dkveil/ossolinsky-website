@@ -3,8 +3,13 @@ import { Wrapper, Heading, Paragraph, ContentWrapper } from 'layouts/404/404.sty
 import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 
 const NotFoundPage = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     return (
         <Wrapper>
             <Container>

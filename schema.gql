@@ -712,7 +712,7 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node @d
     secondimage: ContentfulAsset @link(by: "id", from: "secondimage___NODE")
     drinks: [ContentfulDrinki] @link(by: "id", from: "drinks___NODE")
     description: contentfulOfertyDescriptionTextNode @link(by: "id", from: "description___NODE")
-    moreInformation: contentfulOfertyMoreInformationTextNode @link(by: "id", from: "moreInformation___NODE")
+    moreInformations: ContentfulOfertyMoreInformations
     aboutdrinks: contentfulOfertyAboutdrinksTextNode @link(by: "id", from: "aboutdrinks___NODE")
 }
 
@@ -763,6 +763,10 @@ type ContentfulDrinki implements ContentfulReference & ContentfulEntry & Node @d
     sys: ContentfulDrinkiSys
 }
 
+type ContentfulOfertyMoreInformations {
+    raw: String
+}
+
 type contentfulDrinkiDescriptionTextNode implements Node @derivedTypes @childOf(types: ["ContentfulDrinki"]) @dontInfer {
     description: String
     sys: contentfulDrinkiDescriptionTextNodeSys
@@ -794,15 +798,6 @@ type contentfulOfertyDescriptionTextNode implements Node @derivedTypes @childOf(
 }
 
 type contentfulOfertyDescriptionTextNodeSys {
-    type: String
-}
-
-type contentfulOfertyMoreInformationTextNode implements Node @derivedTypes @childOf(types: ["ContentfulOferty"]) @dontInfer {
-    moreInformation: String
-    sys: contentfulOfertyMoreInformationTextNodeSys
-}
-
-type contentfulOfertyMoreInformationTextNodeSys {
     type: String
 }
 

@@ -1,11 +1,18 @@
 import React from 'react';
 import { FormInfo, About } from 'layouts/Contact';
+import { isBrowser } from 'utils/isBrowser';
 
 const ContactPage = () => {
-    return <>
-        <About />
-        <FormInfo />
-    </>;
+    if (!isBrowser) {
+        return null;
+    }
+
+    return (
+        <>
+            <About />
+            <FormInfo />
+        </>
+    );
 };
 
 export default ContactPage;

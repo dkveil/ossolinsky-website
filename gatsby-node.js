@@ -14,11 +14,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                             category {
                                 name
                             }
-                            shortdescription{
+                            shortdescription {
                                 shortdescription
                             }
                             slug
-                            image{
+                            image {
                                 gatsbyImageData
                             }
                         }
@@ -63,6 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                         image {
                             gatsbyImageData
                         }
+                        createdAt(formatString: "DD.MM.YYYY")
                     }
                 }
             }
@@ -152,10 +153,40 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 edges{
                     node{
                         title
+                        description {
+                            description
+                        }
+                        image {
+                            gatsbyImageData
+                        }
+                        moreInformations {
+                            raw
+                        }
+                        secondimage {
+                            gatsbyImageData
+                        }
+                        aboutdrinks {
+                            aboutdrinks
+                        }
+                        drinks {
+                            name
+                            description {
+                                description
+                            }
+                            image {
+                                gatsbyImageData
+                            }
+                        }
                         iscontact
                         slug
                     }
                 }
+            }
+            phonenumber: contentfulDaneKontaktowe(contactid: { eq: "Numer telefonu" }) {
+                content
+            }
+            email: contentfulDaneKontaktowe(contactid: { eq: "Adres e-mail" }) {
+                content
             }
         }
     `).then(res => res.data)
@@ -166,6 +197,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
 
     const offers = offerpages.allContentfulOferty.edges;
+    const phonenumber = offerpages.phonenumber.content
+    const email = offerpages.email.content
 
     offers.map(offer => {
         if (!offer.node.iscontact) {
@@ -174,6 +207,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 component: path.resolve("./src/templates/OfferPageTemplate.jsx"),
                 context: {
                     title: offer.node.title,
+                    description: offer.node.description.description,
+                    image: offer.node.image.gatsbyImageData,
+                    moreInformations: offer.node.moreInformations,
+                    secondimage: offer.node.secondimage.gatsbyImageData,
+                    aboutdrinks: offer.node.aboutdrinks.aboutdrinks,
+                    drinks: offer.node.drinks,
+                    phonenumber,
+                    email
                 }
             })
         }

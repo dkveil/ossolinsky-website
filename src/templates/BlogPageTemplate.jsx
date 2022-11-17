@@ -5,8 +5,13 @@ import { Container } from 'styles/Container';
 import { BlogPostCard } from 'components/BlogPostCard/BlogPostCard';
 import { Wrapper, BlogPostsWrapper, ContentWrapper, EmptyState } from 'layouts/Blogpage/Blogpage.styles';
 import { Pagination } from 'components/Pagination';
+import { isBrowser } from 'utils/isBrowser';
 
 const BlogPage = (data) => {
+    if (!isBrowser) {
+        return null;
+    }
+
     const { edges: blogposts } = data.data.allContentfulBlog;
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
     const { currentPage, numPages } = data.pageContext;

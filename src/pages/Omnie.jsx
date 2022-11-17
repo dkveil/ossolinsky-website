@@ -1,8 +1,13 @@
 import React from 'react';
 import { Welcome, AboutBartending, Testimonial } from 'layouts/AboutMe';
 import { isDesktop } from 'utils/isDesktop';
+import { isBrowser } from 'utils/isBrowser';
 
 const AboutMePage = () => {
+    if (!isBrowser) {
+        return null;
+    }
+
     return (
         <>
             <Welcome />
