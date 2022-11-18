@@ -7,7 +7,8 @@ export const theme = {
         gray: '#F1F1F1',
         text: '#5F5F5F',
         navhover: '#5F5F5F',
-        transitionposition: '36%'
+        transitionposition: '36%',
+        category: '#7E7F83'
     },
     font: {
         family: 'Poppins, sans-serif',

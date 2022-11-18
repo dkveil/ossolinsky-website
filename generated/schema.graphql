@@ -1123,7 +1123,9 @@ type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node {
   title: String
   category: ContentfulKategorieDlaBlogaIGalerii
   slug: String
+  articlecontent: ContentfulBlogArticlecontent
   image: ContentfulAsset
+  gallery: [ContentfulAsset]
   shortdescription: contentfulBlogShortdescriptionTextNode
   spaceId: String
   createdAt(
@@ -1946,6 +1948,11 @@ type ContentfulOpinieSysContentTypeSys {
   id: String
 }
 
+type ContentfulBlogArticlecontent {
+  raw: String
+  references: [ContentfulAsset]
+}
+
 type ContentfulKategorieDlaBlogaIGaleriiSys {
   type: String
   revision: Int
@@ -2193,7 +2200,7 @@ type Query {
   allContentfulDaneKontaktowe(filter: ContentfulDaneKontaktoweFilterInput, sort: ContentfulDaneKontaktoweSortInput, skip: Int, limit: Int): ContentfulDaneKontaktoweConnection!
   contentfulOpinie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, author: StringQueryOperatorInput, position: StringQueryOperatorInput, image: ContentfulAssetFilterInput, blockquote: contentfulOpinieBlockquoteTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOpinieSysFilterInput, childrenContentfulOpinieBlockquoteTextNode: contentfulOpinieBlockquoteTextNodeFilterListInput, childContentfulOpinieBlockquoteTextNode: contentfulOpinieBlockquoteTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOpinie
   allContentfulOpinie(filter: ContentfulOpinieFilterInput, sort: ContentfulOpinieSortInput, skip: Int, limit: Int): ContentfulOpinieConnection!
-  contentfulBlog(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulBlogSysFilterInput, childrenContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterListInput, childContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulBlog
+  contentfulBlog(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, slug: StringQueryOperatorInput, articlecontent: ContentfulBlogArticlecontentFilterInput, image: ContentfulAssetFilterInput, gallery: ContentfulAssetFilterListInput, shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulBlogSysFilterInput, childrenContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterListInput, childContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulBlog
   allContentfulBlog(filter: ContentfulBlogFilterInput, sort: ContentfulBlogSortInput, skip: Int, limit: Int): ContentfulBlogConnection!
   contentfulOferty(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, iscontact: BooleanQueryOperatorInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput, offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOfertySysFilterInput, priority: IntQueryOperatorInput, secondimage: ContentfulAssetFilterInput, drinks: ContentfulDrinkiFilterListInput, description: contentfulOfertyDescriptionTextNodeFilterInput, moreInformations: ContentfulOfertyMoreInformationsFilterInput, aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput, childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput, childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput, childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput, childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput, childrenContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterListInput, childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterInput, childrenContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterListInput, childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOferty
   allContentfulOferty(filter: ContentfulOfertyFilterInput, sort: ContentfulOfertySortInput, skip: Int, limit: Int): ContentfulOfertyConnection!
@@ -4928,7 +4935,9 @@ input ContentfulBlogFilterInput {
   title: StringQueryOperatorInput
   category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
   slug: StringQueryOperatorInput
+  articlecontent: ContentfulBlogArticlecontentFilterInput
   image: ContentfulAssetFilterInput
+  gallery: ContentfulAssetFilterListInput
   shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput
   spaceId: StringQueryOperatorInput
   createdAt: DateQueryOperatorInput
@@ -4939,6 +4948,15 @@ input ContentfulBlogFilterInput {
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+}
+
+input ContentfulBlogArticlecontentFilterInput {
+  raw: StringQueryOperatorInput
+  references: ContentfulAssetFilterListInput
+}
+
+input ContentfulAssetFilterListInput {
+  elemMatch: ContentfulAssetFilterInput
 }
 
 input contentfulBlogShortdescriptionTextNodeFilterInput {
@@ -5060,6 +5078,8 @@ enum ContentfulBlogFieldsEnum {
   category___blog___category___galeria
   category___blog___category___children
   category___blog___slug
+  category___blog___articlecontent___raw
+  category___blog___articlecontent___references
   category___blog___image___contentful_id
   category___blog___image___id
   category___blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -5080,6 +5100,27 @@ enum ContentfulBlogFieldsEnum {
   category___blog___image___filesize
   category___blog___image___publicUrl
   category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___gallery
+  category___blog___gallery___contentful_id
+  category___blog___gallery___id
+  category___blog___gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___gallery___spaceId
+  category___blog___gallery___createdAt
+  category___blog___gallery___updatedAt
+  category___blog___gallery___title
+  category___blog___gallery___description
+  category___blog___gallery___node_locale
+  category___blog___gallery___url
+  category___blog___gallery___placeholderUrl
+  category___blog___gallery___mimeType
+  category___blog___gallery___filename
+  category___blog___gallery___width
+  category___blog___gallery___height
+  category___blog___gallery___size
+  category___blog___gallery___children
+  category___blog___gallery___filesize
+  category___blog___gallery___publicUrl
+  category___blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   category___blog___shortdescription___shortdescription
   category___blog___shortdescription___id
   category___blog___shortdescription___children
@@ -5205,6 +5246,49 @@ enum ContentfulBlogFieldsEnum {
   category___internal___type
   category___internal___contentFilePath
   slug
+  articlecontent___raw
+  articlecontent___references
+  articlecontent___references___contentful_id
+  articlecontent___references___id
+  articlecontent___references___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  articlecontent___references___spaceId
+  articlecontent___references___createdAt
+  articlecontent___references___updatedAt
+  articlecontent___references___file___url
+  articlecontent___references___file___fileName
+  articlecontent___references___file___contentType
+  articlecontent___references___title
+  articlecontent___references___description
+  articlecontent___references___node_locale
+  articlecontent___references___sys___type
+  articlecontent___references___sys___revision
+  articlecontent___references___url
+  articlecontent___references___placeholderUrl
+  articlecontent___references___mimeType
+  articlecontent___references___filename
+  articlecontent___references___width
+  articlecontent___references___height
+  articlecontent___references___size
+  articlecontent___references___parent___id
+  articlecontent___references___parent___children
+  articlecontent___references___children
+  articlecontent___references___children___id
+  articlecontent___references___children___children
+  articlecontent___references___internal___content
+  articlecontent___references___internal___contentDigest
+  articlecontent___references___internal___description
+  articlecontent___references___internal___fieldOwners
+  articlecontent___references___internal___ignoreType
+  articlecontent___references___internal___mediaType
+  articlecontent___references___internal___owner
+  articlecontent___references___internal___type
+  articlecontent___references___internal___contentFilePath
+  articlecontent___references___filesize
+  articlecontent___references___publicUrl
+  articlecontent___references___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  articlecontent___references___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  articlecontent___references___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  articlecontent___references___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___contentful_id
   image___id
   image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -5273,6 +5357,75 @@ enum ContentfulBlogFieldsEnum {
   image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  gallery
+  gallery___contentful_id
+  gallery___id
+  gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  gallery___spaceId
+  gallery___createdAt
+  gallery___updatedAt
+  gallery___file___url
+  gallery___file___details___size
+  gallery___file___fileName
+  gallery___file___contentType
+  gallery___title
+  gallery___description
+  gallery___node_locale
+  gallery___sys___type
+  gallery___sys___revision
+  gallery___url
+  gallery___placeholderUrl
+  gallery___mimeType
+  gallery___filename
+  gallery___width
+  gallery___height
+  gallery___size
+  gallery___parent___id
+  gallery___parent___parent___id
+  gallery___parent___parent___children
+  gallery___parent___children
+  gallery___parent___children___id
+  gallery___parent___children___children
+  gallery___parent___internal___content
+  gallery___parent___internal___contentDigest
+  gallery___parent___internal___description
+  gallery___parent___internal___fieldOwners
+  gallery___parent___internal___ignoreType
+  gallery___parent___internal___mediaType
+  gallery___parent___internal___owner
+  gallery___parent___internal___type
+  gallery___parent___internal___contentFilePath
+  gallery___children
+  gallery___children___id
+  gallery___children___parent___id
+  gallery___children___parent___children
+  gallery___children___children
+  gallery___children___children___id
+  gallery___children___children___children
+  gallery___children___internal___content
+  gallery___children___internal___contentDigest
+  gallery___children___internal___description
+  gallery___children___internal___fieldOwners
+  gallery___children___internal___ignoreType
+  gallery___children___internal___mediaType
+  gallery___children___internal___owner
+  gallery___children___internal___type
+  gallery___children___internal___contentFilePath
+  gallery___internal___content
+  gallery___internal___contentDigest
+  gallery___internal___description
+  gallery___internal___fieldOwners
+  gallery___internal___ignoreType
+  gallery___internal___mediaType
+  gallery___internal___owner
+  gallery___internal___type
+  gallery___internal___contentFilePath
+  gallery___filesize
+  gallery___publicUrl
+  gallery___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  gallery___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  gallery___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   shortdescription___shortdescription
   shortdescription___sys___type
   shortdescription___id
@@ -7395,6 +7548,7 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___category___blog___node_locale
   blog___category___blog___title
   blog___category___blog___slug
+  blog___category___blog___gallery
   blog___category___blog___spaceId
   blog___category___blog___createdAt
   blog___category___blog___updatedAt
@@ -7424,6 +7578,28 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___category___internal___type
   blog___category___internal___contentFilePath
   blog___slug
+  blog___articlecontent___raw
+  blog___articlecontent___references
+  blog___articlecontent___references___contentful_id
+  blog___articlecontent___references___id
+  blog___articlecontent___references___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___articlecontent___references___spaceId
+  blog___articlecontent___references___createdAt
+  blog___articlecontent___references___updatedAt
+  blog___articlecontent___references___title
+  blog___articlecontent___references___description
+  blog___articlecontent___references___node_locale
+  blog___articlecontent___references___url
+  blog___articlecontent___references___placeholderUrl
+  blog___articlecontent___references___mimeType
+  blog___articlecontent___references___filename
+  blog___articlecontent___references___width
+  blog___articlecontent___references___height
+  blog___articlecontent___references___size
+  blog___articlecontent___references___children
+  blog___articlecontent___references___filesize
+  blog___articlecontent___references___publicUrl
+  blog___articlecontent___references___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___image___contentful_id
   blog___image___id
   blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -7465,6 +7641,48 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___gallery
+  blog___gallery___contentful_id
+  blog___gallery___id
+  blog___gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___gallery___spaceId
+  blog___gallery___createdAt
+  blog___gallery___updatedAt
+  blog___gallery___file___url
+  blog___gallery___file___fileName
+  blog___gallery___file___contentType
+  blog___gallery___title
+  blog___gallery___description
+  blog___gallery___node_locale
+  blog___gallery___sys___type
+  blog___gallery___sys___revision
+  blog___gallery___url
+  blog___gallery___placeholderUrl
+  blog___gallery___mimeType
+  blog___gallery___filename
+  blog___gallery___width
+  blog___gallery___height
+  blog___gallery___size
+  blog___gallery___parent___id
+  blog___gallery___parent___children
+  blog___gallery___children
+  blog___gallery___children___id
+  blog___gallery___children___children
+  blog___gallery___internal___content
+  blog___gallery___internal___contentDigest
+  blog___gallery___internal___description
+  blog___gallery___internal___fieldOwners
+  blog___gallery___internal___ignoreType
+  blog___gallery___internal___mediaType
+  blog___gallery___internal___owner
+  blog___gallery___internal___type
+  blog___gallery___internal___contentFilePath
+  blog___gallery___filesize
+  blog___gallery___publicUrl
+  blog___gallery___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___gallery___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___gallery___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___shortdescription___shortdescription
   blog___shortdescription___sys___type
   blog___shortdescription___id
@@ -7583,6 +7801,7 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   galeria___category___blog___node_locale
   galeria___category___blog___title
   galeria___category___blog___slug
+  galeria___category___blog___gallery
   galeria___category___blog___spaceId
   galeria___category___blog___createdAt
   galeria___category___blog___updatedAt
@@ -7860,6 +8079,8 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___category___galeria
   category___blog___category___children
   category___blog___slug
+  category___blog___articlecontent___raw
+  category___blog___articlecontent___references
   category___blog___image___contentful_id
   category___blog___image___id
   category___blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -7880,6 +8101,27 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___image___filesize
   category___blog___image___publicUrl
   category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___gallery
+  category___blog___gallery___contentful_id
+  category___blog___gallery___id
+  category___blog___gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___gallery___spaceId
+  category___blog___gallery___createdAt
+  category___blog___gallery___updatedAt
+  category___blog___gallery___title
+  category___blog___gallery___description
+  category___blog___gallery___node_locale
+  category___blog___gallery___url
+  category___blog___gallery___placeholderUrl
+  category___blog___gallery___mimeType
+  category___blog___gallery___filename
+  category___blog___gallery___width
+  category___blog___gallery___height
+  category___blog___gallery___size
+  category___blog___gallery___children
+  category___blog___gallery___filesize
+  category___blog___gallery___publicUrl
+  category___blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   category___blog___shortdescription___shortdescription
   category___blog___shortdescription___id
   category___blog___shortdescription___children

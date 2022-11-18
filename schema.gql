@@ -605,12 +605,19 @@ type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node @der
     title: String
     category: ContentfulKategorieDlaBlogaIGalerii @link(by: "id", from: "category___NODE")
     slug: String
+    articlecontent: ContentfulBlogArticlecontent
     image: ContentfulAsset @link(by: "id", from: "image___NODE")
+    gallery: [ContentfulAsset] @link(by: "id", from: "gallery___NODE")
     shortdescription: contentfulBlogShortdescriptionTextNode @link(by: "id", from: "shortdescription___NODE")
     spaceId: String
     createdAt: Date @dateformat
     updatedAt: Date @dateformat
     sys: ContentfulBlogSys
+}
+
+type ContentfulBlogArticlecontent {
+    raw: String
+    references: [ContentfulAsset] @link(by: "id", from: "references___NODE")
 }
 
 type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & ContentfulEntry & Node @derivedTypes @dontInfer {

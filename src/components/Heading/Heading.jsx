@@ -16,9 +16,10 @@ export const Heading = styled(
         mobileFontSize,
         tabletFontSize,
         desktopFontSize,
+        component,
         ...props
     }) => {
-        const HtmlTag = variant === 'subpage h1' ? 'h1' : variant === 'offerspage' ? 'h3' : variant;
+        const HtmlTag = component ? component : variant === 'subpage h1' ? 'h1' : variant === 'offerspage' ? 'h3' : variant;
         return <HtmlTag {...props}>{children}</HtmlTag>;
     }
 )(

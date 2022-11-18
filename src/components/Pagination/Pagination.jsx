@@ -18,7 +18,7 @@ export const Pagination = ({ pages, styles, active, setPage, increment, decremen
                 {items.map((i) => (
                     <Dot
                         key={i}
-                        isActive={i && !numericPagination === active ? true : numericPagination && i + 1 === active}
+                        isActive={!numericPagination && i === active ? true : numericPagination && i + 1 === active}
                         onClick={() => setPage(i)}
                         numeric={numericPagination}
                     >

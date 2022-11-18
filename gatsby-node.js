@@ -219,4 +219,61 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             })
         }
     })
+
+    const articlepages = await graphql(`
+        {
+            allContentfulBlog(sort: {fields: createdAt, order: DESC}){
+                edges{
+                    node{
+                        title
+                        category {
+                            name
+                        }
+                        articlecontent {
+                            raw
+                            references {
+                                ... on ContentfulAsset {
+                                    contentful_id
+                                    title
+                                    gatsbyImageData
+                                    __typename
+                                }
+                            }
+                        }
+                        image{
+                            gatsbyImageData
+                        }
+                        slug
+                        gallery{
+                            gatsbyImageData
+                        }
+                        createdAt
+                    }
+                }
+            }
+        }
+    `).then(res => res.data)
+
+    if (articlepages.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`)
+        return
+    }
+
+    const articles = articlepages.allContentfulBlog.edges
+
+    articles.map(article => {
+        createPage({
+            path: `/blog/${article.node.slug}`,
+            component: path.resolve("./src/templates/ArticlePageTemplate.jsx"),
+            context: {
+                title: article.node.title,
+                date: article.node.createdAt,
+                category: article.node.category.name,
+                articlecontent: article.node.articlecontent,
+                image: article.node.image.gatsbyImageData,
+                gallery: article.node.gallery
+            }
+        })
+    })
+
 }

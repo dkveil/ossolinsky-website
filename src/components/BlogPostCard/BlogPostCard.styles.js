@@ -1,5 +1,53 @@
 import styled, { css } from 'styled-components';
 
+export const ImageWrapper = styled.div`
+    width: 100%;
+    height: ${({ main, blogpage }) => main || blogpage ? '20rem' : '10rem'};
+
+
+    ${({ blogpage }) => blogpage && css`
+        overflow: ${({ blogpage }) => blogpage && 'hidden'};
+
+        div {
+            transition: transform .2s ease;
+        }
+
+        :hover{
+            div {
+                transform: scale(1.1);
+            }
+        }
+
+
+    `}
+
+    ${({ theme }) => theme.mq.tablet}{
+        height: ${({ main }) => main ? '34rem' : '22rem'};
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        position: relative;
+        width: ${({ main, blogpage }) => main || blogpage ? '100%' : '35%'};
+        height: ${({ main, blogpage }) => main ? '40rem' : blogpage ? '24rem' : '100%'};
+        border-right: ${({ main, theme, blogpage }) => !main && !blogpage && `2px solid ${theme.color.gray}`};
+        margin: 0;
+        border: ${({ theme, blogpage }) => !blogpage && `2px solid ${theme.color.gray}`};
+
+        ${({ main }) => main && css`
+            ::after{
+                content: '';
+                top: -1.5rem;
+                left: -1.5rem;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: ${({ theme }) => theme.color.black};
+                z-index: -1;
+            }
+        `}
+    }
+`
+
 export const Wrapper = styled.article`
     width: ${({ blogpage }) => blogpage ? '100%' : 'calc(50% - 1rem)'};
     padding-bottom: ${({ blogpage }) => blogpage ? '0' : '1rem'};
@@ -139,7 +187,6 @@ export const Wrapper = styled.article`
         `
 
     }
-
 `
 
 export const Date = styled.time`
@@ -159,38 +206,6 @@ export const Category = styled.span`
         display: ${({ main }) => !main && 'block'};
     }
 
-`
-
-
-export const ImageWrapper = styled.div`
-    width: 100%;
-    height: ${({ main, blogpage }) => main || blogpage ? '20rem' : '10rem'};
-
-    ${({ theme }) => theme.mq.tablet}{
-        height: ${({ main }) => main ? '34rem' : '22rem'};
-    }
-
-    ${({ theme }) => theme.mq.desktop}{
-        position: relative;
-        width: ${({ main, blogpage }) => main || blogpage ? '100%' : '35%'};
-        height: ${({ main, blogpage }) => main ? '40rem' : blogpage ? '24rem' : '100%'};
-        border-right: ${({ main, theme, blogpage }) => !main && !blogpage && `2px solid ${theme.color.gray}`};
-        margin: 0;
-        border: ${({ theme, blogpage }) => !blogpage && `2px solid ${theme.color.gray}`};
-
-        ${({ main }) => main && css`
-            ::after{
-                content: '';
-                top: -1.5rem;
-                left: -1.5rem;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background-color: ${({ theme }) => theme.color.black};
-                z-index: -1;
-            }
-        `}
-    }
 `
 
 export const ContentWrapper = styled.div`

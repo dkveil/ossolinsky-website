@@ -15,7 +15,7 @@ export const Contact = ({ phonenumber, email }) => {
                         Zainteresowany ofertą?
                     </Heading>
                     <SectionParagraph textAlign="center">
-                        Opowiedz mi o swojej imprezie kontaktując się ze mną bezspośrednio lub skorzystaj z formularza kontaktowego! :)
+                        Opowiedz mi o swojej imprezie kontaktując się ze mną bezspośrednio lub skorzystaj z formularza kontaktowego!
                     </SectionParagraph>
                     <address>
                         {phonenumber && <span>{phonenumber}</span>}

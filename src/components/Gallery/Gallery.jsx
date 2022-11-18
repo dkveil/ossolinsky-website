@@ -82,10 +82,10 @@ export const Gallery = ({ closeGallery, items, firstActive }) => {
                     <CloseIcon />
                 </IconWrapper>
                 <ImageWrapper>
-                    <IconWrapper top={'50%'} left={0} transform="translateY(-50%)" onClick={decrement}>
-                        <LeftArrow />
-                    </IconWrapper>
                     <IconWrapper top={'50%'} right={0} transform="translateY(-50%)" onClick={increment}>
+                        <RightArrow />
+                    </IconWrapper>
+                    <IconWrapper top={'50%'} left={0} transform="translateY(-50%) rotate(180deg)" onClick={decrement}>
                         <RightArrow />
                     </IconWrapper>
                     <ImageDisplayer hideImage={hideImage}>
