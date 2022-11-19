@@ -60,6 +60,11 @@ export const ArticleContentWrapper = styled.article`
         margin: -3rem 0 0;
         padding-left: 1rem;
     }
+    blockquote{
+        color: ${({ theme }) => theme.color.black};
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
 `
 
 export const ImageWrapper = styled.div`
