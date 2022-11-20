@@ -20,6 +20,13 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { getYTEmbedLink } from 'utils/getYTEmbedLink';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { StyledIcon } from 'components/StyledIcon';
+import FacebookIcon from 'assets/icons/facebook.svg';
+import LinkedinIcon from 'assets/icons/linkedin.svg';
+import MessengerIcon from 'assets/icons/messenger.svg';
+import TwitterIcon from 'assets/icons/twitter.svg';
+import GoogleIcon from 'assets/icons/google.svg';
+import PinterestIcon from 'assets/icons/pinterest.svg';
+import CopyLinkIcon from 'assets/icons/share.svg';
 
 const options = {
     renderNode: {
@@ -109,12 +116,6 @@ export const ArticleContent = ({ articlecontent, gallery }) => {
                             </GalleryInfo>
                         </GalleryWrapper>
                     )}
-                    <SocialShareWrapper>
-                        <hr />
-                        <div>
-                            <SocialIconsWrapper></SocialIconsWrapper>
-                        </div>
-                    </SocialShareWrapper>
                 </ContentWrapper>
             </Container>
         </Wrapper>

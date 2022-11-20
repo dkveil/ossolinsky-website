@@ -4,7 +4,6 @@ export const ImageWrapper = styled.div`
     width: 100%;
     height: ${({ main, blogpage }) => main || blogpage ? '20rem' : '10rem'};
 
-
     ${({ blogpage }) => blogpage && css`
         overflow: ${({ blogpage }) => blogpage && 'hidden'};
 
@@ -51,6 +50,7 @@ export const ImageWrapper = styled.div`
 export const Wrapper = styled.article`
     width: ${({ blogpage }) => blogpage ? '100%' : 'calc(50% - 1rem)'};
     padding-bottom: ${({ blogpage }) => blogpage ? '0' : '1rem'};
+    min-height: ${({ blogpage }) => blogpage && '32rem'};
 
     ${({ theme }) => theme.mq.tablet}{
         width: ${({ blogpage }) => blogpage ? 'calc(50% - 1rem)' : null};
