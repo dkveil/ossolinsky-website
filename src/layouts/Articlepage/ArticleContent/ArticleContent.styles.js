@@ -67,6 +67,17 @@ export const ArticleContentWrapper = styled.article`
     }
 `
 
+export const SocialShareWrapper = styled.div`
+    hr{
+        border: none;
+        border-top: 1px solid ${({ theme }) => theme.color.black};
+    }
+`
+
+export const SocialIconsWrapper = styled.div`
+
+`
+
 export const ImageWrapper = styled.div`
     height: auto;
     width: 100%;

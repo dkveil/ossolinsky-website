@@ -10,6 +10,8 @@ import {
     GalleryImageWrapper,
     StyledArrowLeft,
     StyledArrowRight,
+    SocialShareWrapper,
+    SocialIconsWrapper,
 } from './ArticleContent.styles';
 import { Container } from 'styles/Container';
 import { PropTypes } from 'prop-types';
@@ -17,6 +19,7 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { getYTEmbedLink } from 'utils/getYTEmbedLink';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { StyledIcon } from 'components/StyledIcon';
 
 const options = {
     renderNode: {
@@ -106,6 +109,12 @@ export const ArticleContent = ({ articlecontent, gallery }) => {
                             </GalleryInfo>
                         </GalleryWrapper>
                     )}
+                    <SocialShareWrapper>
+                        <hr />
+                        <div>
+                            <SocialIconsWrapper></SocialIconsWrapper>
+                        </div>
+                    </SocialShareWrapper>
                 </ContentWrapper>
             </Container>
         </Wrapper>
