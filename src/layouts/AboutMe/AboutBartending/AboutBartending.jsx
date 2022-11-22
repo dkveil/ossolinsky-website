@@ -27,7 +27,7 @@ export const AboutBartending = () => {
     );
 
     return (
-        <Wrapper>
+        <Wrapper id="about-bartending">
             <Container>
                 <ContentContainer>
                     <ImageWrapper>
@@ -39,7 +39,7 @@ export const AboutBartending = () => {
                             alt="about-bartending-image"
                         />
                     </ImageWrapper>
-                    <ContentWrapper>
+                    <ContentWrapper id="about-bartending-content">
                         <Heading
                             variant="h2"
                             color="black"

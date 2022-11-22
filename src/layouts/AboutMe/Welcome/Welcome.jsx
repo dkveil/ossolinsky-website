@@ -9,6 +9,7 @@ import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
 import parse from 'html-react-parser';
+import { isBrowser } from 'utils/isBrowser';
 
 export const Welcome = () => {
     const { embeddedwelcomeimage, welcomecontent, dynamicwelcomeimage } = useStaticQuery(query);
@@ -22,6 +23,20 @@ export const Welcome = () => {
     const embeddedText = `Nazywam się Mikołaj Ossoliński. Mam 21 lat i studiuje na krakowskiej uczelni. Zawsze chciałem otworzyć własną
                             działalność, żeby być niezależnym. Każdy mówił: „znajdź sobie pracę do której będziesz lubił chodzić, wtedy nie
                             spędzisz ani minuty w pracy”. Skoro znajdujesz się na tej stronie udało mi się tego dokonać.`;
+
+    const isdesktopchecker = isDesktop();
+
+    const handleScroll = () => {
+        const aboutbartendingsection = document.getElementById('about-bartending');
+        if (isBrowser) {
+            const extrasize = isdesktopchecker ? 100 : 200;
+
+            window.scrollTo({
+                top: (aboutbartendingsection.offsetTop + aboutbartendingsection.offsetHeight) / 2 + extrasize,
+                behavior: 'smooth',
+            });
+        }
+    };
 
     return (
         <Wrapper>
@@ -86,7 +101,7 @@ export const Welcome = () => {
                                 ? parse(welcomecontent.content.content)
                                 : embeddedText}
                         </SectionParagraph>
-                        <Button variant="text" onClickHandler={() => console.log('test')}>
+                        <Button variant="text" onClickHandler={handleScroll}>
                             Czytaj dalej
                         </Button>
                     </ContentWrapper>

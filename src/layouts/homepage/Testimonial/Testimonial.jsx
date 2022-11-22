@@ -19,6 +19,10 @@ export const Testimonial = () => {
     const [touchStart, setTouchStart] = React.useState(null);
     const desktopTestimonialItems = [leftsidetestimontial, midsidetestimontial, rightsidetestimontial];
 
+    if (testimonialitems.totalCount < 3) {
+        return null;
+    }
+
     const isDesktopAndTabletChecker = isDesktopAndTablet();
 
     React.useEffect(() => {

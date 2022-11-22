@@ -77,6 +77,9 @@ export const Content = styled.div`
             }
         }
     }
+    ${({ theme }) => theme.mq.tablet}{
+        width: calc(55% - 8rem);
+    }
 
     ${({ theme }) => theme.mq.desktop} {
         font-size: ${({ theme }) => theme.font.size.desktop.paragraph};

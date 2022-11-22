@@ -6,7 +6,6 @@ import LinkedinIcon from 'assets/icons/linkedin.svg';
 import MessengerIcon from 'assets/icons/messenger.svg';
 import TwitterIcon from 'assets/icons/twitter.svg';
 import PinterestIcon from 'assets/icons/pinterest.svg';
-import GooglePlusIcon from 'assets/icons/google.svg';
 import CopyLinkIcon from 'assets/icons/share.svg';
 import { StyledIcon } from 'components/StyledIcon';
 import { useTheme } from 'styled-components';

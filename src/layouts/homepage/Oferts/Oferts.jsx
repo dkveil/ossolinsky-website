@@ -112,7 +112,7 @@ export const Oferts = () => {
                             title={title}
                             content={shortdescription.shortdescription}
                             image={image.gatsbyImageData}
-                            link={`/${slug}`}
+                            link={`/oferta/${slug}`}
                             lastChild={oferts.totalCount}
                         />
                     );

@@ -13,6 +13,10 @@ export const Blog = () => {
 
     const { blogposts } = useStaticQuery(query);
 
+    if (blogposts.totalCount < 5) {
+        return null;
+    }
+
     const sliceArrayIfIsDesktop = (array) => {
         if (isDesktop()) {
             return array.slice(0, 4);
@@ -50,6 +54,7 @@ export const Blog = () => {
 const query = graphql`
     query {
         blogposts: allContentfulBlog(limit: 5) {
+            totalCount
             edges {
                 node {
                     title

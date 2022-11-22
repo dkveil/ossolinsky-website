@@ -25,6 +25,12 @@ export const Footer = () => {
 
     const checkPathname = (array) => {
         return array.find((path) => {
+            if (path === '/galeria' && location.pathname.length === 10) {
+                return location.pathname.includes(path);
+            }
+            if (path === '/blog' && location.pathname.length === 7) {
+                return location.pathname.includes(path);
+            }
             if (path !== '/' && path[path.length - 1] === '/') {
                 return location.pathname.includes(path);
             } else {

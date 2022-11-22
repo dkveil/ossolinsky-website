@@ -68,7 +68,11 @@ export const Header = () => {
                                 <div />
                             </StyledBurger>
                         )}
-                        <StyledLogoIcon width="9rem" color={isDesktop() ? theme.color.black : isActive ? theme.color.black : itemsColor}>
+                        <StyledLogoIcon
+                            width="9rem"
+                            color={isDesktop() ? theme.color.black : isActive ? theme.color.black : itemsColor}
+                            onClick={() => setIsActive(false)}
+                        >
                             <Link to="/">
                                 <Logo />
                             </Link>
