@@ -5,14 +5,28 @@ import { GlobalStyle } from 'styles/GlobalStyles';
 import { theme } from 'styles/theme';
 import { Header } from 'components/Header/';
 import { Footer } from 'components/Footer';
+import { CookieNotice } from 'components/CookieNotice/CookieNotice';
+import Cookies from 'universal-cookie';
 
 export const MainTemplate = ({ children }) => {
+    const [cookieNoticeIsOpen, setCookieNoticeIsOpen] = React.useState(false);
+    const cookies = new Cookies('registered');
+
+    React.useEffect(() => {
+        if (cookies.get('registered')) {
+            return setCookieNoticeIsOpen(false);
+        } else {
+            setCookieNoticeIsOpen(true);
+        }
+    }, []);
+
     return (
         <>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
                 <Header />
                 <main id="main">{children}</main>
+                {cookieNoticeIsOpen ? <CookieNotice closeCookieNotice={() => setCookieNoticeIsOpen(false)} /> : null}
                 <Footer />
             </ThemeProvider>
         </>

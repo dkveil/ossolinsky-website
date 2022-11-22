@@ -48,6 +48,7 @@
     "react-share": "^4.4.1",
     "slugify": "^1.6.5",
     "styled-components": "^5.3.6",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {

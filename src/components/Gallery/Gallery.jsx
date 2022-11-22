@@ -11,7 +11,6 @@ import {
     SingleImageWrapper,
 } from './Gallery.styles';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { graphql, useStaticQuery } from 'gatsby';
 import CloseIcon from 'assets/icons/close.svg';
 import RightArrow from 'assets/icons/thinRightArrow.svg';
 import { isDesktop } from 'utils/isDesktop';
@@ -22,6 +21,8 @@ export const Gallery = ({ closeGallery, items, firstActive, title }) => {
     const [activeImage, setActiveImage] = React.useState(firstActive);
     const [imagesListPosition, setImagesListPosition] = React.useState();
     const [hideImage, setHideImage] = React.useState(false);
+
+    console.log(items);
 
     React.useEffect(() => {
         if (totalImages > 6) {
@@ -109,7 +110,7 @@ export const Gallery = ({ closeGallery, items, firstActive, title }) => {
                                 return (
                                     <SingleImageWrapper key={index} active={activeImage === index} onClick={() => setImage(index)}>
                                         <GatsbyImage
-                                            image={image || image.image.gatsbyImageData}
+                                            image={image.image?.gatsbyImageData || image}
                                             objectFit="cover"
                                             style={{ width: '100%', height: '100%' }}
                                             imgStyle={{ objectFit: 'cover' }}

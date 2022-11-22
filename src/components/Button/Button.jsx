@@ -88,7 +88,8 @@ export const Button = ({ children, variant, onClickHandler, isLink = false, path
 
 Button.propTypes = {
     children: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['contained', 'contained-outlined', 'outlined', 'full-outlined', 'full-contained', 'text']).isRequired,
+    variant: PropTypes.oneOf(['no variant', 'contained', 'contained-outlined', 'outlined', 'full-outlined', 'full-contained', 'text'])
+        .isRequired,
     onClickHandler: PropTypes.func,
     isLink: PropTypes.bool,
     path: ({ isLink, path }, componentName) => {
