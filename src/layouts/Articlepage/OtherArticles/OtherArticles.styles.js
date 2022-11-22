@@ -17,4 +17,29 @@ export const ArticlesWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+
+    article:last-child{
+        display: none;
+    }
+
+    ${({ theme }) => theme.mq.tablet}{
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        row-gap: 3rem;
+
+        article:last-child{
+            display: block;
+        }
+    }
+
+    ${({ theme }) => theme.mq.desktop}{
+        flex-wrap: nowrap;
+        gap: 2.4rem;
+
+        article:last-child{
+            display: none;
+        }
+    }
+
 `

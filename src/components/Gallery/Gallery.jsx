@@ -14,14 +14,10 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import CloseIcon from 'assets/icons/close.svg';
 import RightArrow from 'assets/icons/thinRightArrow.svg';
-import LeftArrow from 'assets/icons/thinLeftArrow.svg';
 import { isDesktop } from 'utils/isDesktop';
 
-export const Gallery = ({ closeGallery, items, firstActive }) => {
-    const { allContentfulGaleria } = useStaticQuery(query);
-
+export const Gallery = ({ closeGallery, items, firstActive, title }) => {
     const totalImages = items.length;
-    console.log(totalImages);
 
     const [activeImage, setActiveImage] = React.useState(firstActive);
     const [imagesListPosition, setImagesListPosition] = React.useState();
@@ -90,13 +86,13 @@ export const Gallery = ({ closeGallery, items, firstActive }) => {
                     </IconWrapper>
                     <ImageDisplayer hideImage={hideImage}>
                         <GatsbyImage
-                            image={items[activeImage].node.image.gatsbyImageData}
+                            image={items[activeImage].gatsbyImageData || items[activeImage].node.image.gatsbyImageData}
                             objectFit="contain"
                             style={{ width: '100%', height: '100%' }}
                             imgStyle={{ objectFit: 'contain' }}
-                            alt="contact-image"
+                            alt={items[activeImage].node?.title || title + ' ' + activeImage}
                         />
-                        {items[0].node.title && items[0].node.createdAt && (
+                        {items[0].node?.title && items[0].node?.createdAt && (
                             <figcaption>
                                 <h3>{items[activeImage].node.title}</h3>
                                 <time>{items[activeImage].node.createdAt}</time>
@@ -108,16 +104,16 @@ export const Gallery = ({ closeGallery, items, firstActive }) => {
                     <ImagesList>
                         <ImagesListWrapper position={imagesListPosition}>
                             {items.map((item, index) => {
-                                const image = item.node;
+                                const image = item.gatsbyImageData || item.node;
 
                                 return (
                                     <SingleImageWrapper key={index} active={activeImage === index} onClick={() => setImage(index)}>
                                         <GatsbyImage
-                                            image={image.image.gatsbyImageData}
+                                            image={image || image.image.gatsbyImageData}
                                             objectFit="cover"
                                             style={{ width: '100%', height: '100%' }}
                                             imgStyle={{ objectFit: 'cover' }}
-                                            alt={image.title + index}
+                                            alt={image.title + index || title + ' ' + index}
                                         />
                                     </SingleImageWrapper>
                                 );
@@ -134,16 +130,5 @@ Gallery.propTypes = {
     firstActive: PropTypes.number.isRequired,
     closeGallery: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
+    title: PropTypes.string,
 };
-
-const query = graphql`
-    query {
-        allContentfulGaleria {
-            nodes {
-                image {
-                    gatsbyImageData
-                }
-            }
-        }
-    }
-`;

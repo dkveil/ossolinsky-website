@@ -272,7 +272,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 articlecontent: article.node.articlecontent,
                 image: article.node.image.gatsbyImageData,
                 gallery: article.node.gallery,
-                otherarticles: blogpage.allContentfulBlog.edges.filter(currentArticle => currentArticle.node.title !== article.node.title).slice(0, 3)
+                otherarticles: blogpage.allContentfulBlog.edges.filter(currentArticle => currentArticle.node.title !== article.node.title).slice(0, 4)
             }
         })
     })

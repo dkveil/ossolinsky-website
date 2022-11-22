@@ -3,11 +3,22 @@ import { Wrapper, ImageWrapper, IntroWrapper, ContentWrapper, StyledArrowLeftIco
 import { Container } from 'styles/Container';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { PropTypes } from 'prop-types';
-import ArrowLeftIcon from 'assets/icons/thinLeftArrow.svg';
 import { Link } from 'gatsby';
 import { formatDate } from 'utils/formatDate';
+import { shareOnMobile } from 'react-mobile-share';
+import { useLocation } from '@reach/router';
 
 export const ArticleTitle = ({ title, date, image, category }) => {
+    const location = useLocation();
+
+    const handleShare = () => {
+        shareOnMobile({
+            url: location.href,
+            title,
+            image: image.images.fallback.src,
+        });
+    };
+
     return (
         <Wrapper>
             <ImageWrapper>
@@ -33,7 +44,7 @@ export const ArticleTitle = ({ title, date, image, category }) => {
                             <span>{category}</span>
                             <span>{formatDate(date)}</span>
                         </div>
-                        <span>
+                        <span onClick={handleShare}>
                             <StyledShareIcon />
                             UDOSTĘPNIJ
                         </span>

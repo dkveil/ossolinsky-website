@@ -23,33 +23,27 @@ export const Footer = () => {
 
     const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
 
+    const checkPathname = (array) => {
+        return array.find((path) => {
+            if (path !== '/' && path[path.length - 1] === '/') {
+                return location.pathname.includes(path);
+            } else {
+                return path === location.pathname;
+            }
+        });
+    };
+
     React.useEffect(() => {
-        if (
-            pathsWhereFooterIsWhiteDesktop.find((path) =>
-                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
-            )
-        ) {
+        if (checkPathname(pathsWhereFooterIsWhiteDesktop)) {
             setDesktopBackgroundColor(theme.color.white);
         }
-        if (
-            pathsWhereFooterIsWhiteMobile.find((path) =>
-                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
-            )
-        ) {
+        if (checkPathname(pathsWhereFooterIsWhiteMobile)) {
             setMobileBackgroundColor(theme.color.white);
         }
-        if (
-            pathsWhereFooterIsGrayDesktop.find((path) =>
-                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
-            )
-        ) {
+        if (checkPathname(pathsWhereFooterIsGrayDesktop)) {
             setDesktopBackgroundColor(theme.color.gray);
         }
-        if (
-            pathsWhereFooterIsGrayMobile.find((path) =>
-                path === '' || path === '/' ? path === location.pathname : location.pathname.includes(path)
-            )
-        ) {
+        if (checkPathname(pathsWhereFooterIsGrayMobile)) {
             setMobileBackgroundColor(theme.color.gray);
         }
     }, [location.pathname]);

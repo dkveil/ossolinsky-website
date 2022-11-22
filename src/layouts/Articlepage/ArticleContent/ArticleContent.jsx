@@ -10,8 +10,8 @@ import {
     GalleryImageWrapper,
     StyledArrowLeft,
     StyledArrowRight,
-    SocialShareWrapper,
-    SocialIconsWrapper,
+    StyledArrowIcon,
+    GalleryContent,
 } from './ArticleContent.styles';
 import { Container } from 'styles/Container';
 import { PropTypes } from 'prop-types';
@@ -19,14 +19,8 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { getYTEmbedLink } from 'utils/getYTEmbedLink';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { StyledIcon } from 'components/StyledIcon';
-import FacebookIcon from 'assets/icons/facebook.svg';
-import LinkedinIcon from 'assets/icons/linkedin.svg';
-import MessengerIcon from 'assets/icons/messenger.svg';
-import TwitterIcon from 'assets/icons/twitter.svg';
-import GoogleIcon from 'assets/icons/google.svg';
-import PinterestIcon from 'assets/icons/pinterest.svg';
-import CopyLinkIcon from 'assets/icons/share.svg';
+import QuoteIcon from 'assets/icons/quote.svg';
+import ArrowSquare from 'icons/arrow-square.svg';
 
 const options = {
     renderNode: {
@@ -66,17 +60,33 @@ const options = {
                 </ImageWrapper>
             );
         },
+        [BLOCKS.QUOTE]: (node, children) => {
+            return (
+                <blockquote>
+                    <QuoteIcon />
+                    <span>
+                        {node.content.map((item, index) => {
+                            if (item.content[0].value[0] === '~') {
+                                return <cite key={index}>{item.content[0].value}</cite>;
+                            } else {
+                                return <p key={index}>{item.content[0].value}</p>;
+                            }
+                        })}
+                    </span>
+                </blockquote>
+            );
+        },
     },
 };
 
-export const ArticleContent = ({ articlecontent, gallery }) => {
+export const ArticleContent = ({ articlecontent, gallery, openGallery }) => {
     const [activeGalleryImage, setActiveGalleryImage] = React.useState(gallery?.length > 0 ? 1 : null);
 
-    const changeActiveGalleryImage = (type) => {
+    const changeActiveGalleryImage = (type, desktop) => {
         if (type === 'decrement' && activeGalleryImage > 1) {
             setActiveGalleryImage((prev) => prev - 1);
         }
-        if (type === 'increment' && activeGalleryImage < gallery?.length) {
+        if (type === 'increment' && activeGalleryImage < (desktop ? gallery?.length - 2 : gallery?.length)) {
             setActiveGalleryImage((prev) => prev + 1);
         }
     };
@@ -88,32 +98,40 @@ export const ArticleContent = ({ articlecontent, gallery }) => {
                     <ArticleContentWrapper>{renderRichText(articlecontent, options)}</ArticleContentWrapper>
                     {gallery && (
                         <GalleryWrapper>
-                            <GalleryDisplayer active={activeGalleryImage}>
-                                {gallery.map((image, index) => (
-                                    <GalleryImageWrapper key={index}>
-                                        <GatsbyImage
-                                            image={image.gatsbyImageData}
-                                            objectFit="cover"
-                                            style={{ width: '100%', height: '100%' }}
-                                            imgStyle={{ objectFit: 'cover' }}
-                                            alt={' '}
-                                        />
-                                    </GalleryImageWrapper>
-                                ))}
-                            </GalleryDisplayer>
-                            <GalleryInfo>
-                                <StyledArrowLeft
-                                    disabled={activeGalleryImage === 1}
-                                    onClick={() => changeActiveGalleryImage('decrement')}
-                                />
-                                <span>
-                                    {activeGalleryImage}/{gallery.length}
-                                </span>
-                                <StyledArrowRight
-                                    disabled={activeGalleryImage === gallery.length}
-                                    onClick={() => changeActiveGalleryImage('increment')}
-                                />
-                            </GalleryInfo>
+                            <StyledArrowIcon width="49px" onClick={() => changeActiveGalleryImage('decrement', true)}>
+                                <ArrowSquare />
+                            </StyledArrowIcon>
+                            <StyledArrowIcon width="49px" right onClick={() => changeActiveGalleryImage('increment', true)}>
+                                <ArrowSquare />
+                            </StyledArrowIcon>
+                            <GalleryContent>
+                                <GalleryDisplayer active={activeGalleryImage}>
+                                    {gallery.map((image, index) => (
+                                        <GalleryImageWrapper key={index} onClick={() => openGallery(index)}>
+                                            <GatsbyImage
+                                                image={image.gatsbyImageData}
+                                                objectFit="cover"
+                                                style={{ width: '100%', height: '100%' }}
+                                                imgStyle={{ objectFit: 'cover' }}
+                                                alt={' '}
+                                            />
+                                        </GalleryImageWrapper>
+                                    ))}
+                                </GalleryDisplayer>
+                                <GalleryInfo>
+                                    <StyledArrowLeft
+                                        disabled={activeGalleryImage === 1}
+                                        onClick={() => changeActiveGalleryImage('decrement')}
+                                    />
+                                    <span>
+                                        {activeGalleryImage}/{gallery.length}
+                                    </span>
+                                    <StyledArrowRight
+                                        disabled={activeGalleryImage === gallery.length}
+                                        onClick={() => changeActiveGalleryImage('increment')}
+                                    />
+                                </GalleryInfo>
+                            </GalleryContent>
                         </GalleryWrapper>
                     )}
                 </ContentWrapper>
@@ -125,4 +143,5 @@ export const ArticleContent = ({ articlecontent, gallery }) => {
 ArticleContent.propTypes = {
     articlecontent: PropTypes.object.isRequired,
     gallery: PropTypes.array,
+    openGallery: PropTypes.func,
 };

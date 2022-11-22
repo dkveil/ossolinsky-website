@@ -10,39 +10,18 @@ import GooglePlusIcon from 'assets/icons/google.svg';
 import CopyLinkIcon from 'assets/icons/share.svg';
 import { StyledIcon } from 'components/StyledIcon';
 import { useTheme } from 'styled-components';
+import { useLocation } from '@reach/router';
+import { PropTypes } from 'prop-types';
+import {
+    FacebookMessengerShareButton,
+    FacebookShareButton,
+    LinkedinShareButton,
+    PinterestShareButton,
+    TwitterShareButton,
+} from 'react-share';
 
-const socialshareitems = [
-    {
-        title: 'facebook',
-        icon: <FacebookIcon />,
-    },
-    {
-        title: 'linkedin',
-        icon: <LinkedinIcon />,
-    },
-    {
-        title: 'messenger',
-        icon: <MessengerIcon />,
-    },
-    {
-        title: 'twitter',
-        icon: <TwitterIcon />,
-    },
-    {
-        title: 'google plus',
-        icon: <GooglePlusIcon />,
-    },
-    {
-        title: 'pinterest',
-        icon: <PinterestIcon />,
-    },
-    {
-        title: 'copy link',
-        icon: <CopyLinkIcon />,
-    },
-];
-
-export const ShareSocials = () => {
+export const ShareSocials = ({ media }) => {
+    const location = useLocation();
     const theme = useTheme();
 
     return (
@@ -53,15 +32,47 @@ export const ShareSocials = () => {
                     <SocialsWrapper>
                         <h5>Podoba Ci się artykuł? Udostępnij znajomym!</h5>
                         <div>
-                            {socialshareitems.map((social) => (
-                                <StyledIcon key={social.title} height="24px" width="24px" color={theme.color.black}>
-                                    {social.icon}
+                            <FacebookShareButton url={location.href}>
+                                <StyledIcon height="24px" width="24px" color={theme.color.black}>
+                                    <FacebookIcon />
                                 </StyledIcon>
-                            ))}
+                            </FacebookShareButton>
+                            <LinkedinShareButton url={location.href}>
+                                <StyledIcon height="24px" width="24px" color={theme.color.black}>
+                                    <LinkedinIcon />
+                                </StyledIcon>
+                            </LinkedinShareButton>
+                            <FacebookMessengerShareButton url={location.href}>
+                                <StyledIcon height="24px" width="24px" color={theme.color.black}>
+                                    <MessengerIcon />
+                                </StyledIcon>
+                            </FacebookMessengerShareButton>
+                            <TwitterShareButton url={location.href}>
+                                <StyledIcon height="24px" width="24px" color={theme.color.black}>
+                                    <TwitterIcon />
+                                </StyledIcon>
+                            </TwitterShareButton>
+                            <PinterestShareButton url={location.href} media={media}>
+                                <StyledIcon height="24px" width="24px" color={theme.color.black}>
+                                    <PinterestIcon />
+                                </StyledIcon>
+                            </PinterestShareButton>
+                            <StyledIcon
+                                height="24px"
+                                width="24px"
+                                color={theme.color.black}
+                                onClick={() => navigator.clipboard.writeText(location.pathname)}
+                            >
+                                <CopyLinkIcon />
+                            </StyledIcon>
                         </div>
                     </SocialsWrapper>
                 </ContentWrapper>
             </Container>
         </Wrapper>
     );
+};
+
+ShareSocials.propTypes = {
+    media: PropTypes.string.isRequired,
 };
