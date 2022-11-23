@@ -1,6 +1,7 @@
 import React from 'react';
 import { Hero, Welcome, Oferts, Testimonial, Blog, Contact, Video } from 'layouts/homepage';
 import { isDesktop } from 'utils/isDesktop';
+import { SEO } from 'components/SEO';
 
 const IndexPage = () => (
     <>
@@ -16,4 +17,4 @@ const IndexPage = () => (
 
 export default IndexPage;
 
-export const Head = () => <title>Home Page</title>;
+export const Head = () => <SEO title="Ossolinsky - Strona główna" description="" />;
