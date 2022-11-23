@@ -2,6 +2,7 @@ import React from 'react';
 import { Welcome, AboutBartending, Testimonial } from 'layouts/AboutMe';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from 'components/SEO';
 
 const AboutMePage = () => {
     if (!isBrowser) {
@@ -19,4 +20,4 @@ const AboutMePage = () => {
 
 export default AboutMePage;
 
-export const Head = () => <title>About Me Page</title>;
+export const Head = () => <SEO title="Ossolinsky - Strona główna" description="" slug="/omnie" />;

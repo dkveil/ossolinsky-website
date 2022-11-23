@@ -14,7 +14,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../Button/Button';
 import { isDesktop } from 'utils/isDesktop';
-import { Link } from 'gatsby';
+import emailjs from '@emailjs/browser';
 
 export const ContactForm = () => {
     const initialValues = {
@@ -33,8 +33,25 @@ export const ContactForm = () => {
         policyaccept: Yup.bool().required('').oneOf([true]),
     });
 
-    const handleForm = () => {
-        console.log('works');
+    const handleForm = (values, { resetForm }) => {
+        const templateparams = {
+            name: values.name,
+            email: values.email,
+            message: values.content,
+        };
+
+        emailjs
+            .send(
+                process.env.GATSBY_EMAILJS_SERVICE_ID,
+                process.env.GATSBY_EMAILJS_TEMPLATE_ID,
+                templateparams,
+                process.env.GATSBY_EMAILJS_KEY
+            )
+            .then(() => {
+                console.log('done');
+                resetForm();
+            })
+            .catch((error) => console.log(error));
     };
 
     return (
