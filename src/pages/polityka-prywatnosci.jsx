@@ -169,6 +169,6 @@ const PrivacyPolicyPage = () => {
     );
 };
 
-export default PrivacyPolicyPage;
+export const Head = () => <title>Polityka prywatności</title>;
 
-export const Head = () => <title>Privacy policy</title>;
+export default PrivacyPolicyPage;

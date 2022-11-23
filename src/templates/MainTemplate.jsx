@@ -10,12 +10,10 @@ import Cookies from 'universal-cookie';
 
 export const MainTemplate = ({ children }) => {
     const [cookieNoticeIsOpen, setCookieNoticeIsOpen] = React.useState(false);
-    const cookies = new Cookies('registered');
+    const cookies = new Cookies();
 
     React.useEffect(() => {
-        if (cookies.get('registered')) {
-            return setCookieNoticeIsOpen(false);
-        } else {
+        if (!cookies.get('registered')) {
             setCookieNoticeIsOpen(true);
         }
     }, []);

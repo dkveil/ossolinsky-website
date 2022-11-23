@@ -48,7 +48,6 @@ export const ContactForm = () => {
             {({ handleSubmit, values, handleChange, errors }) => (
                 <Wrapper onSubmit={handleSubmit}>
                     <StyledLabel htmlFor="name">Twoje imię</StyledLabel>
-                    {console.log(errors)}
                     <FieldWrapper>
                         <StyledInput name="name" value={values.name} onChange={handleChange} placeholder="Mikołaj" error={errors.name} />
                         {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}

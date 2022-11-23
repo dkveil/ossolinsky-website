@@ -88,6 +88,8 @@ export const Footer = () => {
                 @2022 Ossolinsky
                 <br />
                 made by Damian Kądziela
+                <br />
+                <Link to="/polityka-prywatnosci">Polityka prywatności</Link>
             </CopyrightDetails>
         </Wrapper>
     );

@@ -29,6 +29,10 @@ export const CopyrightDetails = styled.small`
     text-align: center;
     font-size: 1rem;
     color: ${({ theme }) => theme.color.text};
+
+    a{
+        color: ${({ theme }) => theme.color.black};
+    }
 `
 
 export const IconsWrapper = styled.div`

@@ -6,11 +6,12 @@ import Cookies from 'universal-cookie';
 
 export const CookieNotice = ({ closeCookieNotice }) => {
     const [hide, setHide] = React.useState(false);
-    const cookies = new Cookies('registered');
+    const cookies = new Cookies();
 
     const handleClose = () => {
         cookies.set('registered', 'true', {
             path: '/',
+            expires: new Date(Date.now() + 604800000),
         });
         setHide(true);
         setTimeout(() => {
