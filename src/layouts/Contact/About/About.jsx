@@ -8,8 +8,9 @@ import { SectionParagraph } from 'components/SectionParagraph/SectionParagraph';
 import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
 import { socialmedia } from 'helpers/socialmedia';
 import { StyledIcon } from 'components/StyledIcon';
+import { PropTypes } from 'prop-types';
 
-export const About = () => {
+export const About = ({ welcomedescription }) => {
     const { embeddedimage, phonenumber, email, socialmediaitems } = useStaticQuery(query);
     const image = getImage(embeddedimage.childImageSharp.gatsbyImageData);
 
@@ -42,10 +43,7 @@ export const About = () => {
                     >
                         Kontakt
                     </Heading>
-                    <SectionParagraph>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet faucibus justo. Nullam a faucibus
-                        nisi, et suscipit augue. Vivamus orci sem, luctus in consectetur auctor, elementum ac mauris.
-                    </SectionParagraph>
+                    <SectionParagraph>{welcomedescription}</SectionParagraph>
                     <ContactDetails>
                         <span>mail: {email ? email.content : null}</span>
                         <span>tel. {phonenumber ? phonenumber.content : null}</span>
@@ -143,3 +141,7 @@ const query = graphql`
         }
     }
 `;
+
+About.propTypes = {
+    welcomedescription: PropTypes.string,
+};

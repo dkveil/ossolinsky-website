@@ -7,6 +7,7 @@ import { Wrapper, ImagesWrapper, ContentWrapper, EmptyState } from 'layouts/Gall
 import { GalleryCard } from 'components/GalleryCard';
 import { Gallery } from 'components/Gallery';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from 'components/SEO';
 
 const GalleryPage = (data) => {
     if (!isBrowser) {
@@ -160,5 +161,7 @@ export const query = graphql`
         }
     }
 `;
+
+export const Head = () => <SEO title="Galeria - Ossolinsky.pl" description="" slug="/galeria" />;
 
 export default GalleryPage;

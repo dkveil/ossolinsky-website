@@ -6,8 +6,9 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import { SectionParagraph } from 'components/SectionParagraph';
 import { isDesktopAndTablet } from 'utils/isDesktopAndTablet';
+import { PropTypes } from 'prop-types';
 
-export const Welcome = () => {
+export const Welcome = ({ welcomedescription }) => {
     const { embeddedwelcomeimage } = useStaticQuery(query);
 
     const welcomeimage = getImage(embeddedwelcomeimage.childImageSharp.gatsbyImageData);
@@ -47,12 +48,7 @@ export const Welcome = () => {
                     >
                         Moja oferta
                     </Heading>
-                    <SectionParagraph textAlign={isDesktopAndTablet() ? 'start' : 'center'}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ante urna, eleifend ut nulla sagittis, sagittis dictum
-                        est. Proin facilisis sem suscipit sapien eleifend, laoreet pulvinar nunc finibus. Sed luctus metus ex, quis
-                        porttitor lectus eleifend id. Sed malesuada imperdiet metus ultricies auctor. Curabitur faucibus odio in risus
-                        finibus elementum. Vivamus fringilla commodo ligula nec.
-                    </SectionParagraph>
+                    <SectionParagraph textAlign={isDesktopAndTablet() ? 'start' : 'center'}>{welcomedescription}</SectionParagraph>
                 </ContentWrapper>
             </Container>
             <ImageWrapper>
@@ -77,3 +73,7 @@ const query = graphql`
         }
     }
 `;
+
+Welcome.propTypes = {
+    welcomedescription: PropTypes.string,
+};

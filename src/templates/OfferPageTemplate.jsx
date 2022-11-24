@@ -1,6 +1,7 @@
 import React from 'react';
 import { Welcome, MoreInformations, Drinks, Contact } from '../layouts/Offerpage';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from 'components/SEO/SEO';
 
 const OfferPage = (data) => {
     if (!isBrowser) {
@@ -16,6 +17,19 @@ const OfferPage = (data) => {
             <Drinks about={aboutdrinks} drinks={drinks} />
             <Contact phonenumber={phonenumber} email={email} />
         </>
+    );
+};
+
+export const Head = (data) => {
+    const { title, description, imageurl, slug } = data.pageContext;
+
+    return (
+        <SEO
+            title={title + ' - Zachwyć swoich gości profesjonalną usługą barmańską! - Ossolinsky.pl'}
+            description={description}
+            image={imageurl}
+            slug={`/oferta/${slug}`}
+        />
     );
 };
 

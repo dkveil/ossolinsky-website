@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArticleTitle, ArticleContent, ShareSocials, OtherArticles } from 'layouts/Articlepage';
 import { Gallery } from 'components/Gallery';
+import { SEO } from 'components/SEO';
 
 const ArticlePage = (data) => {
     const { title, image, category, articlecontent, date, gallery, otherarticles } = data.pageContext;
@@ -31,6 +32,12 @@ const ArticlePage = (data) => {
             )}
         </>
     );
+};
+
+export const Head = (data) => {
+    const { title, shortdescription, imageurl, slug } = data.pageContext;
+
+    return <SEO title={title + ' - Ossolinsky.pl'} description={shortdescription} image={imageurl} slug={`/blog/${slug}`} />;
 };
 
 export default ArticlePage;

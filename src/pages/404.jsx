@@ -4,6 +4,7 @@ import { Container } from 'styles/Container';
 import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from '../components/SEO/SEO';
 
 const NotFoundPage = () => {
     if (!isBrowser) {
@@ -31,4 +32,6 @@ const NotFoundPage = () => {
 
 export default NotFoundPage;
 
-export const Head = () => <title>Not found</title>;
+export const Head = () => (
+    <SEO title="Ossolinsky404 - prawdopodobnie się zgubiłeś!" description="Nic tutaj nie ma! Prawdopodobnie się zgubiłeś!" />
+);

@@ -6,6 +6,7 @@ import { BlogPostCard } from 'components/BlogPostCard/BlogPostCard';
 import { Wrapper, BlogPostsWrapper, ContentWrapper, EmptyState } from 'layouts/Blogpage/Blogpage.styles';
 import { Pagination } from 'components/Pagination';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from 'components/SEO';
 
 const BlogPage = (data) => {
     if (!isBrowser) {
@@ -130,5 +131,13 @@ export const query = graphql`
         }
     }
 `;
+
+export const Head = () => (
+    <SEO
+        title="Blog - Ossolinsky.pl"
+        description="Zaciekawiony tym co oferuję? W tej sekcji znajdziesz relacje z imprez oraz przepisy na różnego rodzaju koktajle alkoholowe. Nie zabraknie tutaj również przepisów na syropy, nalewki etc. oraz poleceń firm wykonujących inne usługi na imprezach, które mile zapadną mi w pamięć. Zostaniesz na dłużej na blogu?"
+        slug="/blog"
+    />
+);
 
 export default BlogPage;

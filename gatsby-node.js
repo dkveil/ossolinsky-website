@@ -175,6 +175,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                             }
                             image {
                                 gatsbyImageData
+                                publicUrl
                             }
                         }
                         iscontact
@@ -214,7 +215,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                     aboutdrinks: offer.node.aboutdrinks.aboutdrinks,
                     drinks: offer.node.drinks,
                     phonenumber,
-                    email
+                    email,
+                    slug: offer.node.slug,
+                    imageurl: offer.node.image.publicUrl
                 }
             })
         }
@@ -229,6 +232,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                         category {
                             name
                         }
+                        shortdescription {
+                            shortdescription
+                        }
                         articlecontent {
                             raw
                             references {
@@ -242,6 +248,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                         }
                         image{
                             gatsbyImageData
+                            publicUrl
                         }
                         slug
                         gallery{
@@ -267,12 +274,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             component: path.resolve("./src/templates/ArticlePageTemplate.jsx"),
             context: {
                 title: article.node.title,
+                shortdescription: article.node.shortdescription.shortdescription,
                 date: article.node.createdAt,
                 category: article.node.category.name,
                 articlecontent: article.node.articlecontent,
                 image: article.node.image.gatsbyImageData,
                 gallery: article.node.gallery,
-                otherarticles: blogpage.allContentfulBlog.edges.filter(currentArticle => currentArticle.node.title !== article.node.title).slice(0, 4)
+                otherarticles: blogpage.allContentfulBlog.edges.filter(currentArticle => currentArticle.node.title !== article.node.title).slice(0, 4),
+                slug: article.node.slug,
+                imageurl: article.node.image.publicUrl
             }
         })
     })

@@ -4,6 +4,7 @@ import { Container } from 'styles/Container';
 import { Heading } from 'components/Heading';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
+import { SEO } from 'components/SEO';
 
 const PrivacyPolicyPage = () => {
     if (!isBrowser) return null;
@@ -169,6 +170,12 @@ const PrivacyPolicyPage = () => {
     );
 };
 
-export const Head = () => <title>Polityka prywatności</title>;
+export const Head = () => (
+    <SEO
+        title="Polityka prywatności - Ossolinsky.pl"
+        description=" Niniejsza polityka dotyczy Serwisu www, funkcjonującego pod adresem url: www.ossolinsky.pl. Operatorem serwisu oraz Administratorem danych osobowych jest: Mikołaj Ossoliński. Adres kontaktowy poczty elektronicznej operatora: kontakt@ossolinsky.pl"
+        slug="/polityka-prywatnosci"
+    />
+);
 
 export default PrivacyPolicyPage;
