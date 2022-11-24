@@ -22,8 +22,6 @@ export const Gallery = ({ closeGallery, items, firstActive, title }) => {
     const [imagesListPosition, setImagesListPosition] = React.useState();
     const [hideImage, setHideImage] = React.useState(false);
 
-    console.log(items);
-
     React.useEffect(() => {
         if (totalImages > 6) {
             if (totalImages - activeImage < 8) {

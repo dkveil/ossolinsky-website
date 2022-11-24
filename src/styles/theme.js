@@ -70,6 +70,7 @@ export const theme = {
         navcart: '.2s ease'
     },
     zindex: {
+        alerts: 9999999,
         cookiesinfo: 999999,
         gallerydisplayer: 99999,
         header: 9999,

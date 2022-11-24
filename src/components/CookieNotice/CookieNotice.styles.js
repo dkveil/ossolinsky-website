@@ -7,7 +7,6 @@ const appear = keyframes`
     to{
         transform: translateY(0);
     }
-
 `
 
 export const Wrapper = styled.div`

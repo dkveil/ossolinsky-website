@@ -29,7 +29,7 @@ export const Welcome = () => {
     const handleScroll = () => {
         const aboutbartendingsection = document.getElementById('about-bartending');
         if (isBrowser) {
-            const extrasize = isdesktopchecker ? 100 : 200;
+            const extrasize = isdesktopchecker ? 90 : 200;
 
             window.scrollTo({
                 top: (aboutbartendingsection.offsetTop + aboutbartendingsection.offsetHeight) / 2 + extrasize,
