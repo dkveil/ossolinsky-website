@@ -40,18 +40,36 @@ export const Footer = () => {
     };
 
     React.useEffect(() => {
-        if (checkPathname(pathsWhereFooterIsWhiteDesktop)) {
-            setDesktopBackgroundColor(theme.color.white);
-        }
-        if (checkPathname(pathsWhereFooterIsWhiteMobile)) {
-            setMobileBackgroundColor(theme.color.white);
-        }
-        if (checkPathname(pathsWhereFooterIsGrayDesktop)) {
-            setDesktopBackgroundColor(theme.color.gray);
-        }
-        if (checkPathname(pathsWhereFooterIsGrayMobile)) {
-            setMobileBackgroundColor(theme.color.gray);
-        }
+        const changeBackgroundColorOnMobile = () => {
+            if (checkPathname(pathsWhereFooterIsWhiteMobile)) {
+                setMobileBackgroundColor(theme.color.white);
+                return;
+            }
+
+            if (checkPathname(pathsWhereFooterIsGrayMobile)) {
+                setMobileBackgroundColor(theme.color.gray);
+                return;
+            }
+
+            return setMobileBackgroundColor(theme.color.gray);
+        };
+
+        const changeBackgroundColorOnDesktop = () => {
+            if (checkPathname(pathsWhereFooterIsWhiteDesktop)) {
+                setDesktopBackgroundColor(theme.color.white);
+                return;
+            }
+
+            if (checkPathname(pathsWhereFooterIsGrayDesktop)) {
+                setDesktopBackgroundColor(theme.color.gray);
+                return;
+            }
+
+            return setDesktopBackgroundColor(theme.color.gray);
+        };
+
+        changeBackgroundColorOnMobile();
+        changeBackgroundColorOnDesktop();
     }, [location.pathname]);
 
     return (

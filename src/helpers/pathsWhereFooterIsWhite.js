@@ -1,2 +1,2 @@
-export const pathsWhereFooterIsWhiteMobile = ['/', '/omnie', '/oferta', '/kontakt', '/blog/', '/polityka-prywatnosci']
-export const pathsWhereFooterIsWhiteDesktop = ['/omnie', '/oferta', '/kontakt', '/blog/', '/polityka-prywatnosci']
+export const pathsWhereFooterIsWhiteMobile = ['/', '/o-mnie', '/oferta', '/kontakt', '/blog/', '/polityka-prywatnosci']
+export const pathsWhereFooterIsWhiteDesktop = ['/o-mnie', '/oferta', '/kontakt', '/blog/', '/polityka-prywatnosci']

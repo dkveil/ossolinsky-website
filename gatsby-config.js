@@ -16,7 +16,7 @@ const gatsbyRequiredRules = path.join(
 module.exports = {
     siteMetadata: {
         title: `Ossolinsky`,
-        siteUrl: `https://www.yourdomain.tld`
+        siteUrl: `https://www.ossolinsky.pl/`
     },
     plugins: [
         {
@@ -28,7 +28,6 @@ module.exports = {
         },
         "gatsby-plugin-image",
         "gatsby-plugin-sharp",
-        "gatsby-plugin-react-helmet",
         "gatsby-transformer-sharp",
         "gatsby-plugin-styled-components",
         "gatsby-plugin-playground",
