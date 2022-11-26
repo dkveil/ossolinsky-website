@@ -7,6 +7,7 @@ import { Header } from 'components/Header/';
 import { Footer } from 'components/Footer';
 import { CookieNotice } from 'components/CookieNotice/CookieNotice';
 import Cookies from 'universal-cookie';
+import { FooterThemeProvider } from 'context/footerThemeContext';
 
 export const MainTemplate = ({ children }) => {
     const [cookieNoticeIsOpen, setCookieNoticeIsOpen] = React.useState(false);
@@ -20,13 +21,15 @@ export const MainTemplate = ({ children }) => {
 
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <GlobalStyle />
-                <Header />
-                <main id="main">{children}</main>
-                {cookieNoticeIsOpen ? <CookieNotice closeCookieNotice={() => setCookieNoticeIsOpen(false)} /> : null}
-                <Footer />
-            </ThemeProvider>
+            <FooterThemeProvider>
+                <ThemeProvider theme={theme}>
+                    <GlobalStyle />
+                    <Header />
+                    <main id="main">{children}</main>
+                    {cookieNoticeIsOpen ? <CookieNotice closeCookieNotice={() => setCookieNoticeIsOpen(false)} /> : null}
+                    <Footer />
+                </ThemeProvider>
+            </FooterThemeProvider>
         </>
     );
 };

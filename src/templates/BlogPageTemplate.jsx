@@ -7,6 +7,8 @@ import { Wrapper, BlogPostsWrapper, ContentWrapper, EmptyState } from 'layouts/B
 import { Pagination } from 'components/Pagination';
 import { isBrowser } from 'utils/isBrowser';
 import { SEO } from 'components/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const BlogPage = (data) => {
     if (!isBrowser) {
@@ -17,6 +19,13 @@ const BlogPage = (data) => {
     const { edges: categories } = data.data.allContentfulKategorieDlaBlogaIGalerii;
     const { currentPage, numPages } = data.pageContext;
     const currentCategory = data.pageContext.category || null;
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.gray);
+        setDesktopBackgroundColor(theme.color.gray);
+    }, []);
 
     const setPage = (i) => {
         if (i + 1 === 1) {

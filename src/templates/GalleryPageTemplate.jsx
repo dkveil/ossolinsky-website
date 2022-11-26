@@ -8,6 +8,8 @@ import { GalleryCard } from 'components/GalleryCard';
 import { Gallery } from 'components/Gallery';
 import { isBrowser } from 'utils/isBrowser';
 import { SEO } from 'components/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const GalleryPage = (data) => {
     if (!isBrowser) {
@@ -19,6 +21,13 @@ const GalleryPage = (data) => {
     const { allGalleryItems } = data.data;
     const { currentPage, numPages } = data.pageContext;
     const currentCategory = data.pageContext.category || null;
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.gray);
+        setDesktopBackgroundColor(theme.color.gray);
+    }, []);
 
     const [isGalleryOpen, setIsGalleryOpen] = React.useState(false);
     const [firstGalleryItem, setFirstGalleryItem] = React.useState(null);

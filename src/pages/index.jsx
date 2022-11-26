@@ -2,18 +2,30 @@ import React from 'react';
 import { Hero, Welcome, Oferts, Testimonial, Blog, Contact, Video } from 'layouts/homepage';
 import { isDesktop } from 'utils/isDesktop';
 import { SEO } from 'components/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
-const IndexPage = () => (
-    <>
-        <Hero />
-        <Welcome />
-        <Oferts />
-        {typeof window !== 'undefined' && isDesktop() ? <Video /> : null}
-        <Testimonial />
-        <Blog />
-        <Contact />
-    </>
-);
+const IndexPage = () => {
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.white);
+        setDesktopBackgroundColor(theme.color.gray);
+    }, []);
+
+    return (
+        <>
+            <Hero />
+            <Welcome />
+            <Oferts />
+            {typeof window !== 'undefined' && isDesktop() ? <Video /> : null}
+            <Testimonial />
+            <Blog />
+            <Contact />
+        </>
+    );
+};
 
 export default IndexPage;
 

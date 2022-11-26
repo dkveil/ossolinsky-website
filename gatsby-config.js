@@ -71,6 +71,7 @@ module.exports = {
                 videos: path.join(__dirname, "src/assets/videos"),
                 layouts: path.join(__dirname, "src/layouts"),
                 helpers: path.join(__dirname, "src/helpers"),
+                context: path.join(__dirname, "src/context"),
             },
         },
         {

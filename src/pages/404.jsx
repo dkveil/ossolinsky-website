@@ -5,11 +5,21 @@ import { Button } from 'components/Button';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
 import { SEO } from '../components/SEO/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const NotFoundPage = () => {
     if (!isBrowser) {
         return null;
     }
+
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setDesktopBackgroundColor(theme.color.gray);
+        setMobileBackgroundColor(theme.color.gray);
+    }, []);
 
     return (
         <Wrapper>

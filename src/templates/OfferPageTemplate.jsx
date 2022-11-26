@@ -2,11 +2,21 @@ import React from 'react';
 import { Welcome, MoreInformations, Drinks, Contact } from '../layouts/Offerpage';
 import { isBrowser } from 'utils/isBrowser';
 import { SEO } from 'components/SEO/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const OfferPage = (data) => {
     if (!isBrowser) {
         return null;
     }
+
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.gray);
+        setDesktopBackgroundColor(theme.color.gray);
+    }, []);
 
     const { title, description, image, moreInformations, secondimage, aboutdrinks, drinks, phonenumber, email } = data.pageContext;
 

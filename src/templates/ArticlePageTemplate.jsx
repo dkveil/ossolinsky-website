@@ -2,11 +2,15 @@ import React from 'react';
 import { ArticleTitle, ArticleContent, ShareSocials, OtherArticles } from 'layouts/Articlepage';
 import { Gallery } from 'components/Gallery';
 import { SEO } from 'components/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const ArticlePage = (data) => {
     const { title, image, category, articlecontent, date, gallery, otherarticles } = data.pageContext;
     const [isGalleryOpen, setIsGalleryOpen] = React.useState(false);
     const [firstGalleryItem, setFirstGalleryItem] = React.useState(null);
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
 
     React.useEffect(() => {
         if (isGalleryOpen) {
@@ -20,6 +24,11 @@ const ArticlePage = (data) => {
         setFirstGalleryItem(index);
         setIsGalleryOpen(true);
     };
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.white);
+        setDesktopBackgroundColor(theme.color.white);
+    }, []);
 
     return (
         <>

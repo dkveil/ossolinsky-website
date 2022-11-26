@@ -3,11 +3,21 @@ import { Welcome, AboutBartending, Testimonial } from 'layouts/AboutMe';
 import { isDesktop } from 'utils/isDesktop';
 import { isBrowser } from 'utils/isBrowser';
 import { SEO } from 'components/SEO';
+import { useFooterThemeContext } from 'context/footerThemeContext';
+import { useTheme } from 'styled-components';
 
 const AboutMePage = () => {
     if (!isBrowser) {
         return null;
     }
+
+    const { setMobileBackgroundColor, setDesktopBackgroundColor } = useFooterThemeContext();
+    const theme = useTheme();
+
+    React.useEffect(() => {
+        setMobileBackgroundColor(theme.color.white);
+        setDesktopBackgroundColor(theme.color.white);
+    }, []);
 
     return (
         <>

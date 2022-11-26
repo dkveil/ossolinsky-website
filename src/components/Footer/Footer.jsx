@@ -6,71 +6,16 @@ import Logo from 'assets/icons/logo.svg';
 import { isDesktop } from 'utils/isDesktop';
 import { socialmedia } from 'helpers/socialmedia';
 import { isBrowser } from 'utils/isBrowser';
-import { useLocation } from '@reach/router';
-import { useTheme } from 'styled-components';
-import { pathsWhereFooterIsWhiteMobile, pathsWhereFooterIsWhiteDesktop } from 'helpers/pathsWhereFooterIsWhite';
-import { pathsWhereFooterIsGrayMobile, pathsWhereFooterIsGrayDesktop } from 'helpers/pathsWhereFooterIsGray';
+import { useFooterThemeContext } from '../../context/footerThemeContext';
 
 export const Footer = () => {
     if (!isBrowser) {
         return null;
     }
 
-    const theme = useTheme();
-    const location = useLocation();
-    const [mobileBackgroundColor, setMobileBackgroundColor] = React.useState(theme.color.white);
-    const [desktopBackgroundColor, setDesktopBackgroundColor] = React.useState(theme.color.white);
+    const { mobileBackgroundColor, desktopBackgroundColor } = useFooterThemeContext();
 
     const { socialmediaitems, phonenumber, email } = useStaticQuery(query);
-
-    const checkPathname = (array) => {
-        return array.find((path) => {
-            if (path === '/galeria' && location.pathname.length === 10) {
-                return location.pathname.includes(path);
-            }
-            if (path === '/blog' && location.pathname.length === 7) {
-                return location.pathname.includes(path);
-            }
-            if (path !== '/' && path[path.length - 1] === '/') {
-                return location.pathname.includes(path);
-            } else {
-                return path === location.pathname;
-            }
-        });
-    };
-
-    React.useEffect(() => {
-        const changeBackgroundColorOnMobile = () => {
-            if (checkPathname(pathsWhereFooterIsWhiteMobile)) {
-                setMobileBackgroundColor(theme.color.white);
-                return;
-            }
-
-            if (checkPathname(pathsWhereFooterIsGrayMobile)) {
-                setMobileBackgroundColor(theme.color.gray);
-                return;
-            }
-
-            return setMobileBackgroundColor(theme.color.gray);
-        };
-
-        const changeBackgroundColorOnDesktop = () => {
-            if (checkPathname(pathsWhereFooterIsWhiteDesktop)) {
-                setDesktopBackgroundColor(theme.color.white);
-                return;
-            }
-
-            if (checkPathname(pathsWhereFooterIsGrayDesktop)) {
-                setDesktopBackgroundColor(theme.color.gray);
-                return;
-            }
-
-            return setDesktopBackgroundColor(theme.color.gray);
-        };
-
-        changeBackgroundColorOnMobile();
-        changeBackgroundColorOnDesktop();
-    }, [location.pathname]);
 
     return (
         <Wrapper mobileBackgroundColor={mobileBackgroundColor} desktopBackgroundColor={desktopBackgroundColor}>
