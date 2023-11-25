@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import ArrowIcon from 'icons/arrow.svg'
+import ArrowIcon from 'icons/arrow-hero.svg'
 import ArrowDesktopIcon from 'icons/arrow-hero-desktop.svg'
 
 export const Wrapper = styled.div`
@@ -86,9 +86,6 @@ export const StyledArrowIcon = styled(ArrowIcon)`
     bottom: 8rem;
     width: 3.2rem;
     cursor: pointer;
-
-    ${({ theme }) => theme.mq.tablet}{
-    }
 `
 
 export const StyledDesktopIcon = styled(ArrowDesktopIcon)`
