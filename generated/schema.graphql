@@ -648,12 +648,10 @@ type ContentfulAsset implements ContentfulReference & Node & RemoteFile {
     fit: RemoteFileFit = COVER
 
     """
-    The image formats to generate. Valid values are AUTO (meaning the same
-    format as the source image), JPG, PNG, WEBP and AVIF.
-    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
-    change this. Take care if you specify JPG or PNG when you do
-    not know the formats of the source images, as this could lead to unwanted
-    results such as converting JPEGs to PNGs. Specifying
+    
+    The image formats to generate. Valid values are AUTO (meaning the same format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
     both PNG and JPG is not supported and will be ignored.
     """
     format: RemoteFileFormat = AUTO
@@ -666,29 +664,32 @@ type ContentfulAsset implements ContentfulReference & Node & RemoteFile {
   """
   gatsbyImage(
     """
+    
     The layout for the image.
     FIXED: A static image sized, that does not resize according to the screen width
-    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
-    it isn't going to be the full width of the screen.
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if it isn't going to be the full width of the screen.
     CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+    
     """
     layout: RemoteFileLayout = CONSTRAINED
 
     """
-    The display width of the generated image for layout = FIXED, and the display
-    width of the largest image for layout = CONSTRAINED.
+    
+    The display width of the generated image for layout = FIXED, and the display width of the largest image for layout = CONSTRAINED.
     The actual largest image resolution will be this value multiplied by the largest value in outputPixelDensities
     Ignored if layout = FLUID.
+    
     """
     width: Int
 
     """
-    If set, the height of the generated image. If omitted, it is calculated from
-    the supplied width, matching the aspect ratio of the source image.
+    
+    If set, the height of the generated image. If omitted, it is calculated from the supplied width, matching the aspect ratio of the source image.
     """
     height: Int
 
     """
+    
     Format of generated placeholder image, displayed while the main image loads.
     BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
     DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
@@ -698,49 +699,46 @@ type ContentfulAsset implements ContentfulReference & Node & RemoteFile {
     placeholder: RemoteFilePlaceholder = DOMINANT_COLOR
 
     """
-    If set along with width or height, this will set the value of the other
-    dimension to match the provided aspect ratio, cropping the image if needed.
+    
+    If set along with width or height, this will set the value of the other dimension to match the provided aspect ratio, cropping the image if needed.
     If neither width or height is provided, height will be set based on the intrinsic width of the source image.
+    
     """
     aspectRatio: Float
 
     """
-    The image formats to generate. Valid values are AUTO (meaning the same
-    format as the source image), JPG, PNG, WEBP and AVIF.
-    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
-    change this. Take care if you specify JPG or PNG when you do
-    not know the formats of the source images, as this could lead to unwanted
-    results such as converting JPEGs to PNGs. Specifying
+    
+    The image formats to generate. Valid values are AUTO (meaning the same format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
     both PNG and JPG is not supported and will be ignored.
+    
     """
     formats: [RemoteFileFormat!] = [AUTO, WEBP, AVIF]
 
     """
-    A list of image pixel densities to generate for FIXED and CONSTRAINED
-    images. You should rarely need to change this. It will never generate images
-    larger than the source, and will always include a 1x image.
-    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, and [0.25, 0.5, 1, 2]
-    for fluid. In this case, an image with a fluid layout and width = 400 would
-    generate images at 100, 200, 400 and 800px wide.
+    
+    A list of image pixel densities to generate for FIXED and CONSTRAINED images. You should rarely need to change this. It will never generate images larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, and [0.25, 0.5, 1, 2] for fluid. In this case, an image with a fluid layout and width = 400 would generate images at 100, 200, 400 and 800px wide.
+    
     """
     outputPixelDensities: [Float] = [0.25, 0.5, 1, 2]
 
     """
-    Specifies the image widths to generate. You should rarely need to change
-    this. For FIXED and CONSTRAINED images it is better to allow these to be
-    determined automatically,
-    based on the image size. For FULL_WIDTH images this can be used to override
-    the default, which is [750, 1080, 1366, 1920].
+    
+    Specifies the image widths to generate. You should rarely need to change this. For FIXED and CONSTRAINED images it is better to allow these to be determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override the default, which is [750, 1080, 1366, 1920].
     It will never generate any images larger than the source.
+    
     """
     breakpoints: [Int] = [750, 1080, 1366, 1920]
 
     """
+    
     The "sizes" property, passed to the img tag. This describes the display size of the image.
-    This does not affect the generated images, but is used by the browser to
-    decide which images to download. You can leave this blank for fixed images,
-    or if the responsive image
+    This does not affect the generated images, but is used by the browser to decide which images to download. You can leave this blank for fixed images, or if the responsive image
     container will be the full width of the screen. In these cases we will generate an appropriate value.
+    
     """
     sizes: String
 
@@ -770,12 +768,10 @@ interface RemoteFile {
     fit: RemoteFileFit = COVER
 
     """
-    The image formats to generate. Valid values are AUTO (meaning the same
-    format as the source image), JPG, PNG, WEBP and AVIF.
-    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
-    change this. Take care if you specify JPG or PNG when you do
-    not know the formats of the source images, as this could lead to unwanted
-    results such as converting JPEGs to PNGs. Specifying
+    
+    The image formats to generate. Valid values are AUTO (meaning the same format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
     both PNG and JPG is not supported and will be ignored.
     """
     format: RemoteFileFormat = AUTO
@@ -788,29 +784,32 @@ interface RemoteFile {
   """
   gatsbyImage(
     """
+    
     The layout for the image.
     FIXED: A static image sized, that does not resize according to the screen width
-    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
-    it isn't going to be the full width of the screen.
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if it isn't going to be the full width of the screen.
     CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
+    
     """
     layout: RemoteFileLayout = CONSTRAINED
 
     """
-    The display width of the generated image for layout = FIXED, and the display
-    width of the largest image for layout = CONSTRAINED.
+    
+    The display width of the generated image for layout = FIXED, and the display width of the largest image for layout = CONSTRAINED.
     The actual largest image resolution will be this value multiplied by the largest value in outputPixelDensities
     Ignored if layout = FLUID.
+    
     """
     width: Int
 
     """
-    If set, the height of the generated image. If omitted, it is calculated from
-    the supplied width, matching the aspect ratio of the source image.
+    
+    If set, the height of the generated image. If omitted, it is calculated from the supplied width, matching the aspect ratio of the source image.
     """
     height: Int
 
     """
+    
     Format of generated placeholder image, displayed while the main image loads.
     BLURRED: a blurred, low resolution image, encoded as a base64 data URI (default)
     DOMINANT_COLOR: a solid color, calculated from the dominant color of the image.
@@ -820,49 +819,46 @@ interface RemoteFile {
     placeholder: RemoteFilePlaceholder = DOMINANT_COLOR
 
     """
-    If set along with width or height, this will set the value of the other
-    dimension to match the provided aspect ratio, cropping the image if needed.
+    
+    If set along with width or height, this will set the value of the other dimension to match the provided aspect ratio, cropping the image if needed.
     If neither width or height is provided, height will be set based on the intrinsic width of the source image.
+    
     """
     aspectRatio: Float
 
     """
-    The image formats to generate. Valid values are AUTO (meaning the same
-    format as the source image), JPG, PNG, WEBP and AVIF.
-    The default value is [AUTO, WEBP, AVIF], and you should rarely need to
-    change this. Take care if you specify JPG or PNG when you do
-    not know the formats of the source images, as this could lead to unwanted
-    results such as converting JPEGs to PNGs. Specifying
+    
+    The image formats to generate. Valid values are AUTO (meaning the same format as the source image), JPG, PNG, WEBP and AVIF.
+    The default value is [AUTO, WEBP, AVIF], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
     both PNG and JPG is not supported and will be ignored.
+    
     """
     formats: [RemoteFileFormat!] = [AUTO, WEBP, AVIF]
 
     """
-    A list of image pixel densities to generate for FIXED and CONSTRAINED
-    images. You should rarely need to change this. It will never generate images
-    larger than the source, and will always include a 1x image.
-    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, and [0.25, 0.5, 1, 2]
-    for fluid. In this case, an image with a fluid layout and width = 400 would
-    generate images at 100, 200, 400 and 800px wide.
+    
+    A list of image pixel densities to generate for FIXED and CONSTRAINED images. You should rarely need to change this. It will never generate images larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for fixed images, meaning 1x, 2x, and [0.25, 0.5, 1, 2] for fluid. In this case, an image with a fluid layout and width = 400 would generate images at 100, 200, 400 and 800px wide.
+    
     """
     outputPixelDensities: [Float] = [0.25, 0.5, 1, 2]
 
     """
-    Specifies the image widths to generate. You should rarely need to change
-    this. For FIXED and CONSTRAINED images it is better to allow these to be
-    determined automatically,
-    based on the image size. For FULL_WIDTH images this can be used to override
-    the default, which is [750, 1080, 1366, 1920].
+    
+    Specifies the image widths to generate. You should rarely need to change this. For FIXED and CONSTRAINED images it is better to allow these to be determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override the default, which is [750, 1080, 1366, 1920].
     It will never generate any images larger than the source.
+    
     """
     breakpoints: [Int] = [750, 1080, 1366, 1920]
 
     """
+    
     The "sizes" property, passed to the img tag. This describes the display size of the image.
-    This does not affect the generated images, but is used by the browser to
-    decide which images to download. You can leave this blank for fixed images,
-    or if the responsive image
+    This does not affect the generated images, but is used by the browser to decide which images to download. You can leave this blank for fixed images, or if the responsive image
     container will be the full width of the screen. In these cases we will generate an appropriate value.
+    
     """
     sizes: String
 
@@ -962,6 +958,28 @@ enum ContentfulImageCropFocus {
   CENTER
 }
 
+type ContentfulAssetFile {
+  url: String
+  details: ContentfulAssetFileDetails
+  fileName: String
+  contentType: String
+}
+
+type ContentfulAssetFileDetails {
+  size: Int
+  image: ContentfulAssetFileDetailsImage
+}
+
+type ContentfulAssetFileDetailsImage {
+  width: Int
+  height: Int
+}
+
+type ContentfulAssetSys {
+  type: String
+  revision: Int
+}
+
 type ContentfulSocialMedia implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
@@ -1010,6 +1028,22 @@ type ContentfulSocialMedia implements ContentfulReference & ContentfulEntry & No
   internal: Internal!
 }
 
+type ContentfulSocialMediaSys {
+  type: String
+  revision: Int
+  contentType: ContentfulSocialMediaSysContentType
+}
+
+type ContentfulSocialMediaSysContentType {
+  sys: ContentfulSocialMediaSysContentTypeSys
+}
+
+type ContentfulSocialMediaSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type ContentfulDaneKontaktowe implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
@@ -1055,6 +1089,22 @@ type ContentfulDaneKontaktowe implements ContentfulReference & ContentfulEntry &
   parent: Node
   children: [Node!]!
   internal: Internal!
+}
+
+type ContentfulDaneKontaktoweSys {
+  type: String
+  revision: Int
+  contentType: ContentfulDaneKontaktoweSysContentType
+}
+
+type ContentfulDaneKontaktoweSysContentType {
+  sys: ContentfulDaneKontaktoweSysContentTypeSys
+}
+
+type ContentfulDaneKontaktoweSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
 }
 
 type ContentfulOpinie implements ContentfulReference & ContentfulEntry & Node {
@@ -1116,15 +1166,31 @@ type ContentfulOpinie implements ContentfulReference & ContentfulEntry & Node {
   internal: Internal!
 }
 
+type ContentfulOpinieSys {
+  type: String
+  revision: Int
+  contentType: ContentfulOpinieSysContentType
+}
+
+type ContentfulOpinieSysContentType {
+  sys: ContentfulOpinieSysContentTypeSys
+}
+
+type ContentfulOpinieSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
   node_locale: String!
   title: String
-  category: ContentfulKategorieDlaBlogaIGalerii
   slug: String
   articlecontent: ContentfulBlogArticlecontent
   image: ContentfulAsset
+  category: ContentfulKategorieDlaBlogaIGalerii
   gallery: [ContentfulAsset]
   shortdescription: contentfulBlogShortdescriptionTextNode
   spaceId: String
@@ -1178,6 +1244,27 @@ type ContentfulBlog implements ContentfulReference & ContentfulEntry & Node {
   internal: Internal!
 }
 
+type ContentfulBlogArticlecontent {
+  raw: String
+  references: [ContentfulAsset]
+}
+
+type ContentfulBlogSys {
+  type: String
+  revision: Int
+  contentType: ContentfulBlogSysContentType
+}
+
+type ContentfulBlogSysContentType {
+  sys: ContentfulBlogSysContentTypeSys
+}
+
+type ContentfulBlogSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
@@ -1225,10 +1312,10 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node {
   ): Date
   sys: ContentfulOfertySys
   priority: Int
+  moreInformations: ContentfulOfertyMoreInformations
   secondimage: ContentfulAsset
   drinks: [ContentfulDrinki]
   description: contentfulOfertyDescriptionTextNode
-  moreInformations: ContentfulOfertyMoreInformations
   aboutdrinks: contentfulOfertyAboutdrinksTextNode
 
   """
@@ -1275,12 +1362,32 @@ type ContentfulOferty implements ContentfulReference & ContentfulEntry & Node {
   internal: Internal!
 }
 
+type ContentfulOfertySys {
+  type: String
+  revision: Int
+  contentType: ContentfulOfertySysContentType
+}
+
+type ContentfulOfertySysContentType {
+  sys: ContentfulOfertySysContentTypeSys
+}
+
+type ContentfulOfertySysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
+type ContentfulOfertyMoreInformations {
+  raw: String
+}
+
 type ContentfulOMnieTresciNaPodstronie implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
   node_locale: String!
-  contentfulid: String!
   toUseThis: Boolean
+  contentfulid: String
   content: contentfulOMnieTresciNaPodstronieContentTextNode
   spaceId: String
   createdAt(
@@ -1333,6 +1440,22 @@ type ContentfulOMnieTresciNaPodstronie implements ContentfulReference & Contentf
   internal: Internal!
 }
 
+type ContentfulOMnieTresciNaPodstronieSys {
+  type: String
+  revision: Int
+  contentType: ContentfulOMnieTresciNaPodstronieSysContentType
+}
+
+type ContentfulOMnieTresciNaPodstronieSysContentType {
+  sys: ContentfulOMnieTresciNaPodstronieSysContentTypeSys
+}
+
+type ContentfulOMnieTresciNaPodstronieSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type ContentfulOMnieZdjeciaNaPodstronie implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
@@ -1381,12 +1504,30 @@ type ContentfulOMnieZdjeciaNaPodstronie implements ContentfulReference & Content
   internal: Internal!
 }
 
+type ContentfulOMnieZdjeciaNaPodstronieSys {
+  type: String
+  revision: Int
+  contentType: ContentfulOMnieZdjeciaNaPodstronieSysContentType
+}
+
+type ContentfulOMnieZdjeciaNaPodstronieSysContentType {
+  sys: ContentfulOMnieZdjeciaNaPodstronieSysContentTypeSys
+}
+
+type ContentfulOMnieZdjeciaNaPodstronieSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
+}
+
 type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & ContentfulEntry & Node {
   contentful_id: String!
   id: ID!
   node_locale: String!
   name: String
   priority: Int
+  blog: [ContentfulBlog]
+  galeria: [ContentfulGaleria]
   spaceId: String
   createdAt(
     """
@@ -1423,11 +1564,25 @@ type ContentfulKategorieDlaBlogaIGalerii implements ContentfulReference & Conten
     locale: String
   ): Date
   sys: ContentfulKategorieDlaBlogaIGaleriiSys
-  blog: [ContentfulBlog]
-  galeria: [ContentfulGaleria]
   parent: Node
   children: [Node!]!
   internal: Internal!
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSys {
+  type: String
+  revision: Int
+  contentType: ContentfulKategorieDlaBlogaIGaleriiSysContentType
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSysContentType {
+  sys: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys
+}
+
+type ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
 }
 
 type ContentfulGaleria implements ContentfulReference & ContentfulEntry & Node {
@@ -1476,6 +1631,22 @@ type ContentfulGaleria implements ContentfulReference & ContentfulEntry & Node {
   parent: Node
   children: [Node!]!
   internal: Internal!
+}
+
+type ContentfulGaleriaSys {
+  type: String
+  revision: Int
+  contentType: ContentfulGaleriaSysContentType
+}
+
+type ContentfulGaleriaSysContentType {
+  sys: ContentfulGaleriaSysContentTypeSys
+}
+
+type ContentfulGaleriaSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
 }
 
 type ContentfulDrinki implements ContentfulReference & ContentfulEntry & Node {
@@ -1535,6 +1706,22 @@ type ContentfulDrinki implements ContentfulReference & ContentfulEntry & Node {
   parent: Node
   children: [Node!]!
   internal: Internal!
+}
+
+type ContentfulDrinkiSys {
+  type: String
+  revision: Int
+  contentType: ContentfulDrinkiSysContentType
+}
+
+type ContentfulDrinkiSysContentType {
+  sys: ContentfulDrinkiSysContentTypeSys
+}
+
+type ContentfulDrinkiSysContentTypeSys {
+  type: String
+  linkType: String
+  id: String
 }
 
 enum GatsbyImageFormat {
@@ -1624,12 +1811,12 @@ input Potrace {
 }
 
 type ImageSharp implements Node {
-  fixed(width: Int, height: Int, base64Width: Int, jpegProgressive: Boolean = true, pngCompressionSpeed: Int = 4, grayscale: Boolean, duotone: DuotoneGradient, traceSVG: Potrace, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, toFormat: ImageFormat, toFormatBase64: ImageFormat, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int, trim: Float): ImageSharpFixed
+  fixed(width: Int, height: Int, base64Width: Int, jpegProgressive: Boolean = true, pngCompressionSpeed: Int = 4, grayscale: Boolean = false, duotone: DuotoneGradient, traceSVG: Potrace, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, toFormat: ImageFormat = AUTO, toFormatBase64: ImageFormat = AUTO, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int = 0, trim: Float = 0): ImageSharpFixed
   fluid(
     maxWidth: Int
     maxHeight: Int
     base64Width: Int
-    grayscale: Boolean
+    grayscale: Boolean = false
     jpegProgressive: Boolean = true
     pngCompressionSpeed: Int = 4
     duotone: DuotoneGradient
@@ -1638,14 +1825,14 @@ type ImageSharp implements Node {
     jpegQuality: Int
     pngQuality: Int
     webpQuality: Int
-    toFormat: ImageFormat
-    toFormatBase64: ImageFormat
+    toFormat: ImageFormat = AUTO
+    toFormatBase64: ImageFormat = AUTO
     cropFocus: ImageCropFocus = ATTENTION
     fit: ImageFit = COVER
     background: String = "rgba(0,0,0,1)"
-    rotate: Int
-    trim: Float
-    sizes: String
+    rotate: Int = 0
+    trim: Float = 0
+    sizes: String = ""
 
     """
     A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]
@@ -1656,31 +1843,26 @@ type ImageSharp implements Node {
     """
     The layout for the image.
     FIXED: A static image sized, that does not resize according to the screen width
-    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if
-    it isn't going to be the full width of the screen.
+    FULL_WIDTH: The image resizes to fit its container. Pass a "sizes" option if it isn't going to be the full width of the screen.
     CONSTRAINED: Resizes to fit its container, up to a maximum width, at which point it will remain fixed in size.
     """
     layout: ImageLayout = CONSTRAINED
 
     """
-    The display width of the generated image for layout = FIXED, and the maximum
-    display width of the largest image for layout = CONSTRAINED.
+    The display width of the generated image for layout = FIXED, and the maximum display width of the largest image for layout = CONSTRAINED.
     Ignored if layout = FLUID.
     """
     width: Int
 
     """
-    The display height of the generated image for layout = FIXED, and the
-    maximum display height of the largest image for layout = CONSTRAINED.
-    The image will be cropped if the aspect ratio does not match the source
-    image. If omitted, it is calculated from the supplied width,
+    The display height of the generated image for layout = FIXED, and the maximum display height of the largest image for layout = CONSTRAINED.
+    The image will be cropped if the aspect ratio does not match the source image. If omitted, it is calculated from the supplied width,
     matching the aspect ratio of the source image.
     """
     height: Int
 
     """
-    If set along with width or height, this will set the value of the other
-    dimension to match the provided aspect ratio, cropping the image if needed.
+    If set along with width or height, this will set the value of the other dimension to match the provided aspect ratio, cropping the image if needed.
     If neither width or height is provided, height will be set based on the intrinsic width of the source image.
     """
     aspectRatio: Float
@@ -1705,31 +1887,23 @@ type ImageSharp implements Node {
     tracedSVGOptions: Potrace
 
     """
-    The image formats to generate. Valid values are "AUTO" (meaning the same
-    format as the source image), "JPG", "PNG", "WEBP" and "AVIF".
-    The default value is [AUTO, WEBP], and you should rarely need to change
-    this. Take care if you specify JPG or PNG when you do
-    not know the formats of the source images, as this could lead to unwanted
-    results such as converting JPEGs to PNGs. Specifying
+    The image formats to generate. Valid values are "AUTO" (meaning the same format as the source image), "JPG", "PNG", "WEBP" and "AVIF".
+    The default value is [AUTO, WEBP], and you should rarely need to change this. Take care if you specify JPG or PNG when you do
+    not know the formats of the source images, as this could lead to unwanted results such as converting JPEGs to PNGs. Specifying
     both PNG and JPG is not supported and will be ignored.
     """
     formats: [ImageFormat]
 
     """
-    A list of image pixel densities to generate. It will never generate images
-    larger than the source, and will always include a 1x image.
-    Default is [ 1, 2 ] for FIXED images, meaning 1x and 2x and [0.25, 0.5, 1,
-    2] for CONSTRAINED. In this case, an image with a constrained layout
-    and width = 400 would generate images at 100, 200, 400 and 800px wide.
-    Ignored for FULL_WIDTH images, which use breakpoints instead
+    A list of image pixel densities to generate. It will never generate images larger than the source, and will always include a 1x image.
+    Default is [ 1, 2 ] for FIXED images, meaning 1x and 2x and [0.25, 0.5, 1, 2] for CONSTRAINED. In this case, an image with a constrained layout
+    and width = 400 would generate images at 100, 200, 400 and 800px wide. Ignored for FULL_WIDTH images, which use breakpoints instead
     """
     outputPixelDensities: [Float]
 
     """
-    Specifies the image widths to generate. For FIXED and CONSTRAINED images it
-    is better to allow these to be determined automatically,
-    based on the image size. For FULL_WIDTH images this can be used to override
-    the default, which is [750, 1080, 1366, 1920].
+    Specifies the image widths to generate. For FIXED and CONSTRAINED images it is better to allow these to be determined automatically,
+    based on the image size. For FULL_WIDTH images this can be used to override the default, which is [750, 1080, 1366, 1920].
     It will never generate any images larger than the source.
     """
     breakpoints: [Int]
@@ -1763,13 +1937,12 @@ type ImageSharp implements Node {
     transformOptions: TransformOptions
 
     """
-    Background color applied to the wrapper. Also passed to sharp to use as a
-    background when "letterboxing" an image to another aspect ratio.
+    Background color applied to the wrapper. Also passed to sharp to use as a background when "letterboxing" an image to another aspect ratio.
     """
     backgroundColor: String
   ): GatsbyImageData!
   original: ImageSharpOriginal
-  resize(width: Int, height: Int, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, jpegProgressive: Boolean = true, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, grayscale: Boolean, duotone: DuotoneGradient, base64: Boolean, traceSVG: Potrace, toFormat: ImageFormat, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int, trim: Float): ImageSharpResize
+  resize(width: Int, height: Int, quality: Int, jpegQuality: Int, pngQuality: Int, webpQuality: Int, jpegProgressive: Boolean = true, pngCompressionLevel: Int = 9, pngCompressionSpeed: Int = 4, grayscale: Boolean = false, duotone: DuotoneGradient, base64: Boolean = false, traceSVG: Potrace, toFormat: ImageFormat = AUTO, cropFocus: ImageCropFocus = ATTENTION, fit: ImageFit = COVER, background: String = "rgba(0,0,0,1)", rotate: Int = 0, trim: Float = 0): ImageSharpResize
   id: ID!
   parent: Node
   children: [Node!]!
@@ -1865,162 +2038,26 @@ type ImageSharpResize {
   originalName: String
 }
 
-type ContentfulAssetFile {
-  url: String
-  details: ContentfulAssetFileDetails
-  fileName: String
-  contentType: String
-}
-
-type ContentfulAssetFileDetails {
-  size: Int
-  image: ContentfulAssetFileDetailsImage
-}
-
-type ContentfulAssetFileDetailsImage {
-  width: Int
-  height: Int
-}
-
-type ContentfulAssetSys {
-  type: String
-  revision: Int
-}
-
-type ContentfulSocialMediaSys {
-  type: String
-  revision: Int
-  contentType: ContentfulSocialMediaSysContentType
-}
-
-type ContentfulSocialMediaSysContentType {
-  sys: ContentfulSocialMediaSysContentTypeSys
-}
-
-type ContentfulSocialMediaSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulDaneKontaktoweSys {
-  type: String
-  revision: Int
-  contentType: ContentfulDaneKontaktoweSysContentType
-}
-
-type ContentfulDaneKontaktoweSysContentType {
-  sys: ContentfulDaneKontaktoweSysContentTypeSys
-}
-
-type ContentfulDaneKontaktoweSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
 type contentfulOpinieBlockquoteTextNode implements Node {
-  blockquote: String
-  sys: contentfulOpinieBlockquoteTextNodeSys
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
+  blockquote: String
+  sys: contentfulOpinieBlockquoteTextNodeSys
 }
 
 type contentfulOpinieBlockquoteTextNodeSys {
   type: String
 }
 
-type ContentfulOpinieSys {
-  type: String
-  revision: Int
-  contentType: ContentfulOpinieSysContentType
-}
-
-type ContentfulOpinieSysContentType {
-  sys: ContentfulOpinieSysContentTypeSys
-}
-
-type ContentfulOpinieSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulBlogArticlecontent {
-  raw: String
-  references: [ContentfulAsset]
-}
-
-type ContentfulKategorieDlaBlogaIGaleriiSys {
-  type: String
-  revision: Int
-  contentType: ContentfulKategorieDlaBlogaIGaleriiSysContentType
-}
-
-type ContentfulKategorieDlaBlogaIGaleriiSysContentType {
-  sys: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys
-}
-
-type ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulGaleriaSys {
-  type: String
-  revision: Int
-  contentType: ContentfulGaleriaSysContentType
-}
-
-type ContentfulGaleriaSysContentType {
-  sys: ContentfulGaleriaSysContentTypeSys
-}
-
-type ContentfulGaleriaSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type contentfulBlogShortdescriptionTextNode implements Node {
-  shortdescription: String
-  sys: contentfulBlogShortdescriptionTextNodeSys
+type contentfulOfertyShortdescriptionTextNode implements Node {
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
-}
-
-type contentfulBlogShortdescriptionTextNodeSys {
-  type: String
-}
-
-type ContentfulBlogSys {
-  type: String
-  revision: Int
-  contentType: ContentfulBlogSysContentType
-}
-
-type ContentfulBlogSysContentType {
-  sys: ContentfulBlogSysContentTypeSys
-}
-
-type ContentfulBlogSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type contentfulOfertyShortdescriptionTextNode implements Node {
   shortdescription: String
   sys: contentfulOfertyShortdescriptionTextNodeSys
-  id: ID!
-  parent: Node
-  children: [Node!]!
-  internal: Internal!
 }
 
 type contentfulOfertyShortdescriptionTextNodeSys {
@@ -2028,74 +2065,25 @@ type contentfulOfertyShortdescriptionTextNodeSys {
 }
 
 type contentfulOfertyOffersPageTextTextNode implements Node {
-  offersPageText: String
-  sys: contentfulOfertyOffersPageTextTextNodeSys
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
+  offersPageText: String
+  sys: contentfulOfertyOffersPageTextTextNodeSys
 }
 
 type contentfulOfertyOffersPageTextTextNodeSys {
   type: String
 }
 
-type ContentfulOfertySys {
-  type: String
-  revision: Int
-  contentType: ContentfulOfertySysContentType
-}
-
-type ContentfulOfertySysContentType {
-  sys: ContentfulOfertySysContentTypeSys
-}
-
-type ContentfulOfertySysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulOfertyMoreInformations {
-  raw: String
-}
-
-type contentfulDrinkiDescriptionTextNode implements Node {
-  description: String
-  sys: contentfulDrinkiDescriptionTextNodeSys
+type contentfulOfertyDescriptionTextNode implements Node {
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
-}
-
-type contentfulDrinkiDescriptionTextNodeSys {
-  type: String
-}
-
-type ContentfulDrinkiSys {
-  type: String
-  revision: Int
-  contentType: ContentfulDrinkiSysContentType
-}
-
-type ContentfulDrinkiSysContentType {
-  sys: ContentfulDrinkiSysContentTypeSys
-}
-
-type ContentfulDrinkiSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type contentfulOfertyDescriptionTextNode implements Node {
   description: String
   sys: contentfulOfertyDescriptionTextNodeSys
-  id: ID!
-  parent: Node
-  children: [Node!]!
-  internal: Internal!
 }
 
 type contentfulOfertyDescriptionTextNodeSys {
@@ -2103,12 +2091,12 @@ type contentfulOfertyDescriptionTextNodeSys {
 }
 
 type contentfulOfertyAboutdrinksTextNode implements Node {
-  aboutdrinks: String
-  sys: contentfulOfertyAboutdrinksTextNodeSys
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
+  aboutdrinks: String
+  sys: contentfulOfertyAboutdrinksTextNodeSys
 }
 
 type contentfulOfertyAboutdrinksTextNodeSys {
@@ -2116,59 +2104,53 @@ type contentfulOfertyAboutdrinksTextNodeSys {
 }
 
 type contentfulOMnieTresciNaPodstronieContentTextNode implements Node {
-  content: String!
-  sys: contentfulOMnieTresciNaPodstronieContentTextNodeSys
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
+  content: String
+  sys: contentfulOMnieTresciNaPodstronieContentTextNodeSys
 }
 
 type contentfulOMnieTresciNaPodstronieContentTextNodeSys {
   type: String
 }
 
-type ContentfulOMnieTresciNaPodstronieSys {
-  type: String
-  revision: Int
-  contentType: ContentfulOMnieTresciNaPodstronieSysContentType
-}
-
-type ContentfulOMnieTresciNaPodstronieSysContentType {
-  sys: ContentfulOMnieTresciNaPodstronieSysContentTypeSys
-}
-
-type ContentfulOMnieTresciNaPodstronieSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulOMnieZdjeciaNaPodstronieSys {
-  type: String
-  revision: Int
-  contentType: ContentfulOMnieZdjeciaNaPodstronieSysContentType
-}
-
-type ContentfulOMnieZdjeciaNaPodstronieSysContentType {
-  sys: ContentfulOMnieZdjeciaNaPodstronieSysContentTypeSys
-}
-
-type ContentfulOMnieZdjeciaNaPodstronieSysContentTypeSys {
-  type: String
-  linkType: String
-  id: String
-}
-
-type ContentfulContentType implements Node {
-  name: String
-  displayField: String
-  description: String
-  sys: ContentfulContentTypeSys
+type contentfulDrinkiDescriptionTextNode implements Node {
   id: ID!
   parent: Node
   children: [Node!]!
   internal: Internal!
+  description: String
+  sys: contentfulDrinkiDescriptionTextNodeSys
+}
+
+type contentfulDrinkiDescriptionTextNodeSys {
+  type: String
+}
+
+type contentfulBlogShortdescriptionTextNode implements Node {
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+  shortdescription: String
+  sys: contentfulBlogShortdescriptionTextNodeSys
+}
+
+type contentfulBlogShortdescriptionTextNodeSys {
+  type: String
+}
+
+type ContentfulContentType implements Node {
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+  name: String
+  displayField: String
+  description: String
+  sys: ContentfulContentTypeSys
 }
 
 type ContentfulContentTypeSys {
@@ -2200,15 +2182,15 @@ type Query {
   allContentfulDaneKontaktowe(filter: ContentfulDaneKontaktoweFilterInput, sort: ContentfulDaneKontaktoweSortInput, skip: Int, limit: Int): ContentfulDaneKontaktoweConnection!
   contentfulOpinie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, author: StringQueryOperatorInput, position: StringQueryOperatorInput, image: ContentfulAssetFilterInput, blockquote: contentfulOpinieBlockquoteTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOpinieSysFilterInput, childrenContentfulOpinieBlockquoteTextNode: contentfulOpinieBlockquoteTextNodeFilterListInput, childContentfulOpinieBlockquoteTextNode: contentfulOpinieBlockquoteTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOpinie
   allContentfulOpinie(filter: ContentfulOpinieFilterInput, sort: ContentfulOpinieSortInput, skip: Int, limit: Int): ContentfulOpinieConnection!
-  contentfulBlog(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, slug: StringQueryOperatorInput, articlecontent: ContentfulBlogArticlecontentFilterInput, image: ContentfulAssetFilterInput, gallery: ContentfulAssetFilterListInput, shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulBlogSysFilterInput, childrenContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterListInput, childContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulBlog
+  contentfulBlog(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, slug: StringQueryOperatorInput, articlecontent: ContentfulBlogArticlecontentFilterInput, image: ContentfulAssetFilterInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, gallery: ContentfulAssetFilterListInput, shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulBlogSysFilterInput, childrenContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterListInput, childContentfulBlogShortdescriptionTextNode: contentfulBlogShortdescriptionTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulBlog
   allContentfulBlog(filter: ContentfulBlogFilterInput, sort: ContentfulBlogSortInput, skip: Int, limit: Int): ContentfulBlogConnection!
-  contentfulOferty(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, iscontact: BooleanQueryOperatorInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput, offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOfertySysFilterInput, priority: IntQueryOperatorInput, secondimage: ContentfulAssetFilterInput, drinks: ContentfulDrinkiFilterListInput, description: contentfulOfertyDescriptionTextNodeFilterInput, moreInformations: ContentfulOfertyMoreInformationsFilterInput, aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput, childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput, childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput, childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput, childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput, childrenContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterListInput, childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterInput, childrenContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterListInput, childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOferty
+  contentfulOferty(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, iscontact: BooleanQueryOperatorInput, slug: StringQueryOperatorInput, image: ContentfulAssetFilterInput, shortdescription: contentfulOfertyShortdescriptionTextNodeFilterInput, offersPageText: contentfulOfertyOffersPageTextTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOfertySysFilterInput, priority: IntQueryOperatorInput, moreInformations: ContentfulOfertyMoreInformationsFilterInput, secondimage: ContentfulAssetFilterInput, drinks: ContentfulDrinkiFilterListInput, description: contentfulOfertyDescriptionTextNodeFilterInput, aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput, childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput, childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput, childrenContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterListInput, childContentfulOfertyOffersPageTextTextNode: contentfulOfertyOffersPageTextTextNodeFilterInput, childrenContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterListInput, childContentfulOfertyDescriptionTextNode: contentfulOfertyDescriptionTextNodeFilterInput, childrenContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterListInput, childContentfulOfertyAboutdrinksTextNode: contentfulOfertyAboutdrinksTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOferty
   allContentfulOferty(filter: ContentfulOfertyFilterInput, sort: ContentfulOfertySortInput, skip: Int, limit: Int): ContentfulOfertyConnection!
-  contentfulOMnieTresciNaPodstronie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, contentfulid: StringQueryOperatorInput, toUseThis: BooleanQueryOperatorInput, content: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOMnieTresciNaPodstronieSysFilterInput, childrenContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterListInput, childContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOMnieTresciNaPodstronie
+  contentfulOMnieTresciNaPodstronie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, toUseThis: BooleanQueryOperatorInput, contentfulid: StringQueryOperatorInput, content: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOMnieTresciNaPodstronieSysFilterInput, childrenContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterListInput, childContentfulOMnieTresciNaPodstronieContentTextNode: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOMnieTresciNaPodstronie
   allContentfulOMnieTresciNaPodstronie(filter: ContentfulOMnieTresciNaPodstronieFilterInput, sort: ContentfulOMnieTresciNaPodstronieSortInput, skip: Int, limit: Int): ContentfulOMnieTresciNaPodstronieConnection!
   contentfulOMnieZdjeciaNaPodstronie(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, useThis: BooleanQueryOperatorInput, contentfulid: StringQueryOperatorInput, image: ContentfulAssetFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulOMnieZdjeciaNaPodstronieSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulOMnieZdjeciaNaPodstronie
   allContentfulOMnieZdjeciaNaPodstronie(filter: ContentfulOMnieZdjeciaNaPodstronieFilterInput, sort: ContentfulOMnieZdjeciaNaPodstronieSortInput, skip: Int, limit: Int): ContentfulOMnieZdjeciaNaPodstronieConnection!
-  contentfulKategorieDlaBlogaIGalerii(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, priority: IntQueryOperatorInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput, blog: ContentfulBlogFilterListInput, galeria: ContentfulGaleriaFilterListInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulKategorieDlaBlogaIGalerii
+  contentfulKategorieDlaBlogaIGalerii(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, name: StringQueryOperatorInput, priority: IntQueryOperatorInput, blog: ContentfulBlogFilterListInput, galeria: ContentfulGaleriaFilterListInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulKategorieDlaBlogaIGalerii
   allContentfulKategorieDlaBlogaIGalerii(filter: ContentfulKategorieDlaBlogaIGaleriiFilterInput, sort: ContentfulKategorieDlaBlogaIGaleriiSortInput, skip: Int, limit: Int): ContentfulKategorieDlaBlogaIGaleriiConnection!
   contentfulGaleria(contentful_id: StringQueryOperatorInput, id: StringQueryOperatorInput, node_locale: StringQueryOperatorInput, title: StringQueryOperatorInput, category: ContentfulKategorieDlaBlogaIGaleriiFilterInput, image: ContentfulAssetFilterInput, spaceId: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, updatedAt: DateQueryOperatorInput, sys: ContentfulGaleriaSysFilterInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulGaleria
   allContentfulGaleria(filter: ContentfulGaleriaFilterInput, sort: ContentfulGaleriaSortInput, skip: Int, limit: Int): ContentfulGaleriaConnection!
@@ -2216,23 +2198,23 @@ type Query {
   allContentfulDrinki(filter: ContentfulDrinkiFilterInput, sort: ContentfulDrinkiSortInput, skip: Int, limit: Int): ContentfulDrinkiConnection!
   imageSharp(fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: GatsbyImageDataQueryOperatorInput, original: ImageSharpOriginalFilterInput, resize: ImageSharpResizeFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ImageSharp
   allImageSharp(filter: ImageSharpFilterInput, sort: ImageSharpSortInput, skip: Int, limit: Int): ImageSharpConnection!
-  contentfulOpinieBlockquoteTextNode(blockquote: StringQueryOperatorInput, sys: contentfulOpinieBlockquoteTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOpinieBlockquoteTextNode
+  contentfulOpinieBlockquoteTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, blockquote: StringQueryOperatorInput, sys: contentfulOpinieBlockquoteTextNodeSysFilterInput): contentfulOpinieBlockquoteTextNode
   allContentfulOpinieBlockquoteTextNode(filter: contentfulOpinieBlockquoteTextNodeFilterInput, sort: contentfulOpinieBlockquoteTextNodeSortInput, skip: Int, limit: Int): contentfulOpinieBlockquoteTextNodeConnection!
-  contentfulBlogShortdescriptionTextNode(shortdescription: StringQueryOperatorInput, sys: contentfulBlogShortdescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulBlogShortdescriptionTextNode
-  allContentfulBlogShortdescriptionTextNode(filter: contentfulBlogShortdescriptionTextNodeFilterInput, sort: contentfulBlogShortdescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulBlogShortdescriptionTextNodeConnection!
-  contentfulOfertyShortdescriptionTextNode(shortdescription: StringQueryOperatorInput, sys: contentfulOfertyShortdescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyShortdescriptionTextNode
+  contentfulOfertyShortdescriptionTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, shortdescription: StringQueryOperatorInput, sys: contentfulOfertyShortdescriptionTextNodeSysFilterInput): contentfulOfertyShortdescriptionTextNode
   allContentfulOfertyShortdescriptionTextNode(filter: contentfulOfertyShortdescriptionTextNodeFilterInput, sort: contentfulOfertyShortdescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyShortdescriptionTextNodeConnection!
-  contentfulOfertyOffersPageTextTextNode(offersPageText: StringQueryOperatorInput, sys: contentfulOfertyOffersPageTextTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyOffersPageTextTextNode
+  contentfulOfertyOffersPageTextTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, offersPageText: StringQueryOperatorInput, sys: contentfulOfertyOffersPageTextTextNodeSysFilterInput): contentfulOfertyOffersPageTextTextNode
   allContentfulOfertyOffersPageTextTextNode(filter: contentfulOfertyOffersPageTextTextNodeFilterInput, sort: contentfulOfertyOffersPageTextTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyOffersPageTextTextNodeConnection!
-  contentfulDrinkiDescriptionTextNode(description: StringQueryOperatorInput, sys: contentfulDrinkiDescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulDrinkiDescriptionTextNode
-  allContentfulDrinkiDescriptionTextNode(filter: contentfulDrinkiDescriptionTextNodeFilterInput, sort: contentfulDrinkiDescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulDrinkiDescriptionTextNodeConnection!
-  contentfulOfertyDescriptionTextNode(description: StringQueryOperatorInput, sys: contentfulOfertyDescriptionTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyDescriptionTextNode
+  contentfulOfertyDescriptionTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, description: StringQueryOperatorInput, sys: contentfulOfertyDescriptionTextNodeSysFilterInput): contentfulOfertyDescriptionTextNode
   allContentfulOfertyDescriptionTextNode(filter: contentfulOfertyDescriptionTextNodeFilterInput, sort: contentfulOfertyDescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyDescriptionTextNodeConnection!
-  contentfulOfertyAboutdrinksTextNode(aboutdrinks: StringQueryOperatorInput, sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOfertyAboutdrinksTextNode
+  contentfulOfertyAboutdrinksTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, aboutdrinks: StringQueryOperatorInput, sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput): contentfulOfertyAboutdrinksTextNode
   allContentfulOfertyAboutdrinksTextNode(filter: contentfulOfertyAboutdrinksTextNodeFilterInput, sort: contentfulOfertyAboutdrinksTextNodeSortInput, skip: Int, limit: Int): contentfulOfertyAboutdrinksTextNodeConnection!
-  contentfulOMnieTresciNaPodstronieContentTextNode(content: StringQueryOperatorInput, sys: contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): contentfulOMnieTresciNaPodstronieContentTextNode
+  contentfulOMnieTresciNaPodstronieContentTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, content: StringQueryOperatorInput, sys: contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput): contentfulOMnieTresciNaPodstronieContentTextNode
   allContentfulOMnieTresciNaPodstronieContentTextNode(filter: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput, sort: contentfulOMnieTresciNaPodstronieContentTextNodeSortInput, skip: Int, limit: Int): contentfulOMnieTresciNaPodstronieContentTextNodeConnection!
-  contentfulContentType(name: StringQueryOperatorInput, displayField: StringQueryOperatorInput, description: StringQueryOperatorInput, sys: ContentfulContentTypeSysFilterInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): ContentfulContentType
+  contentfulDrinkiDescriptionTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, description: StringQueryOperatorInput, sys: contentfulDrinkiDescriptionTextNodeSysFilterInput): contentfulDrinkiDescriptionTextNode
+  allContentfulDrinkiDescriptionTextNode(filter: contentfulDrinkiDescriptionTextNodeFilterInput, sort: contentfulDrinkiDescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulDrinkiDescriptionTextNodeConnection!
+  contentfulBlogShortdescriptionTextNode(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, shortdescription: StringQueryOperatorInput, sys: contentfulBlogShortdescriptionTextNodeSysFilterInput): contentfulBlogShortdescriptionTextNode
+  allContentfulBlogShortdescriptionTextNode(filter: contentfulBlogShortdescriptionTextNodeFilterInput, sort: contentfulBlogShortdescriptionTextNodeSortInput, skip: Int, limit: Int): contentfulBlogShortdescriptionTextNodeConnection!
+  contentfulContentType(id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput, name: StringQueryOperatorInput, displayField: StringQueryOperatorInput, description: StringQueryOperatorInput, sys: ContentfulContentTypeSysFilterInput): ContentfulContentType
   allContentfulContentType(filter: ContentfulContentTypeFilterInput, sort: ContentfulContentTypeSortInput, skip: Int, limit: Int): ContentfulContentTypeConnection!
 }
 
@@ -4497,12 +4479,12 @@ input ContentfulDaneKontaktoweSortInput {
 }
 
 input contentfulOpinieBlockquoteTextNodeFilterInput {
-  blockquote: StringQueryOperatorInput
-  sys: contentfulOpinieBlockquoteTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  blockquote: StringQueryOperatorInput
+  sys: contentfulOpinieBlockquoteTextNodeSysFilterInput
 }
 
 input contentfulOpinieBlockquoteTextNodeSysFilterInput {
@@ -4621,8 +4603,6 @@ enum ContentfulOpinieFieldsEnum {
   image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  blockquote___blockquote
-  blockquote___sys___type
   blockquote___id
   blockquote___parent___id
   blockquote___parent___parent___id
@@ -4664,6 +4644,8 @@ enum ContentfulOpinieFieldsEnum {
   blockquote___internal___owner
   blockquote___internal___type
   blockquote___internal___contentFilePath
+  blockquote___blockquote
+  blockquote___sys___type
   spaceId
   createdAt
   updatedAt
@@ -4673,8 +4655,6 @@ enum ContentfulOpinieFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   childrenContentfulOpinieBlockquoteTextNode
-  childrenContentfulOpinieBlockquoteTextNode___blockquote
-  childrenContentfulOpinieBlockquoteTextNode___sys___type
   childrenContentfulOpinieBlockquoteTextNode___id
   childrenContentfulOpinieBlockquoteTextNode___parent___id
   childrenContentfulOpinieBlockquoteTextNode___parent___parent___id
@@ -4716,8 +4696,8 @@ enum ContentfulOpinieFieldsEnum {
   childrenContentfulOpinieBlockquoteTextNode___internal___owner
   childrenContentfulOpinieBlockquoteTextNode___internal___type
   childrenContentfulOpinieBlockquoteTextNode___internal___contentFilePath
-  childContentfulOpinieBlockquoteTextNode___blockquote
-  childContentfulOpinieBlockquoteTextNode___sys___type
+  childrenContentfulOpinieBlockquoteTextNode___blockquote
+  childrenContentfulOpinieBlockquoteTextNode___sys___type
   childContentfulOpinieBlockquoteTextNode___id
   childContentfulOpinieBlockquoteTextNode___parent___id
   childContentfulOpinieBlockquoteTextNode___parent___parent___id
@@ -4759,6 +4739,8 @@ enum ContentfulOpinieFieldsEnum {
   childContentfulOpinieBlockquoteTextNode___internal___owner
   childContentfulOpinieBlockquoteTextNode___internal___type
   childContentfulOpinieBlockquoteTextNode___internal___contentFilePath
+  childContentfulOpinieBlockquoteTextNode___blockquote
+  childContentfulOpinieBlockquoteTextNode___sys___type
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -4891,37 +4873,30 @@ input ContentfulOpinieSortInput {
   order: [SortOrderEnum] = [ASC]
 }
 
+input ContentfulBlogArticlecontentFilterInput {
+  raw: StringQueryOperatorInput
+  references: ContentfulAssetFilterListInput
+}
+
+input ContentfulAssetFilterListInput {
+  elemMatch: ContentfulAssetFilterInput
+}
+
 input ContentfulKategorieDlaBlogaIGaleriiFilterInput {
   contentful_id: StringQueryOperatorInput
   id: StringQueryOperatorInput
   node_locale: StringQueryOperatorInput
   name: StringQueryOperatorInput
   priority: IntQueryOperatorInput
+  blog: ContentfulBlogFilterListInput
+  galeria: ContentfulGaleriaFilterListInput
   spaceId: StringQueryOperatorInput
   createdAt: DateQueryOperatorInput
   updatedAt: DateQueryOperatorInput
   sys: ContentfulKategorieDlaBlogaIGaleriiSysFilterInput
-  blog: ContentfulBlogFilterListInput
-  galeria: ContentfulGaleriaFilterListInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
-}
-
-input ContentfulKategorieDlaBlogaIGaleriiSysFilterInput {
-  type: StringQueryOperatorInput
-  revision: IntQueryOperatorInput
-  contentType: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeFilterInput
-}
-
-input ContentfulKategorieDlaBlogaIGaleriiSysContentTypeFilterInput {
-  sys: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSysFilterInput
-}
-
-input ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSysFilterInput {
-  type: StringQueryOperatorInput
-  linkType: StringQueryOperatorInput
-  id: StringQueryOperatorInput
 }
 
 input ContentfulBlogFilterListInput {
@@ -4933,10 +4908,10 @@ input ContentfulBlogFilterInput {
   id: StringQueryOperatorInput
   node_locale: StringQueryOperatorInput
   title: StringQueryOperatorInput
-  category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
   slug: StringQueryOperatorInput
   articlecontent: ContentfulBlogArticlecontentFilterInput
   image: ContentfulAssetFilterInput
+  category: ContentfulKategorieDlaBlogaIGaleriiFilterInput
   gallery: ContentfulAssetFilterListInput
   shortdescription: contentfulBlogShortdescriptionTextNodeFilterInput
   spaceId: StringQueryOperatorInput
@@ -4950,22 +4925,13 @@ input ContentfulBlogFilterInput {
   internal: InternalFilterInput
 }
 
-input ContentfulBlogArticlecontentFilterInput {
-  raw: StringQueryOperatorInput
-  references: ContentfulAssetFilterListInput
-}
-
-input ContentfulAssetFilterListInput {
-  elemMatch: ContentfulAssetFilterInput
-}
-
 input contentfulBlogShortdescriptionTextNodeFilterInput {
-  shortdescription: StringQueryOperatorInput
-  sys: contentfulBlogShortdescriptionTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  shortdescription: StringQueryOperatorInput
+  sys: contentfulBlogShortdescriptionTextNodeSysFilterInput
 }
 
 input contentfulBlogShortdescriptionTextNodeSysFilterInput {
@@ -5028,6 +4994,22 @@ input ContentfulGaleriaSysContentTypeSysFilterInput {
   id: StringQueryOperatorInput
 }
 
+input ContentfulKategorieDlaBlogaIGaleriiSysFilterInput {
+  type: StringQueryOperatorInput
+  revision: IntQueryOperatorInput
+  contentType: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeFilterInput
+}
+
+input ContentfulKategorieDlaBlogaIGaleriiSysContentTypeFilterInput {
+  sys: ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSysFilterInput
+}
+
+input ContentfulKategorieDlaBlogaIGaleriiSysContentTypeSysFilterInput {
+  type: StringQueryOperatorInput
+  linkType: StringQueryOperatorInput
+  id: StringQueryOperatorInput
+}
+
 type ContentfulBlogConnection {
   totalCount: Int!
   edges: [ContentfulBlogEdge!]!
@@ -5051,200 +5033,6 @@ enum ContentfulBlogFieldsEnum {
   id
   node_locale
   title
-  category___contentful_id
-  category___id
-  category___node_locale
-  category___name
-  category___priority
-  category___spaceId
-  category___createdAt
-  category___updatedAt
-  category___sys___type
-  category___sys___revision
-  category___blog
-  category___blog___contentful_id
-  category___blog___id
-  category___blog___node_locale
-  category___blog___title
-  category___blog___category___contentful_id
-  category___blog___category___id
-  category___blog___category___node_locale
-  category___blog___category___name
-  category___blog___category___priority
-  category___blog___category___spaceId
-  category___blog___category___createdAt
-  category___blog___category___updatedAt
-  category___blog___category___blog
-  category___blog___category___galeria
-  category___blog___category___children
-  category___blog___slug
-  category___blog___articlecontent___raw
-  category___blog___articlecontent___references
-  category___blog___image___contentful_id
-  category___blog___image___id
-  category___blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___blog___image___spaceId
-  category___blog___image___createdAt
-  category___blog___image___updatedAt
-  category___blog___image___title
-  category___blog___image___description
-  category___blog___image___node_locale
-  category___blog___image___url
-  category___blog___image___placeholderUrl
-  category___blog___image___mimeType
-  category___blog___image___filename
-  category___blog___image___width
-  category___blog___image___height
-  category___blog___image___size
-  category___blog___image___children
-  category___blog___image___filesize
-  category___blog___image___publicUrl
-  category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___blog___gallery
-  category___blog___gallery___contentful_id
-  category___blog___gallery___id
-  category___blog___gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___blog___gallery___spaceId
-  category___blog___gallery___createdAt
-  category___blog___gallery___updatedAt
-  category___blog___gallery___title
-  category___blog___gallery___description
-  category___blog___gallery___node_locale
-  category___blog___gallery___url
-  category___blog___gallery___placeholderUrl
-  category___blog___gallery___mimeType
-  category___blog___gallery___filename
-  category___blog___gallery___width
-  category___blog___gallery___height
-  category___blog___gallery___size
-  category___blog___gallery___children
-  category___blog___gallery___filesize
-  category___blog___gallery___publicUrl
-  category___blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___blog___shortdescription___shortdescription
-  category___blog___shortdescription___id
-  category___blog___shortdescription___children
-  category___blog___spaceId
-  category___blog___createdAt
-  category___blog___updatedAt
-  category___blog___sys___type
-  category___blog___sys___revision
-  category___blog___childrenContentfulBlogShortdescriptionTextNode
-  category___blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
-  category___blog___childrenContentfulBlogShortdescriptionTextNode___id
-  category___blog___childrenContentfulBlogShortdescriptionTextNode___children
-  category___blog___childContentfulBlogShortdescriptionTextNode___shortdescription
-  category___blog___childContentfulBlogShortdescriptionTextNode___id
-  category___blog___childContentfulBlogShortdescriptionTextNode___children
-  category___blog___parent___id
-  category___blog___parent___children
-  category___blog___children
-  category___blog___children___id
-  category___blog___children___children
-  category___blog___internal___content
-  category___blog___internal___contentDigest
-  category___blog___internal___description
-  category___blog___internal___fieldOwners
-  category___blog___internal___ignoreType
-  category___blog___internal___mediaType
-  category___blog___internal___owner
-  category___blog___internal___type
-  category___blog___internal___contentFilePath
-  category___galeria
-  category___galeria___contentful_id
-  category___galeria___id
-  category___galeria___node_locale
-  category___galeria___title
-  category___galeria___category___contentful_id
-  category___galeria___category___id
-  category___galeria___category___node_locale
-  category___galeria___category___name
-  category___galeria___category___priority
-  category___galeria___category___spaceId
-  category___galeria___category___createdAt
-  category___galeria___category___updatedAt
-  category___galeria___category___blog
-  category___galeria___category___galeria
-  category___galeria___category___children
-  category___galeria___image___contentful_id
-  category___galeria___image___id
-  category___galeria___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___galeria___image___spaceId
-  category___galeria___image___createdAt
-  category___galeria___image___updatedAt
-  category___galeria___image___title
-  category___galeria___image___description
-  category___galeria___image___node_locale
-  category___galeria___image___url
-  category___galeria___image___placeholderUrl
-  category___galeria___image___mimeType
-  category___galeria___image___filename
-  category___galeria___image___width
-  category___galeria___image___height
-  category___galeria___image___size
-  category___galeria___image___children
-  category___galeria___image___filesize
-  category___galeria___image___publicUrl
-  category___galeria___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___galeria___spaceId
-  category___galeria___createdAt
-  category___galeria___updatedAt
-  category___galeria___sys___type
-  category___galeria___sys___revision
-  category___galeria___parent___id
-  category___galeria___parent___children
-  category___galeria___children
-  category___galeria___children___id
-  category___galeria___children___children
-  category___galeria___internal___content
-  category___galeria___internal___contentDigest
-  category___galeria___internal___description
-  category___galeria___internal___fieldOwners
-  category___galeria___internal___ignoreType
-  category___galeria___internal___mediaType
-  category___galeria___internal___owner
-  category___galeria___internal___type
-  category___galeria___internal___contentFilePath
-  category___parent___id
-  category___parent___parent___id
-  category___parent___parent___children
-  category___parent___children
-  category___parent___children___id
-  category___parent___children___children
-  category___parent___internal___content
-  category___parent___internal___contentDigest
-  category___parent___internal___description
-  category___parent___internal___fieldOwners
-  category___parent___internal___ignoreType
-  category___parent___internal___mediaType
-  category___parent___internal___owner
-  category___parent___internal___type
-  category___parent___internal___contentFilePath
-  category___children
-  category___children___id
-  category___children___parent___id
-  category___children___parent___children
-  category___children___children
-  category___children___children___id
-  category___children___children___children
-  category___children___internal___content
-  category___children___internal___contentDigest
-  category___children___internal___description
-  category___children___internal___fieldOwners
-  category___children___internal___ignoreType
-  category___children___internal___mediaType
-  category___children___internal___owner
-  category___children___internal___type
-  category___children___internal___contentFilePath
-  category___internal___content
-  category___internal___contentDigest
-  category___internal___description
-  category___internal___fieldOwners
-  category___internal___ignoreType
-  category___internal___mediaType
-  category___internal___owner
-  category___internal___type
-  category___internal___contentFilePath
   slug
   articlecontent___raw
   articlecontent___references
@@ -5357,6 +5145,200 @@ enum ContentfulBlogFieldsEnum {
   image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___contentful_id
+  category___id
+  category___node_locale
+  category___name
+  category___priority
+  category___blog
+  category___blog___contentful_id
+  category___blog___id
+  category___blog___node_locale
+  category___blog___title
+  category___blog___slug
+  category___blog___articlecontent___raw
+  category___blog___articlecontent___references
+  category___blog___image___contentful_id
+  category___blog___image___id
+  category___blog___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___image___spaceId
+  category___blog___image___createdAt
+  category___blog___image___updatedAt
+  category___blog___image___title
+  category___blog___image___description
+  category___blog___image___node_locale
+  category___blog___image___url
+  category___blog___image___placeholderUrl
+  category___blog___image___mimeType
+  category___blog___image___filename
+  category___blog___image___width
+  category___blog___image___height
+  category___blog___image___size
+  category___blog___image___children
+  category___blog___image___filesize
+  category___blog___image___publicUrl
+  category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___category___contentful_id
+  category___blog___category___id
+  category___blog___category___node_locale
+  category___blog___category___name
+  category___blog___category___priority
+  category___blog___category___blog
+  category___blog___category___galeria
+  category___blog___category___spaceId
+  category___blog___category___createdAt
+  category___blog___category___updatedAt
+  category___blog___category___children
+  category___blog___gallery
+  category___blog___gallery___contentful_id
+  category___blog___gallery___id
+  category___blog___gallery___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___gallery___spaceId
+  category___blog___gallery___createdAt
+  category___blog___gallery___updatedAt
+  category___blog___gallery___title
+  category___blog___gallery___description
+  category___blog___gallery___node_locale
+  category___blog___gallery___url
+  category___blog___gallery___placeholderUrl
+  category___blog___gallery___mimeType
+  category___blog___gallery___filename
+  category___blog___gallery___width
+  category___blog___gallery___height
+  category___blog___gallery___size
+  category___blog___gallery___children
+  category___blog___gallery___filesize
+  category___blog___gallery___publicUrl
+  category___blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___shortdescription___id
+  category___blog___shortdescription___children
+  category___blog___shortdescription___shortdescription
+  category___blog___spaceId
+  category___blog___createdAt
+  category___blog___updatedAt
+  category___blog___sys___type
+  category___blog___sys___revision
+  category___blog___childrenContentfulBlogShortdescriptionTextNode
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___id
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___children
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
+  category___blog___childContentfulBlogShortdescriptionTextNode___id
+  category___blog___childContentfulBlogShortdescriptionTextNode___children
+  category___blog___childContentfulBlogShortdescriptionTextNode___shortdescription
+  category___blog___parent___id
+  category___blog___parent___children
+  category___blog___children
+  category___blog___children___id
+  category___blog___children___children
+  category___blog___internal___content
+  category___blog___internal___contentDigest
+  category___blog___internal___description
+  category___blog___internal___fieldOwners
+  category___blog___internal___ignoreType
+  category___blog___internal___mediaType
+  category___blog___internal___owner
+  category___blog___internal___type
+  category___blog___internal___contentFilePath
+  category___galeria
+  category___galeria___contentful_id
+  category___galeria___id
+  category___galeria___node_locale
+  category___galeria___title
+  category___galeria___category___contentful_id
+  category___galeria___category___id
+  category___galeria___category___node_locale
+  category___galeria___category___name
+  category___galeria___category___priority
+  category___galeria___category___blog
+  category___galeria___category___galeria
+  category___galeria___category___spaceId
+  category___galeria___category___createdAt
+  category___galeria___category___updatedAt
+  category___galeria___category___children
+  category___galeria___image___contentful_id
+  category___galeria___image___id
+  category___galeria___image___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___image___spaceId
+  category___galeria___image___createdAt
+  category___galeria___image___updatedAt
+  category___galeria___image___title
+  category___galeria___image___description
+  category___galeria___image___node_locale
+  category___galeria___image___url
+  category___galeria___image___placeholderUrl
+  category___galeria___image___mimeType
+  category___galeria___image___filename
+  category___galeria___image___width
+  category___galeria___image___height
+  category___galeria___image___size
+  category___galeria___image___children
+  category___galeria___image___filesize
+  category___galeria___image___publicUrl
+  category___galeria___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___galeria___spaceId
+  category___galeria___createdAt
+  category___galeria___updatedAt
+  category___galeria___sys___type
+  category___galeria___sys___revision
+  category___galeria___parent___id
+  category___galeria___parent___children
+  category___galeria___children
+  category___galeria___children___id
+  category___galeria___children___children
+  category___galeria___internal___content
+  category___galeria___internal___contentDigest
+  category___galeria___internal___description
+  category___galeria___internal___fieldOwners
+  category___galeria___internal___ignoreType
+  category___galeria___internal___mediaType
+  category___galeria___internal___owner
+  category___galeria___internal___type
+  category___galeria___internal___contentFilePath
+  category___spaceId
+  category___createdAt
+  category___updatedAt
+  category___sys___type
+  category___sys___revision
+  category___parent___id
+  category___parent___parent___id
+  category___parent___parent___children
+  category___parent___children
+  category___parent___children___id
+  category___parent___children___children
+  category___parent___internal___content
+  category___parent___internal___contentDigest
+  category___parent___internal___description
+  category___parent___internal___fieldOwners
+  category___parent___internal___ignoreType
+  category___parent___internal___mediaType
+  category___parent___internal___owner
+  category___parent___internal___type
+  category___parent___internal___contentFilePath
+  category___children
+  category___children___id
+  category___children___parent___id
+  category___children___parent___children
+  category___children___children
+  category___children___children___id
+  category___children___children___children
+  category___children___internal___content
+  category___children___internal___contentDigest
+  category___children___internal___description
+  category___children___internal___fieldOwners
+  category___children___internal___ignoreType
+  category___children___internal___mediaType
+  category___children___internal___owner
+  category___children___internal___type
+  category___children___internal___contentFilePath
+  category___internal___content
+  category___internal___contentDigest
+  category___internal___description
+  category___internal___fieldOwners
+  category___internal___ignoreType
+  category___internal___mediaType
+  category___internal___owner
+  category___internal___type
+  category___internal___contentFilePath
   gallery
   gallery___contentful_id
   gallery___id
@@ -5426,8 +5408,6 @@ enum ContentfulBlogFieldsEnum {
   gallery___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   gallery___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  shortdescription___shortdescription
-  shortdescription___sys___type
   shortdescription___id
   shortdescription___parent___id
   shortdescription___parent___parent___id
@@ -5469,6 +5449,8 @@ enum ContentfulBlogFieldsEnum {
   shortdescription___internal___owner
   shortdescription___internal___type
   shortdescription___internal___contentFilePath
+  shortdescription___shortdescription
+  shortdescription___sys___type
   spaceId
   createdAt
   updatedAt
@@ -5478,8 +5460,6 @@ enum ContentfulBlogFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   childrenContentfulBlogShortdescriptionTextNode
-  childrenContentfulBlogShortdescriptionTextNode___shortdescription
-  childrenContentfulBlogShortdescriptionTextNode___sys___type
   childrenContentfulBlogShortdescriptionTextNode___id
   childrenContentfulBlogShortdescriptionTextNode___parent___id
   childrenContentfulBlogShortdescriptionTextNode___parent___parent___id
@@ -5521,8 +5501,8 @@ enum ContentfulBlogFieldsEnum {
   childrenContentfulBlogShortdescriptionTextNode___internal___owner
   childrenContentfulBlogShortdescriptionTextNode___internal___type
   childrenContentfulBlogShortdescriptionTextNode___internal___contentFilePath
-  childContentfulBlogShortdescriptionTextNode___shortdescription
-  childContentfulBlogShortdescriptionTextNode___sys___type
+  childrenContentfulBlogShortdescriptionTextNode___shortdescription
+  childrenContentfulBlogShortdescriptionTextNode___sys___type
   childContentfulBlogShortdescriptionTextNode___id
   childContentfulBlogShortdescriptionTextNode___parent___id
   childContentfulBlogShortdescriptionTextNode___parent___parent___id
@@ -5564,6 +5544,8 @@ enum ContentfulBlogFieldsEnum {
   childContentfulBlogShortdescriptionTextNode___internal___owner
   childContentfulBlogShortdescriptionTextNode___internal___type
   childContentfulBlogShortdescriptionTextNode___internal___contentFilePath
+  childContentfulBlogShortdescriptionTextNode___shortdescription
+  childContentfulBlogShortdescriptionTextNode___sys___type
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -5678,12 +5660,12 @@ input ContentfulBlogSortInput {
 }
 
 input contentfulOfertyShortdescriptionTextNodeFilterInput {
-  shortdescription: StringQueryOperatorInput
-  sys: contentfulOfertyShortdescriptionTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  shortdescription: StringQueryOperatorInput
+  sys: contentfulOfertyShortdescriptionTextNodeSysFilterInput
 }
 
 input contentfulOfertyShortdescriptionTextNodeSysFilterInput {
@@ -5691,12 +5673,12 @@ input contentfulOfertyShortdescriptionTextNodeSysFilterInput {
 }
 
 input contentfulOfertyOffersPageTextTextNodeFilterInput {
-  offersPageText: StringQueryOperatorInput
-  sys: contentfulOfertyOffersPageTextTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  offersPageText: StringQueryOperatorInput
+  sys: contentfulOfertyOffersPageTextTextNodeSysFilterInput
 }
 
 input contentfulOfertyOffersPageTextTextNodeSysFilterInput {
@@ -5717,6 +5699,10 @@ input ContentfulOfertySysContentTypeSysFilterInput {
   type: StringQueryOperatorInput
   linkType: StringQueryOperatorInput
   id: StringQueryOperatorInput
+}
+
+input ContentfulOfertyMoreInformationsFilterInput {
+  raw: StringQueryOperatorInput
 }
 
 input ContentfulDrinkiFilterListInput {
@@ -5761,10 +5747,10 @@ input ContentfulOfertyFilterInput {
   updatedAt: DateQueryOperatorInput
   sys: ContentfulOfertySysFilterInput
   priority: IntQueryOperatorInput
+  moreInformations: ContentfulOfertyMoreInformationsFilterInput
   secondimage: ContentfulAssetFilterInput
   drinks: ContentfulDrinkiFilterListInput
   description: contentfulOfertyDescriptionTextNodeFilterInput
-  moreInformations: ContentfulOfertyMoreInformationsFilterInput
   aboutdrinks: contentfulOfertyAboutdrinksTextNodeFilterInput
   childrenContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterListInput
   childContentfulOfertyShortdescriptionTextNode: contentfulOfertyShortdescriptionTextNodeFilterInput
@@ -5780,29 +5766,25 @@ input ContentfulOfertyFilterInput {
 }
 
 input contentfulOfertyDescriptionTextNodeFilterInput {
-  description: StringQueryOperatorInput
-  sys: contentfulOfertyDescriptionTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  description: StringQueryOperatorInput
+  sys: contentfulOfertyDescriptionTextNodeSysFilterInput
 }
 
 input contentfulOfertyDescriptionTextNodeSysFilterInput {
   type: StringQueryOperatorInput
 }
 
-input ContentfulOfertyMoreInformationsFilterInput {
-  raw: StringQueryOperatorInput
-}
-
 input contentfulOfertyAboutdrinksTextNodeFilterInput {
-  aboutdrinks: StringQueryOperatorInput
-  sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  aboutdrinks: StringQueryOperatorInput
+  sys: contentfulOfertyAboutdrinksTextNodeSysFilterInput
 }
 
 input contentfulOfertyAboutdrinksTextNodeSysFilterInput {
@@ -5826,12 +5808,12 @@ input contentfulOfertyAboutdrinksTextNodeFilterListInput {
 }
 
 input contentfulDrinkiDescriptionTextNodeFilterInput {
-  description: StringQueryOperatorInput
-  sys: contentfulDrinkiDescriptionTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  description: StringQueryOperatorInput
+  sys: contentfulDrinkiDescriptionTextNodeSysFilterInput
 }
 
 input contentfulDrinkiDescriptionTextNodeSysFilterInput {
@@ -5951,8 +5933,6 @@ enum ContentfulOfertyFieldsEnum {
   image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  shortdescription___shortdescription
-  shortdescription___sys___type
   shortdescription___id
   shortdescription___parent___id
   shortdescription___parent___parent___id
@@ -5994,8 +5974,8 @@ enum ContentfulOfertyFieldsEnum {
   shortdescription___internal___owner
   shortdescription___internal___type
   shortdescription___internal___contentFilePath
-  offersPageText___offersPageText
-  offersPageText___sys___type
+  shortdescription___shortdescription
+  shortdescription___sys___type
   offersPageText___id
   offersPageText___parent___id
   offersPageText___parent___parent___id
@@ -6037,6 +6017,8 @@ enum ContentfulOfertyFieldsEnum {
   offersPageText___internal___owner
   offersPageText___internal___type
   offersPageText___internal___contentFilePath
+  offersPageText___offersPageText
+  offersPageText___sys___type
   spaceId
   createdAt
   updatedAt
@@ -6046,6 +6028,7 @@ enum ContentfulOfertyFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   priority
+  moreInformations___raw
   secondimage___contentful_id
   secondimage___id
   secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -6187,18 +6170,19 @@ enum ContentfulOfertyFieldsEnum {
   drinks___oferty___image___filesize
   drinks___oferty___image___publicUrl
   drinks___oferty___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  drinks___oferty___shortdescription___shortdescription
   drinks___oferty___shortdescription___id
   drinks___oferty___shortdescription___children
-  drinks___oferty___offersPageText___offersPageText
+  drinks___oferty___shortdescription___shortdescription
   drinks___oferty___offersPageText___id
   drinks___oferty___offersPageText___children
+  drinks___oferty___offersPageText___offersPageText
   drinks___oferty___spaceId
   drinks___oferty___createdAt
   drinks___oferty___updatedAt
   drinks___oferty___sys___type
   drinks___oferty___sys___revision
   drinks___oferty___priority
+  drinks___oferty___moreInformations___raw
   drinks___oferty___secondimage___contentful_id
   drinks___oferty___secondimage___id
   drinks___oferty___secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -6230,41 +6214,40 @@ enum ContentfulOfertyFieldsEnum {
   drinks___oferty___drinks___updatedAt
   drinks___oferty___drinks___childrenContentfulDrinkiDescriptionTextNode
   drinks___oferty___drinks___children
-  drinks___oferty___description___description
   drinks___oferty___description___id
   drinks___oferty___description___children
-  drinks___oferty___moreInformations___raw
-  drinks___oferty___aboutdrinks___aboutdrinks
+  drinks___oferty___description___description
   drinks___oferty___aboutdrinks___id
   drinks___oferty___aboutdrinks___children
+  drinks___oferty___aboutdrinks___aboutdrinks
   drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode
-  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
   drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___id
   drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___children
-  drinks___oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
+  drinks___oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
   drinks___oferty___childContentfulOfertyShortdescriptionTextNode___id
   drinks___oferty___childContentfulOfertyShortdescriptionTextNode___children
+  drinks___oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
   drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode
-  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
   drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___id
   drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___children
-  drinks___oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
+  drinks___oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
   drinks___oferty___childContentfulOfertyOffersPageTextTextNode___id
   drinks___oferty___childContentfulOfertyOffersPageTextTextNode___children
+  drinks___oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
   drinks___oferty___childrenContentfulOfertyDescriptionTextNode
-  drinks___oferty___childrenContentfulOfertyDescriptionTextNode___description
   drinks___oferty___childrenContentfulOfertyDescriptionTextNode___id
   drinks___oferty___childrenContentfulOfertyDescriptionTextNode___children
-  drinks___oferty___childContentfulOfertyDescriptionTextNode___description
+  drinks___oferty___childrenContentfulOfertyDescriptionTextNode___description
   drinks___oferty___childContentfulOfertyDescriptionTextNode___id
   drinks___oferty___childContentfulOfertyDescriptionTextNode___children
+  drinks___oferty___childContentfulOfertyDescriptionTextNode___description
   drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode
-  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
   drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___id
   drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___children
-  drinks___oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
   drinks___oferty___childContentfulOfertyAboutdrinksTextNode___id
   drinks___oferty___childContentfulOfertyAboutdrinksTextNode___children
+  drinks___oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
   drinks___oferty___parent___id
   drinks___oferty___parent___children
   drinks___oferty___children
@@ -6279,8 +6262,6 @@ enum ContentfulOfertyFieldsEnum {
   drinks___oferty___internal___owner
   drinks___oferty___internal___type
   drinks___oferty___internal___contentFilePath
-  drinks___description___description
-  drinks___description___sys___type
   drinks___description___id
   drinks___description___parent___id
   drinks___description___parent___children
@@ -6296,14 +6277,14 @@ enum ContentfulOfertyFieldsEnum {
   drinks___description___internal___owner
   drinks___description___internal___type
   drinks___description___internal___contentFilePath
+  drinks___description___description
+  drinks___description___sys___type
   drinks___spaceId
   drinks___createdAt
   drinks___updatedAt
   drinks___sys___type
   drinks___sys___revision
   drinks___childrenContentfulDrinkiDescriptionTextNode
-  drinks___childrenContentfulDrinkiDescriptionTextNode___description
-  drinks___childrenContentfulDrinkiDescriptionTextNode___sys___type
   drinks___childrenContentfulDrinkiDescriptionTextNode___id
   drinks___childrenContentfulDrinkiDescriptionTextNode___parent___id
   drinks___childrenContentfulDrinkiDescriptionTextNode___parent___children
@@ -6319,8 +6300,8 @@ enum ContentfulOfertyFieldsEnum {
   drinks___childrenContentfulDrinkiDescriptionTextNode___internal___owner
   drinks___childrenContentfulDrinkiDescriptionTextNode___internal___type
   drinks___childrenContentfulDrinkiDescriptionTextNode___internal___contentFilePath
-  drinks___childContentfulDrinkiDescriptionTextNode___description
-  drinks___childContentfulDrinkiDescriptionTextNode___sys___type
+  drinks___childrenContentfulDrinkiDescriptionTextNode___description
+  drinks___childrenContentfulDrinkiDescriptionTextNode___sys___type
   drinks___childContentfulDrinkiDescriptionTextNode___id
   drinks___childContentfulDrinkiDescriptionTextNode___parent___id
   drinks___childContentfulDrinkiDescriptionTextNode___parent___children
@@ -6336,6 +6317,8 @@ enum ContentfulOfertyFieldsEnum {
   drinks___childContentfulDrinkiDescriptionTextNode___internal___owner
   drinks___childContentfulDrinkiDescriptionTextNode___internal___type
   drinks___childContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  drinks___childContentfulDrinkiDescriptionTextNode___description
+  drinks___childContentfulDrinkiDescriptionTextNode___sys___type
   drinks___parent___id
   drinks___parent___parent___id
   drinks___parent___parent___children
@@ -6376,8 +6359,6 @@ enum ContentfulOfertyFieldsEnum {
   drinks___internal___owner
   drinks___internal___type
   drinks___internal___contentFilePath
-  description___description
-  description___sys___type
   description___id
   description___parent___id
   description___parent___parent___id
@@ -6419,9 +6400,8 @@ enum ContentfulOfertyFieldsEnum {
   description___internal___owner
   description___internal___type
   description___internal___contentFilePath
-  moreInformations___raw
-  aboutdrinks___aboutdrinks
-  aboutdrinks___sys___type
+  description___description
+  description___sys___type
   aboutdrinks___id
   aboutdrinks___parent___id
   aboutdrinks___parent___parent___id
@@ -6463,9 +6443,9 @@ enum ContentfulOfertyFieldsEnum {
   aboutdrinks___internal___owner
   aboutdrinks___internal___type
   aboutdrinks___internal___contentFilePath
+  aboutdrinks___aboutdrinks
+  aboutdrinks___sys___type
   childrenContentfulOfertyShortdescriptionTextNode
-  childrenContentfulOfertyShortdescriptionTextNode___shortdescription
-  childrenContentfulOfertyShortdescriptionTextNode___sys___type
   childrenContentfulOfertyShortdescriptionTextNode___id
   childrenContentfulOfertyShortdescriptionTextNode___parent___id
   childrenContentfulOfertyShortdescriptionTextNode___parent___parent___id
@@ -6507,8 +6487,8 @@ enum ContentfulOfertyFieldsEnum {
   childrenContentfulOfertyShortdescriptionTextNode___internal___owner
   childrenContentfulOfertyShortdescriptionTextNode___internal___type
   childrenContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
-  childContentfulOfertyShortdescriptionTextNode___shortdescription
-  childContentfulOfertyShortdescriptionTextNode___sys___type
+  childrenContentfulOfertyShortdescriptionTextNode___shortdescription
+  childrenContentfulOfertyShortdescriptionTextNode___sys___type
   childContentfulOfertyShortdescriptionTextNode___id
   childContentfulOfertyShortdescriptionTextNode___parent___id
   childContentfulOfertyShortdescriptionTextNode___parent___parent___id
@@ -6550,9 +6530,9 @@ enum ContentfulOfertyFieldsEnum {
   childContentfulOfertyShortdescriptionTextNode___internal___owner
   childContentfulOfertyShortdescriptionTextNode___internal___type
   childContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
+  childContentfulOfertyShortdescriptionTextNode___shortdescription
+  childContentfulOfertyShortdescriptionTextNode___sys___type
   childrenContentfulOfertyOffersPageTextTextNode
-  childrenContentfulOfertyOffersPageTextTextNode___offersPageText
-  childrenContentfulOfertyOffersPageTextTextNode___sys___type
   childrenContentfulOfertyOffersPageTextTextNode___id
   childrenContentfulOfertyOffersPageTextTextNode___parent___id
   childrenContentfulOfertyOffersPageTextTextNode___parent___parent___id
@@ -6594,8 +6574,8 @@ enum ContentfulOfertyFieldsEnum {
   childrenContentfulOfertyOffersPageTextTextNode___internal___owner
   childrenContentfulOfertyOffersPageTextTextNode___internal___type
   childrenContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
-  childContentfulOfertyOffersPageTextTextNode___offersPageText
-  childContentfulOfertyOffersPageTextTextNode___sys___type
+  childrenContentfulOfertyOffersPageTextTextNode___offersPageText
+  childrenContentfulOfertyOffersPageTextTextNode___sys___type
   childContentfulOfertyOffersPageTextTextNode___id
   childContentfulOfertyOffersPageTextTextNode___parent___id
   childContentfulOfertyOffersPageTextTextNode___parent___parent___id
@@ -6637,9 +6617,9 @@ enum ContentfulOfertyFieldsEnum {
   childContentfulOfertyOffersPageTextTextNode___internal___owner
   childContentfulOfertyOffersPageTextTextNode___internal___type
   childContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
+  childContentfulOfertyOffersPageTextTextNode___offersPageText
+  childContentfulOfertyOffersPageTextTextNode___sys___type
   childrenContentfulOfertyDescriptionTextNode
-  childrenContentfulOfertyDescriptionTextNode___description
-  childrenContentfulOfertyDescriptionTextNode___sys___type
   childrenContentfulOfertyDescriptionTextNode___id
   childrenContentfulOfertyDescriptionTextNode___parent___id
   childrenContentfulOfertyDescriptionTextNode___parent___parent___id
@@ -6681,8 +6661,8 @@ enum ContentfulOfertyFieldsEnum {
   childrenContentfulOfertyDescriptionTextNode___internal___owner
   childrenContentfulOfertyDescriptionTextNode___internal___type
   childrenContentfulOfertyDescriptionTextNode___internal___contentFilePath
-  childContentfulOfertyDescriptionTextNode___description
-  childContentfulOfertyDescriptionTextNode___sys___type
+  childrenContentfulOfertyDescriptionTextNode___description
+  childrenContentfulOfertyDescriptionTextNode___sys___type
   childContentfulOfertyDescriptionTextNode___id
   childContentfulOfertyDescriptionTextNode___parent___id
   childContentfulOfertyDescriptionTextNode___parent___parent___id
@@ -6724,9 +6704,9 @@ enum ContentfulOfertyFieldsEnum {
   childContentfulOfertyDescriptionTextNode___internal___owner
   childContentfulOfertyDescriptionTextNode___internal___type
   childContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  childContentfulOfertyDescriptionTextNode___description
+  childContentfulOfertyDescriptionTextNode___sys___type
   childrenContentfulOfertyAboutdrinksTextNode
-  childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
-  childrenContentfulOfertyAboutdrinksTextNode___sys___type
   childrenContentfulOfertyAboutdrinksTextNode___id
   childrenContentfulOfertyAboutdrinksTextNode___parent___id
   childrenContentfulOfertyAboutdrinksTextNode___parent___parent___id
@@ -6768,8 +6748,8 @@ enum ContentfulOfertyFieldsEnum {
   childrenContentfulOfertyAboutdrinksTextNode___internal___owner
   childrenContentfulOfertyAboutdrinksTextNode___internal___type
   childrenContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
-  childContentfulOfertyAboutdrinksTextNode___aboutdrinks
-  childContentfulOfertyAboutdrinksTextNode___sys___type
+  childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  childrenContentfulOfertyAboutdrinksTextNode___sys___type
   childContentfulOfertyAboutdrinksTextNode___id
   childContentfulOfertyAboutdrinksTextNode___parent___id
   childContentfulOfertyAboutdrinksTextNode___parent___parent___id
@@ -6811,6 +6791,8 @@ enum ContentfulOfertyFieldsEnum {
   childContentfulOfertyAboutdrinksTextNode___internal___owner
   childContentfulOfertyAboutdrinksTextNode___internal___type
   childContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
+  childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  childContentfulOfertyAboutdrinksTextNode___sys___type
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -6925,12 +6907,12 @@ input ContentfulOfertySortInput {
 }
 
 input contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput {
-  content: StringQueryOperatorInput
-  sys: contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  content: StringQueryOperatorInput
+  sys: contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput
 }
 
 input contentfulOMnieTresciNaPodstronieContentTextNodeSysFilterInput {
@@ -6979,10 +6961,8 @@ enum ContentfulOMnieTresciNaPodstronieFieldsEnum {
   contentful_id
   id
   node_locale
-  contentfulid
   toUseThis
-  content___content
-  content___sys___type
+  contentfulid
   content___id
   content___parent___id
   content___parent___parent___id
@@ -7024,6 +7004,8 @@ enum ContentfulOMnieTresciNaPodstronieFieldsEnum {
   content___internal___owner
   content___internal___type
   content___internal___contentFilePath
+  content___content
+  content___sys___type
   spaceId
   createdAt
   updatedAt
@@ -7033,8 +7015,6 @@ enum ContentfulOMnieTresciNaPodstronieFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   childrenContentfulOMnieTresciNaPodstronieContentTextNode
-  childrenContentfulOMnieTresciNaPodstronieContentTextNode___content
-  childrenContentfulOMnieTresciNaPodstronieContentTextNode___sys___type
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___id
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___parent___id
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___parent___parent___id
@@ -7076,8 +7056,8 @@ enum ContentfulOMnieTresciNaPodstronieFieldsEnum {
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___internal___owner
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___internal___type
   childrenContentfulOMnieTresciNaPodstronieContentTextNode___internal___contentFilePath
-  childContentfulOMnieTresciNaPodstronieContentTextNode___content
-  childContentfulOMnieTresciNaPodstronieContentTextNode___sys___type
+  childrenContentfulOMnieTresciNaPodstronieContentTextNode___content
+  childrenContentfulOMnieTresciNaPodstronieContentTextNode___sys___type
   childContentfulOMnieTresciNaPodstronieContentTextNode___id
   childContentfulOMnieTresciNaPodstronieContentTextNode___parent___id
   childContentfulOMnieTresciNaPodstronieContentTextNode___parent___parent___id
@@ -7119,6 +7099,8 @@ enum ContentfulOMnieTresciNaPodstronieFieldsEnum {
   childContentfulOMnieTresciNaPodstronieContentTextNode___internal___owner
   childContentfulOMnieTresciNaPodstronieContentTextNode___internal___type
   childContentfulOMnieTresciNaPodstronieContentTextNode___internal___contentFilePath
+  childContentfulOMnieTresciNaPodstronieContentTextNode___content
+  childContentfulOMnieTresciNaPodstronieContentTextNode___sys___type
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -7231,8 +7213,8 @@ input ContentfulOMnieTresciNaPodstronieFilterInput {
   contentful_id: StringQueryOperatorInput
   id: StringQueryOperatorInput
   node_locale: StringQueryOperatorInput
-  contentfulid: StringQueryOperatorInput
   toUseThis: BooleanQueryOperatorInput
+  contentfulid: StringQueryOperatorInput
   content: contentfulOMnieTresciNaPodstronieContentTextNodeFilterInput
   spaceId: StringQueryOperatorInput
   createdAt: DateQueryOperatorInput
@@ -7519,64 +7501,11 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   node_locale
   name
   priority
-  spaceId
-  createdAt
-  updatedAt
-  sys___type
-  sys___revision
-  sys___contentType___sys___type
-  sys___contentType___sys___linkType
-  sys___contentType___sys___id
   blog
   blog___contentful_id
   blog___id
   blog___node_locale
   blog___title
-  blog___category___contentful_id
-  blog___category___id
-  blog___category___node_locale
-  blog___category___name
-  blog___category___priority
-  blog___category___spaceId
-  blog___category___createdAt
-  blog___category___updatedAt
-  blog___category___sys___type
-  blog___category___sys___revision
-  blog___category___blog
-  blog___category___blog___contentful_id
-  blog___category___blog___id
-  blog___category___blog___node_locale
-  blog___category___blog___title
-  blog___category___blog___slug
-  blog___category___blog___gallery
-  blog___category___blog___spaceId
-  blog___category___blog___createdAt
-  blog___category___blog___updatedAt
-  blog___category___blog___childrenContentfulBlogShortdescriptionTextNode
-  blog___category___blog___children
-  blog___category___galeria
-  blog___category___galeria___contentful_id
-  blog___category___galeria___id
-  blog___category___galeria___node_locale
-  blog___category___galeria___title
-  blog___category___galeria___spaceId
-  blog___category___galeria___createdAt
-  blog___category___galeria___updatedAt
-  blog___category___galeria___children
-  blog___category___parent___id
-  blog___category___parent___children
-  blog___category___children
-  blog___category___children___id
-  blog___category___children___children
-  blog___category___internal___content
-  blog___category___internal___contentDigest
-  blog___category___internal___description
-  blog___category___internal___fieldOwners
-  blog___category___internal___ignoreType
-  blog___category___internal___mediaType
-  blog___category___internal___owner
-  blog___category___internal___type
-  blog___category___internal___contentFilePath
   blog___slug
   blog___articlecontent___raw
   blog___articlecontent___references
@@ -7641,6 +7570,51 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  blog___category___contentful_id
+  blog___category___id
+  blog___category___node_locale
+  blog___category___name
+  blog___category___priority
+  blog___category___blog
+  blog___category___blog___contentful_id
+  blog___category___blog___id
+  blog___category___blog___node_locale
+  blog___category___blog___title
+  blog___category___blog___slug
+  blog___category___blog___gallery
+  blog___category___blog___spaceId
+  blog___category___blog___createdAt
+  blog___category___blog___updatedAt
+  blog___category___blog___childrenContentfulBlogShortdescriptionTextNode
+  blog___category___blog___children
+  blog___category___galeria
+  blog___category___galeria___contentful_id
+  blog___category___galeria___id
+  blog___category___galeria___node_locale
+  blog___category___galeria___title
+  blog___category___galeria___spaceId
+  blog___category___galeria___createdAt
+  blog___category___galeria___updatedAt
+  blog___category___galeria___children
+  blog___category___spaceId
+  blog___category___createdAt
+  blog___category___updatedAt
+  blog___category___sys___type
+  blog___category___sys___revision
+  blog___category___parent___id
+  blog___category___parent___children
+  blog___category___children
+  blog___category___children___id
+  blog___category___children___children
+  blog___category___internal___content
+  blog___category___internal___contentDigest
+  blog___category___internal___description
+  blog___category___internal___fieldOwners
+  blog___category___internal___ignoreType
+  blog___category___internal___mediaType
+  blog___category___internal___owner
+  blog___category___internal___type
+  blog___category___internal___contentFilePath
   blog___gallery
   blog___gallery___contentful_id
   blog___gallery___id
@@ -7683,8 +7657,6 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___gallery___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___gallery___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  blog___shortdescription___shortdescription
-  blog___shortdescription___sys___type
   blog___shortdescription___id
   blog___shortdescription___parent___id
   blog___shortdescription___parent___children
@@ -7700,14 +7672,14 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___shortdescription___internal___owner
   blog___shortdescription___internal___type
   blog___shortdescription___internal___contentFilePath
+  blog___shortdescription___shortdescription
+  blog___shortdescription___sys___type
   blog___spaceId
   blog___createdAt
   blog___updatedAt
   blog___sys___type
   blog___sys___revision
   blog___childrenContentfulBlogShortdescriptionTextNode
-  blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
-  blog___childrenContentfulBlogShortdescriptionTextNode___sys___type
   blog___childrenContentfulBlogShortdescriptionTextNode___id
   blog___childrenContentfulBlogShortdescriptionTextNode___parent___id
   blog___childrenContentfulBlogShortdescriptionTextNode___parent___children
@@ -7723,8 +7695,8 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___childrenContentfulBlogShortdescriptionTextNode___internal___owner
   blog___childrenContentfulBlogShortdescriptionTextNode___internal___type
   blog___childrenContentfulBlogShortdescriptionTextNode___internal___contentFilePath
-  blog___childContentfulBlogShortdescriptionTextNode___shortdescription
-  blog___childContentfulBlogShortdescriptionTextNode___sys___type
+  blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
+  blog___childrenContentfulBlogShortdescriptionTextNode___sys___type
   blog___childContentfulBlogShortdescriptionTextNode___id
   blog___childContentfulBlogShortdescriptionTextNode___parent___id
   blog___childContentfulBlogShortdescriptionTextNode___parent___children
@@ -7740,6 +7712,8 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   blog___childContentfulBlogShortdescriptionTextNode___internal___owner
   blog___childContentfulBlogShortdescriptionTextNode___internal___type
   blog___childContentfulBlogShortdescriptionTextNode___internal___contentFilePath
+  blog___childContentfulBlogShortdescriptionTextNode___shortdescription
+  blog___childContentfulBlogShortdescriptionTextNode___sys___type
   blog___parent___id
   blog___parent___parent___id
   blog___parent___parent___children
@@ -7790,11 +7764,6 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   galeria___category___node_locale
   galeria___category___name
   galeria___category___priority
-  galeria___category___spaceId
-  galeria___category___createdAt
-  galeria___category___updatedAt
-  galeria___category___sys___type
-  galeria___category___sys___revision
   galeria___category___blog
   galeria___category___blog___contentful_id
   galeria___category___blog___id
@@ -7816,6 +7785,11 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   galeria___category___galeria___createdAt
   galeria___category___galeria___updatedAt
   galeria___category___galeria___children
+  galeria___category___spaceId
+  galeria___category___createdAt
+  galeria___category___updatedAt
+  galeria___category___sys___type
+  galeria___category___sys___revision
   galeria___category___parent___id
   galeria___category___parent___children
   galeria___category___children
@@ -7916,6 +7890,14 @@ enum ContentfulKategorieDlaBlogaIGaleriiFieldsEnum {
   galeria___internal___owner
   galeria___internal___type
   galeria___internal___contentFilePath
+  spaceId
+  createdAt
+  updatedAt
+  sys___type
+  sys___revision
+  sys___contentType___sys___type
+  sys___contentType___sys___linkType
+  sys___contentType___sys___id
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -8057,27 +8039,11 @@ enum ContentfulGaleriaFieldsEnum {
   category___node_locale
   category___name
   category___priority
-  category___spaceId
-  category___createdAt
-  category___updatedAt
-  category___sys___type
-  category___sys___revision
   category___blog
   category___blog___contentful_id
   category___blog___id
   category___blog___node_locale
   category___blog___title
-  category___blog___category___contentful_id
-  category___blog___category___id
-  category___blog___category___node_locale
-  category___blog___category___name
-  category___blog___category___priority
-  category___blog___category___spaceId
-  category___blog___category___createdAt
-  category___blog___category___updatedAt
-  category___blog___category___blog
-  category___blog___category___galeria
-  category___blog___category___children
   category___blog___slug
   category___blog___articlecontent___raw
   category___blog___articlecontent___references
@@ -8101,6 +8067,17 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___image___filesize
   category___blog___image___publicUrl
   category___blog___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  category___blog___category___contentful_id
+  category___blog___category___id
+  category___blog___category___node_locale
+  category___blog___category___name
+  category___blog___category___priority
+  category___blog___category___blog
+  category___blog___category___galeria
+  category___blog___category___spaceId
+  category___blog___category___createdAt
+  category___blog___category___updatedAt
+  category___blog___category___children
   category___blog___gallery
   category___blog___gallery___contentful_id
   category___blog___gallery___id
@@ -8122,21 +8099,21 @@ enum ContentfulGaleriaFieldsEnum {
   category___blog___gallery___filesize
   category___blog___gallery___publicUrl
   category___blog___gallery___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  category___blog___shortdescription___shortdescription
   category___blog___shortdescription___id
   category___blog___shortdescription___children
+  category___blog___shortdescription___shortdescription
   category___blog___spaceId
   category___blog___createdAt
   category___blog___updatedAt
   category___blog___sys___type
   category___blog___sys___revision
   category___blog___childrenContentfulBlogShortdescriptionTextNode
-  category___blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
   category___blog___childrenContentfulBlogShortdescriptionTextNode___id
   category___blog___childrenContentfulBlogShortdescriptionTextNode___children
-  category___blog___childContentfulBlogShortdescriptionTextNode___shortdescription
+  category___blog___childrenContentfulBlogShortdescriptionTextNode___shortdescription
   category___blog___childContentfulBlogShortdescriptionTextNode___id
   category___blog___childContentfulBlogShortdescriptionTextNode___children
+  category___blog___childContentfulBlogShortdescriptionTextNode___shortdescription
   category___blog___parent___id
   category___blog___parent___children
   category___blog___children
@@ -8161,11 +8138,11 @@ enum ContentfulGaleriaFieldsEnum {
   category___galeria___category___node_locale
   category___galeria___category___name
   category___galeria___category___priority
+  category___galeria___category___blog
+  category___galeria___category___galeria
   category___galeria___category___spaceId
   category___galeria___category___createdAt
   category___galeria___category___updatedAt
-  category___galeria___category___blog
-  category___galeria___category___galeria
   category___galeria___category___children
   category___galeria___image___contentful_id
   category___galeria___image___id
@@ -8206,6 +8183,11 @@ enum ContentfulGaleriaFieldsEnum {
   category___galeria___internal___owner
   category___galeria___internal___type
   category___galeria___internal___contentFilePath
+  category___spaceId
+  category___createdAt
+  category___updatedAt
+  category___sys___type
+  category___sys___revision
   category___parent___id
   category___parent___parent___id
   category___parent___parent___children
@@ -8574,8 +8556,6 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___image___resize___height @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   oferty___image___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   oferty___image___gatsbyImage @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  oferty___shortdescription___shortdescription
-  oferty___shortdescription___sys___type
   oferty___shortdescription___id
   oferty___shortdescription___parent___id
   oferty___shortdescription___parent___children
@@ -8591,8 +8571,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___shortdescription___internal___owner
   oferty___shortdescription___internal___type
   oferty___shortdescription___internal___contentFilePath
-  oferty___offersPageText___offersPageText
-  oferty___offersPageText___sys___type
+  oferty___shortdescription___shortdescription
+  oferty___shortdescription___sys___type
   oferty___offersPageText___id
   oferty___offersPageText___parent___id
   oferty___offersPageText___parent___children
@@ -8608,12 +8588,15 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___offersPageText___internal___owner
   oferty___offersPageText___internal___type
   oferty___offersPageText___internal___contentFilePath
+  oferty___offersPageText___offersPageText
+  oferty___offersPageText___sys___type
   oferty___spaceId
   oferty___createdAt
   oferty___updatedAt
   oferty___sys___type
   oferty___sys___revision
   oferty___priority
+  oferty___moreInformations___raw
   oferty___secondimage___contentful_id
   oferty___secondimage___id
   oferty___secondimage___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -8697,21 +8680,21 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___drinks___oferty___childrenContentfulOfertyDescriptionTextNode
   oferty___drinks___oferty___childrenContentfulOfertyAboutdrinksTextNode
   oferty___drinks___oferty___children
-  oferty___drinks___description___description
   oferty___drinks___description___id
   oferty___drinks___description___children
+  oferty___drinks___description___description
   oferty___drinks___spaceId
   oferty___drinks___createdAt
   oferty___drinks___updatedAt
   oferty___drinks___sys___type
   oferty___drinks___sys___revision
   oferty___drinks___childrenContentfulDrinkiDescriptionTextNode
-  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___description
   oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___id
   oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___children
-  oferty___drinks___childContentfulDrinkiDescriptionTextNode___description
+  oferty___drinks___childrenContentfulDrinkiDescriptionTextNode___description
   oferty___drinks___childContentfulDrinkiDescriptionTextNode___id
   oferty___drinks___childContentfulDrinkiDescriptionTextNode___children
+  oferty___drinks___childContentfulDrinkiDescriptionTextNode___description
   oferty___drinks___parent___id
   oferty___drinks___parent___children
   oferty___drinks___children
@@ -8726,8 +8709,6 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___drinks___internal___owner
   oferty___drinks___internal___type
   oferty___drinks___internal___contentFilePath
-  oferty___description___description
-  oferty___description___sys___type
   oferty___description___id
   oferty___description___parent___id
   oferty___description___parent___children
@@ -8743,9 +8724,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___description___internal___owner
   oferty___description___internal___type
   oferty___description___internal___contentFilePath
-  oferty___moreInformations___raw
-  oferty___aboutdrinks___aboutdrinks
-  oferty___aboutdrinks___sys___type
+  oferty___description___description
+  oferty___description___sys___type
   oferty___aboutdrinks___id
   oferty___aboutdrinks___parent___id
   oferty___aboutdrinks___parent___children
@@ -8761,9 +8741,9 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___aboutdrinks___internal___owner
   oferty___aboutdrinks___internal___type
   oferty___aboutdrinks___internal___contentFilePath
+  oferty___aboutdrinks___aboutdrinks
+  oferty___aboutdrinks___sys___type
   oferty___childrenContentfulOfertyShortdescriptionTextNode
-  oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
-  oferty___childrenContentfulOfertyShortdescriptionTextNode___sys___type
   oferty___childrenContentfulOfertyShortdescriptionTextNode___id
   oferty___childrenContentfulOfertyShortdescriptionTextNode___parent___id
   oferty___childrenContentfulOfertyShortdescriptionTextNode___parent___children
@@ -8779,8 +8759,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___owner
   oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___type
   oferty___childrenContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
-  oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
-  oferty___childContentfulOfertyShortdescriptionTextNode___sys___type
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___shortdescription
+  oferty___childrenContentfulOfertyShortdescriptionTextNode___sys___type
   oferty___childContentfulOfertyShortdescriptionTextNode___id
   oferty___childContentfulOfertyShortdescriptionTextNode___parent___id
   oferty___childContentfulOfertyShortdescriptionTextNode___parent___children
@@ -8796,9 +8776,9 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childContentfulOfertyShortdescriptionTextNode___internal___owner
   oferty___childContentfulOfertyShortdescriptionTextNode___internal___type
   oferty___childContentfulOfertyShortdescriptionTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyShortdescriptionTextNode___shortdescription
+  oferty___childContentfulOfertyShortdescriptionTextNode___sys___type
   oferty___childrenContentfulOfertyOffersPageTextTextNode
-  oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
-  oferty___childrenContentfulOfertyOffersPageTextTextNode___sys___type
   oferty___childrenContentfulOfertyOffersPageTextTextNode___id
   oferty___childrenContentfulOfertyOffersPageTextTextNode___parent___id
   oferty___childrenContentfulOfertyOffersPageTextTextNode___parent___children
@@ -8814,8 +8794,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___owner
   oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___type
   oferty___childrenContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
-  oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
-  oferty___childContentfulOfertyOffersPageTextTextNode___sys___type
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___offersPageText
+  oferty___childrenContentfulOfertyOffersPageTextTextNode___sys___type
   oferty___childContentfulOfertyOffersPageTextTextNode___id
   oferty___childContentfulOfertyOffersPageTextTextNode___parent___id
   oferty___childContentfulOfertyOffersPageTextTextNode___parent___children
@@ -8831,9 +8811,9 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childContentfulOfertyOffersPageTextTextNode___internal___owner
   oferty___childContentfulOfertyOffersPageTextTextNode___internal___type
   oferty___childContentfulOfertyOffersPageTextTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyOffersPageTextTextNode___offersPageText
+  oferty___childContentfulOfertyOffersPageTextTextNode___sys___type
   oferty___childrenContentfulOfertyDescriptionTextNode
-  oferty___childrenContentfulOfertyDescriptionTextNode___description
-  oferty___childrenContentfulOfertyDescriptionTextNode___sys___type
   oferty___childrenContentfulOfertyDescriptionTextNode___id
   oferty___childrenContentfulOfertyDescriptionTextNode___parent___id
   oferty___childrenContentfulOfertyDescriptionTextNode___parent___children
@@ -8849,8 +8829,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childrenContentfulOfertyDescriptionTextNode___internal___owner
   oferty___childrenContentfulOfertyDescriptionTextNode___internal___type
   oferty___childrenContentfulOfertyDescriptionTextNode___internal___contentFilePath
-  oferty___childContentfulOfertyDescriptionTextNode___description
-  oferty___childContentfulOfertyDescriptionTextNode___sys___type
+  oferty___childrenContentfulOfertyDescriptionTextNode___description
+  oferty___childrenContentfulOfertyDescriptionTextNode___sys___type
   oferty___childContentfulOfertyDescriptionTextNode___id
   oferty___childContentfulOfertyDescriptionTextNode___parent___id
   oferty___childContentfulOfertyDescriptionTextNode___parent___children
@@ -8866,9 +8846,9 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childContentfulOfertyDescriptionTextNode___internal___owner
   oferty___childContentfulOfertyDescriptionTextNode___internal___type
   oferty___childContentfulOfertyDescriptionTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyDescriptionTextNode___description
+  oferty___childContentfulOfertyDescriptionTextNode___sys___type
   oferty___childrenContentfulOfertyAboutdrinksTextNode
-  oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
-  oferty___childrenContentfulOfertyAboutdrinksTextNode___sys___type
   oferty___childrenContentfulOfertyAboutdrinksTextNode___id
   oferty___childrenContentfulOfertyAboutdrinksTextNode___parent___id
   oferty___childrenContentfulOfertyAboutdrinksTextNode___parent___children
@@ -8884,8 +8864,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___owner
   oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___type
   oferty___childrenContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
-  oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
-  oferty___childContentfulOfertyAboutdrinksTextNode___sys___type
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  oferty___childrenContentfulOfertyAboutdrinksTextNode___sys___type
   oferty___childContentfulOfertyAboutdrinksTextNode___id
   oferty___childContentfulOfertyAboutdrinksTextNode___parent___id
   oferty___childContentfulOfertyAboutdrinksTextNode___parent___children
@@ -8901,6 +8881,8 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___childContentfulOfertyAboutdrinksTextNode___internal___owner
   oferty___childContentfulOfertyAboutdrinksTextNode___internal___type
   oferty___childContentfulOfertyAboutdrinksTextNode___internal___contentFilePath
+  oferty___childContentfulOfertyAboutdrinksTextNode___aboutdrinks
+  oferty___childContentfulOfertyAboutdrinksTextNode___sys___type
   oferty___parent___id
   oferty___parent___parent___id
   oferty___parent___parent___children
@@ -8941,8 +8923,6 @@ enum ContentfulDrinkiFieldsEnum {
   oferty___internal___owner
   oferty___internal___type
   oferty___internal___contentFilePath
-  description___description
-  description___sys___type
   description___id
   description___parent___id
   description___parent___parent___id
@@ -8984,6 +8964,8 @@ enum ContentfulDrinkiFieldsEnum {
   description___internal___owner
   description___internal___type
   description___internal___contentFilePath
+  description___description
+  description___sys___type
   spaceId
   createdAt
   updatedAt
@@ -8993,8 +8975,6 @@ enum ContentfulDrinkiFieldsEnum {
   sys___contentType___sys___linkType
   sys___contentType___sys___id
   childrenContentfulDrinkiDescriptionTextNode
-  childrenContentfulDrinkiDescriptionTextNode___description
-  childrenContentfulDrinkiDescriptionTextNode___sys___type
   childrenContentfulDrinkiDescriptionTextNode___id
   childrenContentfulDrinkiDescriptionTextNode___parent___id
   childrenContentfulDrinkiDescriptionTextNode___parent___parent___id
@@ -9036,8 +9016,8 @@ enum ContentfulDrinkiFieldsEnum {
   childrenContentfulDrinkiDescriptionTextNode___internal___owner
   childrenContentfulDrinkiDescriptionTextNode___internal___type
   childrenContentfulDrinkiDescriptionTextNode___internal___contentFilePath
-  childContentfulDrinkiDescriptionTextNode___description
-  childContentfulDrinkiDescriptionTextNode___sys___type
+  childrenContentfulDrinkiDescriptionTextNode___description
+  childrenContentfulDrinkiDescriptionTextNode___sys___type
   childContentfulDrinkiDescriptionTextNode___id
   childContentfulDrinkiDescriptionTextNode___parent___id
   childContentfulDrinkiDescriptionTextNode___parent___parent___id
@@ -9079,6 +9059,8 @@ enum ContentfulDrinkiFieldsEnum {
   childContentfulDrinkiDescriptionTextNode___internal___owner
   childContentfulDrinkiDescriptionTextNode___internal___type
   childContentfulDrinkiDescriptionTextNode___internal___contentFilePath
+  childContentfulDrinkiDescriptionTextNode___description
+  childContentfulDrinkiDescriptionTextNode___sys___type
   parent___id
   parent___parent___id
   parent___parent___parent___id
@@ -9376,8 +9358,6 @@ type contentfulOpinieBlockquoteTextNodeEdge {
 }
 
 enum contentfulOpinieBlockquoteTextNodeFieldsEnum {
-  blockquote
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -9471,6 +9451,8 @@ enum contentfulOpinieBlockquoteTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  blockquote
+  sys___type
 }
 
 type contentfulOpinieBlockquoteTextNodeGroupConnection {
@@ -9489,141 +9471,6 @@ type contentfulOpinieBlockquoteTextNodeGroupConnection {
 
 input contentfulOpinieBlockquoteTextNodeSortInput {
   fields: [contentfulOpinieBlockquoteTextNodeFieldsEnum]
-  order: [SortOrderEnum] = [ASC]
-}
-
-type contentfulBlogShortdescriptionTextNodeConnection {
-  totalCount: Int!
-  edges: [contentfulBlogShortdescriptionTextNodeEdge!]!
-  nodes: [contentfulBlogShortdescriptionTextNode!]!
-  pageInfo: PageInfo!
-  distinct(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [String!]!
-  max(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  min(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  sum(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  group(skip: Int, limit: Int, field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [contentfulBlogShortdescriptionTextNodeGroupConnection!]!
-}
-
-type contentfulBlogShortdescriptionTextNodeEdge {
-  next: contentfulBlogShortdescriptionTextNode
-  node: contentfulBlogShortdescriptionTextNode!
-  previous: contentfulBlogShortdescriptionTextNode
-}
-
-enum contentfulBlogShortdescriptionTextNodeFieldsEnum {
-  shortdescription
-  sys___type
-  id
-  parent___id
-  parent___parent___id
-  parent___parent___parent___id
-  parent___parent___parent___children
-  parent___parent___children
-  parent___parent___children___id
-  parent___parent___children___children
-  parent___parent___internal___content
-  parent___parent___internal___contentDigest
-  parent___parent___internal___description
-  parent___parent___internal___fieldOwners
-  parent___parent___internal___ignoreType
-  parent___parent___internal___mediaType
-  parent___parent___internal___owner
-  parent___parent___internal___type
-  parent___parent___internal___contentFilePath
-  parent___children
-  parent___children___id
-  parent___children___parent___id
-  parent___children___parent___children
-  parent___children___children
-  parent___children___children___id
-  parent___children___children___children
-  parent___children___internal___content
-  parent___children___internal___contentDigest
-  parent___children___internal___description
-  parent___children___internal___fieldOwners
-  parent___children___internal___ignoreType
-  parent___children___internal___mediaType
-  parent___children___internal___owner
-  parent___children___internal___type
-  parent___children___internal___contentFilePath
-  parent___internal___content
-  parent___internal___contentDigest
-  parent___internal___description
-  parent___internal___fieldOwners
-  parent___internal___ignoreType
-  parent___internal___mediaType
-  parent___internal___owner
-  parent___internal___type
-  parent___internal___contentFilePath
-  children
-  children___id
-  children___parent___id
-  children___parent___parent___id
-  children___parent___parent___children
-  children___parent___children
-  children___parent___children___id
-  children___parent___children___children
-  children___parent___internal___content
-  children___parent___internal___contentDigest
-  children___parent___internal___description
-  children___parent___internal___fieldOwners
-  children___parent___internal___ignoreType
-  children___parent___internal___mediaType
-  children___parent___internal___owner
-  children___parent___internal___type
-  children___parent___internal___contentFilePath
-  children___children
-  children___children___id
-  children___children___parent___id
-  children___children___parent___children
-  children___children___children
-  children___children___children___id
-  children___children___children___children
-  children___children___internal___content
-  children___children___internal___contentDigest
-  children___children___internal___description
-  children___children___internal___fieldOwners
-  children___children___internal___ignoreType
-  children___children___internal___mediaType
-  children___children___internal___owner
-  children___children___internal___type
-  children___children___internal___contentFilePath
-  children___internal___content
-  children___internal___contentDigest
-  children___internal___description
-  children___internal___fieldOwners
-  children___internal___ignoreType
-  children___internal___mediaType
-  children___internal___owner
-  children___internal___type
-  children___internal___contentFilePath
-  internal___content
-  internal___contentDigest
-  internal___description
-  internal___fieldOwners
-  internal___ignoreType
-  internal___mediaType
-  internal___owner
-  internal___type
-  internal___contentFilePath
-}
-
-type contentfulBlogShortdescriptionTextNodeGroupConnection {
-  totalCount: Int!
-  edges: [contentfulBlogShortdescriptionTextNodeEdge!]!
-  nodes: [contentfulBlogShortdescriptionTextNode!]!
-  pageInfo: PageInfo!
-  distinct(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [String!]!
-  max(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  min(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  sum(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
-  group(skip: Int, limit: Int, field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [contentfulBlogShortdescriptionTextNodeGroupConnection!]!
-  field: String!
-  fieldValue: String
-}
-
-input contentfulBlogShortdescriptionTextNodeSortInput {
-  fields: [contentfulBlogShortdescriptionTextNodeFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 
@@ -9646,8 +9493,6 @@ type contentfulOfertyShortdescriptionTextNodeEdge {
 }
 
 enum contentfulOfertyShortdescriptionTextNodeFieldsEnum {
-  shortdescription
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -9741,6 +9586,8 @@ enum contentfulOfertyShortdescriptionTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  shortdescription
+  sys___type
 }
 
 type contentfulOfertyShortdescriptionTextNodeGroupConnection {
@@ -9781,8 +9628,6 @@ type contentfulOfertyOffersPageTextTextNodeEdge {
 }
 
 enum contentfulOfertyOffersPageTextTextNodeFieldsEnum {
-  offersPageText
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -9876,6 +9721,8 @@ enum contentfulOfertyOffersPageTextTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  offersPageText
+  sys___type
 }
 
 type contentfulOfertyOffersPageTextTextNodeGroupConnection {
@@ -9894,141 +9741,6 @@ type contentfulOfertyOffersPageTextTextNodeGroupConnection {
 
 input contentfulOfertyOffersPageTextTextNodeSortInput {
   fields: [contentfulOfertyOffersPageTextTextNodeFieldsEnum]
-  order: [SortOrderEnum] = [ASC]
-}
-
-type contentfulDrinkiDescriptionTextNodeConnection {
-  totalCount: Int!
-  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
-  nodes: [contentfulDrinkiDescriptionTextNode!]!
-  pageInfo: PageInfo!
-  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
-  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
-}
-
-type contentfulDrinkiDescriptionTextNodeEdge {
-  next: contentfulDrinkiDescriptionTextNode
-  node: contentfulDrinkiDescriptionTextNode!
-  previous: contentfulDrinkiDescriptionTextNode
-}
-
-enum contentfulDrinkiDescriptionTextNodeFieldsEnum {
-  description
-  sys___type
-  id
-  parent___id
-  parent___parent___id
-  parent___parent___parent___id
-  parent___parent___parent___children
-  parent___parent___children
-  parent___parent___children___id
-  parent___parent___children___children
-  parent___parent___internal___content
-  parent___parent___internal___contentDigest
-  parent___parent___internal___description
-  parent___parent___internal___fieldOwners
-  parent___parent___internal___ignoreType
-  parent___parent___internal___mediaType
-  parent___parent___internal___owner
-  parent___parent___internal___type
-  parent___parent___internal___contentFilePath
-  parent___children
-  parent___children___id
-  parent___children___parent___id
-  parent___children___parent___children
-  parent___children___children
-  parent___children___children___id
-  parent___children___children___children
-  parent___children___internal___content
-  parent___children___internal___contentDigest
-  parent___children___internal___description
-  parent___children___internal___fieldOwners
-  parent___children___internal___ignoreType
-  parent___children___internal___mediaType
-  parent___children___internal___owner
-  parent___children___internal___type
-  parent___children___internal___contentFilePath
-  parent___internal___content
-  parent___internal___contentDigest
-  parent___internal___description
-  parent___internal___fieldOwners
-  parent___internal___ignoreType
-  parent___internal___mediaType
-  parent___internal___owner
-  parent___internal___type
-  parent___internal___contentFilePath
-  children
-  children___id
-  children___parent___id
-  children___parent___parent___id
-  children___parent___parent___children
-  children___parent___children
-  children___parent___children___id
-  children___parent___children___children
-  children___parent___internal___content
-  children___parent___internal___contentDigest
-  children___parent___internal___description
-  children___parent___internal___fieldOwners
-  children___parent___internal___ignoreType
-  children___parent___internal___mediaType
-  children___parent___internal___owner
-  children___parent___internal___type
-  children___parent___internal___contentFilePath
-  children___children
-  children___children___id
-  children___children___parent___id
-  children___children___parent___children
-  children___children___children
-  children___children___children___id
-  children___children___children___children
-  children___children___internal___content
-  children___children___internal___contentDigest
-  children___children___internal___description
-  children___children___internal___fieldOwners
-  children___children___internal___ignoreType
-  children___children___internal___mediaType
-  children___children___internal___owner
-  children___children___internal___type
-  children___children___internal___contentFilePath
-  children___internal___content
-  children___internal___contentDigest
-  children___internal___description
-  children___internal___fieldOwners
-  children___internal___ignoreType
-  children___internal___mediaType
-  children___internal___owner
-  children___internal___type
-  children___internal___contentFilePath
-  internal___content
-  internal___contentDigest
-  internal___description
-  internal___fieldOwners
-  internal___ignoreType
-  internal___mediaType
-  internal___owner
-  internal___type
-  internal___contentFilePath
-}
-
-type contentfulDrinkiDescriptionTextNodeGroupConnection {
-  totalCount: Int!
-  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
-  nodes: [contentfulDrinkiDescriptionTextNode!]!
-  pageInfo: PageInfo!
-  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
-  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
-  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
-  field: String!
-  fieldValue: String
-}
-
-input contentfulDrinkiDescriptionTextNodeSortInput {
-  fields: [contentfulDrinkiDescriptionTextNodeFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 
@@ -10051,8 +9763,6 @@ type contentfulOfertyDescriptionTextNodeEdge {
 }
 
 enum contentfulOfertyDescriptionTextNodeFieldsEnum {
-  description
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -10146,6 +9856,8 @@ enum contentfulOfertyDescriptionTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  description
+  sys___type
 }
 
 type contentfulOfertyDescriptionTextNodeGroupConnection {
@@ -10186,8 +9898,6 @@ type contentfulOfertyAboutdrinksTextNodeEdge {
 }
 
 enum contentfulOfertyAboutdrinksTextNodeFieldsEnum {
-  aboutdrinks
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -10281,6 +9991,8 @@ enum contentfulOfertyAboutdrinksTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  aboutdrinks
+  sys___type
 }
 
 type contentfulOfertyAboutdrinksTextNodeGroupConnection {
@@ -10321,8 +10033,6 @@ type contentfulOMnieTresciNaPodstronieContentTextNodeEdge {
 }
 
 enum contentfulOMnieTresciNaPodstronieContentTextNodeFieldsEnum {
-  content
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -10416,6 +10126,8 @@ enum contentfulOMnieTresciNaPodstronieContentTextNodeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  content
+  sys___type
 }
 
 type contentfulOMnieTresciNaPodstronieContentTextNodeGroupConnection {
@@ -10434,6 +10146,276 @@ type contentfulOMnieTresciNaPodstronieContentTextNodeGroupConnection {
 
 input contentfulOMnieTresciNaPodstronieContentTextNodeSortInput {
   fields: [contentfulOMnieTresciNaPodstronieContentTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulDrinkiDescriptionTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
+  nodes: [contentfulDrinkiDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
+}
+
+type contentfulDrinkiDescriptionTextNodeEdge {
+  next: contentfulDrinkiDescriptionTextNode
+  node: contentfulDrinkiDescriptionTextNode!
+  previous: contentfulDrinkiDescriptionTextNode
+}
+
+enum contentfulDrinkiDescriptionTextNodeFieldsEnum {
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+  description
+  sys___type
+}
+
+type contentfulDrinkiDescriptionTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulDrinkiDescriptionTextNodeEdge!]!
+  nodes: [contentfulDrinkiDescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulDrinkiDescriptionTextNodeFieldsEnum!): [contentfulDrinkiDescriptionTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulDrinkiDescriptionTextNodeSortInput {
+  fields: [contentfulDrinkiDescriptionTextNodeFieldsEnum]
+  order: [SortOrderEnum] = [ASC]
+}
+
+type contentfulBlogShortdescriptionTextNodeConnection {
+  totalCount: Int!
+  edges: [contentfulBlogShortdescriptionTextNodeEdge!]!
+  nodes: [contentfulBlogShortdescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [contentfulBlogShortdescriptionTextNodeGroupConnection!]!
+}
+
+type contentfulBlogShortdescriptionTextNodeEdge {
+  next: contentfulBlogShortdescriptionTextNode
+  node: contentfulBlogShortdescriptionTextNode!
+  previous: contentfulBlogShortdescriptionTextNode
+}
+
+enum contentfulBlogShortdescriptionTextNodeFieldsEnum {
+  id
+  parent___id
+  parent___parent___id
+  parent___parent___parent___id
+  parent___parent___parent___children
+  parent___parent___children
+  parent___parent___children___id
+  parent___parent___children___children
+  parent___parent___internal___content
+  parent___parent___internal___contentDigest
+  parent___parent___internal___description
+  parent___parent___internal___fieldOwners
+  parent___parent___internal___ignoreType
+  parent___parent___internal___mediaType
+  parent___parent___internal___owner
+  parent___parent___internal___type
+  parent___parent___internal___contentFilePath
+  parent___children
+  parent___children___id
+  parent___children___parent___id
+  parent___children___parent___children
+  parent___children___children
+  parent___children___children___id
+  parent___children___children___children
+  parent___children___internal___content
+  parent___children___internal___contentDigest
+  parent___children___internal___description
+  parent___children___internal___fieldOwners
+  parent___children___internal___ignoreType
+  parent___children___internal___mediaType
+  parent___children___internal___owner
+  parent___children___internal___type
+  parent___children___internal___contentFilePath
+  parent___internal___content
+  parent___internal___contentDigest
+  parent___internal___description
+  parent___internal___fieldOwners
+  parent___internal___ignoreType
+  parent___internal___mediaType
+  parent___internal___owner
+  parent___internal___type
+  parent___internal___contentFilePath
+  children
+  children___id
+  children___parent___id
+  children___parent___parent___id
+  children___parent___parent___children
+  children___parent___children
+  children___parent___children___id
+  children___parent___children___children
+  children___parent___internal___content
+  children___parent___internal___contentDigest
+  children___parent___internal___description
+  children___parent___internal___fieldOwners
+  children___parent___internal___ignoreType
+  children___parent___internal___mediaType
+  children___parent___internal___owner
+  children___parent___internal___type
+  children___parent___internal___contentFilePath
+  children___children
+  children___children___id
+  children___children___parent___id
+  children___children___parent___children
+  children___children___children
+  children___children___children___id
+  children___children___children___children
+  children___children___internal___content
+  children___children___internal___contentDigest
+  children___children___internal___description
+  children___children___internal___fieldOwners
+  children___children___internal___ignoreType
+  children___children___internal___mediaType
+  children___children___internal___owner
+  children___children___internal___type
+  children___children___internal___contentFilePath
+  children___internal___content
+  children___internal___contentDigest
+  children___internal___description
+  children___internal___fieldOwners
+  children___internal___ignoreType
+  children___internal___mediaType
+  children___internal___owner
+  children___internal___type
+  children___internal___contentFilePath
+  internal___content
+  internal___contentDigest
+  internal___description
+  internal___fieldOwners
+  internal___ignoreType
+  internal___mediaType
+  internal___owner
+  internal___type
+  internal___contentFilePath
+  shortdescription
+  sys___type
+}
+
+type contentfulBlogShortdescriptionTextNodeGroupConnection {
+  totalCount: Int!
+  edges: [contentfulBlogShortdescriptionTextNodeEdge!]!
+  nodes: [contentfulBlogShortdescriptionTextNode!]!
+  pageInfo: PageInfo!
+  distinct(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [String!]!
+  max(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  min(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  sum(field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): Float
+  group(skip: Int, limit: Int, field: contentfulBlogShortdescriptionTextNodeFieldsEnum!): [contentfulBlogShortdescriptionTextNodeGroupConnection!]!
+  field: String!
+  fieldValue: String
+}
+
+input contentfulBlogShortdescriptionTextNodeSortInput {
+  fields: [contentfulBlogShortdescriptionTextNodeFieldsEnum]
   order: [SortOrderEnum] = [ASC]
 }
 
@@ -10460,10 +10442,6 @@ type ContentfulContentTypeEdge {
 }
 
 enum ContentfulContentTypeFieldsEnum {
-  name
-  displayField
-  description
-  sys___type
   id
   parent___id
   parent___parent___id
@@ -10557,6 +10535,10 @@ enum ContentfulContentTypeFieldsEnum {
   internal___owner
   internal___type
   internal___contentFilePath
+  name
+  displayField
+  description
+  sys___type
 }
 
 type ContentfulContentTypeGroupConnection {
@@ -10574,14 +10556,14 @@ type ContentfulContentTypeGroupConnection {
 }
 
 input ContentfulContentTypeFilterInput {
-  name: StringQueryOperatorInput
-  displayField: StringQueryOperatorInput
-  description: StringQueryOperatorInput
-  sys: ContentfulContentTypeSysFilterInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
+  name: StringQueryOperatorInput
+  displayField: StringQueryOperatorInput
+  description: StringQueryOperatorInput
+  sys: ContentfulContentTypeSysFilterInput
 }
 
 input ContentfulContentTypeSortInput {
