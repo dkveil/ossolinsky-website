@@ -15,6 +15,7 @@ export const Hero = () => {
         return null;
     }
 
+
     const { width: windowWidth } = useWindowDimensions();
     const theme = useTheme();
     const containerRef = React.useRef(null);
