@@ -99,7 +99,7 @@ export const Hero = () => {
                 </ContentWrapper>
             </Container>
             <VideoWrapper ref={videoRef} id="hero-video">
-                <video src={HeroVideo} autoPlay={true} loop={true} muted></video>
+                <video src={HeroVideo} autoPlay={true} playsinline={true} loop={true} muted></video>
             </VideoWrapper>
         </Wrapper>
     );
